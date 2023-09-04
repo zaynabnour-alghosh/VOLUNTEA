@@ -1,0 +1,6 @@
+@media (max-width: 417px) {
+    .code input{
+        width:125px;
+        font-size: 12px;
+    }
+}
