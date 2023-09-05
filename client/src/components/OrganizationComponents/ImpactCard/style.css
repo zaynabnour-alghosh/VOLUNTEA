@@ -1,0 +1,36 @@
+.imp-card-container{
+    gap:10px;
+    background-color:  rgb(237, 237, 237);
+    margin: 10px;
+    max-width: 350px;
+    max-height:max-content;
+    padding:15px;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.imp-header{
+    width: fit-content;
+}
+.imp-header img{
+    object-fit: cover;
+    width: 100%;
+    height:auto;
+    border-radius:5px;
+}
+.imp-topic{
+    font-size: 18px;
+}
+.imp-desc p{
+    line-break: auto;
+    font-size: 14px;
+    padding: 10px;
+    border-color: #cccccc;
+}
+.imp-card-container:hover{
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    border: 1px solid #cccccc;
+    background-color: white;
+    cursor: pointer;
+}   
