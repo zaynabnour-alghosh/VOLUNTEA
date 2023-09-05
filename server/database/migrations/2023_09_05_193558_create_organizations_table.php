@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->unsignedBigInteger('admin_id');
             $table->timestamps();
+            
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
         });
         Schema::create('organization_profiles', function (Blueprint $table) {
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->timestamps();
+
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
         });
         Schema::create('impacts', function (Blueprint $table) {
@@ -37,6 +39,7 @@ return new class extends Migration
             $table->string('header');
             $table->text('desciption');
             $table->timestamps();
+
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
         });
         Schema::create('missions', function (Blueprint $table) {
@@ -45,6 +48,7 @@ return new class extends Migration
             $table->string('header');
             $table->text('desciption');
             $table->timestamps();
+
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
         });
         Schema::create('events', function (Blueprint $table) {
@@ -56,6 +60,7 @@ return new class extends Migration
             $table->date('event_date');
             $table->string('location');
             $table->timestamps();
+
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
         });
     }

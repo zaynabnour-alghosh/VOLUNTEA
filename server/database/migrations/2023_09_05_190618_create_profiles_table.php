@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('avatar_url');
             $table->text('desciption');
             $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         Schema::create('schedules', function (Blueprint $table) {
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         Schema::create('calendar_events', function (Blueprint $table) {
@@ -38,6 +40,7 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         Schema::create('skills', function (Blueprint $table) {
@@ -50,6 +53,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('skill_id');
             $table->timestamps();
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
         });

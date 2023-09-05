@@ -20,6 +20,7 @@ return new class extends Migration
             $table->time('from');
             $table->time('to');
             $table->timestamps();
+           
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->date('date_at');
             $table->string('location');
             $table->timestamps();
+           
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -42,6 +44,7 @@ return new class extends Migration
             $table->string('org_code');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->timestamps();
+            
             $table->foreign('org_code')->references('code')->on('organizations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -52,6 +55,7 @@ return new class extends Migration
             $table->unsignedBigInteger('opp_id');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->timestamps();
+           
             $table->foreign('opp_id')->references('id')->on('opportunities')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
