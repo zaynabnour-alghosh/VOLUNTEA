@@ -39,12 +39,13 @@ return new class extends Migration
         Schema::create('signup_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('org_code');
+            $table->string('org_code');
             $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->timestamps();
             $table->foreign('org_code')->references('code')->on('organizations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+
         Schema::create('opportunity_applications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
@@ -52,7 +53,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'accepted', 'rejected']);
             $table->timestamps();
             $table->foreign('opp_id')->references('id')->on('opportunities')->onDelete('cascade');
-            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -62,6 +63,5 @@ return new class extends Migration
         Schema::dropIfExists('meetings');
         Schema::dropIfExists('signup_requests');
         Schema::dropIfExists('opportunity_applications');
-
     }
 };
