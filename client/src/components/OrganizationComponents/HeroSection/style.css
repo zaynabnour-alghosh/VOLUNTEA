@@ -1,0 +1,88 @@
+.org-hero-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.org-hero-content{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    justify-content:space-between;
+    padding-top: 150px;
+    align-items: center;
+}
+.org-landing{
+    width: 100%;  
+    max-width: 100%;  
+    height: auto;
+    flex-shrink: 1;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column; 
+    padding-left: 50px;
+    gap: 10px;
+}
+.org-landing h1{
+    font-size:5vw;
+}
+.org-landing h3{
+    font-weight:normal;
+    padding-top: 20px;
+    word-wrap: break-word;
+    white-space: pre-line;
+    line-height: 1.2;
+    text-align:left;
+    font-size: 22px; 
+    max-width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.signup{
+    margin-top: 1rem;
+    justify-content: space-around;
+    gap: 1rem;
+    height: 30px;
+   
+}
+.signup a{
+    padding:10px;
+    border: none;
+    border-radius: 0.5rem;
+    background-color:#9EA4DA;
+    color:white;
+    width: 150px;
+    font-size: 18px;
+
+}
+.signup a:hover{
+    text-decoration: none;
+    font-weight: 600;
+       
+}
+.org-img{
+    width: 100%;
+}
+.organization-img {
+    max-width: 100%; 
+    height: auto;
+    object-fit: cover;
+    flex-shrink: 1;
+}
+@media (max-width: 850px) {
+    .org-landing h3{
+        font-weight: 500;
+        padding-top: 10px;
+        word-wrap: break-word;
+        white-space: pre-line;
+        line-height: 1.2;
+        text-align:left;
+        font-size: 14px; 
+        max-width:500px;
+    }
+    .org-landing{
+        margin-top: 100px;
+    }
+}
