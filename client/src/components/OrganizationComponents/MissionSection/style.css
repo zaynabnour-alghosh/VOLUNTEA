@@ -1,0 +1,31 @@
+.mission-page{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    gap:50px;
+    padding-top: 80px;
+    height: fit-content;
+}
+.missions{
+    width: 100%;
+    height:max-content;
+    padding-bottom: 50px;;
+    flex-wrap: wrap
+}
+.missions-header h1{
+    font-size: 48px;
+}
+.missions-container{
+    gap: 15px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap:10px;
+  }
+  
+.grid-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 16px;
+}
