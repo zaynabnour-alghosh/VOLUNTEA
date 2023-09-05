@@ -1,0 +1,16 @@
+.event-page{
+    width: 100%;
+    background-color: rgb(233, 227, 254);
+    gap:100px;
+    padding-top: 80px;
+}
+.events{
+    width: 100%;
+}
+.events-header h1{
+    font-size: 48px;
+}
+.events-container{
+    width: 100%;
+    justify-content: space-evenly;
+}
