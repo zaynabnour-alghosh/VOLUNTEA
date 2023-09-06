@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     use HasFactory;
+
+    /*Relationships related to a feedback*/
+
+    public function volunteer() {
+        return $this->belongsTo(User::class, 'volunteer_id');
+    }
+
+    public function opportunity() {
+        return $this->belongsTo(Opportunity::class, 'opp_id');
+    }
 }
