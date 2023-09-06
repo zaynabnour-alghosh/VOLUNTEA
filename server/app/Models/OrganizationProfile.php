@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class OrganizationProfile extends Model
 {
     use HasFactory;
+
+    /*Relationships related to an organization_profile*/
+
+    public function organization() {
+        return $this->belongsTo(Organization::class, 'org_id');
+    }
 }
