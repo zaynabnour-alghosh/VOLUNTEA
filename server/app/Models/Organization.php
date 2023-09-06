@@ -8,4 +8,42 @@ use Illuminate\Database\Eloquent\Model;
 class Organization extends Model
 {
     use HasFactory;
+
+    /*Relationships related to an organization*/
+
+    public function admin() {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function organizationProfile() {
+        return $this->hasOne(OrganizationProfile::class);
+    }
+
+    public function impacts() {
+        return $this->hasMany(Impact::class);
+    }
+
+    public function missions() {
+        return $this->hasMany(Mission::class);
+    }
+
+    public function events() {
+        return $this->hasMany(Event::class);
+    }
+
+    public function opportunities() {
+        return $this->hasMany(Opportunity::class);
+    }
+
+    public function announcements() {
+        return $this->hasMany(Announcement::class, 'org_id');
+    }
+
+    public function meetings() {
+        return $this->hasMany(Meeting::class, 'org_id');
+    }
+
+    public function signupRequests() {
+        return $this->hasMany(SignupRequest::class, 'org_code', 'code');
+    }
 }
