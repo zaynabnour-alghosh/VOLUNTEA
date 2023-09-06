@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+
+    /*Relationships related to a profile*/
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
