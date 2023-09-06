@@ -28,4 +28,38 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /*Relationships related to a user*/
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function profile() {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function schedules() {
+        return $this->hasMany(Schedule::class);
+    }
+
+    public function calendarEvents() {
+        return $this->hasMany(CalendarEvent::class);
+    }
+
+    public function skills() {
+        return $this->belongsToMany(Skill::class, 'volunteer_skills');
+    }
+
+    public function organizations() {
+        return $this->hasMany(Organization::class, 'admin_id');
+    }
+
+    public function opportunityApplications() {
+        return $this->hasMany(OpportunityApplication::class);
+    }
+
+    public function feedbacks() {
+        return $this->hasMany(Feedback::class, 'volunteer_id');
+    }
 }
