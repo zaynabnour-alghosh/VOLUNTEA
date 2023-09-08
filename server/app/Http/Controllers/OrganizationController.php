@@ -192,4 +192,35 @@ class OrganizationController extends Controller
 
         }
     }
+    public function editImpact(Request $request){
+        $user=Auth::user();
+        $impact_id=$request->impact_id;
+        $impact = Impact::find($impact_id);
+        if (!$user || $user->role_id != 1){
+            return response()->json([
+                'status' => 'Permission denied or Invalid input',
+            ], 422);
+        }
+        else{
+            $impact->header=$request->header;
+            $impact->description=$request->description;
+            $old_impact=$impact->image_url;
+
+            $image_url=$request->file('image_url');
+            if($request->hasFile('image_url')){
+                $path=$request->file('image_url')->store('public/images/impacts/');
+                $path=basename($path);
+                $impact->image_url=$path;
+            }
+                
+            if (Storage::exists('public/images/impacts/' . $old_impact)) {
+                Storage::delete('public/images/impacts/' . $old_impact);
+            }
+            $impact->save();
+            return response()->json([
+                'status'=>'success ful update',
+                'data'=>$impact
+            ]);
+        }
+    }
 }

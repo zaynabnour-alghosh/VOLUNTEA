@@ -20,7 +20,8 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("organization-event",[OrganizationController::class,"addEvent"]);
         
         Route::post("edit-organization-info",[OrganizationController::class,"editOrganizationInfo"]);
-        
+        Route::post("edit-impact",[OrganizationController::class,"editImpact"]);
+
     });
 
 });
