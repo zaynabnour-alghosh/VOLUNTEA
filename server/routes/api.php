@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrganizationController;
 
 Route::group(["middleware" => "auth:api"], function(){
     $user = Auth::user();     
@@ -13,6 +14,9 @@ Route::group(["middleware" => "auth:api"], function(){
     });
     Route::group(["prefix"=>"admin"],function(){
         Route::post("new-organization",[AdminController::class,"createOrganization"]);
+        Route::post("organization-info",[OrganizationController::class,"AddInformation"]);
+        
+        
     });
 });
 
