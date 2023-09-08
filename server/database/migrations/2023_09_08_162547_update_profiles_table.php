@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('impacts');
+        Schema::dropIfExists('events');
     }
+    
 
     /**
      * Reverse the migrations.

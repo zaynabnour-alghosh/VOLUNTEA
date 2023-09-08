@@ -7,7 +7,7 @@ use App\Models\Organization;
 use App\Models\OrganizationProfile;
 class OrganizationController extends Controller
 {
-    public function AddInformation(Request $request){
+    public function addInformation(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1500',
@@ -42,4 +42,7 @@ class OrganizationController extends Controller
             'data'=>$profile
         ]);
     }
+    // public function addImpact(Request $request){
+
+    // }
 }
