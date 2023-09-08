@@ -21,9 +21,9 @@ Route::group(["middleware" => "auth:api"], function(){
         
         Route::post("edit-organization-info",[OrganizationController::class,"editOrganizationInfo"]);
         Route::post("edit-impact",[OrganizationController::class,"editImpact"]);
-
+        Route::post("edit-mission",[OrganizationController::class,"editMission"]);
+        Route::post("edit-event",[OrganizationController::class,"editEvent"]);
     });
-
 });
 
 Route::group(["prefix" => "guest"], function(){
@@ -31,7 +31,5 @@ Route::group(["prefix" => "guest"], function(){
     Route::post("login", [AuthController::class, "login"]);
     Route::post("register", [AuthController::class, "register"]);
     Route::get("verify-email/{token}", [AuthController::class, "verifyEmail"]);
-
-    
 });
     Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);

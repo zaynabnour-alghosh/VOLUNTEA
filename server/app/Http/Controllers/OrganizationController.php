@@ -242,4 +242,37 @@ class OrganizationController extends Controller
             ]);
         }
     }
+    public function editEvent(Request $request){
+        $user=Auth::user();
+        $event_id=$request->event;
+        $event = Event::find($event);
+        if (!$user || $user->role_id != 1){
+            return response()->json([
+                'status' => 'Permission denied or Invalid input',
+            ], 422);
+        }
+        else{
+            $event->topic=$request->topic;
+            $event->description=$request->description;
+            $old_event=$event->image_url;
+
+            $image_url=$request->file('image_url');
+            if($request->hasFile('image_url')){
+                $path=$request->file('image_url')->store('public/images/events/');
+                $path=basename($path);
+                $event->image_url=$path;
+            }
+            $event->event_date=$request->event_date;
+            $event->location=$request->location;
+             
+            if (Storage::exists('public/images/events/' . $old_event)) {
+                Storage::delete('public/images/events/' . $old_eventt);
+            }
+            $event->save(); 
+            return response()->json([
+                'status'=>'successfull update',
+                'data'=>$event
+            ]);
+        }
+    }
 }
