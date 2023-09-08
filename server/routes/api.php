@@ -19,6 +19,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("organization-mission",[OrganizationController::class,"addMission"]);
         Route::post("organization-event",[OrganizationController::class,"addEvent"]);
         
+        Route::post("edit-organization-info",[OrganizationController::class,"editOrganizationInfo"]);
         
     });
 
@@ -32,4 +33,4 @@ Route::group(["prefix" => "guest"], function(){
 
     
 });
-Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);
+    Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);

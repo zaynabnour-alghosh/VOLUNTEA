@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\Organization;
 use App\Models\OrganizationProfile;
 use App\Models\Impact;
@@ -12,7 +15,7 @@ use Carbon\Carbon;
 
 class OrganizationController extends Controller
 {
-    public function addInformation(Request $request){
+    public function addInformation(Request $request,$id = "add"){
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1500',
@@ -24,6 +27,13 @@ class OrganizationController extends Controller
             'email' => 'required|string|email|max:255|unique:organization_profiles',
             'phone' => 'required|string|min:6',
         ]);
+
+        if($id == "add"){
+            $profile = new OrganizationProfile;
+        }else{
+            $profile = OrganizationProfile::find($id);
+        }
+        
         $org_id=$request->org_id;
         $profile=New OrganizationProfile;
         $profile->name=$request->name;
@@ -141,6 +151,45 @@ class OrganizationController extends Controller
                 'status'=>'failure',
                 'message'=>'An error has occured, Invalid Input'
             ]);
+        }
+    }
+    public function editOrganizationInfo(Request $request){
+        $user=Auth::user();
+        $org_id = $request->org_id;
+        $organization = OrganizationProfile::find($org_id);
+        if (!$user || $user->role_id != 1){
+            return response()->json([
+                'status' => 'Permission denied or Invalid input',
+            ], 422);
+        }
+        else{
+            $organization->name=$request->name ?? $organization->name;
+            $organization->description=$request->description ?? $organization->description;
+            $organization->face_link=$request->face_link ?? $organization->face_link;
+            $organization->insta_link=$request->insta_link ?? $organization->insta_link;
+            $organization->whats_link=$request->whats_link ?? $organization->whats_link;
+            $organization->location=$request->location ?? $organization->location;
+            $organization->email=$request->email ?? $organization->email;
+            $organization->phone=$request->phone ?? $organization->phone;
+            $old_logo=$organization->logo_url;
+           
+            $logo_url=$request->file('logo_url');
+            if($request->hasFile('logo_url')){
+                $path=$request->file('logo_url')->store('public/images/organizations/');
+                $path=basename($path);
+                $organization->logo_url=$path;
+            }
+            $organization->org_id=$org_id;
+
+            if (Storage::exists('public/images/organizations/' . $old_logo)) {
+                Storage::delete('public/images/organizations/' . $old_logo);
+            }
+            $organization->save();
+            return response()->json([
+                'status'=>'success ful update',
+                'data'=>$organization
+            ]);
+
         }
     }
 }
