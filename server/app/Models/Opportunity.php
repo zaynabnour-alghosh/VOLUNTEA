@@ -30,4 +30,9 @@ class Opportunity extends Model
     public function feedbacks() {
         return $this->hasMany(Feedback::class);
     }
+    
+    public function certifications()
+    {
+        return $this->hasMany(Certification::class, 'opp_id');
+    }
 }

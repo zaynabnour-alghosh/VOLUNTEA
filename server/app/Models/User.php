@@ -62,4 +62,14 @@ class User extends Authenticatable
     public function feedbacks() {
         return $this->hasMany(Feedback::class, 'volunteer_id');
     }
+    
+    public function adminCertifications()
+    {
+        return $this->hasMany(Certification::class, 'admin_id');
+    }
+
+    public function volunteerCertifications()
+    {
+        return $this->hasMany(Certification::class, 'volunteer_id');
+    }
 }
