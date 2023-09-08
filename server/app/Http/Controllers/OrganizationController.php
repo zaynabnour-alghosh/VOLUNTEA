@@ -120,4 +120,27 @@ class OrganizationController extends Controller
             'date'=>$formattedEventDate,
         ]);
     }
+    public function getOrganizationInfo($id){
+        $profile=OrganizationProfile::find($id);
+        $org=Organization::find($id);
+        $impacts=$org->impacts;
+        $missions=$org->missions;
+        $events=$org->events;
+       
+        if ($profile){
+            return response()->json([
+                'status'=>'success',
+                'data'=>$profile,
+                'impacts'=>$impacts,
+                'missions'=>$missions,
+                'events'=>$events
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>'failure',
+                'message'=>'An error has occured, Invalid Input'
+            ]);
+        }
+    }
 }

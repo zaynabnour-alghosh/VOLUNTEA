@@ -21,6 +21,7 @@ Route::group(["middleware" => "auth:api"], function(){
         
         
     });
+
 });
 
 Route::group(["prefix" => "guest"], function(){
@@ -31,3 +32,4 @@ Route::group(["prefix" => "guest"], function(){
 
     
 });
+Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);

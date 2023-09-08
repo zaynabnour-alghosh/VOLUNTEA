@@ -20,15 +20,15 @@ class Organization extends Model
     }
 
     public function impacts() {
-        return $this->hasMany(Impact::class);
+        return $this->hasMany(Impact::class,'org_id', 'id');
     }
 
     public function missions() {
-        return $this->hasMany(Mission::class);
+        return $this->hasMany(Mission::class,'org_id', 'id');
     }
 
     public function events() {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class,'org_id', 'id');
     }
 
     public function opportunities() {
