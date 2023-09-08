@@ -218,8 +218,27 @@ class OrganizationController extends Controller
             }
             $impact->save();
             return response()->json([
-                'status'=>'success ful update',
+                'status'=>'successfull update',
                 'data'=>$impact
+            ]);
+        }
+    }
+    public function editMission(Request $request){
+        $user=Auth::user();
+        $mission_id=$request->mission_id;
+        $mission = Mission::find($mission_id);
+        if (!$user || $user->role_id != 1){
+            return response()->json([
+                'status' => 'Permission denied or Invalid input',
+            ], 422);
+        }
+        else{
+            $mission->header=$request->header;
+            $mission->description=$request->description;
+            $mission->save();
+            return response()->json([
+                'status'=>'successfull update',
+                'data'=>$mission
             ]);
         }
     }
