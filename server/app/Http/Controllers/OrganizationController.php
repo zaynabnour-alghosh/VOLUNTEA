@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Organization;
 use App\Models\OrganizationProfile;
 use App\Models\Impact;
+use App\Models\Mission;
+
 class OrganizationController extends Controller
 {
     public function addInformation(Request $request){
@@ -66,6 +68,24 @@ class OrganizationController extends Controller
         return response()->json([
             'status'=>'success',
             'data'=>$impact
+        ]);
+    }
+    public function addMission(Request $request){
+        // $request->validate([
+        //     'header' => 'required|string|max:255',
+        //     'description' => 'required|string|max:1500',
+        // ]);
+        $org_id=$request->org_id;
+        $mission=New Mission;
+        $mission->org_id=$org_id;
+        $mission->header=$request->header;
+        $mission->description=$request->description;
+        $mission->save();
+        $organization=OrganizationProfile::where('org_id',$org_id)->first();
+        $mission->organization=$organization->name;
+        return response()->json([
+            'status'=>'success',
+            'data'=>$mission
         ]);
     }
 }

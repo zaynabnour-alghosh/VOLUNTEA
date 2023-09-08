@@ -12,13 +12,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('org_id');
             $table->unsignedBigInteger('admin_id');
-            $table->text('image_url');
             $table->enum('header', ['Event', 'Opportunity', 'Reminder','Feedback', 'Updates', 'Emergency', 'Resources','Others']);
             $table->string('topic');
-            $table->text('desciption');
-            $table->date('date_at');
-            $table->time('from');
-            $table->time('to');
+            $table->text('description');
+            $table->date('date_at')->nullable();
+            $table->time('from')->nullable();
+            $table->time('to')->nullable();
             $table->timestamps();
            
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
@@ -29,10 +28,9 @@ return new class extends Migration
             $table->unsignedBigInteger('org_id');
             $table->unsignedBigInteger('admin_id');
             $table->text('link');
-            $table->enum('header', ['Event', 'Opportunity', 'Reminder','Feedback', 'Updates', 'Emergency', 'Resources','Others']);
-            $table->text('desciption');
+            $table->text('description');
             $table->date('date_at');
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->timestamps();
            
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');

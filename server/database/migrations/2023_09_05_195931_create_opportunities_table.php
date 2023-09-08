@@ -13,6 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('org_id');
             $table->unsignedBigInteger('coordinator_id');
             $table->string('topic');
+            $table->string('description');
             $table->date('opportunity_date');
             $table->string('location');
             $table->integer('nb_volunteers');
@@ -22,14 +23,6 @@ return new class extends Migration
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
         });
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('opp_id');
-            $table->text('description');
-            $table->timestamps();
-
-            $table->foreign('opp_id')->references('id')->on('opportunities')->onDelete('cascade');
-        });
-        Schema::create('descriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('opp_id');
             $table->text('description');

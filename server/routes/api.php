@@ -16,6 +16,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("new-organization",[AdminController::class,"createOrganization"]);
         Route::post("organization-info",[OrganizationController::class,"addInformation"]);
         Route::post("organization-impact",[OrganizationController::class,"addImpact"]);
+        Route::post("organization-mission",[OrganizationController::class,"addMission"]);
         
         
     });

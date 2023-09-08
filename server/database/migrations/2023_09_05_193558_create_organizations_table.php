@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('org_id');
             $table->string('name');
             $table->text('logo_url');
-            $table->text('desciption');
+            $table->text('description');
             $table->text('face_link');
             $table->text('insta_link');
             $table->text('whats_link');
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->unsignedBigInteger('org_id');
             $table->text('image_url');
             $table->string('header');
-            $table->text('desciption');
+            $table->text('description');
             $table->timestamps();
 
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
@@ -46,7 +46,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('org_id');
             $table->string('header');
-            $table->text('desciption');
+            $table->text('description');
             $table->timestamps();
 
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');
@@ -56,9 +56,9 @@ return new class extends Migration
             $table->unsignedBigInteger('org_id');
             $table->text('image_url');
             $table->string('topic');
-            $table->text('desciption');
+            $table->text('description');
             $table->date('event_date');
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->timestamps();
 
             $table->foreign('org_id')->references('id')->on('organizations')->onDelete('cascade');

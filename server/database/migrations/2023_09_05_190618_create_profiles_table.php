@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('address');
             $table->date('dob');
             $table->text('avatar_url');
-            $table->text('desciption');
+            $table->text('description');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
