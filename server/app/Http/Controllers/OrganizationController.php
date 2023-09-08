@@ -7,6 +7,8 @@ use App\Models\Organization;
 use App\Models\OrganizationProfile;
 use App\Models\Impact;
 use App\Models\Mission;
+use App\Models\Event;
+use Carbon\Carbon;
 
 class OrganizationController extends Controller
 {
@@ -71,10 +73,10 @@ class OrganizationController extends Controller
         ]);
     }
     public function addMission(Request $request){
-        // $request->validate([
-        //     'header' => 'required|string|max:255',
-        //     'description' => 'required|string|max:1500',
-        // ]);
+        $request->validate([
+            'header' => 'required|string|max:255',
+            'description' => 'required|string|max:1500',
+        ]);
         $org_id=$request->org_id;
         $mission=New Mission;
         $mission->org_id=$org_id;
@@ -86,6 +88,36 @@ class OrganizationController extends Controller
         return response()->json([
             'status'=>'success',
             'data'=>$mission
+        ]);
+    }
+    public function addEvent(Request $request){
+        $request->validate([
+            'topic' => 'required|string|max:255',
+            'description' => 'required|string|max:1500',
+            'image_url' => 'required|image',
+            'location' => 'string|max:1000',
+        ]);
+        $org_id=$request->org_id;
+        $event=New Event;
+        $event->org_id=$org_id;
+        $event->topic=$request->topic;
+        $event->description=$request->description;
+        $image_url=$request->file('image_url');
+        if($request->hasFile('image_url')){
+            $path=$request->file('image_url')->store('public/images/events/');
+            $path=basename($path);
+            $event->image_url=$path;
+        }
+        $event->event_date=$request->event_date;
+        $event->location=$request->location;
+        $formattedEventDate = Carbon::parse($request->event_date)->format('F d, Y');
+        $event->save();
+        $organization=OrganizationProfile::where('org_id',$org_id)->first();
+        $event->organization=$organization->name;
+        return response()->json([
+            'status'=>'success',
+            'data'=>$event,
+            'date'=>$formattedEventDate,
         ]);
     }
 }
