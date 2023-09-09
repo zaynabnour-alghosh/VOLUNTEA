@@ -25,7 +25,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("edit-mission",[OrganizationController::class,"editMission"]);
         Route::post("edit-event",[OrganizationController::class,"editEvent"]);
 
-        Route::post("new-opportunity",[OpportunityController::class,"createOpportunity"]);
+        Route::post("opportunity/{id?}",[OpportunityController::class,"createOpportunity"]);
         Route::post("delete-opportunity/{id}",[OpportunityController::class,"deleteOpportunity"]);
 
     });

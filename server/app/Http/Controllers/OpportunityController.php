@@ -15,7 +15,7 @@ class OpportunityController extends Controller
     //edit opportunity
     //view opportunity details+ its feedback
     //oppotunity has many tasks so ima add them in one api\
-    public function createOpportunity(Request $request){
+    public function createOpportunity(Request $request,$id=null){
         $request->validate([
             'topic' => 'required|string|max:255',
             'description' => 'required|string|max:1500',
@@ -25,7 +25,7 @@ class OpportunityController extends Controller
         ]);
 
         $coordinator=Auth::user();
-        $ord_id=$request->org_id;
+        $org_id=$request->org_id;
 
         if (!$coordinator || $coordinator->role_id != 1){
             return response()->json([
@@ -33,19 +33,28 @@ class OpportunityController extends Controller
             ], 422);
         }
         else{
-            $opportunity=new Opportunity;
+            if($id){
+                $opportunity=Opportunity:: find($id);
+                $tasks=Task::all()->where('opp_Id',$id);
+            }
+            else{
+                $opportunity=new Opportunity;
+                $tasks=$request->tasks;                
+            }
             $opportunity->topic=$request->topic;
             $opportunity->description=$request->description;
             $opportunity->opportunity_date=$request->opportunity_date;
             $opportunity->location=$request->location;
             $opportunity->nb_volunteers=$request->nb_volunteers;
-            $opportunity->org_id=$ord_id;
+            $opportunity->org_id=$org_id;
             $opportunity->coordinator_id=$coordinator->id;
             $opportunity->save();
 
-            $tasks=$request->tasks;
+            
             foreach($tasks as $t){
-                $task=new Task;
+                if(!$id){
+                    $task=new Task;
+                }
                 $task->description=$t;
                 $task->opp_id=$opportunity->id;
                 $task->save();
@@ -74,7 +83,5 @@ class OpportunityController extends Controller
                 'message'=>'Invalid operation'
             ]);
         }
-
     }
-
 }
