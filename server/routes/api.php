@@ -27,8 +27,10 @@ Route::group(["middleware" => "auth:api"], function(){
 
         Route::post("opportunity/{id?}",[OpportunityController::class,"createOpportunity"]);
         Route::post("delete-opportunity/{id}",[OpportunityController::class,"deleteOpportunity"]);
-        
         Route::get("opportunity/{id}",[OpportunityController::class,"viewOpportunityDetails"]);
+
+        
+        Route::post("new-group",[AdminController::class,"createGroup"]);
 
     });
 });
