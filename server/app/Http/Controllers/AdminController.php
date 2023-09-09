@@ -13,6 +13,8 @@ use App\Models\Chatroom;
 use App\Models\User;
 use App\Models\Announcement;
 use App\Models\Meeting;
+use App\Models\Certification;
+use App\Models\Opportunity;
 use Carbon\Carbon;
 
 
@@ -146,5 +148,29 @@ class AdminController extends Controller
             'date'=>$formatted_date
         ]);
     }
+    public function certifyVolunteer(Request $request){
+        $request->validate([
+            'content' => 'required|string|max:1500',
+        ]);
+        $admin=Auth::user();
+        $certification=new Certification;
+        $certification->admin_id=$admin->id;
+        $certification->volunteer_id=$request->volunteer_id;
+        $certification->opp_id=$request->opp_id;
+        $certification->content=$request->content;
+        $certification->save();
+        $opportunity=Opportunity::find($request->opp_id);
+        $certification->topic=$opportunity->topic;
+        
+        $volunteer=User::find($request->volunteer_id);
+        $certification->volunteer=$volunteer->name;
+        $certification->admin=$admin->name;
+        $certification->date=$certification->created_at->format('F d, Y');
+        return response()->json([
+            'status'=>'success',
+            'data'=>$certification
+        ]);
+    }
 }
+
 

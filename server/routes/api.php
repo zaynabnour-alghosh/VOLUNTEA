@@ -38,7 +38,9 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("new-group",[AdminController::class,"createGroup"]);        
         Route::post("new-announcement",[AdminController::class,"makeAnnouncement"]);
         Route::post("new-meeting",[AdminController::class,"scheduleMeeting"]);
+        Route::post("new-certification",[AdminController::class,"certifyVolunteer"]);
 
+        
         
     });
     
