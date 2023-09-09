@@ -51,4 +51,13 @@ class CommonController extends Controller
             'mambers'=>$members
         ]);
     }
+    // public function viewProfile($id){
+    //     $member=User::find($id);
+    //     $name=$member->name;
+    //     $email=$member->email;
+    //     $profile=Profile::where('user_id',$id)->first();
+
+
+
+    // }
 }

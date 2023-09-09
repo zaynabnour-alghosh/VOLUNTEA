@@ -184,12 +184,14 @@ class OpportunityController extends Controller
                 'end'=>$formattedEnd
             ];
         }
+        $skills=$applicant->skills()->get()->pluck('name');
         return response()->json([
                 'status'=>'success',
                 'name'=>$name,
                 'email'=>$email,
                 'profile'=>$info,
-                'schedule'=>$availability
+                'schedule'=>$availability,
+                'skills'=>$skills,
             ]);
        }
        else{
