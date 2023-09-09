@@ -9,6 +9,8 @@ use App\Models\Opportunity;
 use App\Models\Task;
 use App\Models\Feedback;
 use App\Models\Profile;
+use App\Models\OpportunityApplication;
+
 
 class OpportunityController extends Controller
 {
@@ -115,4 +117,29 @@ class OpportunityController extends Controller
             ]);
         }
     }
+    
+    //  todo:
+    // view application-opp
+    // accept application
+    // reject application
+    // view user-applicat-profile
+    public function viewOpportunityApplications($id){
+        $applications=OpportunityApplication::all()->where('opp_id',$id)->where('status','pending');
+        $applicants=[];
+        foreach($applications as $app){
+            $applicant_id=$app->user->id;
+            $profile=Profile::where('user_id',$applicant_id)->first();
+            $applicant_name=$app->user->name;
+            $applicant_avatar=$profile->avatar_url;
+            $applicants[] = [
+                'id'=>$applicant_id,
+                'name'=>$applicant_name,
+                'avatar'=>$applicant_avatar
+            ];
+        }
+        return response()->json([
+            'status'=>'success',
+            'applicats'=>$applicants
+        ]);
+    }  
 }

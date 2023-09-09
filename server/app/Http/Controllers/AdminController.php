@@ -11,6 +11,7 @@ use App\Models\GroupMember;
 use App\Models\GroupAdmin;
 use App\Models\Chatroom;
 
+
 class AdminController extends Controller
 {
     public function createOrganization(Request $request){
@@ -59,4 +60,5 @@ class AdminController extends Controller
             'created_by'=>$admin->name,
         ]);
      }
+
 }
