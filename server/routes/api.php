@@ -44,6 +44,7 @@ Route::group(["middleware" => "auth:api"], function(){
     
     Route::get("members/{id}",[CommonController::class,"getAllVolunteers"]);
     Route::get("user/{id}",[OpportunityController::class,"viewApplicant"]);
+    Route::get("stream/{id}",[CommonController::class,"getStream"]);
 
 });
 

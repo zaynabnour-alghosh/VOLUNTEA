@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Organization;
 use App\Models\SignupRequest;
+use App\Models\Meeting;
+use App\Models\Announcement;
 
 class CommonController extends Controller
 {
@@ -51,13 +53,21 @@ class CommonController extends Controller
             'mambers'=>$members
         ]);
     }
-    // public function viewProfile($id){
-    //     $member=User::find($id);
-    //     $name=$member->name;
-    //     $email=$member->email;
-    //     $profile=Profile::where('user_id',$id)->first();
-
-
-
-    // }
+    public function getStream($id){
+        $announcements = Announcement::all()->where('org_id',$id);
+        $meetings = Meeting::all()->where('org_id',$id);
+        $stream=$announcements->concat($meetings)->toArray();
+        usort($stream, function ($a, $b) {
+            return strtotime($a['created_at']) - strtotime($b['created_at']);
+        });
+        foreach ($stream as &$s) {
+            $admin = User::find($s['admin_id']);
+            $s['admin_name'] = $admin ? $admin->name:' ';
+            $s['created_at'] = date('F d, Y 00:00', strtotime($s['created_at']));
+        }
+        return response()->json([
+            'status'=>'succuess',
+            'stream'=>$stream
+        ]);
+    }
 }
