@@ -11,6 +11,8 @@ use App\Models\Organization;
 use App\Models\SignupRequest;
 use App\Models\Meeting;
 use App\Models\Announcement;
+use App\Models\Opportunity;
+use App\Models\Task;
 
 class CommonController extends Controller
 {
@@ -68,6 +70,33 @@ class CommonController extends Controller
         return response()->json([
             'status'=>'succuess',
             'stream'=>$stream
+        ]);
+    }
+    public function getOpportunities($id,$name='all'){
+        $opportunities= Opportunity::all()->where('org_id',$id);
+        $opp=[];
+        if ($name==='all'){
+            foreach($opportunities as $op){
+                $opp_id=$op->id;
+                $name=$op->topic;
+                $opp[]=[
+                    'id'=>$opp_id,
+                    'name'=>$name
+                ];
+            }
+        }
+        else{
+            foreach($opportunities as $op){
+                $tasks=Task::all()->where('opp_id',$op->id);
+                $coordinator=User::where('id',$op->coordinator_id)->first();          
+                $op->coordinator=$coordinator->name;
+                $opp[]=['opportunity'=>$op];
+            }
+        }
+       
+        return response()->json([
+            'status'=>'success',
+            'data'=>$opp
         ]);
     }
 }
