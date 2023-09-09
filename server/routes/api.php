@@ -30,6 +30,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::get("opportunity/{id}",[OpportunityController::class,"viewOpportunityDetails"]);
         Route::get("applications/{id}",[OpportunityController::class,"viewOpportunityApplications"]);
         Route::post("application/{action?}",[OpportunityController::class,"acceptApplicant"]);
+        Route::get("user/{id}",[OpportunityController::class,"viewApplicant"]);
         
         
         

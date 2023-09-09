@@ -10,6 +10,10 @@ use App\Models\Task;
 use App\Models\Feedback;
 use App\Models\Profile;
 use App\Models\OpportunityApplication;
+use App\Models\Schedule;
+use App\Models\User;
+
+use Carbon\Carbon;
 
 
 class OpportunityController extends Controller
@@ -158,6 +162,41 @@ class OpportunityController extends Controller
                 'message'=>'application rejected'
             ]);
         }
-       
+    }
+    public function viewApplicant($id){
+       $applicant=User::find($id);
+       if($applicant){
+        $info=$applicant->profile;
+        $name=$applicant->name;
+        $email=$applicant->email;
+        $availability=[];
+        $schedule=Schedule::all()->where('user_id',$id);
+        foreach($schedule as $s){
+            $day=$s->weekday;
+            $start = Carbon::createFromFormat('H:i:s', $s->start_time);
+            $formattedStart = $start->format('h:i:s A');
+            $end = Carbon::createFromFormat('H:i:s', $s->end_time);
+            $formattedEnd = $end->format('h:i:s A');
+
+            $availability[] = [
+                'day'=>$day,
+                'start'=>$formattedStart,
+                'end'=>$formattedEnd
+            ];
+        }
+        return response()->json([
+                'status'=>'success',
+                'name'=>$name,
+                'email'=>$email,
+                'profile'=>$info,
+                'schedule'=>$availability
+            ]);
+       }
+       else{
+            return response()->json([
+                'status'=>'failure',
+                'message'=>'Invalid data'
+            ]);
+       }
     }
 }
