@@ -12,6 +12,7 @@ use App\Models\GroupAdmin;
 use App\Models\Chatroom;
 use App\Models\User;
 use App\Models\Announcement;
+use App\Models\Meeting;
 use Carbon\Carbon;
 
 
@@ -120,5 +121,29 @@ class AdminController extends Controller
             'from'=>$formatted_from,
             'to'=>$formatted_to
         ]);
-     }
+    }
+    public function scheduleMeeting(Request $request){
+        $request->validate([
+            'link' => 'required|string|max:500',
+            'description' => 'required|string|max:1500',
+            'date_at'=>'required|date',
+            'location'=>'string|max:500'
+        ]);
+        $admin=Auth::user();
+        $meeting=new Meeting;
+        $meeting->org_id=$request->org_id;
+        $meeting->admin_id=$admin->id;
+        $meeting->link=$request->link;
+        $meeting->description=$request->description;
+        $meeting->date_at=$request->date_at;
+        $meeting->location=$request->location;
+        $meeting->save();
+        $formatted_date = Carbon::parse($request->date_at)->format('F d, Y');
+        return response()->json([
+            'status'=>'success',
+            'data'=>$meeting,
+            'admin'=>$admin->name,
+            'date'=>$formatted_date
+        ]);
+    }
 }
