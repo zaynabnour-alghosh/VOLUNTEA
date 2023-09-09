@@ -60,4 +60,21 @@ class OpportunityController extends Controller
             ]);
         }
     }
+    public function deleteOpportunity($id){
+        $opportunity=Opportunity::find($id);
+        if ($opportunity){
+            $opportunity->delete();
+            return response()->json([
+                'status'=>'deleted successfully',
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>'failure',
+                'message'=>'Invalid operation'
+            ]);
+        }
+
+    }
+
 }
