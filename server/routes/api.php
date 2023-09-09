@@ -31,8 +31,8 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::get("opportunity/{id}",[OpportunityController::class,"viewOpportunityDetails"]);
         Route::get("applications/{id}",[OpportunityController::class,"viewOpportunityApplications"]);
         Route::post("application/{action?}",[OpportunityController::class,"acceptApplicant"]);
-        Route::get("user/{id}",[OpportunityController::class,"viewApplicant"]);
         
+        Route::post("remove-member/{id}",[AdminController::class,"removeVolunteer"]);
         
         
         Route::post("new-group",[AdminController::class,"createGroup"]);
@@ -41,6 +41,7 @@ Route::group(["middleware" => "auth:api"], function(){
     });
     
     Route::get("members/{id}",[CommonController::class,"getAllVolunteers"]);
+    Route::get("user/{id}",[OpportunityController::class,"viewApplicant"]);
 
 });
 

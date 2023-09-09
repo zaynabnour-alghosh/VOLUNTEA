@@ -10,6 +10,7 @@ use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\GroupAdmin;
 use App\Models\Chatroom;
+use App\Models\User;
 
 
 class AdminController extends Controller
@@ -60,5 +61,20 @@ class AdminController extends Controller
             'created_by'=>$admin->name,
         ]);
      }
-
+     public function removeVolunteer($id){
+        $volunteer=User::find($id);
+        if(!$volunteer){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'delete operation failed'
+            ]);
+        }
+        else{
+            $volunteer->delete();
+            return response()->json([
+                'status'=>'success',
+                'message'=>'delete operation successful'
+            ]);
+        }
+     }
 }
