@@ -35,8 +35,8 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("remove-member/{id}",[AdminController::class,"removeVolunteer"]);
         
         
-        Route::post("new-group",[AdminController::class,"createGroup"]);
-
+        Route::post("new-group",[AdminController::class,"createGroup"]);        
+        Route::post("new-announcement",[AdminController::class,"makeAnnouncement"]);
 
     });
     
