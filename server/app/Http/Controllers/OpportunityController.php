@@ -142,13 +142,22 @@ class OpportunityController extends Controller
             'applicats'=>$applicants
         ]);
     }  
-    public function acceptApplicant(Request $request){
+    public function acceptApplicant(Request $request, $action='accept'){
         $application=OpportunityApplication::where('opp_id',$request->opp_id)->where('user_id',$request->applicant_id)->first();
-        $application->status='accepted';
-        $application->save();
-        return response()->json([
-            'status'=>'success',
-            'message'=>'application accepted'
-        ]);
+        if($action==='accept'){
+            $application->status='accepted';
+            $application->save();
+            return response()->json([
+                'message'=>'application accepted'
+            ]);
+        }
+        elseif($action==='reject'){
+            $application->status='rejected';
+            $application->save();
+            return response()->json([
+                'message'=>'application rejected'
+            ]);
+        }
+       
     }
 }

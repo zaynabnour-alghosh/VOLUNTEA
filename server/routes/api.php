@@ -29,7 +29,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("delete-opportunity/{id}",[OpportunityController::class,"deleteOpportunity"]);
         Route::get("opportunity/{id}",[OpportunityController::class,"viewOpportunityDetails"]);
         Route::get("applications/{id}",[OpportunityController::class,"viewOpportunityApplications"]);
-        Route::post("application",[OpportunityController::class,"acceptApplicant"]);
+        Route::post("application/{action?}",[OpportunityController::class,"acceptApplicant"]);
         
         
         
