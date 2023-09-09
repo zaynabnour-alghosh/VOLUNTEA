@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OpportunityController;
+use App\Http\Controllers\CommonController;
 
 Route::group(["middleware" => "auth:api"], function(){
     $user = Auth::user();     
@@ -38,6 +39,9 @@ Route::group(["middleware" => "auth:api"], function(){
 
 
     });
+    
+    Route::get("members/{id}",[CommonController::class,"getAllVolunteers"]);
+
 });
 
 Route::group(["prefix" => "guest"], function(){
@@ -47,3 +51,4 @@ Route::group(["prefix" => "guest"], function(){
     Route::get("verify-email/{token}", [AuthController::class, "verifyEmail"]);
 });
     Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);
+
