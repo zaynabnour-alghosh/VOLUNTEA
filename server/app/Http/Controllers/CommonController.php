@@ -99,4 +99,51 @@ class CommonController extends Controller
             'data'=>$opp
         ]);
     }
+    //todo
+    //fill profile info
+    //update profile info
+    public function addOrupdateProfile(Request $request,$action='update'){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'gender' => 'required|string|max:255',
+            'dob'=>'required|date',
+            'description' => 'required|string|max:1500',
+            'avatar_url' => 'required|image',            
+            'address' => 'required|string|max:255',
+            'mobile' => 'required|string|min:6',
+        ]);
+        $user=Auth::user();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        if($action==='update'){
+            $profile=Profile::where('user_id',$user->id)->first();           
+        }
+        else{
+            $profile=New Profile;
+        }
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $profile->gender=$request->gender;
+        $profile->address=$request->address;
+        $profile->dob=$request->dob;
+        $profile->description=$request->description;
+        $profile->mobile=$request->mobile;
+        $avatar_url=$request->file('avatar_url');
+        if($request->hasFile('avatar_url')){
+            $path=$request->file('avatar_url')->store('public/images/profiles/');
+            $path=basename($path);
+            $profile->avatar_url=$path;
+        }
+       
+        $profile->user_id=$user->id;
+        $user->save();
+        $profile->save();
+        return response()->json([
+            'status'=>'success',
+            'user'=>$user->name,
+            'email'=>$user->email,
+            'profile'=>$profile
+        ]);
+    }
 }
