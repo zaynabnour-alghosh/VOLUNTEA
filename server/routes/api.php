@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\OpportunityController;
 
 Route::group(["middleware" => "auth:api"], function(){
     $user = Auth::user();     
@@ -23,6 +24,9 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("edit-impact",[OrganizationController::class,"editImpact"]);
         Route::post("edit-mission",[OrganizationController::class,"editMission"]);
         Route::post("edit-event",[OrganizationController::class,"editEvent"]);
+
+        Route::post("new-opportunity",[OpportunityController::class,"createOpportunity"]);
+
     });
 });
 

@@ -20,7 +20,7 @@ class Opportunity extends Model
     }
 
     public function tasks() {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class,'opp_id', 'id');
     }
 
     public function descriptions() {
