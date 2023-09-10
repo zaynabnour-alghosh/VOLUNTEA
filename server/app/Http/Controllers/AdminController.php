@@ -15,6 +15,7 @@ use App\Models\Announcement;
 use App\Models\Meeting;
 use App\Models\Certification;
 use App\Models\Opportunity;
+use App\Models\SignupRequest;
 use Carbon\Carbon;
 
 
@@ -171,9 +172,28 @@ class AdminController extends Controller
             'data'=>$certification
         ]);
     }
-    // todo
-  
-    // accept signup request->status->accepted
+    public function acceptRequest(Request $request,$action='accept'){
+        $admin=Auth::user();
+        $code=Organization::where('admin_id',$admin->id)->first()->code;
+        $sign_request=SignupRequest::where('user_id',$request->id)->where('org_code',$code)->first();
+        if($action==='accept'){
+            $sign_request->status='accepted';
+            $sign_request->save();
+            return response()->json([
+                'status'=>'success',
+                'message'=>'application accepted successfully.'
+            ]);    
+        }
+        elseif($action==='reject'){
+            $sign_request->status='rejected';
+            $sign_request->save();
+            return response()->json([
+                'status'=>'success',
+                'message'=>'application rejected successfully.'
+            ]); 
+        }
+       
+    }
     // get all org volunteer is signup in (status:accepted in signup request)
     // chatrooms (group name/other volunteername)+last message/+date
     // create a chatroom between user and everyother user in the org

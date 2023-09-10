@@ -7,9 +7,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\SignupRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\EmailVerification;
 use Illuminate\Mail\Mailable;
+
 
 class AuthController extends Controller
 {
@@ -66,6 +68,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+            'code'=>'string|max:255',
         ]);
         $verificationToken = Str::random(60);
 
@@ -84,11 +87,18 @@ class AuthController extends Controller
             return response()->json(['message'=>'Invalid Request']);
         }
         $user->save();
+        if($role==='volunteer'){
+            $signup_request=new SignupRequest;
+            $signup_request->user_id=$user->id;
+            $signup_request->org_code=$request->code;
+            $signup_request->status='pending';
+            $signup_request->save();
+        }
         $token = Auth::login($user);
         $user->token = $token;
 
-        $emailVerificationNotification = new EmailVerification($verificationToken);
-        $user->notify($emailVerificationNotification);
+        // $emailVerificationNotification = new EmailVerification($verificationToken);
+        // $user->notify($emailVerificationNotification);
 
         return response()->json([
             'status' => 'Email verification link sent successfully',
