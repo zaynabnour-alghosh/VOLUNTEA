@@ -8,6 +8,7 @@ use App\Models\OrganizationProfile;
 use App\Models\SignupRequest;
 use App\Models\OpportunityApplication;
 use App\Models\Opportunity;
+use App\Models\Profile;
 
 use Illuminate\Http\Request;
 
@@ -91,5 +92,24 @@ class VolunteerController extends Controller
                 'message'=>'An error has occured while performing this operation'
             ]);
         }
+    }
+    public function getFeedback($id){
+        $org=Organization::find($id);
+        $opp_arr=$org->opportunities;
+        $feedback=[];
+        foreach($opp_arr as $o){
+            $opp_feedback=$o->feedbacks;
+           foreach($opp_feedback as $f){
+            $avatar=Profile::where('user_id',$f->volunteer->id)->first()->avatar_url;
+            $feedback[]=[
+                'name'=>$f->volunteer->name,
+                'profile'=>$avatar,
+                'feedback'=>$f->feedback,
+                'created'=>$f->created_at->format('F d, Y'),
+                'topic'=>$f->opportunity->topic,
+            ];
+           }
+        }
+        return response($feedback);        
     }
 }

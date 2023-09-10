@@ -32,7 +32,7 @@ class Organization extends Model
     }
 
     public function opportunities() {
-        return $this->hasMany(Opportunity::class);
+        return $this->hasMany(Opportunity::class,'org_id', 'id');
     }
 
     public function announcements() {
