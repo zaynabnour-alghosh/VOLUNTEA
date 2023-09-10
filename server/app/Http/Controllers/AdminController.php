@@ -214,11 +214,8 @@ class AdminController extends Controller
                 'status'=>'success',
                 'message'=>'application rejected successfully.'
             ]); 
-        }
-       
-    }
-    
-    // chatrooms (group name/other volunteername)+last message/+date
+        }       
+    }    
 }
 
 

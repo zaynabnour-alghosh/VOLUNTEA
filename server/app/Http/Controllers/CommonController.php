@@ -16,6 +16,7 @@ use App\Models\Task;
 use App\Models\Skill;
 use App\Models\VolunteerSkill;
 use App\Models\Schedule;
+use App\Models\Chatroom;
 use Carbon\Carbon;
 
 
@@ -240,4 +241,41 @@ class CommonController extends Controller
             ]);
         }
     }
+    // chatrooms (group name/other volunteername)+last message/+date
+    public function viewChatrooms($id){
+        $user=Auth::user();
+        $chatrooms=Chatroom::all()->where('user_id',$user->id)->where('org_id',$id)->where('other_user_id','!=',$user->id);
+        $single=[];
+        $group=[];
+        $chatboxes=[];
+        foreach($chatrooms as $chatroom){
+            $other_avatar=' ';
+            if($chatroom->conversation_id==1){
+                $chatbox_type='Single';
+                $other=$chatroom->otherUser->name;  
+                $profile=Profile::where('user_id',$chatroom->otherUser->id)->first();
+                $avatar=$profile->avatar_url;
+                
+                $single[]=[
+                    'id'=>$chatroom->id,
+                    'other'=>$other,
+                    'avatar'=>$avatar                    
+                ];
+            }
+            elseif($chatroom->conversation_id==2){
+                $chatbox_type='Group';
+                $other=$chatroom->group->name;
+                $group[]=[
+                    'id'=>$chatroom->id,
+                    'other'=>$other,
+                ];
+            }            
+        }        
+        return response()->json([
+            'status'=>'success',
+            'single'=>$single,
+            'group'=>$group
+        ]);
+    }
+
 }

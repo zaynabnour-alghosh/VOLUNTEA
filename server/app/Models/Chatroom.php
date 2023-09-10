@@ -24,10 +24,10 @@ class Chatroom extends Model
     }
 
     public function otherUser() {
-        return $this->belongsTo(User::class, 'other_user_id');
+        return $this->belongsTo(User::class, 'other_user_id','id');
     }
 
     public function group() {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class,'group_id','id');
     }
 }
