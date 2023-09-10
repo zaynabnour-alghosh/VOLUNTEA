@@ -49,7 +49,9 @@ Route::group(["middleware" => "auth:api"], function(){
     Route::get("stream/{id}",[CommonController::class,"getStream"]);
     Route::get("opportunities/{id}/{name?}",[CommonController::class,"getOpportunities"]);
     Route::post("profile/{action?}",[CommonController::class,"addOrUpdateProfile"]);
+    Route::post("skills",[CommonController::class,"addSkills"]);
 
+    
     
 });
 

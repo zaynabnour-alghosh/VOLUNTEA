@@ -13,6 +13,8 @@ use App\Models\Meeting;
 use App\Models\Announcement;
 use App\Models\Opportunity;
 use App\Models\Task;
+use App\Models\Skill;
+use App\Models\VolunteerSkill;
 
 class CommonController extends Controller
 {
@@ -145,5 +147,32 @@ class CommonController extends Controller
             'email'=>$user->email,
             'profile'=>$profile
         ]);
+    }
+    public function addSkills(Request $request){
+        $user=Auth::user();
+        $skills=$request->skills;
+        foreach ($skills as $s){
+            $existing_skill=Skill::where('name',$s)->first();
+            if(!$existing_skill){
+                $skill=new Skill();
+                $skill->name=$s;
+                $skill->save();
+                $volunteer_skill=new VolunteerSkill;
+                $volunteer_skill->user_id=$user->id;
+                $volunteer_skill->skill_id=$skill->id;
+                $volunteer_skill->save();
+            }
+            else{
+                $volunteer_skill=new VolunteerSkill;
+                $volunteer_skill->user_id=$user->id;
+                $volunteer_skill->skill_id=$existing_skill->id;
+                $volunteer_skill->save();
+            }            
+        }
+        $skillNames=$user->skills()->pluck('name');
+        return response()->json([
+            'status'=>'success',
+            'data'=>$skillNames
+        ]);        
     }
 }
