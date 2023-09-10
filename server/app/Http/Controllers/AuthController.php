@@ -97,8 +97,8 @@ class AuthController extends Controller
         $token = Auth::login($user);
         $user->token = $token;
 
-        // $emailVerificationNotification = new EmailVerification($verificationToken);
-        // $user->notify($emailVerificationNotification);
+        $emailVerificationNotification = new EmailVerification($verificationToken);
+        $user->notify($emailVerificationNotification);
 
         return response()->json([
             'status' => 'Email verification link sent successfully',

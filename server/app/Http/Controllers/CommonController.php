@@ -22,6 +22,13 @@ use Carbon\Carbon;
 
 class CommonController extends Controller
 {
+    public function forgetPassword(Request $request){
+        $user=User::where("email", $request->email)->first();
+        $user->password=Hash::make($request->password);        
+        $user->save();
+        return response()->json(["updated_info"=>$user,"state"=>"successully updated"]);
+    }
+
     public function getAllVolunteers($id){
         $auth_user=Auth::user();
         $org=Organization::find($id);

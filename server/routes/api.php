@@ -8,6 +8,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OpportunityController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\PasswordResetController;
 
 Route::group(["middleware" => "auth:api"], function(){
     $user = Auth::user();     
@@ -71,6 +72,8 @@ Route::group(["prefix" => "guest"], function(){
     Route::post("login", [AuthController::class, "login"]);
     Route::post("register/{role}", [AuthController::class, "register"]);
     Route::get("verify-email/{token}", [AuthController::class, "verifyEmail"]);
+    Route::post("password/reset/request",[PasswordResetController::class, "requestReset"]);
+    Route::post("password/reset/verify",[PasswordResetController::class, "resetPassword"]);
 });
     Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);
 
