@@ -60,17 +60,14 @@ Route::group(["middleware" => "auth:api"], function(){
     Route::post("profile/{action?}",[CommonController::class,"addOrUpdateProfile"]);
     Route::post("skills",[CommonController::class,"addSkills"]);
     Route::post("schedule/{action?}",[CommonController::class,"addOrUpdateSchedule"]);
-    Route::get("delete-user/{id}",[CommonController::class,"deleteUser"]);
-
-    
-    
+    Route::get("delete-user/{id}",[CommonController::class,"deleteUser"]); 
     
 });
 
 Route::group(["prefix" => "guest"], function(){
     Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
     Route::post("login", [AuthController::class, "login"]);
-    Route::post("register/{role?}", [AuthController::class, "register"]);
+    Route::post("register/{role}", [AuthController::class, "register"]);
     Route::get("verify-email/{token}", [AuthController::class, "verifyEmail"]);
 });
     Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);

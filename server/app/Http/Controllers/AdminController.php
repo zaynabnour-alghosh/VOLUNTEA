@@ -174,11 +174,34 @@ class AdminController extends Controller
     }
     public function acceptRequest(Request $request,$action='accept'){
         $admin=Auth::user();
-        $code=Organization::where('admin_id',$admin->id)->first()->code;
+        $org=Organization::where('admin_id',$admin->id)->first();
+        $code=$org->code;
         $sign_request=SignupRequest::where('user_id',$request->id)->where('org_code',$code)->first();
         if($action==='accept'){
             $sign_request->status='accepted';
             $sign_request->save();
+            $chatroom_admin_user=new Chatroom;
+            $chatroom_admin_user->org_id=$org->id;
+            $chatroom_admin_user->conversation_id=1;
+            $chatroom_admin_user->user_id=$admin->id;
+            $chatroom_admin_user->other_user_id=$request->id;
+            $chatroom_admin_user->save();
+            $members_ids=SignupRequest::all()->where('org_code',$code)->where('status','accepted')->pluck('user_id');
+            foreach($members_ids as $mid){
+                $chatroom_user_member=new Chatroom;
+                $chatroom_user_member->org_id=$org->id;
+                $chatroom_user_member->conversation_id=1;
+                $chatroom_user_member->user_id=$request->id;
+                $chatroom_user_member->other_user_id=$mid;
+                $chatroom_user_member->save();
+            }
+            $chatroom_user_admin=new Chatroom;
+            $chatroom_user_admin->org_id=$org->id;
+            $chatroom_user_admin->conversation_id=1;
+            $chatroom_user_admin->user_id=$request->id;
+            $chatroom_user_admin->other_user_id=$admin->id;
+            $chatroom_user_admin->save();
+
             return response()->json([
                 'status'=>'success',
                 'message'=>'application accepted successfully.'
@@ -196,7 +219,6 @@ class AdminController extends Controller
     }
     
     // chatrooms (group name/other volunteername)+last message/+date
-    // create a chatroom between user and everyother user in the org
 }
 
 
