@@ -6,7 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Organization;
 use App\Models\OrganizationProfile;
 use App\Models\SignupRequest;
+use App\Models\OpportunityApplication;
+use App\Models\Opportunity;
+
 use Illuminate\Http\Request;
+
 use Carbon\Carbon;
 
 
@@ -47,5 +51,45 @@ class VolunteerController extends Controller
             'joined'=>$joined_on->format('F d, Y'),
             'badges'=>$cert_arr
         ]); 
+    }
+    //todo
+    //send application-request
+    // view all my accepted applications
+    // get all org-feedback
+    // cancel my application
+    // give a feedback
+    // need to update nb volunteers on admin (if accepting to decrease it)
+    public function sendApplication($id,$action='send'){
+        $volunteer=Auth::user();
+        if($action==='add'){
+            $app= new OpportunityApplication;
+            $app->user_id=$volunteer->id;
+            $app->opp_id=$id;
+            $app->status='pending';
+            $app->save();
+            return response()->json([
+                'status'=>'success',
+                'message'=>'your application request has been sent successfully'
+            ]);
+        }
+        elseif($action==='cancel'){
+            $app= OpportunityApplication::where('user_id',$volunteer->id)->where('status','accepted')->where('opp_id',$id);
+            if($app){
+                $app->delete();
+                $opp=Opportunity::find($id);
+                $opp->nb_volunteers=$opp->nb_volunteers+1;
+                $opp->save();
+                return response()->json([
+                    'status'=>'success',
+                    'message'=>'your application has been cencelled successfully'
+                ]);
+            }
+        }            
+        else{
+            return response()->json([
+                'status'=>'failure',
+                'message'=>'An error has occured while performing this operation'
+            ]);
+        }
     }
 }

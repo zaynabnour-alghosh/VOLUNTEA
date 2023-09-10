@@ -46,6 +46,8 @@ Route::group(["middleware" => "auth:api"], function(){
     });
     Route::group(["prefix"=>"volunteer"],function(){
         Route::get("dashboard-home/{id}",[VolunteerController::class,"viewDashboardDetails"]);
+        Route::post("application/{id}/{action?}",[VolunteerController::class,"sendApplication"]);
+        
     });
     
     Route::get("members/{id}",[CommonController::class,"getAllVolunteers"]);

@@ -151,6 +151,9 @@ class OpportunityController extends Controller
         if($action==='accept'){
             $application->status='accepted';
             $application->save();
+            $opp=Opportunity::find($request->opp_id);
+                $opp->nb_volunteers=$opp->nb_volunteers-1;
+                $opp->save();
             return response()->json([
                 'message'=>'application accepted'
             ]);
