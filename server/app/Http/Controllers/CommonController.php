@@ -15,6 +15,9 @@ use App\Models\Opportunity;
 use App\Models\Task;
 use App\Models\Skill;
 use App\Models\VolunteerSkill;
+use App\Models\Schedule;
+use Carbon\Carbon;
+
 
 class CommonController extends Controller
 {
@@ -131,13 +134,17 @@ class CommonController extends Controller
         $profile->dob=$request->dob;
         $profile->description=$request->description;
         $profile->mobile=$request->mobile;
+        $old_event=$profile->avatar_url;
+
         $avatar_url=$request->file('avatar_url');
         if($request->hasFile('avatar_url')){
             $path=$request->file('avatar_url')->store('public/images/profiles/');
             $path=basename($path);
             $profile->avatar_url=$path;
         }
-       
+        if (Storage::exists('public/images/profiles/' . $old_profile)) {
+            Storage::delete('public/images/profiles/' . $old_profile);
+        }
         $profile->user_id=$user->id;
         $user->save();
         $profile->save();
@@ -174,5 +181,49 @@ class CommonController extends Controller
             'status'=>'success',
             'data'=>$skillNames
         ]);        
+    }
+    public function addOrupdateSchedule(Request $request,$action='update'){
+        $request->validate([
+            'weekday' => 'required|string|max:255',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+        $user=Auth::user();
+        if($action==='update'){
+            $schedule=Schedule::where('user_id',$user->id)->first();           
+        }
+        elseif($action==='add'){
+            $schedule=New Schedule;
+        }
+        $schedule->weekday=$request->weekday;
+        $schedule->title=$request->title;
+        $schedule->event_date=$request->event_date;
+        $schedule->start_time=$request->start_time;
+        $schedule->end_time=$request->end_time;       
+        $schedule->user_id=$user->id;
+        $user->save();
+        $formatted_start_time = '';
+        $formatted_end_time = '';
+        $formatted_date='';
+        if($request->start_time){
+            $start_time = Carbon::createFromFormat('H:i:s', $request->start_time);
+            $formatted_start_time = $start_time->format('h:i:s A');
+        }
+        if($request->end_time){
+            $end_time = Carbon::createFromFormat('H:i:s', $request->end_time);
+            $formatted_end_time = $end_time->format('h:i:s A');
+        }
+        if($request->event_date){
+            $formatted_date = Carbon::parse($request->event_date)->format('F d, Y');
+        }      
+        $schedule->save();
+        return response()->json([
+            'status'=>'success',
+            'user'=>$user->name,
+            'data'=>$schedule,
+            'start'=>$formatted_start_time,
+            'end'=>$formatted_end_time,
+            'date'=>$formatted_date
+        ]);
     }
 }
