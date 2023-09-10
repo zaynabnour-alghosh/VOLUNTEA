@@ -54,13 +54,6 @@ class VolunteerController extends Controller
             'badges'=>$cert_arr
         ]); 
     }
-    //todo
-    //send application-request
-    // view all my accepted applications
-    // get all org-feedback
-    // cancel my application
-    // give a feedback
-    // need to update nb volunteers on admin (if accepting to decrease it)
     public function sendApplication($id,$action='send'){
         $volunteer=Auth::user();
         if($action==='add'){

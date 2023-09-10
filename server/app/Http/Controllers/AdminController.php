@@ -171,6 +171,13 @@ class AdminController extends Controller
             'data'=>$certification
         ]);
     }
+    // todo
+  
+    // accept signup request->status->accepted
+    // get all org volunteer is signup in (status:accepted in signup request)
+    // chatrooms (group name/other volunteername)+last message/+date
+    // create a chatroom between user and everyother user in the org
+    // delete user account
 }
 
 

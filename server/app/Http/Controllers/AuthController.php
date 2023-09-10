@@ -61,7 +61,7 @@ class AuthController extends Controller
             ]);
     }
 
-    public function register(Request $request){
+    public function register(Request $request,$role='admin'){
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -74,7 +74,15 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->verification_token=$verificationToken;
-        $user->role_id='1';
+        if($role==='admin'){
+            $user->role_id='1';
+        }
+        elseif($role==='volunteer'){
+            $user->role_id='2';
+        }
+        else{
+            return response()->json(['message'=>'Invalid Request']);
+        }
         $user->save();
         $token = Auth::login($user);
         $user->token = $token;
@@ -85,6 +93,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'Email verification link sent successfully',
             'user' => $user,
+            'role'=>$role,
             'verification_status' => false,
         ]);
     }
