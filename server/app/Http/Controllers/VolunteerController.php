@@ -9,6 +9,7 @@ use App\Models\SignupRequest;
 use App\Models\OpportunityApplication;
 use App\Models\Opportunity;
 use App\Models\Profile;
+use App\Models\Feedback;
 
 use Illuminate\Http\Request;
 
@@ -93,7 +94,7 @@ class VolunteerController extends Controller
             ]);
         }
     }
-    public function getFeedback($id){
+    public function Feedback($id){
         $org=Organization::find($id);
         $opp_arr=$org->opportunities;
         $feedback=[];
@@ -110,6 +111,24 @@ class VolunteerController extends Controller
             ];
            }
         }
-        return response($feedback);        
+        return response()->json([
+            'feedback'=>$feedback
+        ]);        
+    }
+    public function writeFeedback(Request $request,$id){
+        $request->validate([
+            'feedback' => 'required|string|max:1500',
+        ]);
+        $volunteer=Auth::user();
+        $opp=Opportunity::find($id);
+        $feedback=new Feedback;
+        $feedback->volunteer_id=$volunteer->id;
+        $feedback->opp_id=$id;
+        $feedback->feedback=$request->feedback;
+        $feedback->save();
+        return response()->json([
+            'status'=>'success',
+            'feedback'=>$feedback
+        ]);        
     }
 }

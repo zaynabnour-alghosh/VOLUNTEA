@@ -48,6 +48,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::get("dashboard-home/{id}",[VolunteerController::class,"viewDashboardDetails"]);
         Route::post("application/{id}/{action?}",[VolunteerController::class,"sendApplication"]);
         Route::get("feedback/{id}",[VolunteerController::class,"getFeedback"]);
+        Route::post("new-feedback/{id}",[VolunteerController::class,"writeFeedback"]);
         
     });
     
