@@ -194,9 +194,9 @@ class AdminController extends Controller
         }
        
     }
+    
     // chatrooms (group name/other volunteername)+last message/+date
     // create a chatroom between user and everyother user in the org
-    // delete user account
 }
 
 

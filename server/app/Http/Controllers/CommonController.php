@@ -226,4 +226,18 @@ class CommonController extends Controller
             'date'=>$formatted_date
         ]);
     }
+    public function deleteUser($id){
+        $user=User::find($id);
+        if($user){
+            $user->delete();
+            return response()->json([
+                'status'=>'success'
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>'failure'
+            ]);
+        }
+    }
 }

@@ -60,7 +60,9 @@ Route::group(["middleware" => "auth:api"], function(){
     Route::post("profile/{action?}",[CommonController::class,"addOrUpdateProfile"]);
     Route::post("skills",[CommonController::class,"addSkills"]);
     Route::post("schedule/{action?}",[CommonController::class,"addOrUpdateSchedule"]);
+    Route::get("delete-user/{id}",[CommonController::class,"deleteUser"]);
 
+    
     
     
 });
