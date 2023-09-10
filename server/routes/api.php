@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OpportunityController;
 use App\Http\Controllers\CommonController;
+use App\Http\Controllers\VolunteerController;
 
 Route::group(["middleware" => "auth:api"], function(){
     $user = Auth::user();     
@@ -42,6 +43,9 @@ Route::group(["middleware" => "auth:api"], function(){
 
         
         
+    });
+    Route::group(["prefix"=>"volunteer"],function(){
+        Route::get("dashboard-home/{id}",[VolunteerController::class,"viewDashboardDetails"]);
     });
     
     Route::get("members/{id}",[CommonController::class,"getAllVolunteers"]);
