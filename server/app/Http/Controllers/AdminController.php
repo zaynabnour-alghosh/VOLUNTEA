@@ -194,7 +194,6 @@ class AdminController extends Controller
         }
        
     }
-    // get all org volunteer is signup in (status:accepted in signup request)
     // chatrooms (group name/other volunteername)+last message/+date
     // create a chatroom between user and everyother user in the org
     // delete user account

@@ -149,4 +149,24 @@ class VolunteerController extends Controller
             'data'=>$opp_arr
         ]);        
     }
+    public function getSignedUpOrg(){
+        $user=Auth::user();
+        $codes=Signuprequest::all()->where('user_id',$user->id)->where('status','accepted')->pluck('org_code');
+        $org_arr=[];
+        foreach($codes as $code){
+            $org=Organization::where('code',$code)->first();
+            $nb=SignupRequest::where('org_code',$code)->where('status','accepted')->count();
+            $org_arr[]=[
+                'id'=>$org->id,
+                'logo'=>$org->organizationProfile->logo_url,
+                'name'=>$org->organizationProfile->name,
+                'location'=>$org->organizationProfile->location,
+                'members'=>$nb+1
+            ];
+        }
+        return response()->json([
+            'status'=>'success',
+            'data'=>$org_arr,
+        ]);
+    }
 }

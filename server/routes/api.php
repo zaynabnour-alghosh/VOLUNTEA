@@ -50,8 +50,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::get("feedback/{id}",[VolunteerController::class,"getFeedback"]);
         Route::post("new-feedback/{id}",[VolunteerController::class,"writeFeedback"]);
         Route::get("applications",[VolunteerController::class,"viewApplications"]);
-        
-        
+        Route::get("organizations",[VolunteerController::class,"getSignedUpOrg"]);
     });
     
     Route::get("members/{id}",[CommonController::class,"getAllVolunteers"]);

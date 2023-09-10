@@ -16,7 +16,7 @@ class Organization extends Model
     }
 
     public function organizationProfile() {
-        return $this->hasOne(OrganizationProfile::class);
+        return $this->hasOne(OrganizationProfile::class,'org_id', 'id');
     }
 
     public function impacts() {
