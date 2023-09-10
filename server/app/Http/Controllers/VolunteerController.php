@@ -131,4 +131,29 @@ class VolunteerController extends Controller
             'feedback'=>$feedback
         ]);        
     }
+    public function viewApplications(){
+        $volunteer=Auth::user();
+        $opp_ids=$volunteer->opportunityApplications()
+                                ->where('status', 'accepted')
+                                ->pluck('opp_id');
+        $opp_arr=[];
+        foreach ($opp_ids as $id) {
+            $opp=Opportunity::find($id);
+            $opp_arr[]=[
+                'id'=>$opp->id,
+                'topic'=>$opp->topic,
+                'description'=>$opp->description,
+                'location'=>$opp->location,
+                'coordinator'=>$opp->coordinator->name,
+                'date'=>$opp->opportunity_date,
+                'formatted'=>date("l, F Y", strtotime($opp->opportunity_date)),
+                'vacancies'=>$opp->nb_volunteers,
+                'tasks'=>$opp->tasks->pluck('description')
+            ];            
+        }
+        return response()->json([
+            'status'=>'success',
+            'data'=>$opp_arr
+        ]);        
+    }
 }
