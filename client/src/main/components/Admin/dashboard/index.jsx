@@ -5,6 +5,7 @@ import Input from "../../common/input";
 import Button from "../../common/button";
 import Card from "../../common/card";
 import {icons} from "../../../icons.js";
+import RowCard from "../../common/rowcard";
 const AdminDashboard=()=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
@@ -33,8 +34,6 @@ const AdminDashboard=()=>{
                             type={"text"}
                         />
                         <Input
-                            // label={"Name"}
-                            // icon={icons['home']}
                             placeholder={"type your name here"}
                             type={"textarea"}
                         />
@@ -62,7 +61,7 @@ const AdminDashboard=()=>{
                     </div>
                     <div className="right-dash flex column">
                         Cards component will be here
-                        <Card 
+                        {/* <Card 
                         image={true}
                         title={"Impact on Climate Change"}
                         src={"https://www.pblworks.org/sites/default/files/inline-images/blog_planet-b.png"}
@@ -76,7 +75,29 @@ const AdminDashboard=()=>{
                         desc={ "A virtual event featuring renowned environmentalists and scientists discussing climate change solutions and sustainable practices."}
                         dateState={true}
                         date={"April 22.2023"}                        
+                        /> */}
+                        <RowCard 
+                        title={"Reforestation Revolution"}
+                        desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
                         />
+                        <RowCard 
+                        title={"Opportunity Name"}
+                        desc={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et luctus orci, vitae maximus enim. Proin facilisis in libero vitae mattis"}
+                        notice={"Issued by: Admin Name"}
+                        date={"Jan 1st, 2022"}
+                        isCertification={true}
+                        />
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
             </div>

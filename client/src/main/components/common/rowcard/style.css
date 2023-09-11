@@ -1,0 +1,52 @@
+.rowcard-container{
+    gap:10px;
+    background-color:white;
+    margin: 10px;
+    max-width: 500px;
+    max-height:max-content;
+    padding:15px;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.rowcard-topic{
+    font-size: 18px;
+}
+.rowcard-desc p{
+    line-break: auto;
+    font-size: 14px;
+    padding:10px 0px;
+    border-color: #cccccc;
+}
+.rowcard-container:hover{
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    border: 1px solid #cccccc;
+    background-color:rgb(237, 237, 237);
+    cursor: pointer;
+}
+.rowcard-notice{
+    font-size: 12px;
+    color:rgb(146, 152, 159);
+    justify-content: flex-start;
+}   
+.limit{
+    width:298px;
+}
+.certified{
+    width:100px;
+    padding: 5px 10px;
+    height:24px;
+    position:relative;
+    background-color:var(--stroke_action);
+    color:var(--white);
+    font-size: 14px;
+    left:200px;
+    bottom:22px;
+}
+.poly{
+    position:relative;
+    left:283px;
+    bottom:22px;
+    color:rgb(101, 101, 101);
+}
