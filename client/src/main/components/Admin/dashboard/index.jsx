@@ -3,6 +3,7 @@ import './style.css';
 import Sidebar from '../../common/sidebar';
 import Input from "../../common/input";
 import Button from "../../common/button";
+import Card from "../../common/card";
 import {icons} from "../../../icons.js";
 const AdminDashboard=()=>{
     const tabs = [
@@ -17,7 +18,7 @@ const AdminDashboard=()=>{
     ];
     return(
         <div>
-            <div className="admin-dash page light">
+            <div className="admin-dash  light">
             <div className="admin-dash-container flex">
                 <Sidebar tabs={tabs} />
                 <div className="right-dash flex column ">
@@ -57,6 +58,24 @@ const AdminDashboard=()=>{
                             text={"View"}
                             isMain={true}
                             isWide={true}                                      
+                        />
+                    </div>
+                    <div className="right-dash flex column">
+                        Cards component will be here
+                        <Card 
+                        image={true}
+                        title={"Impact on Climate Change"}
+                        src={"https://www.pblworks.org/sites/default/files/inline-images/blog_planet-b.png"}
+                        desc={'By restoring critical ecosystems, we have significantly contributed to mitigating climate change and preserving biodiversity.'}
+                        />
+
+                        <Card 
+                        image={true}
+                        title={"Earth Day Symposium"}
+                        src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_rMs8oSJR3UOFJtam12ydE8CFGxdnamF4zg&usqp=CAU"}
+                        desc={ "A virtual event featuring renowned environmentalists and scientists discussing climate change solutions and sustainable practices."}
+                        dateState={true}
+                        date={"April 22.2023"}                        
                         />
                     </div>
                 </div>
