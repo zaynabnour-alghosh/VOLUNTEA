@@ -1,6 +1,8 @@
 import React from "react";
 import './style.css';
 import Sidebar from '../../common/sidebar';
+import Input from "../../common/input";
+import {icons} from "../../../icons.js";
 const AdminDashboard=()=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
@@ -14,11 +16,20 @@ const AdminDashboard=()=>{
     ];
     return(
         <div>
-             <div className="admin-dash page light">
+            <div className="admin-dash page light">
+            <div className="admin-dash-container flex">
                 <Sidebar tabs={tabs} />
+                <div className="right-dash flex center ">
+                        <Input
+                            // label={"Name"}
+                            icon={icons['home']}
+                            placeholder={"type your name here"}
+                            type={"textarea"}                                      
+                        />
+                    </div>
+                </div>
             </div>
-        </div>
-       
+    </div>  
     );
 }
 export default AdminDashboard;
