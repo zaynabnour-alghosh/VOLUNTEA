@@ -6,6 +6,7 @@ import Button from "../../common/button";
 import Card from "../../common/card";
 import {icons} from "../../../icons.js";
 import RowCard from "../../common/rowcard";
+import AvatarCard from "../../common/avatar";
 const AdminDashboard=()=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
@@ -80,13 +81,29 @@ const AdminDashboard=()=>{
                         title={"Reforestation Revolution"}
                         desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
                         />
-                        <RowCard 
+                        <AvatarCard
+                        image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU"}
+                        top={"Mary Doe"}
+                        info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                        date={"April 22.2023"}                        
+                        />
+                        <AvatarCard
+                        image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU"}
+                        top={"Mary Doe"}
+                        link={<Button isLink={true} text={"View"}/>}                        
+                        />
+                        <AvatarCard
+                        top={"Reminder"}
+                        info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                        time={"12:45"}
+                        />
+                        {/* <RowCard 
                         title={"Opportunity Name"}
                         desc={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et luctus orci, vitae maximus enim. Proin facilisis in libero vitae mattis"}
                         notice={"Issued by: Admin Name"}
                         date={"Jan 1st, 2022"}
                         isCertification={true}
-                        />
+                        /> */}
 
 
 
