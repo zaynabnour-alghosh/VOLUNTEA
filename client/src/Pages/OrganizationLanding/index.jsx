@@ -109,7 +109,7 @@ const OrganizationLanding=()=>{
                         </div>
                     </div>
                     <div className=" flex org-social">
-                        <FaFacebookSquare size={28}/>
+                        <FaFacebookSquare size={30}/>
                         <BsInstagram  size={28}/>
                         <BsWhatsapp  size={28}/>
                     </div>

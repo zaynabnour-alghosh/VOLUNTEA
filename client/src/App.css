@@ -9,6 +9,31 @@
     --color-text-secondary: #9EA4DA;
     --color-dark-gray: #383838;
     --font-primary:'Roboto', sans-serif;
+
+    /* inside voluntea app */
+
+    --font-primary:'Roboto', sans-serif;
+    --primary_bg:#E9E3FE;
+    --secondary:#34324E;
+    --white:#FFFFFF;
+    --text_primary:#34324E;
+    --text_secondary:#FFFFFF;
+    --stroke_primary:#C4BCBC;
+    --stroke_secondary:#9EA4DA;
+    --stroke_action:#0B1888;
+    --purple:#9EA4DA;
+    --green:#3A7D23;
+    --red:#E91D1D;
+    --sidebar:#8086BC;     
+  }
+  .light{
+    background-color: var(--primary_bg);
+    color:var(--text_primary);
+  
+  }
+  .dark{
+    background-color: var(--secondary);
+    color:var(--text_secondary);
   }
 
 button,

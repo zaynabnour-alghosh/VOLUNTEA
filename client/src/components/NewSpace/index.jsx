@@ -5,8 +5,10 @@ import {MdEmail} from 'react-icons/md';
 import {FaKey} from 'react-icons/fa';
 import {BiCalculator } from 'react-icons/bi';
 import logoS from "../../assets/logo-secondary.svg";
+import { useNavigate } from 'react-router-dom';
 import "./style.css";
 const NewSpace=({onToggle})=>{
+    const navigate = useNavigate();
     const [organizationCode, setOrganizationCode] = useState('');
     const generateRandomCode=()=>{
     const alphanumericChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -17,6 +19,9 @@ const NewSpace=({onToggle})=>{
         result += alphanumericChars.charAt(randomIndex);
     }
     setOrganizationCode(result);
+    }
+    const createOrganization=()=>{
+        navigate('/fill-organization-info');
     }
     return (
         <div className="fill-registarion-container page flex center">
@@ -49,12 +54,12 @@ const NewSpace=({onToggle})=>{
                         </div>
                     </div>
                     <hr/>
-                    <div className="row ">
+                    {/* <div className="row ">
                         <div className="input flex row">
                             <span><BsPeopleFill/></span>
                             <input type="text" placeholder="Organization Name" />
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row">
                         <div className="input flex row">
                             <span><BiCalculator/></span>
@@ -68,8 +73,7 @@ const NewSpace=({onToggle})=>{
                         
                     </div>
                     <button onClick={generateRandomCode}>Generate</button>
-                    <button className="btnSpace">Register</button>
-
+                    <button className="btnSpace" onClick={createOrganization}>NEXT</button>
                 
                     <div className="option-search">
                         Looking for an orgamization?<span onClick={() => onToggle()}>Look up</span>
