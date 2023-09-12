@@ -1,7 +1,9 @@
 import React from "react";
 import './style.css';
 import Button from "../button";
-const Header=({title,buttons})=>{
+import Input from "../input";
+import {icons} from "../../../icons.js"
+const Header=({title,buttons,search})=>{
     return(
         <div className="head-content flex spaceBetween">
             <span className="title">
@@ -18,7 +20,15 @@ const Header=({title,buttons})=>{
                         isPrimary={true}                                      
                     />
                 </div>
-            }            
+            }    
+            {search &&
+                <Input 
+                placeholder={"Search members..."}
+                className="search"
+                search={true}
+                icon={icons['search']}
+                />
+            }        
         </div>
         
     );

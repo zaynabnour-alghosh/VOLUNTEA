@@ -16,6 +16,9 @@
     margin-bottom: 5px;
 
 }
+small{
+    width: 75px;
+}
 .primary{
     background-color: var(--purple);
     color:var(--white);

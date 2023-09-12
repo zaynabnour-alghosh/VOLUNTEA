@@ -14,9 +14,10 @@ const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled 
       className={`baseButton pointer 
                 ${isPrimary? 'primary':'secondary'} 
                 ${isAction? 'action' : ''}
-                ${isWide? 'wide' : ' '}
+                ${isWide? 'wide' : 'small '}
                 ${isLink? 'action-no-bg':''}
                 ${isMain? 'btn-main' : ' '}
+               
                 `}
     //   onClick={() => clickHandler()}
     >

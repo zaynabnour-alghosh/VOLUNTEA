@@ -1,6 +1,6 @@
 import React from 'react';
 import {GoHome} from 'react-icons/go';
-import {BiTask,BiMenu,BiChat} from 'react-icons/bi';
+import {BiTask,BiMenu,BiChat,BiSearch} from 'react-icons/bi';
 import {BsPerson,BsPeople,BsFillLockFill,BsCheck2Circle,BsInstagram, BsWhatsapp} from 'react-icons/bs';
 import {MdEmail,MdOutlineNotificationsNone,MdLocationPin, MdKeyboardDoubleArrowRight} from 'react-icons/md';
 import {CiLogout} from 'react-icons/ci';
@@ -30,7 +30,8 @@ const icons = {
     linkedin:<AiOutlineLinkedin/>,
     whats:<BsWhatsapp/>,
     menu:<FaBars/>,
-    arrow:<MdKeyboardDoubleArrowRight/>
+    arrow:<MdKeyboardDoubleArrowRight/>,
+    search:<BiSearch/>
   };
   
 export {icons};

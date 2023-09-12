@@ -41,6 +41,12 @@ const AdminDashboard=()=>{
                                 title={"OPPORTUNITIES"} 
                                 buttons={true}
                             />}
+                            {selectedTab=='Members' && 
+                            <Header
+                                title={"MEMBERS"} 
+                                search={true}
+                            />}
+
                         </div>
                         <div className="dash-content flex ">
                             {selectedTab === 'Dashboard' && <Info />}
