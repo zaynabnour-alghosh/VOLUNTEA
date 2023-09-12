@@ -50,7 +50,7 @@
 }
 
   
-  input[type="file"]::-webkit-file-upload-button {
+input[type="file"]::-webkit-file-upload-button {
     background-color: var(--purple);
     border-style: none;
     padding: 15px;
@@ -60,7 +60,7 @@
     justify-content:flex-end;
     position: relative;
     left:250px;
-  }
+}
   
 .input-file-container {
     display: flex;

@@ -19,7 +19,6 @@
     max-height: 90%;
     overflow: auto;
     justify-content: center;
-    align-items: center;
 }
 .dash-content::-webkit-scrollbar {
     width: 8px;

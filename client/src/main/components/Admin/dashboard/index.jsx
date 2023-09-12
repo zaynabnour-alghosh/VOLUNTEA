@@ -32,7 +32,15 @@ const AdminDashboard=()=>{
                 <Sidebar tabs={tabs} onTabClick={handleTabClick} />
                 <div className="dash-content-container flex column ">
                         <div className="dash-header">
-                           {selectedTab==='Dashboard' && <Header />}
+                           {selectedTab==='Dashboard' &&
+                            <Header 
+                                title={"ADMIN DASHBOARD"}
+                            />}
+                           {selectedTab=='Projects' && 
+                            <Header
+                                title={"OPPORTUNITIES"} 
+                                buttons={true}
+                            />}
                         </div>
                         <div className="dash-content flex ">
                             {selectedTab === 'Dashboard' && <Info />}
