@@ -8,7 +8,7 @@ import orgLogo from '../../../../images/org-logo.png';
 
 const Info=()=>{
     return(
-        <div className="edit-org-info flex center">
+        <div className="edit-org-info flex">
             <div className="admin-org-info-container flex column">
                 <div className="base-org-info pt-20 fullwidth">
                     <div><h3>Basic Info</h3></div>
@@ -42,7 +42,7 @@ const Info=()=>{
                         </div>
                     </div>
                 </div>
-                <div className="org-impact pt-10 fullwidth">
+                 <div className="org-impact pt-10 fullwidth">
                     <div><h3>Impacts</h3></div>
                     <hr/>
                     <div className="flex center pt- gap-40">
@@ -177,7 +177,7 @@ const Info=()=>{
                         </div>
                     </div>
                 </div>
-                <div className=" flex center">
+                <div className="flex center">
                     <Button
                         text={"Edit"}
                         isPrimary={false}                                      

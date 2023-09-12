@@ -1,6 +1,8 @@
 .edit-org-info{
     width:100%;
     height: 100%;
+    display: flex;
+    justify-content: center
 }
 .org-details{
     padding-left:20px;

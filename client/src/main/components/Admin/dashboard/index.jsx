@@ -4,6 +4,7 @@ import { useState } from "react";
 import Sidebar from '../../common/sidebar';
 import Info from "../Info";
 import Members from "../Members";
+import Header from "../../common/header";
 const AdminDashboard=()=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
@@ -21,14 +22,14 @@ const AdminDashboard=()=>{
     };
     return(
         <div>
-            <div className="admin-dash  light">
+            <div className="admin-dash light">
             <div className="admin-dash-container flex">
                 <Sidebar tabs={tabs} onTabClick={handleTabClick} />
                 <div className="dash-content-container flex column ">
                         <div className="dash-header">
-                            header goes here
+                           {selectedTab==='Dashboard' && <Header />}
                         </div>
-                        <div className="dash-content">
+                        <div className="dash-content flex ">
                             {selectedTab === 'Dashboard' && <Info />}
                             {selectedTab === 'Members' && <Members />}
                         </div>                      

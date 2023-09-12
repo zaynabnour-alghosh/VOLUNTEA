@@ -6,8 +6,8 @@
     height: 100vh;
 }
 .dash-header{
-    padding: 30px;
-    background-color: var(--purple);
+    padding: 10px;
+    background-color: var(--primary1-bg);
     border-radius: 10px;
     height: 10%;
 }
@@ -18,6 +18,8 @@
     height: 90%;
     max-height: 90%;
     overflow: auto;
+    justify-content: center;
+    align-items: center;
 }
 .dash-content::-webkit-scrollbar {
     width: 8px;
