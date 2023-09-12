@@ -15,7 +15,7 @@ const Button = ({ text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled
                 ${isAction? 'action' : ''}
                 ${isWide? 'wide' : ' '}
                 ${isLink? 'action-no-bg':''}
-                ${isMain? 'main' : ' '}
+                ${isMain? 'btn-main' : ' '}
                 `}
     //   onClick={() => clickHandler()}
     >

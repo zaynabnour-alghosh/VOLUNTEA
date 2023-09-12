@@ -3,10 +3,11 @@ import './style.css';
 import Tab from "../tab";
 import {icons} from '../../../icons.js';
 import secondaryLogo from '../../../../assets/secondary-white.svg';
-const Sidebar=({tabs})=>{
-    const [selectedTab,setSelectedTab]=useState(null)
-    const handleTabClick = (index) => {
-        setSelectedTab(index);
+const Sidebar=({tabs,onTabClick})=>{
+    const [selectedTab,setSelectedTab]=useState('Dashboard')
+    const handleTabClick = (tabName) => {
+        setSelectedTab(tabName);
+        onTabClick(tabName);
       };
     return(
         <div className="sidebar">
@@ -22,8 +23,8 @@ const Sidebar=({tabs})=>{
                             name={tab.name}
                             size={tab.size}
                             color={tab.color}
-                            isSelected={selectedTab === index}
-                            onToggle={() => handleTabClick(index)}
+                            isSelected={selectedTab === tab.name}
+                            onToggle={() => handleTabClick(tab.name)}
                                     
                         />
                     ))

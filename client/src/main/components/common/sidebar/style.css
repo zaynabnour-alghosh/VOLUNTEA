@@ -1,15 +1,15 @@
 .side-logo{
     display: flex;
     padding-left: 35px;
+    padding-bottom: 75px;
 }
 .sidebar{
     background-color: var(--sidebar);
-    width:300px;
-    padding-left: 20px;
+    width:380px;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
     justify-content: center;
 }
 .tab-list{

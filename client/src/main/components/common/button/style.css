@@ -43,7 +43,7 @@
 .wide{
     width:350px;
 }
-.main{
+.btn-main{
     background-color: var(--secondary);
     border-style: none;
     color:var(--white);

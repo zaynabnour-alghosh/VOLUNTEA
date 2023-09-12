@@ -1,3 +1,16 @@
-.right-dash{
-    padding-left: 20px;
+.dash-content-container{
+    width: 100%;
+    padding: 10px;
+    gap:20px;
+}
+.dash-header{
+    padding: 30px;
+    background-color: var(--purple);
+    border-radius: 10px;
+}
+.dash-content{
+    background-color: var(--white);
+    border-radius:10px;
+    padding: 8px;
+    height: 100%;
 }
