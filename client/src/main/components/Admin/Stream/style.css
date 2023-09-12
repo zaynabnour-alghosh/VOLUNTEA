@@ -1,0 +1,16 @@
+.admin-stream-container{    
+    width:100%;
+}
+.stream-tabs{
+    border-bottom: 1px solid rgb(209, 209, 209);
+    height: 100px;
+    align-items: center;
+    padding-left: 20px;
+    width: 100%;
+}
+.admin-stream-content{
+    padding:20px;
+}
+.admin-stream-main{
+    width:100%
+}
