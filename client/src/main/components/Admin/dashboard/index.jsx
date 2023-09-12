@@ -5,13 +5,18 @@ import Sidebar from '../../common/sidebar';
 import Info from "../Info";
 import Members from "../Members";
 import Header from "../../common/header";
+import Project from "../Project";
+import Messages from "../Messages";
+import Notifications from "../Notifications";
+import Stream from "../Stream";
+import Profile from "../Profile";
 const AdminDashboard=()=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
         { icon: 'task', name: 'Projects' , size: 32},
         { icon: 'people', name: 'Members', size: 32},
         { icon: 'chat', name: 'Messages', size: 32},
-        { icon: 'notification', name: 'Nottifications',size: 32},
+        { icon: 'notification', name: 'Notifications',size: 32},
         { icon: 'stream', name: 'Stream', size: 32},
         { icon: 'profile', name: 'Profile', size: 32},
         { icon: 'logout', name: 'Logout', size: 32}       
@@ -31,7 +36,13 @@ const AdminDashboard=()=>{
                         </div>
                         <div className="dash-content flex ">
                             {selectedTab === 'Dashboard' && <Info />}
+                            {selectedTab === 'Projects' && <Project />}
                             {selectedTab === 'Members' && <Members />}
+                            {selectedTab === 'Messages' && <Messages />}
+                            {selectedTab === 'Notifications' && <Notifications />}
+                            {selectedTab === 'Stream' && <Stream />}
+                            {selectedTab === 'Profile' && <Profile />}
+
                         </div>                      
                     </div>
                 </div>

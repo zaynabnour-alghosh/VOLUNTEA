@@ -3,7 +3,7 @@ import './style.css';
 const Members=()=>{
     return(
         <div>
-            View Org members here
+            Here goes the members components
         </div>
     );
 }
