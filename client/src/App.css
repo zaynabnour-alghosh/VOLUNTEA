@@ -80,3 +80,42 @@ input[type="file"] {
 .fullwidth {
   width: 100%;
 }
+.mt-10{
+  margin-top: 10px;
+}
+.p-10{
+  padding:10px
+}
+.p-20{
+  padding:20px;
+}
+.pt-10{
+  padding-top: 10px;
+}
+.pt-15{
+  padding-top: 15px;
+}
+.pt-20{
+  padding-top: 20px;
+}
+.gap-5{
+  gap:5px;
+}
+.gap-10{
+  gap:10px;
+}
+.gap-15{
+  gap:15px;
+}
+.gap-20{
+  gap:20px;
+}
+.gap-25{
+  gap:25px;
+}
+.gap-30{
+  gap:30px;
+}
+.grid{
+  display: grid;
+}

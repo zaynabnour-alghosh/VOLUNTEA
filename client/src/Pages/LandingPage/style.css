@@ -293,7 +293,7 @@ a:hover{
     flex-direction: column;
     gap:5px;
 }
-.row{
+.row-x{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

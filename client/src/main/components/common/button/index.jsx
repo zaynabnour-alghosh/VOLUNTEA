@@ -1,11 +1,12 @@
 import React from "react";
 import "./style.css";
 
-const Button = ({ text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled = true }) => {
+const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled = true }) => {
   const clickHandler = () => {
     if (enabled) {
       onClick();
     }
+
   };
 
   return (

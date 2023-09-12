@@ -9,7 +9,12 @@
     margin-bottom: 5px;
     
 }
-  
+.base-input-row input[type="file"] {
+    background-color: var(--white);
+    padding: 0px;
+    display: inline-block;
+    justify-content: flex-end;
+}
 .base-input-row  input {
     height:42px;
     padding:10px;

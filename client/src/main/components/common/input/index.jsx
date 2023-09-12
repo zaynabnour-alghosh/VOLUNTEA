@@ -3,11 +3,14 @@ import './style.css';
 import {icons} from '../../../icons.js';
 import { useState } from "react";
 
-const Input=({icon, label, placeholder, type = "text" })=>{
+const Input=({icon, label, placeholder, type = "text",fill })=>{
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
       };
+      const inputStyle = {
+        width: '100%',
+      }; 
     return(
         <div className="flex column base-input-row">
             {label? 
@@ -16,6 +19,7 @@ const Input=({icon, label, placeholder, type = "text" })=>{
                 <input
                     type={type}
                     placeholder={placeholder}
+                    style={fill?  inputStyle:{}}
                 />
             </>:
             <>

@@ -120,7 +120,7 @@ const LandingPage=()=>{
 
                                 <div className="contact-info">
                                    <div className="contact-left">
-                                        <div className="row">
+                                        <div className="row-x">
                                             <div className="contact-input">
                                                 <input type="text" placeholder="Name" />
                                             </div>
@@ -128,7 +128,7 @@ const LandingPage=()=>{
                                                 <input type="email" placeholder="Email Address" />
                                             </div>
                                         </div>
-                                        <div className="row">
+                                        <div className="row-x">
                                             <textarea name="contact-message" cols="51" rows="10" placeholder="Message"></textarea>
                                         </div>
                                     </div>
