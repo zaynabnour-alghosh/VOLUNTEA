@@ -39,15 +39,12 @@ const AdminDashboard=()=>{
         setSelectedTab(tabName);
         if (tabName === 'Notifications') {
             toggleNotificationModal();
-            } else {
-            setShowNotificationModal(false);
-            }
-        if (tabName === 'Notifications') {
             setShowNotificationModal(true);
             } else {
             setShowNotificationModal(false);
             }
-    };    
+       
+        };    
     return(
         <div>
             <div className="admin-dash light">
@@ -55,6 +52,17 @@ const AdminDashboard=()=>{
                     <Sidebar tabs={tabs} onTabClick={handleTabClick} toggleModal={toggleModal}/>
                     <div className="dash-content-container flex column ">
                         <div className="dash-header">
+                            {selectedTab === 'Notifications' && ( 
+                                <div className="dash-header"> 
+                                    {previousTab === 'Dashboard' && <><Header title={"ADMIN DASHBOARD"}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>} 
+                                    {previousTab === 'Projects' && <><Header title={"OPPORTUNITIES"} buttons={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
+                                    {previousTab === 'Members' && <><Header title={"MEMBERS"} search={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
+                                    {previousTab === 'Messages' && <><Header title={"MESSAGES"}/><div className="notif-modal-content"><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></div></>}
+                                    {previousTab === 'Stream' && <><Header title={"STREAM"} avatar={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
+                                    {previousTab === 'Profile' && <><Header title={"PROFILE"} avatar={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
+                                    {previousTab === 'Notifications' && <><Header title={"NOTIFICATIONS"}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
+                                </div>
+                                )}
                             {selectedTab==='Dashboard' &&
                             <Header 
                                 title={"ADMIN DASHBOARD"}
@@ -86,7 +94,7 @@ const AdminDashboard=()=>{
                             {selectedTab === 'Members' && <Members />}
                             {selectedTab === 'Messages' && <Messages />}
                             {selectedTab === 'Notifications' && ( 
-                                <div className="modal-overlay"> 
+                                <div className="dash-content flex"> 
                                     {previousTab === 'Dashboard' && <><Info /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>} 
                                     {previousTab === 'Projects' && <><Project /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Members' && <><Members /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}

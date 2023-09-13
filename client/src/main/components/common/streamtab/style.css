@@ -12,7 +12,7 @@
     transition: 0.3s ease-in-out;
   }
   .tabButton p{
-    font-weight: 700;
+    font-weight: normal;
     color:var(--text_primary);
   }
   .selectedMark {
@@ -20,4 +20,9 @@
     width: 100%;
     border-radius: 1.5px;
     background-color: var(--stroke_action);
+    font-weight: 700;
+  }
+  .bold{
+    font-weight: 700;
+    color:var(--text_primary);
   }

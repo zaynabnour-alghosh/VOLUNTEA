@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-const StreamTab = ({ name, value, selected,onSelected }) => {
+const StreamTab = ({ name, value, selected,onSelected ,chosen}) => {
     const clickHandler = () => {
       onSelected(value);
     };
@@ -10,7 +10,7 @@ const StreamTab = ({ name, value, selected,onSelected }) => {
         className="flex column  pointer tabButton"
         onClick={() => clickHandler()}
       >
-        <p>{name}</p>  
+        <p className={`${chosen? 'bold':''}`}>{name}</p>  
         {selected && <div className="selectedMark"></div>}
       </div>
     );
