@@ -8,9 +8,9 @@ import orgLogo from '../../../../images/org-logo.png';
 
 const Info=()=>{
     return(
-        <div className="edit-org-info flex">
+        <div className="edit-org-info flex wrap">
             <div className="admin-org-info-container flex column">
-                <div className="base-org-info pt-20 fullwidth">
+                <div className="base-org-info  flex wrap column pt-20 fullwidth">
                     <div><h3>Basic Info</h3></div>
                     <hr/>
                     <div className="org-info-form flex row spaceBetween">

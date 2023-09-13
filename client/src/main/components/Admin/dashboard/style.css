@@ -9,7 +9,8 @@
     padding: 10px;
     background-color: var(--primary1-bg);
     border-radius: 10px;
-    height: 10%;
+    /* height: 10%; */
+    height: max-content;
 }
 .dash-content{
     background-color: var(--white);
