@@ -42,6 +42,11 @@ const AdminDashboard=()=>{
             } else {
             setShowNotificationModal(false);
             }
+        if (tabName === 'Notifications') {
+            setShowNotificationModal(true);
+            } else {
+            setShowNotificationModal(false);
+            }
     };    
     return(
         <div>
@@ -85,7 +90,7 @@ const AdminDashboard=()=>{
                                     {previousTab === 'Dashboard' && <><Info /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>} 
                                     {previousTab === 'Projects' && <><Project /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Members' && <><Members /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
-                                    {previousTab === 'Messages' && <><Messages /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
+                                    {previousTab === 'Messages' && <><Messages /><div className="notif-modal-content"><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></div></>}
                                     {previousTab === 'Stream' && <><Stream /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Profile' && <><Profile /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Notifications' && <><Info /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}

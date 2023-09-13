@@ -28,3 +28,8 @@
 .dash-content::-webkit-scrollbar-thumb {
     background-color:var(--sidebar);
   }
+.modal-overlay{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}

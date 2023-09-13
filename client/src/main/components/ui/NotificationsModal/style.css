@@ -1,0 +1,26 @@
+.notif-container{
+    align-items: center;   
+    /* overflow: hidden; */
+}
+.clear-all{
+    font-size: 18px;
+    font-weight: 700;
+    color:var(--red);
+}
+.notif-content{
+    justify-content: flex-end;
+}
+.ReactModal__Content .ReactModal__Content--after-open{
+    position: fixed;
+    left:auto;
+    top:0;
+    bottom: 0;
+    right: 0;
+    width: 40%;;
+}
+.notif-cards-container{
+    overflow:scroll;
+}
+.notif-cards-container::-webkit-scrollbar {
+    width: 8px;
+}
