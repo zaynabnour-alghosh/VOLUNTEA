@@ -3,7 +3,7 @@ import './style.css';
 import Button from "../button";
 import Input from "../input";
 import {icons} from "../../../icons.js"
-const Header=({title,buttons,search,stream})=>{
+const Header=({title,buttons,search,avatar})=>{
     return(
         <div className="head-content flex spaceBetween">
             <span className="title">
@@ -29,7 +29,7 @@ const Header=({title,buttons,search,stream})=>{
                 icon={icons['search']}
                 />
             }      
-            {stream &&
+            {avatar &&
             <div className="member-full-name flex row stream-header">
                  <span>Jane Doe</span>
                 <div className="member-avatar">

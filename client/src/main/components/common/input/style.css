@@ -3,6 +3,10 @@
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 20px;
+    display: flex; 
+    max-width: 100%;
+    /* max-width: 350px;  */
+    margin: 0 auto;
 }
   
 .base-input-row > label {
@@ -27,7 +31,9 @@
     outline-color:var(--secondary);
     outline-style: none;
     border-radius: 5px;
-    width: 350px;
+    width:250px;
+    max-width: 100%;
+    min-width: 0;
 }
 .base-input-row  input:focus {
     color:rgb(111, 119, 128);
@@ -55,3 +61,14 @@
     gap:5px;
 }
 
+.base-input-row input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--purple);
+    border-style: none;
+    padding: 15px;
+    margin: 0px;
+    color: var(--white);
+    display: flex;
+    justify-content:flex-end;
+    position: relative;
+    left:250px;
+}

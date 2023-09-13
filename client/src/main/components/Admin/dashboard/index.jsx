@@ -49,8 +49,14 @@ const AdminDashboard=()=>{
                             {selectedTab=='Stream' && 
                             <Header
                                 title={"STREAM"} 
-                                stream={true}
+                                avatar={true}
                             />}
+                            {selectedTab=='Profile' && 
+                            <Header
+                                title={"PROFILE "} 
+                                avatar={true}
+                            />}
+                            
 
                         </div>
                         <div className="dash-content flex ">
