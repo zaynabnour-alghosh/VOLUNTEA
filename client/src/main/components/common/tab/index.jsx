@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import './style.css';
-const Tab=({icon, name, size, isSelected, onToggle })=>{
+const Tab=({icon, name, size, isSelected, onToggle, onTabClick })=>{
     const iconStyle = {
         fontSize: size + 'px',
       };  
+    const handleClick = () => {
+    onTabClick(name); 
+    onToggle();
+    };
     return(
         <li
             className={`tab-item ${isSelected? 'selected':''}`}
-            onClick={onToggle}      
+            onClick={handleClick}      
         >
             <span className={`tab-icon ${isSelected? 'selected':''}`} style={iconStyle}>{icon}</span>
             <span className={`tab-name ${isSelected? 'selected':''}`}>{name}</span>
