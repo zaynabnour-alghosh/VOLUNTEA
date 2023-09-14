@@ -3,7 +3,7 @@ import './style.css';
 import {icons} from '../../../icons.js';
 import { useState } from "react";
 
-const Input=({icon, label, placeholder, type = "text",fill ,search})=>{
+const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder})=>{
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -23,15 +23,17 @@ const Input=({icon, label, placeholder, type = "text",fill ,search})=>{
                 />
             </>:
             <>
-                <div className="icon-input-row">
+                <div className={`con-input-row  ${noBorder? 'no-border':''}`}>
                     {icon && <span className="base-input-icon" style={{ fontSize: '25px' }} >{icon}</span>}
-                    <input                
+                    <input
+                                    
                         type={showPassword ? 'text' : type}
                         placeholder={placeholder}
+                        style={fill?  inputStyle:{}}
                     />
                     {type === 'password' && (
                     <span
-                        className="password-toggle-icon"
+                        className={`assword-toggle-icon}`}
                         onClick={togglePasswordVisibility}
                         style={{ color: 'gray',fontSize: '20px'}}
                     >

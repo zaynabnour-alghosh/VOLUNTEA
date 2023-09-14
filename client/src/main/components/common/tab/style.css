@@ -9,6 +9,7 @@ li{
 }
 .tab-name{
     color:var(--white);
+    padding-bottom: 9px;
 }
 .tab-item:hover{
     cursor: pointer;    

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import StreamTab from "../../common/streamtab";
 import './style.css';
 import AvatarCard from "../../common/avatar";
+import Input from "../../common/input";
 import Header from "../../common/header";
 import MessageRow from "../../ui/MessageRow";
+import {icons} from './../../../icons.js';
 const Messages=()=>{
     const [selectedTab, setSelectedTab] = useState("Single");
 
@@ -16,14 +18,12 @@ const Messages=()=>{
                 <div className="single-group-top flex row spaceBetween">
                     <StreamTab
                         name={"Single"}
-                        // selected={selectedTab === "Stream"}
                         value={"Single"}
                         onSelected={(value) => selectHandler(value)}
                         chosen={selectedTab==="Single"}
                     />
                     <StreamTab
                         name={"Group"}
-                        // selected={selectedTab === "Stream"}
                         value={"Group"}
                         onSelected={(value) => selectHandler(value)}
                         chosen={selectedTab==="Group"}
@@ -84,8 +84,19 @@ const Messages=()=>{
                    <MessageRow sender={true} text={"lorem ipsum ..."} />
                    <MessageRow text={"lorem ipsum ..."} />
                 </div>
+                <hr />
                 <div className="chatbox-message-input flex row">
-                    here goes imput and emoji tab
+                    <div className="send-input fullWidth">
+                        <Input
+                            placeholder={"Type your message here ..."}
+                            type={"textarea"}
+                            className="fullwidth"
+                            fill={true}
+                            noBorder={true}
+                        />
+                    </div>
+                    <span style={{ fontSize: '25px',paddingLeft:'10px',paddingRight:'10px'}}>{icons['emoji']}</span>
+                    <span style={{ fontSize: '25px' }}>{icons['send']}</span>
                 </div>
 
             </div>

@@ -2,9 +2,9 @@ import React from 'react';
 import {GoHome} from 'react-icons/go';
 import {BiTask,BiMenu,BiChat,BiSearch} from 'react-icons/bi';
 import {BsPerson,BsPeople,BsFillLockFill,BsCheck2Circle,BsInstagram, BsWhatsapp} from 'react-icons/bs';
-import {MdEmail,MdOutlineNotificationsNone,MdLocationPin, MdKeyboardDoubleArrowRight} from 'react-icons/md';
+import {MdEmail,MdOutlineNotificationsNone,MdLocationPin, MdKeyboardDoubleArrowRight,MdOutlineEmojiEmotions} from 'react-icons/md';
 import {CiLogout} from 'react-icons/ci';
-import{AiFillEyeInvisible,AiFillEye,AiOutlineLinkedin} from 'react-icons/ai';
+import{AiFillEyeInvisible,AiFillEye,AiOutlineLinkedin,AiOutlineSend} from 'react-icons/ai';
 import {FaKey} from 'react-icons/fa';
 import {FaFacebookSquare,FaPhone,FaBars} from 'react-icons/fa';
 
@@ -31,7 +31,10 @@ const icons = {
     whats:<BsWhatsapp/>,
     menu:<FaBars/>,
     arrow:<MdKeyboardDoubleArrowRight/>,
-    search:<BiSearch/>
+    search:<BiSearch/>,
+    send:<AiOutlineSend/>,
+    emoji:<MdOutlineEmojiEmotions fill={'#FFA500'}/>
+
   };
   
 export {icons};

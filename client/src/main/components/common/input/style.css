@@ -70,5 +70,8 @@
     display: flex;
     justify-content:flex-end;
     position: relative;
-    left:250px;
+    left:150px;
+}
+.no-border input{
+    border-style: none;
 }
