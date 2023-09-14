@@ -23,7 +23,7 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder})=>{
                 />
             </>:
             <>
-                <div className={`con-input-row  ${noBorder? 'no-border':''}`}>
+                <div className={`icon-input-row  ${noBorder? 'no-border':''}`}>
                     {icon && <span className="base-input-icon" style={{ fontSize: '25px' }} >{icon}</span>}
                     <input
                                     

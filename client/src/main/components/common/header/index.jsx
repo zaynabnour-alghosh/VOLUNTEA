@@ -1,9 +1,18 @@
 import React from "react";
 import './style.css';
+import { useState } from 'react';
 import Button from "../button";
 import Input from "../input";
 import {icons} from "../../../icons.js"
+import OpportunityModal from "../../ui/OpportunityModal";
 const Header=({title,buttons,search,avatar})=>{
+    const [isOppModalOpen, setIsOppModalOpen] = useState(false);
+    const showOppModal = () => {
+        setIsOppModalOpen(true);
+      };
+    const toggleOppModal=()=>{
+        setIsOppModalOpen(!isOppModalOpen);
+    }
     return(
         <div className="head-content flex spaceBetween">
             <span className="title">
@@ -13,7 +22,8 @@ const Header=({title,buttons,search,avatar})=>{
                 <div className="opp-buttons flex row gap-20">
                     <Button
                         text={"NEW"}
-                        isPrimary={true}                                      
+                        isPrimary={true}
+                        onClick={showOppModal}                                      
                     />
                     <Button
                         text={"+GROUP"}
@@ -22,12 +32,15 @@ const Header=({title,buttons,search,avatar})=>{
                 </div>
             }    
             {search &&
-                <Input 
-                placeholder={"Search members..."}
-                className="search"
-                search={true}
-                icon={icons['search']}
-                />
+                <div className="member-icon-search">
+                    <Input 
+                        placeholder={"Search members..."}
+                        className="search"
+                        search={true}
+                        icon={icons['search']}
+                    />
+                </div>
+                
             }      
             {avatar &&
             <div className="member-full-name flex row stream-header">
@@ -40,7 +53,12 @@ const Header=({title,buttons,search,avatar})=>{
                 </div>
             </div>
 
-            }  
+            }
+            {isOppModalOpen && 
+                <OpportunityModal 
+                    showOppModal={isOppModalOpen}
+                    onRequestClose={toggleOppModal}
+                />}
         </div>
         
     );

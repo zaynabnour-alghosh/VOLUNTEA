@@ -16,3 +16,14 @@
 .head-content{
     align-items: center;
 }
+.member-icon-search{
+    border-color:var(--secondary);
+    border-style:solid;
+    border-width: 2px;
+    box-sizing: border-box;
+    color:var(--text_primary);
+    outline-color:var(--secondary);
+    outline-style: none;
+    border-radius: 20px;
+    padding-left: 10px;
+}

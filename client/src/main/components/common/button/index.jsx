@@ -18,7 +18,7 @@ const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled 
                 ${isLink? 'action-no-bg':''}
                 ${isMain? 'btn-main' : ' '}
                 `}
-    //   onClick={() => clickHandler()}
+      onClick={() => clickHandler()}
     >
       {text}
     </button>

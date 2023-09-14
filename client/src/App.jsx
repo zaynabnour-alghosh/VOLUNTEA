@@ -17,6 +17,8 @@ function App() {
         <Route path='/voluntea/orgname' element={<OrganizationLanding/>} />
         <Route path='/fill-organization-info' element={<InformationForm />} />
         <Route path='/voluntea/orgname/admin' element={<Admin/>} />
+
+
       </Routes>
     </BrowserRouter>
   );

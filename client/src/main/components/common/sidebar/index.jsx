@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import './style.css';
 import Tab from "../tab";
 import {icons} from '../../../icons.js';
+import NotificationsModal from "../../ui/NotificationsModal";
 import secondaryLogo from '../../../../assets/secondary-white.svg';
-const Sidebar=({tabs,onTabClick, toggleModal})=>{
+const Sidebar=({tabs,onTabClick, toggleModal,showNotificationModal, toggleNotificationModal})=>{
     const [selectedTab,setSelectedTab]=useState('Dashboard')
-    // const handleTabClick = (tabName) => {
-    //     setSelectedTab(tabName);
-    //     onTabClick(tabName);
-    //   };
+    const handleTabClick = (tabName) => {
+        setSelectedTab(tabName);
+        if (tabName === "Notifications") {
+            toggleNotificationModal();
+          } else {
+            onTabClick(tabName);
+          }
+      };
     return(
         <div className="sidebar">
             <div className="side-logo">
@@ -26,13 +31,18 @@ const Sidebar=({tabs,onTabClick, toggleModal})=>{
                             isSelected={selectedTab === tab.name}
                             onToggle={toggleModal}
                             onTabClick={(tabName) => {
-                                setSelectedTab(tabName);
-                                onTabClick(tabName);
+                                handleTabClick(tabName);
                               }}                                    
                         />
                     ))
                 }
             </ul>
+            {showNotificationModal && (
+                <NotificationsModal
+                showModal={showNotificationModal}
+                onRequestClose={toggleNotificationModal}
+                />
+            )}
         </div>
     );
 }

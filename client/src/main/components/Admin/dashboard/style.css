@@ -37,3 +37,16 @@
     background-color: var(--primary_bg);
     padding: 0px;
 }
+.dash-content .overlay{
+    position: relative;
+}
+.dash-content-container.overlay::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+  }

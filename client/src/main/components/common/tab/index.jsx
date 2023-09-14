@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import './style.css';
-const Tab=({icon, name, size, isSelected, onToggle, onTabClick })=>{
+const Tab=({icon, name, size, isSelected, onTabClick })=>{
     const iconStyle = {
         fontSize: size + 'px',
       };  
     const handleClick = () => {
     onTabClick(name); 
-    onToggle();
     };
     return(
         <li

@@ -1,6 +1,8 @@
 .notif-container{
-    align-items: center;   
-    /* overflow: hidden; */
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
 }
 .clear-all{
     font-size: 18px;

@@ -43,7 +43,7 @@
 .search input{
     height:42px;
     padding:10px;
-    background-color:var(--white);
+    background-color:transparent;
     border-color:var(--stroke_primary);
     border-style: none;
     border-width: 1px;
@@ -74,4 +74,5 @@
 }
 .no-border input{
     border-style: none;
+    width: 100%;
 }
