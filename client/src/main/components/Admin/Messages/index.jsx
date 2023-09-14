@@ -30,7 +30,17 @@ const Messages=()=>{
                     />
                 </div>
                 <div className="member-chat-search flex">
-                    <Header search={true}/>
+                <div className="member-search">
+                    <Input 
+                        placeholder={"Search members..."}
+                        className="search"
+                        memberSearch={true}
+                        // isWide={true}
+                        noBorder={true}
+                        icon={icons['search']
+                    }
+                    />
+                </div>
                 </div>
                 <div className="member-messagebox-container flex column">
                     {selectedTab==="Single" && 

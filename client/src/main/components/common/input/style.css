@@ -52,7 +52,7 @@
     outline-color:var(--secondary);
     outline-style: none;
     border-radius: 15px;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .icon-input-row{
@@ -75,4 +75,7 @@
 .no-border input{
     border-style: none;
     width: 100%;
+}
+.member-search{
+
 }

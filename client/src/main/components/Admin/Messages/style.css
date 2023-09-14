@@ -65,3 +65,6 @@
 .chatbox-message-input span{
     cursor: pointer;
 }
+.member-search{
+    width: 90%;
+}
