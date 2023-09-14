@@ -3,6 +3,7 @@ import StreamTab from "../../common/streamtab";
 import './style.css';
 import AvatarCard from "../../common/avatar";
 import Header from "../../common/header";
+import MessageRow from "../../ui/MessageRow";
 const Messages=()=>{
     const [selectedTab, setSelectedTab] = useState("Single");
 
@@ -74,6 +75,14 @@ const Messages=()=>{
                 <hr />
                 <div className="chatbox-content flex column">
                    {/* message */}
+                   <MessageRow sender={true} text={"hi"} />
+                   <MessageRow  text={"hi there!"}/>
+                   <MessageRow sender={true} text={"Lorem ipsum dolor sit amet"} />
+                   <MessageRow sender={true} text={"lorem ipsum ..."} />
+                   <MessageRow text={"lorem ipsum ..."} />
+                   <MessageRow sender={true} text={"Lorem ipsum dolor sit amet"} />
+                   <MessageRow sender={true} text={"lorem ipsum ..."} />
+                   <MessageRow text={"lorem ipsum ..."} />
                 </div>
                 <div className="chatbox-message-input flex row">
                     here goes imput and emoji tab

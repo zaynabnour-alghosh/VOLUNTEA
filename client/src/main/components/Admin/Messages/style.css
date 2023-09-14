@@ -24,17 +24,30 @@
     border-radius: 10px;
     padding: 5px;
     height: 100%;
-    width: 40%;
+    width: 35%;
 }
 .members-chatbox-container{
     background-color: var(--white);
     border-radius: 10px;
     padding: 5px;
     height: 100%;
-    width: 60%;
+    width: 65%;
 }
 .chatbox-header{
     padding: 15px;
     gap:10px;
     align-items: center;
+}
+.chatbox-content{
+    height: 100%;
+    padding:10px;
+    gap:10px;
+    overflow: scroll;
+}
+.chatbox-content::-webkit-scrollbar {
+    width: 4px;
+}
+  
+.chatbox-content::-webkit-scrollbar-thumb {
+    background-color:var(--sidebar);
 }
