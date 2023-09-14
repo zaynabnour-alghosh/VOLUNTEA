@@ -88,7 +88,7 @@ const AdminDashboard=()=>{
                                 avatar={true}
                             />}
                         </div>
-                        <div className="dash-content flex ">
+                        <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`}>
                             {selectedTab === 'Dashboard' &&<Info />}
                             {selectedTab === 'Projects' && <Project />}
                             {selectedTab === 'Members' && <Members />}

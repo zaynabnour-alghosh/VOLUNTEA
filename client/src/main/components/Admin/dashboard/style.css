@@ -33,3 +33,7 @@
     justify-content: flex-end;
     width: 100%;
 }
+.chat-bg{
+    background-color: var(--primary_bg);
+    padding: 0px;
+}

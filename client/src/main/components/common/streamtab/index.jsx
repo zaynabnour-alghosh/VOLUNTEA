@@ -7,10 +7,10 @@ const StreamTab = ({ name, value, selected,onSelected ,chosen}) => {
   
     return (
       <div
-        className="flex column  pointer tabButton"
+        className={`flex column  pointer tabButton ${chosen? 'bold':''}`}
         onClick={() => clickHandler()}
       >
-        <p className={`${chosen? 'bold':''}`}>{name}</p>  
+        <p>{name}</p>  
         {selected && <div className="selectedMark"></div>}
       </div>
     );

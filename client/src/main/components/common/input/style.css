@@ -52,7 +52,7 @@
     outline-color:var(--secondary);
     outline-style: none;
     border-radius: 15px;
-    width: 250px;
+    width: 100%;
 }
 
 .icon-input-row{

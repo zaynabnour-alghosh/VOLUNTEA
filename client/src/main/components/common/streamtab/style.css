@@ -22,7 +22,7 @@
     background-color: var(--stroke_action);
     font-weight: 700;
   }
-  .bold{
-    font-weight: 700;
+  .bold p{
+    font-weight: 800;
     color:var(--text_primary);
   }
