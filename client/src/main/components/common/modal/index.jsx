@@ -11,7 +11,7 @@ const customStyles = {
         bottom: 0,     
         height: '100%',
         width: 'max-content',
-       
+        borderRadius:0,
         // transform: 'translate(-50%, -50%)',
         backgroundColor: '#fff',
         inset:'0px',
@@ -22,7 +22,7 @@ const customStyles = {
         justifyContent: 'flex-start',
     },
     overlay: {
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgba(0,0,0,0.6)',
         top: 0,
         left:0,
         right: 0,

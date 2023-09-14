@@ -57,7 +57,7 @@ const AdminDashboard=()=>{
                                     {previousTab === 'Dashboard' && <><Header title={"ADMIN DASHBOARD"}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>} 
                                     {previousTab === 'Projects' && <><Header title={"OPPORTUNITIES"} buttons={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Members' && <><Header title={"MEMBERS"} search={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
-                                    {previousTab === 'Messages' && <><Header title={"MESSAGES"}/><div className="notif-modal-content"><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></div></>}
+                                    {previousTab === 'Messages' && <><Header title={"MESSAGES"} avatar={true}/><div className="notif-modal-content"><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></div></>}
                                     {previousTab === 'Stream' && <><Header title={"STREAM"} avatar={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Profile' && <><Header title={"PROFILE"} avatar={true}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Notifications' && <><Header title={"NOTIFICATIONS"}/><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
@@ -77,6 +77,11 @@ const AdminDashboard=()=>{
                                 title={"MEMBERS"} 
                                 search={true}
                             />}
+                            {selectedTab=='Messages' && 
+                            <Header
+                                title={"CHATS"} 
+                                avatar={true}
+                            />}
                             {selectedTab=='Stream' && 
                             <Header
                                 title={"STREAM"} 
@@ -94,15 +99,16 @@ const AdminDashboard=()=>{
                             {selectedTab === 'Members' && <Members />}
                             {selectedTab === 'Messages' && <Messages />}
                             {selectedTab === 'Notifications' && ( 
-                                <div className="dash-content flex"> 
+                                // <div className={`fullWidth ${selectedTab==='Messages'?'chat-bg':''}`}> 
+                                    <>
                                     {previousTab === 'Dashboard' && <><Info /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>} 
                                     {previousTab === 'Projects' && <><Project /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Members' && <><Members /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
-                                    {previousTab === 'Messages' && <><Messages /><div className="notif-modal-content"><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></div></>}
+                                    {previousTab === 'Messages' && <><Messages  className='chat-bg1'/><div className="notif-modal-content"><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></div></>}
                                     {previousTab === 'Stream' && <><Stream /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Profile' && <><Profile /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
                                     {previousTab === 'Notifications' && <><Info /><NotificationsModal showModal={showNotificationModal} toggleModal={toggleNotificationModal} /></>}
-                                </div>
+                                </>
                                 )}
                             {selectedTab === 'Stream' && <Stream />}
                             {selectedTab === 'Profile' && <Profile />}

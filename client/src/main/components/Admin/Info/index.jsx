@@ -14,7 +14,7 @@ const Info=()=>{
                     <div><h3>Basic Info</h3></div>
                     <hr/>
                     <div className="org-info-form flex row spaceBetween">
-                        <div className="flex column">
+                        <div className="flex column gap-10">
                             <div className="flex row gap-10 pt-20">
                                 <Input
                                     label={"Orgainzation"}
@@ -137,7 +137,7 @@ const Info=()=>{
                     <div className="org-contact">
                         <div><h3>Contact Info</h3></div>
                         <hr/>
-                        <div className="flex column pt-10">
+                        <div className="flex column gap-10 pt-10">
                             <Input
                                 label={"Location"}
                                 placeholder={"location"}
@@ -158,7 +158,7 @@ const Info=()=>{
                     <div className="org-soials">
                     <div><h3>Socials</h3></div>
                         <hr/>
-                        <div className="flex column pt-10">
+                        <div className="flex column gap-10 pt-10">
                             <Input
                                 label={"Facebook"}
                                 placeholder={"link"}
