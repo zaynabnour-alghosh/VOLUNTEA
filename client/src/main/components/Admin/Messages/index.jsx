@@ -73,7 +73,7 @@ const Messages=()=>{
                 </div>
                 <hr />
                 <div className="chatbox-content flex column">
-                   {/* message component */}
+                   {/* message */}
                 </div>
                 <div className="chatbox-message-input flex row">
                     here goes imput and emoji tab
