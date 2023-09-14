@@ -5,13 +5,22 @@ import Button from "../button";
 import Input from "../input";
 import {icons} from "../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
+import GroupModal from "../../ui/GroupModal";
 const Header=({title,buttons,search,avatar})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
+    const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
         setIsOppModalOpen(true);
       };
     const toggleOppModal=()=>{
         setIsOppModalOpen(!isOppModalOpen);
+    }
+
+    const showGroupModal = () => {
+        setIsGroupModalOpen(true);
+      };
+    const toggleGroupModal=()=>{
+        setIsGroupModalOpen(!isGroupModalOpen);
     }
     return(
         <div className="head-content flex spaceBetween">
@@ -27,7 +36,8 @@ const Header=({title,buttons,search,avatar})=>{
                     />
                     <Button
                         text={"+GROUP"}
-                        isPrimary={true}                                      
+                        isPrimary={true} 
+                        onClick={showGroupModal}                                     
                     />
                 </div>
             }    
@@ -59,8 +69,12 @@ const Header=({title,buttons,search,avatar})=>{
                     showOppModal={isOppModalOpen}
                     onRequestClose={toggleOppModal}
                 />}
+            {isGroupModalOpen &&
+                <GroupModal
+                    showGroupModal={isGroupModalOpen}
+                    onRequestClose={toggleGroupModal}
+                />}
         </div>
-        
     );
 }
 export default Header;

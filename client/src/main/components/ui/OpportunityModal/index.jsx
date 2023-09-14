@@ -55,9 +55,9 @@ const OpportunityModal=({showOppModal , onRequestClose})=>{
                     <div className="new-opp-form-container">
                         <div className="opp-form-grid grid new-opp-grid-container">
                             <div className="opp-card-topic flex column new-opp-grid-item">
-                                <h3>Topic</h3>
                                 <span className="pt-10">
                                     <Input
+                                        label={"Topic"}
                                         placeholder={"topic"}
                                         type={"text"}
                                         fill={true}
@@ -65,9 +65,9 @@ const OpportunityModal=({showOppModal , onRequestClose})=>{
                                 </span>
                             </div>
                             <div className="opp-card-coord flex column new-opp-grid-item">
-                                <h3>Coordinator</h3>
                                 <span className="pt-10">
                                     <Input
+                                        label={"Coordinator"}
                                         placeholder={"coordinator"}
                                         type={"text"}
                                         fill={true}
@@ -75,9 +75,9 @@ const OpportunityModal=({showOppModal , onRequestClose})=>{
                                 </span>
                             </div>
                             <div className="opp-card-desc flex column new-opp-grid-item">
-                                <h3>Description</h3>
                                 <span className="pt-10">
                                     <Input
+                                        label={"Description"}
                                         placeholder={"decription"}
                                         type={"textarea"}
                                         fill={true}
@@ -85,9 +85,9 @@ const OpportunityModal=({showOppModal , onRequestClose})=>{
                                 </span>
                             </div>
                             <div className="opp-card-coord flex column new-opp-grid-item">
-                                <h3>Tasks</h3>
                                 <span className="pt-10">
                                     <Input
+                                        label={"Tasks"}
                                         placeholder={"Tasks"}
                                         type={"text"}
                                         fill={true}
@@ -104,9 +104,9 @@ const OpportunityModal=({showOppModal , onRequestClose})=>{
                                 </div>
                             </div>
                             <div className="opp-card-location flex column new-opp-grid-item">
-                                <h3>Location</h3>
                                 <span className="pt-10">
                                     <Input
+                                        label={"Location"}
                                         placeholder={"location"}
                                         type={"text"}
                                         fill={true}
@@ -114,9 +114,9 @@ const OpportunityModal=({showOppModal , onRequestClose})=>{
                                 </span>
                             </div>
                             <div className="opp-card-vacancies flex column new-opp-grid-item">
-                                <h3>Vacancies</h3>
                                 <span className="pt-10">
                                     <Input
+                                        label={"Vacancies"}
                                         placeholder={"vacancies"}
                                         type={"text"}
                                         fill={true}

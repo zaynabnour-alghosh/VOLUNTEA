@@ -1,0 +1,72 @@
+
+.group-form-container{
+    width: 100%;
+}
+.new-group-header{
+    align-items: center;
+    background-color: var(--sidebar);
+    padding:10px;
+    padding-left: 20px;
+    border-radius: 20px 20px 0px 0px;
+}
+.new-group-header span{
+    color: var(--white, #FFF);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;    
+}
+.new-group-form-container {
+    gap:20px;
+    padding: 20px;
+    width: 100%;
+}
+.group-form{
+    width: 100%;
+    gap:10px;
+}
+.group-name{
+    width: 100%;
+}
+.member-name-list{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.member-name-list select::-webkit-scrollbar {
+    width: 0; 
+}
+  
+.member-name-list select::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+  
+.member-name-list select:focus {
+    background-color: var(--sidebar);
+}
+select option{
+    padding: 5px;
+}
+.g-member-list{
+    padding: 8px;
+    gap:10px;
+    background-color: var(--sidebar);
+    border-radius: 10px;
+    width: 100%;
+}
+.g-member-list div{
+    background-color: white;
+    padding: 8px;
+    border-radius: 4px;
+}
+.select-group-admin{
+    align-items: center;
+}
