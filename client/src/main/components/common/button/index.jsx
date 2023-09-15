@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled = true }) => {
+const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled = true,active,inactive }) => {
   const clickHandler = () => {
     if (enabled) {
       onClick();
@@ -17,6 +17,9 @@ const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled 
                 ${isWide? 'wide' : 'small '}
                 ${isLink? 'action-no-bg':''}
                 ${isMain? 'btn-main' : ' '}
+                ${active? 'active' : ''}
+                ${inactive? 'inactive' : ''}
+                
                 `}
       onClick={() => clickHandler()}
     >
