@@ -3,7 +3,7 @@ import './style.css';
 import Button from './../../common/button';
 import ModalComponent from "../../common/modal";
 import Input from "../../common/input";
-const AnnouncementModal=({showAnnouncementModal , onRequestClose})=>{
+const AnnouncementModal=({showModal , onRequestClose})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -42,7 +42,7 @@ const AnnouncementModal=({showAnnouncementModal , onRequestClose})=>{
     };
     return(
         <div >
-            <ModalComponent customStyles={customStyles} showModal={showAnnouncementModal} onRequestClose={onRequestClose} >
+            <ModalComponent customStyles={customStyles} showModal={showModal} onRequestClose={onRequestClose} >
                 <div className='new-announcement-form-container flex fullwidth column'>
                     <div className="new-announcement-header flex row spaceBetween">
                         <span>Announce Something</span>
@@ -52,7 +52,7 @@ const AnnouncementModal=({showAnnouncementModal , onRequestClose})=>{
                             <div className="announcement-card-topic flex column new-announcement-grid-item">
                                 <span className="pt-10">
                                     <label htmlFor="header">Header</label>
-                                    <select name="header" id="" className="pt-10 fullwidth header-list">
+                                    <select name="header" id="" className="pt-10 fullwidth  select header-list">
                                         <option value="">Event</option>
                                         <option value="">Opportunity</option>
                                         <option value="">Reminder</option>

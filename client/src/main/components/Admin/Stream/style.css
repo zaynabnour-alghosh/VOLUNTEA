@@ -7,6 +7,7 @@
     align-items: center;
     padding-left: 20px;
     width: 100%;
+    justify-content: space-evenly
 }
 .admin-stream-content{
     padding:20px;

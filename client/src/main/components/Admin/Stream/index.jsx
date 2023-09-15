@@ -3,24 +3,31 @@ import './style.css';
 import AvatarCard from "../../common/avatar";
 import StreamTab from "../../common/streamtab";
 import AnnouncementModal from "../../ui/AnnouncementModal";
+import MeetingModal from "../../ui/MeetingModal";
+import CertificationModal from "../../ui/CertificationModal";
 const Stream = () => {
   const [selectedTab, setSelectedTab] = useState("Stream");
-  const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const selectHandler = (value) => {
     setSelectedTab(value);
     if (value === 'Announcement') {
-        setIsAnnouncementModalOpen(true);
+        setIsModalOpen(true);
     }
+    else if (value === 'Meeting') {
+        setIsModalOpen(true);
+    }
+    else if (value === 'Certification') {
+        setIsModalOpen(true);
+    }
+
   };
-
-  const toggleAnnouncementModal=()=>{
-    setIsAnnouncementModalOpen(!isAnnouncementModalOpen);
+  const toggleModal=()=>{
+    setIsModalOpen(!isModalOpen);
   }
-
   return (
             <div className="admin-stream-container flex column">
-                <div className="flex row fullWidth stream-tabs spaceBetween">
+                <div className="flex row stream-tabs spaceBetween">
                 <StreamTab
                     name={"Stream"}
                     selected={selectedTab === "Stream"}
@@ -75,13 +82,17 @@ const Stream = () => {
                     />
                 </div>
                 {selectedTab === 'Announcement' && <AnnouncementModal 
-                showAnnouncementModal={isAnnouncementModalOpen}
-                onRequestClose={toggleAnnouncementModal}
+                showModal={isModalOpen}
+                onRequestClose={toggleModal}
                 />}
-               
-                
-                {selectedTab === 'Meeting' && <div>meet</div>}
-                {selectedTab === 'Certification' && <div>certify</div>}
+               {selectedTab === 'Meeting' && <MeetingModal 
+                showModal={isModalOpen}
+                onRequestClose={toggleModal}
+                />}
+                {selectedTab === 'Certification' && <CertificationModal 
+                showModal={isModalOpen}
+                onRequestClose={toggleModal}
+                />}
             </div>        
         </div>
     );

@@ -1,0 +1,26 @@
+.certification-form-container{
+    width: 100%;
+}
+.new-certification-header{
+    align-items: center;
+    background-color: var(--sidebar);
+    padding:10px;
+    padding-left: 20px;
+    border-radius: 20px 20px 0px 0px;
+}
+.new-certification-header span{
+    color: var(--white, #FFF);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;    
+}
+.new-certification-form-container {
+    gap:20px;
+    padding: 20px;
+    width: 100%;
+}
+.certification-form{
+    width: 100%;
+    gap:10px;
+}
