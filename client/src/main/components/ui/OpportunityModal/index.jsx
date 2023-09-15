@@ -3,7 +3,7 @@ import './style.css';
 import Button from './../../common/button';
 import ModalComponent from "../../common/modal";
 import Input from "../../common/input";
-const OpportunityModal=({showOppModal , onRequestClose})=>{
+const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -48,7 +48,7 @@ const OpportunityModal=({showOppModal , onRequestClose})=>{
                     <div className="new-opp-header flex row spaceBetween">
                         <span>Add New Opportunity</span>
                         <Button 
-                            text={"ADD"}
+                            text={edit? 'EDIT':'ADD'}
                             isPrimary={false}
                         />
                     </div>
