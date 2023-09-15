@@ -9,6 +9,19 @@
 .stream-header{
     padding-left: 30px;
 }
+.profile-header{
+    padding-left: 30px;
+}
+
+.profile-header span{
+    font-weight: 700;
+    font-size: 36px;
+}
+.member-profile-header{
+    align-items: center;
+}
+
+
 .stream-header span{
     font-weight: 700;
     font-size: 18px;
@@ -26,4 +39,17 @@
     outline-style: none;
     border-radius: 20px;
     padding-left: 10px;
+}
+.member-profile-avatar{
+    height: 80px;
+    width: 80px;
+    border-radius: 90px;
+
+}
+.member-profile-avatar img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 90px;
+
 }

@@ -3,5 +3,36 @@
     width: 100%;
     background-color: var(--white);
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
+    overflow: auto;
+}
+.pro-grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 20px;
+}
+.skill-grid-container{
+    border-radius: 10px;
+    background-color: var(--primary_bg);
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 10px;
+}
+.skill-grid-item{
+    align-items: center;
+}
+.checked{
+    color:var(--white);
+    background-color: var(--purple);
+    padding: 5px;
+    size: 36px;
+}
+.m-skill{
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
 }

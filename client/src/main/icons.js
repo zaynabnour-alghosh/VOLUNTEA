@@ -4,7 +4,7 @@ import {BiTask,BiMenu,BiChat,BiSearch} from 'react-icons/bi';
 import {BsPerson,BsPeople,BsFillLockFill,BsCheck2Circle,BsInstagram, BsWhatsapp} from 'react-icons/bs';
 import {MdEmail,MdOutlineNotificationsNone,MdLocationPin, MdKeyboardDoubleArrowRight,MdOutlineEmojiEmotions} from 'react-icons/md';
 import {CiLogout} from 'react-icons/ci';
-import{AiFillEyeInvisible,AiFillEye,AiOutlineLinkedin,AiOutlineSend} from 'react-icons/ai';
+import{AiFillEyeInvisible,AiFillEye,AiOutlineLinkedin,AiOutlineSend,AiOutlineCheck} from 'react-icons/ai';
 import {FaKey} from 'react-icons/fa';
 import {FaFacebookSquare,FaPhone,FaBars} from 'react-icons/fa';
 
@@ -33,7 +33,8 @@ const icons = {
     arrow:<MdKeyboardDoubleArrowRight/>,
     search:<BiSearch/>,
     send:<AiOutlineSend/>,
-    emoji:<MdOutlineEmojiEmotions fill={'#FFA500'}/>
+    emoji:<MdOutlineEmojiEmotions fill={'#FFA500'}/>,
+    tick:<AiOutlineCheck size={'28'}/>
 
   };
   

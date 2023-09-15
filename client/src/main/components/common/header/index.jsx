@@ -6,7 +6,7 @@ import Input from "../input";
 import {icons} from "../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
-const Header=({title,buttons,search,avatar})=>{
+const Header=({title,buttons,search,avatar,profile,name})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
@@ -24,9 +24,7 @@ const Header=({title,buttons,search,avatar})=>{
     }
     return(
         <div className="head-content flex spaceBetween">
-            <span className="title">
-                {title}
-            </span>
+            {title && <span className="title">{title}</span>}            
             {buttons &&
                 <div className="opp-buttons flex row gap-20">
                     <Button
@@ -40,7 +38,32 @@ const Header=({title,buttons,search,avatar})=>{
                         onClick={showGroupModal}                                     
                     />
                 </div>
-            }    
+            }
+            {profile && 
+                <div className="member-profile-header flex row fullwidth spaceBetween">
+                    <div className="member-full-name flex row profile-header">
+                        <div className="member-profile-avatar">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU"
+                                alt="member"
+                            />
+                        </div>
+                        <span>{name}</span>
+                    </div>
+                    <div className="opp-buttons flex row gap-20">
+                        <Button
+                            text={"MESSAGE"}
+                            isLink={true}
+                        />
+                        <Button
+                            text={"REMOVE"}
+                            inactive={true}                                    
+                        />
+                    </div>
+                
+                </div>     
+
+            }
             {search &&
                 <div className="member-icon-search">
                     <Input 
