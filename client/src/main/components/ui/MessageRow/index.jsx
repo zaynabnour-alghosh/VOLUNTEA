@@ -7,7 +7,7 @@ const MessageRow=({sender,text})=>{
                 <div className={`message-card ${sender? 'sender-box':'reciever-box'}`}>
                     <span className="message">{text}</span>                
                 </div>
-                <span className="message-time">10:54</span>
+                <span className="message-time ">10:54</span>
 
             </div>
            

@@ -9,8 +9,9 @@ import Project from "../Project";
 import Messages from "../Messages";
 import Stream from "../Stream";
 import Profile from "../Profile";
-import NotificationsModal from "../../ui/NotificationsModal";
 import OpportunityDetails from "../../ui/OpportunityDetails";
+import MemberProfile from "../../ui/MemberProfile";
+
 const AdminDashboard=()=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
@@ -25,6 +26,7 @@ const AdminDashboard=()=>{
     const [selectedTab, setSelectedTab] = useState('Dashboard');
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showOpportunityDetails, setShowOpportunityDetails] = useState(false);    
+    const [showMemberProfile, setShowMemeberProfile] = useState(false);    
     
     useEffect(() => {
         setShowNotificationModal(false);
@@ -46,6 +48,7 @@ const AdminDashboard=()=>{
                || tabName==='Profile' 
                || tabName==='Logout') {
             setShowOpportunityDetails(false);
+            setShowMemeberProfile(false);
         }
     }
     return(
@@ -59,53 +62,28 @@ const AdminDashboard=()=>{
                         toggleNotificationModal={toggleNotificationModal}
                         />
                     <div className="dash-content-container flex column ">
-                        {
-                            showOpportunityDetails? <OpportunityDetails/>:
+                        {!showOpportunityDetails && !showMemberProfile &&
                             <>
                                 <div className="dash-header">
-                                    {selectedTab==='Dashboard' &&
-                                    <Header 
-                                        title={"ADMIN DASHBOARD"}
-                                    />}
-                                    {selectedTab=='Projects' && 
-                                    <>
-                                    <Header
-                                        title={"OPPORTUNITIES"} 
-                                        buttons={true}
-                                    />
-                                
-                                    </>}
-                                    {selectedTab=='Members' && 
-                                    <Header
-                                        title={"MEMBERS"} 
-                                        search={true}
-                                    />}
-                                    {selectedTab=='Messages' && 
-                                    <Header
-                                        title={"CHATS"} 
-                                        avatar={true}
-                                    />}
-                                    {selectedTab=='Stream' && 
-                                    <Header
-                                        title={"STREAM"} 
-                                        avatar={true}
-                                    />}
-                                    {selectedTab=='Profile' && 
-                                    <Header
-                                        title={"PROFILE "} 
-                                        avatar={true}
-                                    />}
+                                    {selectedTab==='Dashboard' && <Header title={"ADMIN DASHBOARD"}/>}
+                                    {selectedTab=='Projects' && <Header title={"OPPORTUNITIES"} buttons={true}/>}
+                                    {selectedTab=='Members' && <Header title={"MEMBERS"} search={true}/>}
+                                    {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
+                                    {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
+                                    {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info />}
                                     {selectedTab === 'Projects' && <Project toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
-                                    {selectedTab === 'Members' && <Members />}
+                                    {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
                                     {selectedTab === 'Profile' && <Profile />}
                                 </div>
-                            </>
+                            </>      
                         }
+                        {showOpportunityDetails && <OpportunityDetails />}
+                        {showMemberProfile && <MemberProfile/>}
                     </div>
                 </div>
             </div>

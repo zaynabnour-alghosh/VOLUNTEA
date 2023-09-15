@@ -1,7 +1,8 @@
 import React from "react";
 import './style.css';
 import MemberRow from "../../ui/MemberRow";
-const Members=()=>{
+
+const Members=({toggleMemberProfile})=>{
     return(
         <div className="member-grid">
             <div className="member-row members-top">
@@ -10,7 +11,7 @@ const Members=()=>{
                 <div>Action</div>
             </div>
             <div className="members-content">
-                <MemberRow />
+                <MemberRow toggleMemberProfile={toggleMemberProfile}/>
                 <MemberRow />
                 <MemberRow />
                 <MemberRow />

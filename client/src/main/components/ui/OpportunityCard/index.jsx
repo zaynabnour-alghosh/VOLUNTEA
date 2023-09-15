@@ -3,7 +3,6 @@ import './style.css';
 import { useState } from 'react';
 import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
-import OpportunityDetails from "../OpportunityDetails";
 
 const OpportunityCard=({ toggleOpportunityDetails , buttons})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);

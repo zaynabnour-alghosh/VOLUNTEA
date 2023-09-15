@@ -1,7 +1,7 @@
 import React from "react";
 import './style.css';
 import Button from "../../common/button";
-const MemberRow=()=>{
+const MemberRow=({toggleMemberProfile})=>{
     return(
         <div className="member-row-container flex row spaceBetween">
             <div className="member-full-name flex row">
@@ -17,8 +17,11 @@ const MemberRow=()=>{
                 <span>janeDoe@mail.com</span>
             </div>
             <div className="member-action flex row">
-                <a href="#">View</a>
-                <a href="#">Certify</a>
+                <Button 
+                    isLink={true} 
+                    text={"View"} 
+                    onClick={toggleMemberProfile}/>
+                <Button isLink={true} text={"Certify"}/>
             </div>
         </div>
     );
