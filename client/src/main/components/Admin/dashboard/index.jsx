@@ -37,7 +37,14 @@ const AdminDashboard=()=>{
         setSelectedTab(tabName);
         if (tabName === 'Notifications') {
             toggleNotificationModal();     
-        }else if (tabName === 'Projects') {
+        }else if (tabName === 'Projects' 
+               || tabName==='Dashboard' 
+               || tabName==='Members' 
+               || tabName==='Messages' 
+               || tabName==='Notifications' 
+               || tabName==='Stream' 
+               || tabName==='Profile' 
+               || tabName==='Logout') {
             setShowOpportunityDetails(false);
         }
     }
