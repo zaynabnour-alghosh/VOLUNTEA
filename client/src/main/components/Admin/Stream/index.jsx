@@ -2,12 +2,21 @@ import React, { useState } from "react";
 import './style.css';
 import AvatarCard from "../../common/avatar";
 import StreamTab from "../../common/streamtab";
+import AnnouncementModal from "../../ui/AnnouncementModal";
 const Stream = () => {
   const [selectedTab, setSelectedTab] = useState("Stream");
+  const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
 
   const selectHandler = (value) => {
     setSelectedTab(value);
+    if (value === 'Announcement') {
+        setIsAnnouncementModalOpen(true);
+    }
   };
+
+  const toggleAnnouncementModal=()=>{
+    setIsAnnouncementModalOpen(!isAnnouncementModalOpen);
+  }
 
   return (
             <div className="admin-stream-container flex column">
@@ -23,6 +32,7 @@ const Stream = () => {
                     selected={selectedTab === "Announcement"}
                     value={"Announcement"}
                     onSelected={(value) => selectHandler(value)}
+                    
                 />
                 <StreamTab
                     name={"Meeting"}
@@ -38,35 +48,38 @@ const Stream = () => {
                 />        
             </div>
             <div className="admin-stream-content flex center wrap">
-                {selectedTab === 'Stream' && 
-                    <div className="admin-stream-main flex column">
-                        <AvatarCard
-                        notice={"Admin posted a new announcement"}
-                        top={"Reminder"}
-                        info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                        time={"12:45"}
-                        date={"April 22.2023"} 
-                        isWide={true}
-                        />
-                        <AvatarCard
-                        notice={"Admin posted a new announcement"}
-                        top={"Reminder"}
-                        info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                        time={"12:45"}
-                        date={"April 22.2023"} 
-                        isWide={true}
-                        />
-                        <AvatarCard
-                        notice={"Admin posted a new announcement"}
-                        top={"Reminder"}
-                        info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                        time={"12:45"}
-                        date={"April 22.2023"} 
-                        isWide={true}
-                        />
-                    </div>
-                }
-                {selectedTab === 'Announcement' && <div>announce</div>}
+                <div className="admin-stream-main flex column">
+                    <AvatarCard
+                    notice={"Admin posted a new announcement"}
+                    top={"Reminder"}
+                    info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                    time={"12:45"}
+                    date={"April 22.2023"} 
+                    isWide={true}
+                    />
+                    <AvatarCard
+                    notice={"Admin posted a new announcement"}
+                    top={"Reminder"}
+                    info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                    time={"12:45"}
+                    date={"April 22.2023"} 
+                    isWide={true}
+                    />
+                    <AvatarCard
+                    notice={"Admin posted a new announcement"}
+                    top={"Reminder"}
+                    info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                    time={"12:45"}
+                    date={"April 22.2023"} 
+                    isWide={true}
+                    />
+                </div>
+                {selectedTab === 'Announcement' && <AnnouncementModal 
+                showAnnouncementModal={isAnnouncementModalOpen}
+                onRequestClose={toggleAnnouncementModal}
+                />}
+               
+                
                 {selectedTab === 'Meeting' && <div>meet</div>}
                 {selectedTab === 'Certification' && <div>certify</div>}
             </div>        

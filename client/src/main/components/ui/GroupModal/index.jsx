@@ -44,11 +44,11 @@ const GroupModal=({showGroupModal , onRequestClose})=>{
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showGroupModal} onRequestClose={onRequestClose} >
-                <div className='group-form-container flex fullWidth column'>
+                <div className='group-form-container flex fullwidth column'>
                     <div className="new-group-header flex ">
                         <span>Create Group</span>
                     </div>
-                    <div className="new-group-form-container flex column fullWidth">
+                    <div className="new-group-form-container flex column fullwidth">
                         <div className="group-form  flex column center">
                             <div className="group-name fullwidth flex column">
                                 <span className="pt-10">
@@ -63,7 +63,7 @@ const GroupModal=({showGroupModal , onRequestClose})=>{
                             <div className="group-member-combo flex fullwidth">
                                 <span className=" fullwidth pt-10">
                                     <label htmlFor="groupMembers">Choose group members</label>
-                                    <select name="groupMembers"  className=" pt-10 fullwidth member-name-list" id="" multiple>
+                                    <select name="groupMembers"  className="pt-10 fullwidth member-name-list" id="" multiple>
                                         <option value="option1">Option 1</option>
                                         <option value="option2">Option 2</option>
                                         <option value="option3">Option 3</option>
