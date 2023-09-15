@@ -26,7 +26,10 @@
     width: 0px;
 }
 
-
+.opp-details-content{
+    background-color: var(--primary_bg);
+    border-radius: 10px;
+}
 
 
 .opp-details-action-tabs{
@@ -66,4 +69,10 @@
 }
 .opp-details-container{
     padding-left: 0px 30px;
+}
+.total-opp-app{
+    color:var(--stroke_action);
+    font-weight: 700;
+    justify-content: flex-end;
+    width: 77.5%;
 }

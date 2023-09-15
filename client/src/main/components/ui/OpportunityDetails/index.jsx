@@ -23,7 +23,8 @@ const OpportunityDetails=()=>{
                             Feedback
                         </div>
                     </div>
-                    <div className="opp-details-content flex fullwidth">
+                    <div className="opp-details-content flex column fullwidth">
+                        {selectedTab === 'applications' && <div className="total-opp-app fullwidth flex ">Total: <span>4</span> </div>}
                         {selectedTab === 'applications' && <OpportunityApplications/>}
                         {selectedTab === 'feedback' &&  <OpportunityFeedback/>}
                     </div>
