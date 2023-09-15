@@ -1,6 +1,5 @@
-import React , { useState } from "react";
+import React from "react";
 import './style.css';
-import OpportunityDetails from "../../ui/OpportunityDetails";
 import OpportunityCard from "../../ui/OpportunityCard";
 const Project=({toggleOpportunityDetails})=>{
     return(
