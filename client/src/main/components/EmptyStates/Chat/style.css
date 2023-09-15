@@ -1,0 +1,7 @@
+.empty-chat-state{
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 5px;
+    height: 100%;
+    width: 65%;
+}

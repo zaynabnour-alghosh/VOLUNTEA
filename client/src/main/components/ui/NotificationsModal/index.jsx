@@ -55,26 +55,31 @@ const NotificationsModal=({showModal , onRequestClose})=>{
                     top={"Reminder"}
                     info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     time={"12:45"}
+                    bg={true}
                 />
                 <AvatarCard
                     top={"Reminder"}
                     info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     time={"12:45"}
+                    bg={true}
                 />
                 <AvatarCard
                     top={"Reminder"}
                     info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     time={"12:45"}
+                    bg={true}
                 />
                 <AvatarCard
                     top={"Reminder"}
                     info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     time={"12:45"}
+                    bg={true}
                 />
                 <AvatarCard
                     top={"Reminder"}
                     info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     time={"12:45"}
+                    bg={true}
                 />
             </div>
 

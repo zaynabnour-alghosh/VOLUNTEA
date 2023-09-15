@@ -1,9 +1,9 @@
 import React from "react";
 import './style.css';
 
-const AvatarCard=({top,info,date,link,image,time,isWide, notice,accept,reject})=>{
+const AvatarCard=({top,info,date,link,image,time,isWide, notice,accept,reject,bg})=>{
     return(
-        <div className={`avatarcard-container flex ${isWide? 'fullwidth':''} ${!info ? 'avatar-card-align':''}`}>
+        <div className={`avatarcard-container flex ${isWide? 'fullwidth':''} ${!info ? 'avatar-card-align':''} ${bg ? 'add-bg':''}`}>
             <div className="img-info-combo flex row gap-20">
 
                 {image && 

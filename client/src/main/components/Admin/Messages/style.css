@@ -16,8 +16,8 @@
 }
 .member-messagebox-container{
     justify-content: center;
-    
-   
+    padding-top: 10px;
+    gap: 10px; 
 }
 .members-messages-container{
     background-color: var(--white);

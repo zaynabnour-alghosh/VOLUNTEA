@@ -1,6 +1,6 @@
 import React from "react";
 import './style.css';
-const RowCard=({title,desc,notice,date, isCertification})=>{
+const RowCard=({title,desc,notice,date, isCertification,time})=>{
     return(
         <div className={`rowcard-container flex ${isCertification  ? 'limit':' '}`}>
             <div className="rowcard-content flex column flex-start">
@@ -23,7 +23,7 @@ const RowCard=({title,desc,notice,date, isCertification})=>{
                 }
                 <div className="rowcard-desc">
                     <p>{desc}</p>
-                    
+                    {time && <div className="flex rowcard-notice">{time}</div>}
                     {date && <div className="flex rowcard-notice">{date}</div>}
                 </div>
             </div>

@@ -4,7 +4,7 @@ import AvatarCard from "../../common/avatar";
 import Button from "../../common/button";
 const OpportunityApplications=()=>{
     return(
-        <div className="opp-applications-container flex center column fullwidth mt-10">
+        <div className="opp-applications-container gap-10 flex center column fullwidth mt-10">
             <div className="opp-app-member flex center">
                 <AvatarCard
                     image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU"}
