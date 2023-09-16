@@ -3,9 +3,11 @@ import './style.css';
 import { useState } from 'react';
 import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
+import FeedbackModal from "../FeedbackModal";
 
 const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
+    const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
     
     const showOppModal = () => {
         setIsOppModalOpen(true);
@@ -13,6 +15,14 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
     const toggleOppModal=()=>{
         setIsOppModalOpen(!isOppModalOpen);
     }
+
+    const showFeedModal = () => {
+        setIsFeedModalOpen(true);
+      };
+    const toggleFeedModal=()=>{
+        setIsFeedModalOpen(!isFeedModalOpen);
+    }
+
 
 
     return(
@@ -60,6 +70,8 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
                             text={"FEEDBACK"}
                             isPrimary={true}
                             medium={true}
+                            onClick={showFeedModal}                                      
+
                         />
                         <Button
                             text={"CANCEL"}
@@ -113,6 +125,11 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
                     showOppModal={isOppModalOpen}
                     onRequestClose={toggleOppModal}
                     edit={true}
+                />}
+            {isFeedModalOpen && 
+                <FeedbackModal 
+                    showFeedModal={isFeedModalOpen}
+                    onRequestClose={toggleFeedModal}
                 />}
         </div>
     );
