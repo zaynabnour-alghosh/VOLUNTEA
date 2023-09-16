@@ -8,7 +8,8 @@ import Header from "../../common/header";
 import Opportunities from "../Opportunities";
 import Messages from "../Messages";
 import Stream from "../Stream";
-// import Profile from "../Profile";
+import Profile from "../../ui/Profile";
+
 import MemberProfile from "../../ui/MemberProfile";
 
 const VolunteerDashboard=()=>{
@@ -84,7 +85,7 @@ const VolunteerDashboard=()=>{
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
-                                    {/* {selectedTab === 'Profile' && <Profile />} */}
+                                    {selectedTab === 'Profile' && <Profile />}
 
                                 </div>
                             </>      

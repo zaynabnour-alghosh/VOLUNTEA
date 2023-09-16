@@ -8,7 +8,7 @@ import Header from "../../common/header";
 import Project from "../Project";
 import Messages from "../Messages";
 import Stream from "../Stream";
-import Profile from "../Profile";
+import Profile from "../../ui/Profile";
 import OpportunityDetails from "../../ui/OpportunityDetails";
 import MemberProfile from "../../ui/MemberProfile";
 

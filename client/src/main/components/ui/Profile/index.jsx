@@ -3,7 +3,7 @@ import './style.css';
 import { useState } from "react";
 import Input from "../../common/input";
 import Button from "../../common/button";
-import MemberSchedule from "../../ui/MemberSchedule";
+import MemberSchedule from "../MemberSchedule";
 const Profile=()=>{
     const [showSchedule, setShowSchedule] = useState(false);
 
