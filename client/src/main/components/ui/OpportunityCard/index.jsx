@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
 
-const OpportunityCard=({ toggleOpportunityDetails , buttons})=>{
+const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     
     const showOppModal = () => {
@@ -18,67 +18,57 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons})=>{
     return(
         <div className="opp-card-container flex column">
             <div className="opp-card-content pt-20 grid opp-grid-container">
-                {buttons?
+                {buttons &&
                 <>
-
-                <div className="flex column opp-grid-item"></div>
-
-                <div className="opp-card-top flex row gap-10 opp-grid-item">
-                    <Button
-                        text={"VIEW"}
+                    <div className="flex column opp-grid-item"></div>
+                    <div className="opp-card-top flex row gap-10 opp-grid-item">
+                        <Button
+                            text={"VIEW"}
+                            isPrimary={true}
+                            onClick={toggleOpportunityDetails}
+                            medium={true}
+                        />
+                        <Button
+                            text={"EDIT"}
+                            isPrimary={true}  
+                            onClick={showOppModal}                                      
+                            medium={true}
+                        />
+                        <Button
+                            text={"DELETE"}
+                            isPrimary={true} 
+                            medium={true}
+                        />
+                    </div>
+                </>}
+                {apply &&
+                <>
+                    <div className="flex column opp-grid-item"></div>
+                        <div className="send-app-btn flex opp-card-top flex opp-grid-item">
+                        <Button
+                        text={"Send Application"}
                         isPrimary={true}
-                        onClick={toggleOpportunityDetails}
-                        medium={true}
-                    />
-                    <Button
-                        text={"EDIT"}
-                        isPrimary={true}  
-                        onClick={showOppModal}                                      
-                        medium={true}
-                    />
-                    <Button
-                        text={"DELETE"}
-                        isPrimary={true} 
-                        medium={true}
-                    />
-                </div>
-                <div className="opp-card-topic flex column opp-grid-item">
-                    <h3>Topic</h3>
-                    <span>Lorem ipsum dolor sit amet</span>
-                </div>
-                <div className="opp-card-coord flex column opp-grid-item">
-                    <h3>Coordinator</h3>
-                    <span>Lorem ipsum </span>
-                </div>
-                <div className="opp-card-desc flex column opp-grid-item">
-                    <h3>Description</h3>
-                    <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit. Ut laoreet faucibus purus 
-                        et suscipit. Maecenas ultricies ante sit amet
-                        cursus venenatis. In auctor venenatis imperdiet. 
-                    </span>
-                </div>
-                <div className="opp-card-task flex column opp-grid-item">
-                    <h3>Tasks</h3>
-                    <div className="opp-task-list flex column">
-                        <div>Lorem ipsum dolor sit amet, consectetur</div>
-                        <div>Lorem ipsum dolor sit amet, consectetur</div>
-                        <div>Lorem ipsum dolor sit amet, consectetur</div>
+                        isWide={true}
+                        />
                     </div>
-                </div>
-                <div className="opp-card-location flex column opp-grid-item">
-                    <h3>Location</h3>
-                    <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.
-                    </span>
-                </div>
-                <div className="opp-card-vacancies flex column opp-grid-item">
-                    <h3>Vacancies</h3>
-                    <span>8 volunteers</span>
-                </div>
-                </>:<>
+                </>}
+                {applied &&
+                <>
+                    <div className="flex column opp-grid-item"></div>
+                    <div className="opp-app-actions flex fullwidth row gap-10 opp-grid-item" >
+                        <Button
+                            text={"FEEDBACK"}
+                            isPrimary={true}
+                            medium={true}
+                        />
+                        <Button
+                            text={"CANCEL"}
+                            isPrimary={true}  
+                            medium={true}
+                            
+                        />
+                    </div>
+                </>}
 
                 <div className="opp-card-topic flex column opp-grid-item">
                     <h3>Topic</h3>
@@ -116,7 +106,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons})=>{
                     <h3>Vacancies</h3>
                     <span>8 volunteers</span>
                 </div>
-            </>}
+            
             </div>
             {isOppModalOpen && 
                 <OpportunityModal 

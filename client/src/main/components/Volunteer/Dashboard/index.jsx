@@ -5,7 +5,7 @@ import Sidebar from "../../common/sidebar";
 import Info from "../Info";
 // import Members from "../Members";
 import Header from "../../common/header";
-// import Project from "../Project";
+import Opportunities from "../Opportunities";
 // import Messages from "../Messages";
 // import Stream from "../Stream";
 // import Profile from "../Profile";
@@ -75,7 +75,7 @@ const VolunteerDashboard=()=>{
                             {/* <> */}
                                 <div className="dash-header">
                                     {selectedTab==='Dashboard' && <Header title={"VOLUNTEER DASHBOARD"} joined={"22-08-2023"}/>}
-                                    {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true}/>}
+                                    {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
                                     {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
@@ -83,8 +83,8 @@ const VolunteerDashboard=()=>{
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info />}
-                                    {/* {selectedTab === 'Opportunities' && <Project toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
-                                    {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
+                                    {selectedTab === 'Opportunities' && <Opportunities/>}
+                                    {/* {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
                                     {selectedTab === 'Profile' && <Profile />} */}
