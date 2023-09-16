@@ -78,7 +78,7 @@ const Trial=()=>{
                         date={"April 22.2023"}                        
                         />
 
-                         <RowCard 
+                        <RowCard 
                         title={"Opportunity Name"}
                         desc={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et luctus orci, vitae maximus enim. Proin facilisis in libero vitae mattis"}
                         notice={"Issued by: Admin Name"}

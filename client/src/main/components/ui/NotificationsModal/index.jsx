@@ -3,6 +3,7 @@ import "./style.css";
 import ModalComponent from "../../common/modal";
 import Header from "../../common/header";
 import AvatarCard from "../../common/avatar";
+import Button from "../../common/button";
 const NotificationsModal=({showModal , onRequestClose})=>{
     const customStyles = {
         content: {
@@ -47,7 +48,7 @@ const NotificationsModal=({showModal , onRequestClose})=>{
                 title={'NOTIFICATIONS'}
               />
               <div className="clear-notif">
-                <span className="clear-all"> Clear All</span>
+                <Button text={"Clear All"} inactive={true} medium={true}/>
               </div>
             </div>
             <div className="notif-cards-container flex fullWidth column gap-10">

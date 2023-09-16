@@ -2,7 +2,7 @@ import React from "react";
 import './style.css';
 import { useState,useEffect } from "react";
 import Sidebar from "../../common/sidebar";
-// import Info from "../Info";
+import Info from "../Info";
 // import Members from "../Members";
 import Header from "../../common/header";
 // import Project from "../Project";
@@ -81,16 +81,16 @@ const VolunteerDashboard=()=>{
                                     {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
                                     {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
                                 </div>
-                                {/* <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
+                                <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info />}
-                                    {selectedTab === 'Opportunities' && <Project toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
+                                    {/* {selectedTab === 'Opportunities' && <Project toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
-                                    {selectedTab === 'Profile' && <Profile />}
+                                    {selectedTab === 'Profile' && <Profile />} */}
 
-                                </div> */}
-                                <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
+                                </div>
+                                {/* <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' && <div>Volunteer dashboard</div>}
                                     {selectedTab === 'Opportunities' && <div>Volunteer Applications</div>}
                                     {selectedTab === 'Members' && <div>Volunteer Colleagues</div>}
@@ -98,7 +98,7 @@ const VolunteerDashboard=()=>{
                                     {selectedTab === 'Stream' && <div>Volunteer Stream</div>}
                                     {selectedTab === 'Profile' && <div>Volunteer Profile</div>}
 
-                                </div>
+                                </div> */}
 
 
 

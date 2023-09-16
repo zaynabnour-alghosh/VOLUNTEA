@@ -1,0 +1,25 @@
+.vol-org-info{
+    width:100%;
+    height: 100%;
+    display: flex;
+    justify-content: center
+}
+.vol-org-details{
+    padding-left:20px;
+    padding-right: 20px;
+}
+.vol-org-info-container{
+    width: 100%;
+    padding-left: 8px;
+    padding-bottom: 20px;
+}
+
+
+
+.info-row{
+    padding: 8px;
+}
+.info-row span{
+    font-size: 18px;
+    font-weight: 700;
+}
