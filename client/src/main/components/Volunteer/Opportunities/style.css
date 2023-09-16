@@ -7,3 +7,6 @@
 .opp-app-actions{
     justify-content: center;
 }
+.opp-container{
+    overflow: auto;
+}

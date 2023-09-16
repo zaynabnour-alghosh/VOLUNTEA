@@ -42,7 +42,7 @@ const Opportunities=()=>{
             </div>
             <div className="volunteer-stream-content flex center wrap">
                 <div className="volunteer-stream-main flex column">
-                    <div className="opp-container flex column gap-40">
+                    <div className="opp-container scroll flex column gap-40">
                     </div>
                     {selectedTab === 'All' && <OpportunityCard apply={true}/>}
                     {selectedTab === 'My Applications' && <OpportunityCard applied={true}/>}
