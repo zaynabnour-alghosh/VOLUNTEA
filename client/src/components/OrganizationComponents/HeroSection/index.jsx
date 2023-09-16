@@ -1,33 +1,24 @@
 import React from "react";
 import './style.css';
 import {Link} from 'react-router-dom';
-import orgImg from '../../../images/hero-cei.png';
-
+import heroSection from "../../../images/hero-section.webp";
 const HeroSection=()=>{
     return(
-        <div className="page org-hero-section">
-            <div className='org-hero'>
-                <div className="org-hero-content">
-                    <div className="org-about-us">
-                        <div className='org-landing'>
-                            <h1>CEI</h1>
-                            <h3>
-                            Clean Earth Initiative is a global non-profit 
-                            organization dedicated to environmental 
-                            conservation.
-                            We work tirelessly to address pressing environmental 
-                            challenges and promote responsible 
-                            stewardship of our planet for future generations.
-                            </h3>
-                            <div className="signup">
-                                <Link to="/startup">SIGN UP </Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="org-img flex center">
-                        <img src={orgImg} alt="illustration"  className="organization-img"/>
-                    </div>
+        <div className="hero fullwidth">
+            <div className="hero-content flex column fullwidth">
+                <div className="content fullwidth">
+                    <h1>CLEAN EARTH INITIATIVE</h1>
+                    <h3>"Empowering Change, One Step at a Time."</h3>
                 </div>
+                <div className="content-desc fullwidth flex center">
+                    <p>Join us in our mission to foster a sustainable future 
+                        for all. The Clean Earth Initiative is dedicated to 
+                        championing environmental awareness and sustainable 
+                        practices. Through collaborative efforts and community 
+                        engagement,we strive to make a lasting impact on the planet. 
+                        Let's unite to protect and preserve our Earth for generations to come.
+                    </p>
+                </div>        
             </div>
         </div>
     );

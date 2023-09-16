@@ -1,6 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import logoP from "../../assets/logo-white.svg";
+import logo from "../../images/logo-mini.png";
 import {Link} from 'react-router-dom'
 import { BsCheck2Circle,BsInstagram} from 'react-icons/bs';
 import {FaPhone} from 'react-icons/fa';
@@ -51,9 +51,11 @@ const LandingPage=()=>{
                     <Logo />
                 </div>
                 :
-                <div className='hero'>
-                    <div className={`header ${navbarClass}`}>
-                        <img src={logoP} alt="logo" className="logoP"/>
+                <div className='app-hero'>
+                    <div className={`header flex row menu-toggle ${navbarClass} `}>
+                        <div className="app-logo">
+                            <img src={logo} alt="logo" />
+                        </div>
                         <div className={`menu-toggle ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                             <FaBars  className="menu"/>
                         </div>
@@ -65,13 +67,11 @@ const LandingPage=()=>{
 
                         </div>
                     </div>
-                    <div className="hero-content">
+                    <div className="app-hero-content flex fullwidth">
                         <div className="about-us">
                             <div className='landing'>
                                 <h1>VOLUNTEA</h1>
-                                <h2>Your Way </h2>
-                                <h2>to Manage</h2>
-                                <h2>Your Community</h2>
+                                <h2>Your Way to Manage Your Community</h2>
                                 <div>
                                     <button className="btnStart"><Link to="/startup">START NOW</Link></button>
                                 </div>
@@ -120,7 +120,7 @@ const LandingPage=()=>{
 
                                 <div className="contact-info">
                                    <div className="contact-left">
-                                        <div className="row-x">
+                                        <div className="row">
                                             <div className="contact-input">
                                                 <input type="text" placeholder="Name" />
                                             </div>
@@ -128,7 +128,7 @@ const LandingPage=()=>{
                                                 <input type="email" placeholder="Email Address" />
                                             </div>
                                         </div>
-                                        <div className="row-x">
+                                        <div className="row">
                                             <textarea name="contact-message" cols="51" rows="10" placeholder="Message"></textarea>
                                         </div>
                                     </div>
@@ -157,7 +157,6 @@ const LandingPage=()=>{
                                             <MdEmail size={20} />
                                             <h3>Email</h3>
                                         </div>
-                                        
                                         <div>info_voluntea@gmail.com</div>
                                     </div>
                                 </div>
@@ -167,12 +166,10 @@ const LandingPage=()=>{
                             <div className="social">
                             <FaFacebookSquare size={28}/>
                                 <BsInstagram  size={28}/>
-                                <AiOutlineLinkedin  size={30}/>
                             </div>
                             <h2>COPYRIGHT &copy;</h2>
                         </div>
                     </div>
-                    
                 }
             </div>
         </>

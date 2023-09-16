@@ -1,88 +1,50 @@
-.org-hero-section{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-.org-hero-content{
+.hero-content{
+    background: url('../../../images/hero-section.webp') no-repeat center center;
+    background-size: cover;
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: row;
-    gap:10px;
-    justify-content:space-between;
-    padding-top: 150px;
+    justify-content: center;
     align-items: center;
+    overflow: hidden;
+    position: relative;
+    color:var(--white);
 }
-.org-landing{
-    width: 100%;  
-    max-width: 100%;  
-    height: auto;
-    flex-shrink: 1;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column; 
-    padding-left: 50px;
-    gap: 10px;
+
+.content {
+    text-align: center;
+    color: var(--white); 
+    padding: 20px; 
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-.org-landing h1{
-    font-size:5vw;
+.content-desc {
+    text-align: center;
+    color: var(--white); 
+    position: absolute;
+    top: 90%;
 }
-.org-landing h3{
-    font-weight:normal;
-    padding-top: 20px;
-    word-wrap: break-word;
-    white-space: pre-line;
+
+.content h1 {
+    font-size: 48px; 
+    margin: 0;
+    font-weight: 700;
+}
+
+.content-desc >p {
+    font-family: var(--font-primary);
+    font-size: 1.2em;
+    margin: 0;
+    padding: 20px 20px;
     line-height: 1.2;
-    text-align:left;
-    font-size: 22px; 
-    max-width: 450px;
-    display: flex;
-    flex-wrap: wrap;
+    max-width: 700px; 
+    margin: 0 auto; 
+    text-align: center;
 }
-
-.signup{
-    margin-top: 1rem;
-    justify-content: space-around;
-    gap: 1rem;
-    height: 30px;
-   
-}
-.signup a{
-    padding:10px;
-    border: none;
-    border-radius: 0.5rem;
-    background-color:#9EA4DA;
-    color:white;
-    width: 150px;
-    font-size: 18px;
-
-}
-.signup a:hover{
-    text-decoration: none;
-    font-weight: 600;
-       
-}
-.org-img{
-    width: 100%;
-}
-.organization-img {
-    max-width: 100%; 
-    height: auto;
-    object-fit: cover;
-    flex-shrink: 1;
-}
-@media (max-width: 850px) {
-    .org-landing h3{
-        font-weight: 500;
-        padding-top: 10px;
-        word-wrap: break-word;
-        white-space: pre-line;
-        line-height: 1.2;
-        text-align:left;
-        font-size: 14px; 
-        max-width:500px;
-    }
-    .org-landing{
-        margin-top: 100px;
-    }
+.content-desc{
+    background-color:rgba(0,0,0,.4); 
+    top: 280px;
+    bottom: 200px;
 }

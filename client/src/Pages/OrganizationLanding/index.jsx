@@ -38,8 +38,8 @@ const OrganizationLanding=()=>{
     };
     const navbarClass = scrolling ? 'with-shadow' : 'navbar';
     return(
-        <div className="page">
-            <div className={`header ${navbarClass}`}>
+        <div>
+            <div className={`header fullwidth flex  ${navbarClass}`}>
                 <img src={orgLogo} alt="logo" className="logoO"/>
                 <div className={`menu-toggle ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                     <FaBars  className="menu"/>
@@ -108,8 +108,8 @@ const OrganizationLanding=()=>{
                             </div>
                         </div>
                     </div>
-                    <div className=" flex org-social">
-                        <FaFacebookSquare size={30}/>
+                    <div className=" flex center fullwidth p-10 org-social">
+                        <FaFacebookSquare size={28}/>
                         <BsInstagram  size={28}/>
                         <BsWhatsapp  size={28}/>
                     </div>
