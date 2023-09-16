@@ -51,5 +51,9 @@
     width: 100%;
     object-fit: cover;
     border-radius: 90px;
-
+}
+.joined-at-notice{
+    color:rgb(85, 83, 83);
+    justify-content: flex-end;
+    padding-right: 30px;
 }

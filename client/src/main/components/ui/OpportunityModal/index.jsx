@@ -50,6 +50,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                         <Button 
                             text={edit? 'EDIT':'ADD'}
                             isPrimary={false}
+                            medium={true}
                         />
                     </div>
                     <div className="new-opp-form-container">

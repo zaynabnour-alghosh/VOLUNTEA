@@ -6,6 +6,7 @@ import OrganizationLanding from './Pages/OrganizationLanding';
 import './App.css';
 import Admin from './Pages/Admin';
 import InformationForm from './components/OrganizationDetails/InformationForm';
+import Volunteer from './Pages/Volunteer';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path='/voluntea/orgname' element={<OrganizationLanding/>} />
         <Route path='/fill-organization-info' element={<InformationForm />} />
         <Route path='/voluntea/orgname/admin' element={<Admin/>} />
+        <Route path='/voluntea/orgname/volunteer' element={<Volunteer/>} />
+
 
 
       </Routes>

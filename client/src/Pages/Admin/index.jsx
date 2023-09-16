@@ -1,11 +1,8 @@
-import AdminDashboard from "../../main/components/Admin/dashboard";
-import Trial from "../../main/components/Admin/trial";
-
+import AdminDashboard from "../../main/components/Admin/Dashboard";
 const Admin=()=>{
     return(
         <div>
             <AdminDashboard />
-            {/* <Trial /> */}
         </div>
     );
 }

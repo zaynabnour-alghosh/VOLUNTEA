@@ -6,7 +6,7 @@ import Input from "../input";
 import {icons} from "../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
-const Header=({title,buttons,search,avatar,profile,name})=>{
+const Header=({title,buttons,search,avatar,profile,name, joined})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
@@ -23,6 +23,7 @@ const Header=({title,buttons,search,avatar,profile,name})=>{
         setIsGroupModalOpen(!isGroupModalOpen);
     }
     return(
+    <div className="flex column fullwidth">
         <div className="head-content flex spaceBetween">
             {title && <span className="title">{title}</span>}            
             {buttons &&
@@ -100,6 +101,8 @@ const Header=({title,buttons,search,avatar,profile,name})=>{
                     onRequestClose={toggleGroupModal}
                 />}
         </div>
+        {joined && <div className="joined-at-notice  fullwidth flex pt-10 ">joined at: {joined}</div>}
+    </div>
     );
 }
 export default Header;
