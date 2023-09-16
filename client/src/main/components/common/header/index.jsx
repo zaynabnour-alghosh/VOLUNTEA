@@ -6,7 +6,7 @@ import Input from "../input";
 import {icons} from "../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
-const Header=({title,buttons,search,avatar,profile,name, joined})=>{
+const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
@@ -42,7 +42,7 @@ const Header=({title,buttons,search,avatar,profile,name, joined})=>{
                     />
                 </div>
             }
-            {profile && 
+            {admin_pov && 
                 <div className="member-profile-header flex row fullwidth spaceBetween">
                     <div className="member-full-name flex row profile-header">
                         <div className="member-profile-avatar">
@@ -65,8 +65,39 @@ const Header=({title,buttons,search,avatar,profile,name, joined})=>{
                     </div>
                 
                 </div>     
+            }
+            {volunteer_pov && 
+                <div className="member-profile-header flex row fullwidth spaceBetween">
+                    <div className="member-full-name flex row profile-header">
+                        <div className="member-profile-avatar">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU"
+                                alt="member"
+                            />
+                        </div>
+                        <span>{name}</span>
+                    </div>
+                    <div className="opp-buttons flex row gap-20">
+                        <Button
+                            text={"MESSAGE"}
+                            isLink={true}
+                        />
+                    </div>
+                
+                </div>     
 
             }
+
+
+
+
+
+
+
+
+
+
+
             {search &&
                 <div className="member-icon-search">
                     <Input 

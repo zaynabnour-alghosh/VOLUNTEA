@@ -3,14 +3,14 @@ import './style.css';
 import { useState,useEffect } from "react";
 import Sidebar from "../../common/sidebar";
 import Info from "../Info";
-// import Members from "../Members";
+import Members from "../Members";
 import Header from "../../common/header";
 import Opportunities from "../Opportunities";
 // import Messages from "../Messages";
 // import Stream from "../Stream";
 // import Profile from "../Profile";
 // import OpportunityDetails from "../../ui/OpportunityDetails";
-// import MemberProfile from "../../ui/MemberProfile";
+import MemberProfile from "../../ui/MemberProfile";
 
 const VolunteerDashboard=()=>{
     const tabs = [
@@ -26,8 +26,7 @@ const VolunteerDashboard=()=>{
     const [selectedTab, setSelectedTab] = useState('Dashboard');
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
-    // const [showOpportunityDetails, setShowOpportunityDetails] = useState(false);    
-    // const [showMemberProfile, setShowMemeberProfile] = useState(false);    
+    const [showMemberProfile, setShowMemeberProfile] = useState(false);    
     
     useEffect(() => {
         setShowNotificationModal(false);
@@ -46,17 +45,16 @@ const VolunteerDashboard=()=>{
         }else if(tabName==='Logout'){
             toggleConfirmationModal();
         }
-        // else if (tabName === 'Opportunities' 
-        //        || tabName==='Dashboard' 
-        //        || tabName==='Members' 
-        //        || tabName==='Messages' 
-        //        || tabName==='Notifications' 
-        //        || tabName==='Stream' 
-        //        || tabName==='Profile' 
-        //        ) {
-        //     setShowOpportunityDetails(false);
-        //     setShowMemeberProfile(false);
-        // }
+        else if (tabName === 'Opportunities' 
+               || tabName==='Dashboard' 
+               || tabName==='Members' 
+               || tabName==='Messages' 
+               || tabName==='Notifications' 
+               || tabName==='Stream' 
+               || tabName==='Profile' 
+               ) {
+            setShowMemeberProfile(false);
+        }
     }
     return(
         <div>
@@ -71,8 +69,8 @@ const VolunteerDashboard=()=>{
                         toggleConfirmationModal={toggleConfirmationModal}
                         />
                     <div className="dash-content-container flex column ">
-                        {/* {!showOpportunityDetails && !showMemberProfile && */}
-                            {/* <> */}
+                        {!showMemberProfile &&
+                             <> 
                                 <div className="dash-header">
                                     {selectedTab==='Dashboard' && <Header title={"VOLUNTEER DASHBOARD"} joined={"22-08-2023"}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"}/>}
@@ -84,30 +82,15 @@ const VolunteerDashboard=()=>{
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info />}
                                     {selectedTab === 'Opportunities' && <Opportunities/>}
-                                    {/* {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
-                                    {selectedTab === 'Messages' && <Messages />}
+                                    {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
+                                    {/* {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
                                     {selectedTab === 'Profile' && <Profile />} */}
 
                                 </div>
-                                {/* <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
-                                    {selectedTab === 'Dashboard' && <div>Volunteer dashboard</div>}
-                                    {selectedTab === 'Opportunities' && <div>Volunteer Applications</div>}
-                                    {selectedTab === 'Members' && <div>Volunteer Colleagues</div>}
-                                    {selectedTab === 'Messages' && <div>Volunteer Messages</div>}
-                                    {selectedTab === 'Stream' && <div>Volunteer Stream</div>}
-                                    {selectedTab === 'Profile' && <div>Volunteer Profile</div>}
-
-                                </div> */}
-
-
-
-
-
-                            {/* </>       */}
-                        {/* } */}
-                        {/* {showOpportunityDetails && <OpportunityDetails />} */}
-                        {/* {showMemberProfile && <MemberProfile/>} */}
+                            </>      
+                         } 
+                        {showMemberProfile && <MemberProfile remove={false}/>}
                     </div>
                 </div>
             </div>

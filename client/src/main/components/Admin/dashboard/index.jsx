@@ -93,7 +93,7 @@ const AdminDashboard=()=>{
                             </>      
                         }
                         {showOpportunityDetails && <OpportunityDetails />}
-                        {showMemberProfile && <MemberProfile/>}
+                        {showMemberProfile && <MemberProfile remove={true}/>}
                     </div>
                 </div>
             </div>

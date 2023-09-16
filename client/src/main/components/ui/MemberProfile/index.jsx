@@ -6,7 +6,7 @@ import Item from "../../common/item";
 import {icons} from "../../../icons.js";
 import MemberSchedule from "../MemberSchedule";
 import { useState } from "react";
-const MemberProfile=()=>{
+const MemberProfile=({remove})=>{
     const [showSchedule, setShowSchedule] = useState(false);
 
     const handleViewScheduleClick = () => {
@@ -14,15 +14,22 @@ const MemberProfile=()=>{
     };
     return(
         <div className="member-profile-container fullwidth flex column scroll">
-            
+            {remove ?
             <Header 
                 profile={true}
-                name={"Jane Doe"}            
-            />
-                {showSchedule ? (
-                    <MemberSchedule goBack={() => setShowSchedule(false)} />
-                ) : (
-                    <>
+                name={"Jane Doe"}
+                admin_pov={true}
+                        
+            />:
+            <Header 
+                profile={true}
+                name={"Jane Doe"}
+                volunteer_pov={true}
+            />}
+            {showSchedule ? (
+                <MemberSchedule goBack={() => setShowSchedule(false)} />
+            ) : (
+                <>
                     <div className="member-profile-personal flex column fullwidth pt-40">
                         <div><h3>Personal</h3></div>
                         <hr/>

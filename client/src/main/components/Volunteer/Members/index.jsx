@@ -11,10 +11,10 @@ const Members=({toggleMemberProfile})=>{
                 <div>Action</div>
             </div>
             <div className="members-content">
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
+                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={false}/>
+                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={false}/>
+                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={false}/>
+                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={false}/>
             </div>
         </div>
     );
