@@ -1,0 +1,23 @@
+.schedule-calendar-container{
+    padding: 10px;
+}
+.rbc-event:hover, .rbc-day-slot .rbc-background-event:hover {
+    background-color: var(--purple); 
+    padding-top: 5px;
+}
+.rbc-event:hover, .rbc-day-slot .rbc-background-event {
+    background-color: var(--purple);
+}
+.event-box{
+    color:var(--secondary);
+    background-color: var(--primary_bg);
+    padding: 10px;
+    border-radius: 5px;
+}
+.event-box:hover{
+    background-color: var(--primary_bg);
+}
+.rbc-row-segment {
+    padding: 0 1px 1px 1px;
+    height: 50px;
+}
