@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled = true,active,inactive }) => {
+const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled = true,active,inactive,medium }) => {
   const clickHandler = () => {
     if (enabled) {
       onClick();
@@ -19,7 +19,7 @@ const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled 
                 ${isMain? 'btn-main' : ' '}
                 ${active? 'active' : ''}
                 ${inactive? 'inactive' : ''}
-                
+                ${medium? 'medium' : ''}
                 `}
       onClick={() => clickHandler()}
     >

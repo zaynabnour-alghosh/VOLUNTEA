@@ -1,0 +1,12 @@
+.member-schedule-top{
+    align-items: center;
+}
+.back{
+    cursor: pointer;
+}
+.member-schedule{
+    background-color: var(--primary_bg);
+    border-radius: 10px;
+    color:var(--stroke_action);
+    font-weight: 700;
+}

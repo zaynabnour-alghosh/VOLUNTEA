@@ -18,6 +18,7 @@ const Profile=()=>{
                             <Button 
                                 text={"Edit"}
                                 isPrimary={true}
+                                medium={true}
                             />
                         </div>
                     </div>

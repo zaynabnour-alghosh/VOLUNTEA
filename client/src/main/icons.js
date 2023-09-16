@@ -1,6 +1,6 @@
 import React from 'react';
 import {GoHome} from 'react-icons/go';
-import {BiTask,BiMenu,BiChat,BiSearch} from 'react-icons/bi';
+import {BiTask,BiMenu,BiChat,BiSearch,BiArrowBack} from 'react-icons/bi';
 import {BsPerson,BsPeople,BsFillLockFill,BsCheck2Circle,BsInstagram, BsWhatsapp} from 'react-icons/bs';
 import {MdEmail,MdOutlineNotificationsNone,MdLocationPin, MdKeyboardDoubleArrowRight,MdOutlineEmojiEmotions} from 'react-icons/md';
 import {CiLogout} from 'react-icons/ci';
@@ -34,7 +34,8 @@ const icons = {
     search:<BiSearch/>,
     send:<AiOutlineSend/>,
     emoji:<MdOutlineEmojiEmotions fill={'#FFA500'}/>,
-    tick:<AiOutlineCheck size={'28'}/>
+    tick:<AiOutlineCheck size={'28'}/>,
+    back:<BiArrowBack size={'28'}/>
 
   };
   

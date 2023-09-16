@@ -30,12 +30,14 @@ const Header=({title,buttons,search,avatar,profile,name})=>{
                     <Button
                         text={"NEW"}
                         isPrimary={true}
-                        onClick={showOppModal}                                      
+                        onClick={showOppModal}  
+                        medium={true}
                     />
                     <Button
                         text={"+GROUP"}
                         isPrimary={true} 
-                        onClick={showGroupModal}                                     
+                        onClick={showGroupModal}
+                        medium={true}
                     />
                 </div>
             }

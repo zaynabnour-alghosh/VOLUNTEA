@@ -28,16 +28,18 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons})=>{
                         text={"VIEW"}
                         isPrimary={true}
                         onClick={toggleOpportunityDetails}
+                        medium={true}
                     />
                     <Button
                         text={"EDIT"}
                         isPrimary={true}  
                         onClick={showOppModal}                                      
-
+                        medium={true}
                     />
                     <Button
                         text={"DELETE"}
-                        isPrimary={true}                                      
+                        isPrimary={true} 
+                        medium={true}
                     />
                 </div>
                 <div className="opp-card-topic flex column opp-grid-item">

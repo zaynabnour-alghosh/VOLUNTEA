@@ -48,6 +48,9 @@ small{
 .wide{
     width:350px;
 }
+.medium{
+    width: 100px;
+}
 .btn-main{
     background-color: var(--secondary);
     border-style: none;
