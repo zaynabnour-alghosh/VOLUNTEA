@@ -3,7 +3,16 @@ import './style.css';
 import {icons} from "../../../icons.js";
 import CalendarComponent from "../../common/calendar";
 import Button from "../../common/button";
+import EventModal from "../EventModal";
+import { useState } from "react";
 const MemberSchedule=({goBack, auth})=>{
+    const [isAddEventModalOpen, setIsAddEventModalOpen] = useState(false);
+    const showAddEventModal = () => {
+        setIsAddEventModalOpen(true);
+      };
+      const toggleEventModal=()=>{
+        setIsAddEventModalOpen(!isAddEventModalOpen);
+    }
     return(
         <div className="member-schedule-container fullwidth p-10">
             <div className="member-schedule-top flex row p-30 gap-20">
@@ -23,12 +32,15 @@ const MemberSchedule=({goBack, auth})=>{
                         text={"+Event"}
                         isPrimary={false} 
                         medium={true}
+                        onClick={showAddEventModal}
                     />
                 </div>
             }
             <div className="flex center fullwidth p-20">
                 <CalendarComponent/>
             </div>
+            {isAddEventModalOpen && 
+                <EventModal showAddEventModal={isAddEventModalOpen} onRequestClose={toggleEventModal}/>}
         </div>
     );
 }
