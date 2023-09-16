@@ -39,8 +39,9 @@ const CalendarComponent=()=>{
       );
 
     return(
-        <div className="schedule-calendar-container flex center" style={{ height: `${weekViewHeight}px`, width: '100%' }}>
+        <div className="schedule-calendar-container flex center scroll" style={{ height: `${weekViewHeight}px`, width: '100%' }}>
             <Calendar
+                className="scroll"
                 localizer={localizer}
                 events={events}
                 startAccessor="start"

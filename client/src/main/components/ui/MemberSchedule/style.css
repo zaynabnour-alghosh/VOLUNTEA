@@ -10,3 +10,6 @@
     color:var(--stroke_action);
     font-weight: 700;
 }
+.auth-sechedule-actions{
+    justify-content: flex-end;
+}
