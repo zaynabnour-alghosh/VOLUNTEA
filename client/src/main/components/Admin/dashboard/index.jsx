@@ -25,6 +25,7 @@ const AdminDashboard=()=>{
     ];
     const [selectedTab, setSelectedTab] = useState('Dashboard');
     const [showNotificationModal, setShowNotificationModal] = useState(false);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
     const [showOpportunityDetails, setShowOpportunityDetails] = useState(false);    
     const [showMemberProfile, setShowMemeberProfile] = useState(false);    
     
@@ -35,18 +36,24 @@ const AdminDashboard=()=>{
     const toggleNotificationModal = () => {
         setShowNotificationModal(!showNotificationModal);
       };
+    const toggleConfirmationModal = () => {
+        setShowConfirmationModal(!showConfirmationModal);
+    };
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
         if (tabName === 'Notifications') {
             toggleNotificationModal();     
-        }else if (tabName === 'Projects' 
+        }else if(tabName==='Logout'){
+            toggleConfirmationModal();
+        }
+        else if (tabName === 'Projects' 
                || tabName==='Dashboard' 
                || tabName==='Members' 
                || tabName==='Messages' 
                || tabName==='Notifications' 
                || tabName==='Stream' 
                || tabName==='Profile' 
-               || tabName==='Logout') {
+               ) {
             setShowOpportunityDetails(false);
             setShowMemeberProfile(false);
         }
@@ -60,6 +67,8 @@ const AdminDashboard=()=>{
                         onTabClick={handleTabClick} 
                         showNotificationModal={showNotificationModal}
                         toggleNotificationModal={toggleNotificationModal}
+                        showConfirmationModal={showConfirmationModal}
+                        toggleConfirmationModal={toggleConfirmationModal}
                         />
                     <div className="dash-content-container flex column ">
                         {!showOpportunityDetails && !showMemberProfile &&
@@ -79,6 +88,7 @@ const AdminDashboard=()=>{
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
                                     {selectedTab === 'Profile' && <Profile />}
+
                                 </div>
                             </>      
                         }

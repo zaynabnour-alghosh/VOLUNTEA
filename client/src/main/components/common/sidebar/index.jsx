@@ -4,13 +4,17 @@ import Tab from "../tab";
 import {icons} from '../../../icons.js';
 import NotificationsModal from "../../ui/NotificationsModal";
 import secondaryLogo from '../../../../assets/secondary-white.svg';
-const Sidebar=({tabs,onTabClick, toggleModal,showNotificationModal, toggleNotificationModal})=>{
+import ConfirmationModal from "../../ui/ConfirmationModal";
+const Sidebar=({tabs,onTabClick, toggleModal,showNotificationModal, toggleNotificationModal,showConfirmationModal,toggleConfirmationModal})=>{
     const [selectedTab,setSelectedTab]=useState('Dashboard')
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
         if (tabName === "Notifications") {
             toggleNotificationModal();
-          } else {
+          }else if (tabName === "Logout"){
+            toggleConfirmationModal();
+          } 
+          else{
             onTabClick(tabName);
           }
       };
@@ -43,6 +47,8 @@ const Sidebar=({tabs,onTabClick, toggleModal,showNotificationModal, toggleNotifi
                 onRequestClose={toggleNotificationModal}
                 />
             )}
+             
+            {showConfirmationModal && <ConfirmationModal showConfirmationModal={showConfirmationModal} onRequestClose={toggleConfirmationModal} />}
         </div>
     );
 }
