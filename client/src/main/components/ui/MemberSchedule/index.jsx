@@ -5,13 +5,22 @@ import CalendarComponent from "../../common/calendar";
 import Button from "../../common/button";
 import EventModal from "../EventModal";
 import { useState } from "react";
+import ScheduleModal from "../ScheduleModal";
 const MemberSchedule=({goBack, auth})=>{
     const [isAddEventModalOpen, setIsAddEventModalOpen] = useState(false);
+    const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
+    
     const showAddEventModal = () => {
         setIsAddEventModalOpen(true);
-      };
-      const toggleEventModal=()=>{
+    };
+    const toggleEventModal=()=>{
         setIsAddEventModalOpen(!isAddEventModalOpen);
+    }
+    const showScheduleModal = () => {
+        setIsScheduleModalOpen(true);
+      };
+      const toggleScheduleModal=()=>{
+        setIsScheduleModalOpen(!isScheduleModalOpen);
     }
     return(
         <div className="member-schedule-container fullwidth p-10">
@@ -27,6 +36,7 @@ const MemberSchedule=({goBack, auth})=>{
                         text={"Edit"}
                         isPrimary={false}
                         medium={true}
+                        onClick={showScheduleModal}
                     />
                     <Button
                         text={"+Event"}
@@ -40,7 +50,11 @@ const MemberSchedule=({goBack, auth})=>{
                 <CalendarComponent/>
             </div>
             {isAddEventModalOpen && 
-                <EventModal showAddEventModal={isAddEventModalOpen} onRequestClose={toggleEventModal}/>}
+                <EventModal showAddEventModal={isAddEventModalOpen} onRequestClose={toggleEventModal}
+            />}
+            {isScheduleModalOpen && 
+                <ScheduleModal showScheduleModal={isScheduleModalOpen} onRequestClose={toggleScheduleModal}
+            />}
         </div>
     );
 }
