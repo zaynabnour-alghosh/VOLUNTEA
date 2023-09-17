@@ -85,7 +85,7 @@ const GroupModal=({showGroupModal , onRequestClose})=>{
                             <div className="btn-add-group flex ">
                                 <Button 
                                     text={"CREATE"}
-                                    isPrimary={false}
+                                    isSecondary={true}
                                 />
                             </div>
                         </div>

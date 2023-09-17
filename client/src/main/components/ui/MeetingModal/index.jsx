@@ -91,7 +91,7 @@ const MeetingModal=({showModal , onRequestClose})=>{
                             <div className="btn-add-meeting flex ">
                                 <Button 
                                     text={"SCHEDULE"}
-                                    isPrimary={false}
+                                    isSecondary={true}
                                 />
                             </div>
                         </div>

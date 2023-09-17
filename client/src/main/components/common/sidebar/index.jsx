@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './style.css';
 import Tab from "../tab";
-import {icons} from '../../../icons.js';
+import {icons} from '../../../../icons.js';
 import NotificationsModal from "../../ui/NotificationsModal";
 import secondaryLogo from '../../../../assets/secondary-white.svg';
 import ConfirmationModal from "../../ui/ConfirmationModal";

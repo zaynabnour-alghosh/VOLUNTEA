@@ -7,6 +7,7 @@ import './App.css';
 import Admin from './Pages/Admin';
 import InformationForm from './components/OrganizationDetails/InformationForm';
 import Volunteer from './Pages/Volunteer';
+import {icons} from "./icons.js";
 
 function App() {
   return (

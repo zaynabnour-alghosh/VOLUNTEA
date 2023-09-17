@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled = true,active,inactive,medium }) => {
+const Button = ({text,isLink,isWide,isLight,isDark,isSecondary,isPrimary,isAction, onClick, enabled = true,active,inactive,medium }) => {
   const clickHandler = () => {
     if (enabled) {
       onClick();
@@ -12,11 +12,14 @@ const Button = ({text,isLink,isWide,isMain,isPrimary,isAction, onClick, enabled 
   return (
     <button
       className={`baseButton pointer 
-                ${isPrimary? 'primary':'secondary'} 
+                ${isPrimary? 'primary':''}
+                ${isSecondary? 'secondary':''}
                 ${isAction? 'action' : ''}
                 ${isWide? 'wide' : 'small '}
                 ${isLink? 'action-no-bg':''}
-                ${isMain? 'btn-main' : ' '}
+                ${isLight? 'btn-light' : ''}
+                ${isDark? 'btn-dark' : ''}
+
                 ${active? 'active' : ''}
                 ${inactive? 'inactive' : ''}
                 ${medium? 'medium' : ''}

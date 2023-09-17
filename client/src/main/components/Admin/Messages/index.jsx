@@ -5,7 +5,7 @@ import AvatarCard from "../../common/avatar";
 import Input from "../../common/input";
 import Header from "../../common/header";
 import MessageRow from "../../ui/MessageRow";
-import {icons} from './../../../icons.js';
+import {icons} from '../../../../icons.js';
 import SingleChatBox from "../../common/single";
 import GroupChatBox from "../../common/group";
 import EmptyChatState from "../../EmptyStates/Chat";

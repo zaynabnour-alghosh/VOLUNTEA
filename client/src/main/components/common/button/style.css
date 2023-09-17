@@ -11,6 +11,13 @@
     font-weight: 700;
     border-style: none;
 }
+.baseButton:hover{
+    background-color:var(--primary_bg);
+    color:var(--sidebar);
+    border-color: var(--sidebar);
+    border: 2px solid var(--sidebar);
+    font-weight: 600;
+}
 small{
     width: 75px;
 }
@@ -51,7 +58,12 @@ small{
 .medium{
     width: 100px;
 }
-.btn-main{
+.btn-light{
+    background-color: var(--sidebar);
+    border-style: none;
+    color:var(--white);
+}
+.btn-dark{
     background-color: var(--secondary);
     border-style: none;
     color:var(--white);

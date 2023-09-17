@@ -115,7 +115,7 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                         <div className="btn-add-announcement flex fullwidth center">
                             <Button 
                                 text={"Announce"}
-                                isPrimary={false}
+                                isSecondary={true}
                             />
                         </div>
                     </div>

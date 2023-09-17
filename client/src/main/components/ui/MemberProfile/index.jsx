@@ -3,7 +3,7 @@ import './style.css';
 import Header from "../../common/header";
 import Button from "../../common/button";
 import Item from "../../common/item";
-import {icons} from "../../../icons.js";
+import {icons} from "../../../../icons.js";
 import MemberSchedule from "../MemberSchedule";
 import { useState } from "react";
 const MemberProfile=({remove})=>{

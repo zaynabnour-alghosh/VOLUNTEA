@@ -180,7 +180,7 @@ const Info=()=>{
                 <div className="flex center">
                     <Button
                         text={"Edit"}
-                        isPrimary={false}
+                        isSecondary={true}
                         medium={true}                                      
                     />
                 </div>

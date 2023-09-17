@@ -1,6 +1,6 @@
 import React from "react";
 import './style.css';
-import {icons} from "../../../icons.js";
+import {icons} from "../../../../icons.js";
 import CalendarComponent from "../../common/calendar";
 import Button from "../../common/button";
 import EventModal from "../EventModal";
@@ -34,13 +34,13 @@ const MemberSchedule=({goBack, auth})=>{
                 <div className="auth-sechedule-actions flex fullwidth row gap-20 p-20">
                     <Button
                         text={"Edit"}
-                        isPrimary={false}
+                        isSecondary={true}
                         medium={true}
                         onClick={showScheduleModal}
                     />
                     <Button
                         text={"+Event"}
-                        isPrimary={false} 
+                        isSecondary={true}
                         medium={true}
                         onClick={showAddEventModal}
                     />

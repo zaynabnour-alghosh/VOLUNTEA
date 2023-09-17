@@ -49,7 +49,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                         <span>Add New Opportunity</span>
                         <Button 
                             text={edit? 'EDIT':'ADD'}
-                            isPrimary={false}
+                            isSecondary={true}
                             medium={true}
                         />
                     </div>

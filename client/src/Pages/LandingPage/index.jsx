@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import logo from "../../images/logo-mini.png";
 import {Link} from 'react-router-dom'
 import { BsCheck2Circle,BsInstagram} from 'react-icons/bs';
-import {icons} from "../../main/icons";
+import {icons} from "../../icons";
 import {FaFacebookSquare} from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa';
 import Logo from "../../components/Logo";
@@ -76,7 +76,7 @@ const LandingPage=()=>{
                                     <h2>Your Way to Manage Your Community</h2>
                                 </div>                               
                                 <div>
-                                    <Button text={"START NOW"} isMain={true} onClick={()=>{navigate('/startup');}}/>
+                                    <Button text={"START NOW"} isDark={true} onClick={()=>{navigate('/startup');}}/>
                                 </div>
                             </div>
                         </div>
@@ -127,6 +127,7 @@ const LandingPage=()=>{
                                                 <Input type={"text"} placeholder={"Name"} fill={true}/>
                                                 <Input type={"text"} placeholder={"Email Address"}fill={true}/>
                                                 <Input type="textarea" placeholder={"Message"} fill={true}/>
+                                                <Button text={"START NOW"} isDark={true}/>
                                             </div>
                                         </div>
                                     </div>  

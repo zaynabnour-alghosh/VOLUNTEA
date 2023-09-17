@@ -1,7 +1,7 @@
 import React from "react";
 import './style.css';
 import MessageRow from "../../ui/MessageRow";
-import {icons} from './../../../icons.js';
+import {icons} from '../../../../icons.js';
 import Input from "../input";
 const SingleChatBox=()=>{
     return(

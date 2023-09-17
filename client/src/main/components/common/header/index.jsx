@@ -3,7 +3,7 @@ import './style.css';
 import { useState } from 'react';
 import Button from "../button";
 import Input from "../input";
-import {icons} from "../../../icons.js"
+import {icons} from "../../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
 const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov})=>{

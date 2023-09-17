@@ -82,7 +82,7 @@ const CertificationModal=({showModal , onRequestClose})=>{
                             <div className="btn-add-certification flex ">
                                 <Button 
                                     text={"CERTIFY"}
-                                    isPrimary={false}
+                                    isSecondary={true}
                                 />
                             </div>
                         </div>
