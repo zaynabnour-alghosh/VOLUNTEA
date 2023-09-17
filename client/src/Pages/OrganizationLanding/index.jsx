@@ -85,7 +85,7 @@ const OrganizationLanding=()=>{
                             <a href="#mission"><MdKeyboardDoubleArrowRight/> &nbsp;How We Do it</a>
                             </div>
                         </div>
-                        <div className="footer-contact flex column">
+                        <div className="footer-contact flex column" id="contact">
                             <h3>Contact Us</h3>
                             <div className="footer-links flex column">
                                 <div className="flex gap-10">

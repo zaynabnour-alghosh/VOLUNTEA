@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {icons} from "../../icons.js";
 import logo from '../../images/logo-mini.png';
 import {AiFillEye,AiFillEyeInvisible} from 'react-icons/ai';
 import {MdEmail} from 'react-icons/md';

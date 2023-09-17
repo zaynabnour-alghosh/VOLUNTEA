@@ -80,7 +80,7 @@ const NewSpace=({onToggle})=>{
                                 medium={true}
                             />
                             <Button 
-                                onClick={()=>{navigate('/fill-organization-info');}} 
+                                onClick={()=>{navigate('/personal-info');}} 
                                 text={"Next"} 
                                 isLight={true}
                                 medium={true}
