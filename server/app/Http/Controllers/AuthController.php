@@ -22,9 +22,11 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function verifyEmail(Request $request, $token)
+    public function verifyEmail(Request $request)
     {
-        $user = User::where('verification_token', $token)->first();
+        $user = User::where('email',$request->email)
+                    ->where('verification_token', $request->token)
+                    ->first();
     
         if (!$user) {
             return response()->json(['message' => 'Invalid verification token'], 400);
@@ -76,7 +78,6 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->verification_token=$verificationToken;
         if($role==='admin'){
             $user->role_id='1';
         }
@@ -86,6 +87,7 @@ class AuthController extends Controller
         else{
             return response()->json(['message'=>'Invalid Request']);
         }
+        $user->verification_token=$verificationToken;
         $user->save();
         if($role==='volunteer'){
             $signup_request=new SignupRequest;

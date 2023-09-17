@@ -71,7 +71,7 @@ Route::group(["prefix" => "guest"], function(){
     Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
     Route::post("login", [AuthController::class, "login"]);
     Route::post("register/{role}", [AuthController::class, "register"]);
-    Route::get("verify-email/{token}", [AuthController::class, "verifyEmail"]);
+    Route::post("verify-email", [AuthController::class, "verifyEmail"]);
     Route::post("password/reset/request",[PasswordResetController::class, "requestReset"]);
     Route::post("password/reset/verify",[PasswordResetController::class, "resetPassword"]);
 });
