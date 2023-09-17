@@ -12,7 +12,6 @@
 .fill-personal span{
     color:var(--sidebar)
 }
-
 .personal-info-container{
 
     width: 70%;
@@ -29,7 +28,7 @@
 .week-grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-  }
+}
   
 .week-grid-item {
     
@@ -46,9 +45,6 @@
 .user-gender{
     gap:2px;
 }
-
-
-
 .user-file .base-input-row input[type="file"] {
     background-color: var(--white);
     padding-left:75px;

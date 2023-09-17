@@ -16,10 +16,10 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/startup' element={<StartupPage />} />
         <Route path='/personal-info' element={<PersonalInformation />} />
+        <Route path='/fill-organization-info' element={<InformationForm />} />
 
         <Route path='/login' element={<Login/>} />
         <Route path='/voluntea/orgname' element={<OrganizationLanding/>} />
-        <Route path='/fill-organization-info' element={<InformationForm />} />
         <Route path='/voluntea/orgname/admin' element={<Admin/>} />
         <Route path='/voluntea/orgname/volunteer' element={<Volunteer/>} />
 

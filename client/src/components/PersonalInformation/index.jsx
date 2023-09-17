@@ -3,7 +3,9 @@ import './style.css';
 import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button";
 import logoS from "../../assets/logo-secondary.svg";
+import { useNavigate } from "react-router-dom";
 const PersonalInformation=()=>{
+    const navigate=useNavigate();
     return(
            <div className="fill-personal-container page flex">
                 <div className="fill-personal flex column gap-30">
@@ -98,6 +100,7 @@ const PersonalInformation=()=>{
                                         text={"Add"}
                                         isLight={true}
                                         medium={true}
+                                        onClick={()=>navigate('/fill-organization-info')}
                                 />
                                 </div>
                             </div>                            
