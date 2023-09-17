@@ -39,7 +39,7 @@ a:hover{
 }
 
 .menu{
-    color:var(--tex_primary);
+    color:var(--text_primary);
     padding:5px;
 }
 .menu-app-toggle,.menu-toggle {

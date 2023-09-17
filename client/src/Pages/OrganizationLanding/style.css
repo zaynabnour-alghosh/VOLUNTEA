@@ -4,16 +4,16 @@
     width: fit-content;
 }
 .footer-container{
-    background-color:var(white);
+    background-color:var(--white);
    
 }
 .footer-content{
+    width: 100%;
     padding: 10px;
-    gap:320px;
-    justify-content: space-evenly;
     padding-bottom: 50px;
     padding-top: 50px;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    
 }
 .footer-links{
     gap:5px;
