@@ -1,8 +1,8 @@
 import React from "react";
 import './style.css';
-const EventModal=()=>{
+const OrgEventModal=()=>{
     return(
         <div></div>
     );
 }
-export default EventModal;
+export default OrgEventModal;

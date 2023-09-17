@@ -4,9 +4,35 @@ import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
 import logoS from "../../../assets/logo-secondary.svg";
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
+import ImpactModal from "../ImpactModal";
+import MissionModal from "../MissionModal";
+import OrgEventModal from "../EventModal";
 const InformationForm=()=>{
     const navigate=useNavigate();
+    const [isImpactModalOpen, setIsImpactModalOpen] = useState(false);
+    const [isMissionModalOpen, setIsMissionModalOpen] = useState(false);
+    const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+    
+    const showImpcatModal = () => {
+        setIsImpactModalOpen(true);
+      };
+    const toggleImpactModal=()=>{
+        setIsImpactModalOpen(!isImpactModalOpen);
+    }
+
+    const showMissionModal = () => {
+        setIsMissionModalOpen(true);
+      };
+    const toggleMissionModal=()=>{
+        setIsMissionModalOpen(!isMissionModalOpen);
+    }
+    const showEventModal = () => {
+        setIsEventModalOpen(true);
+      };
+    const toggleEventModal=()=>{
+        setIsEventModalOpen(!isEventModalOpen);
+    }
 
     return(
         <div className="fill-org-container page flex">
@@ -44,17 +70,21 @@ const InformationForm=()=>{
                         <Button
                             text={"+ Impact"}
                             isAction={true}
-                            isMedium={true}
+                            meduim={true}
+                            onClick={showImpcatModal}
+
                         />
                         <Button
                             text={"+ Mission"}
                             isAction={true}
-                            isMedium={true}
+                            medium={true}
+                            onClick={showMissionModal}
                         />
                         <Button
                             text={"+ Event"}
                             isAction={true}
-                            isMedium={true}
+                            medium={true}
+                            onClick={showEventModal}
                         />
                     </div>
                     
@@ -109,6 +139,21 @@ const InformationForm=()=>{
                 </div>                                                                
             </div>
         </div>
+        {isImpactModalOpen && 
+            <ImpactModal 
+                showImpactModal={isImpactModalOpen}
+                onRequestClose={toggleImpactModal}
+            />}
+        {isMissionModalOpen && 
+            <MissionModal 
+                showMissionModal={isMissionModalOpen}
+                onRequestClose={toggleMissionModal}
+            />}
+        {isEventModalOpen && 
+            <OrgEventModal 
+                showEventModal={isEventModalOpen}
+                onRequestClose={toggleEventModal}
+            />}
     </div>
     );
 }
