@@ -76,13 +76,13 @@ const NewSpace=({onToggle})=>{
                             <Button 
                                 onClick={generateRandomCode} 
                                 text={"Generate"} 
-                                isMain={true}
+                                isLight={true}
                                 medium={true}
                             />
                             <Button 
                                 onClick={()=>{navigate('/fill-organization-info');}} 
                                 text={"Next"} 
-                                isMain={true}
+                                isLight={true}
                                 medium={true}
                             /> 
                         </div>
