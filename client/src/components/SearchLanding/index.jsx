@@ -1,6 +1,5 @@
 import React from "react";
 import '../NewSpace/style.css';
-import {BsPeopleFill} from "react-icons/bs"
 import logoS from "../../assets/logo-secondary.svg";
 import './style.css';
 import {icons} from "../../icons.js";

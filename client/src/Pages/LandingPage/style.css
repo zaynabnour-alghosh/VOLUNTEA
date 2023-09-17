@@ -47,7 +47,11 @@ a:hover{
     cursor: pointer;
     display: none;
 }
-  
+.lst div{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
 .menu-toggle.open,.menu-app-toggle.open {
     display: block;
 }

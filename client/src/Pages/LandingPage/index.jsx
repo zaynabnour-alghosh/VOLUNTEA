@@ -2,10 +2,8 @@ import React from "react";
 import { useState,useEffect } from "react";
 import logo from "../../images/logo-mini.png";
 import {Link} from 'react-router-dom'
-import { BsCheck2Circle,BsInstagram} from 'react-icons/bs';
+import { BsCheck2Circle} from 'react-icons/bs';
 import {icons} from "../../icons";
-import {FaFacebookSquare} from 'react-icons/fa';
-import { FaBars } from 'react-icons/fa';
 import Logo from "../../components/Logo";
 import illustration from "../../images/illustration.png"
 import "./style.css";
@@ -58,7 +56,7 @@ const LandingPage=()=>{
                             <img src={logo} alt="logo" />
                         </div>
                         <div className={`menu-app-toggle ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-                            <FaBars  className="menu"/>
+                            <div className="menu">{icons['menu']}</div>
                         </div>
                         <div  className={`link nav-links ${isMenuOpen ? 'open' : ''}`}>
                             <a href="#about-us" className="about" onClick={closeMenu}>About Us</a>
@@ -105,7 +103,6 @@ const LandingPage=()=>{
                                             <div><BsCheck2Circle className="check"/>&nbsp;View volunteers information </div>
                                             <div><BsCheck2Circle className="check"/>&nbsp;Add volunteers to groups</div>
                                             <div><BsCheck2Circle className="check"/>&nbsp;So much more</div>
-                                        
                                         </div>
                                     </div>
                                 </div>
