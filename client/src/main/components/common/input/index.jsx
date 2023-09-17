@@ -25,12 +25,25 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
             <>
                 <div className={`icon-input-row  ${noBorder? 'no-border':''}`}>
                     {icon && <span className="base-input-icon" style={{ fontSize: '25px' }} >{icon}</span>}
+                    {type === 'textarea' ? (
+                        <textarea
+                            className="textarea-style"
+                            placeholder={placeholder}
+                            style={{
+                                ...inputStyle,
+                                width: '100%',  
+                                boxSizing: 'border-box'  
+                            }}
+                            rows={4} 
+                            cols={30}
+                        />
+                    ) : (
                     <input
                                     
                         type={showPassword ? 'text' : type}
                         placeholder={placeholder}
                         style={fill?  inputStyle:{}}
-                    />
+                    />)}
                     {type === 'password' && (
                     <span
                         className={`assword-toggle-icon}`}
