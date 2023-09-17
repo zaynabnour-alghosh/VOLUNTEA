@@ -1,13 +1,6 @@
 .org-impact-form-container{
     width: 100%;
 }
-.new-org-impact-header span{
-    color: var(--white, #FFF);
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;    
-}
 .new-org-impact-form-container {
     gap:20px;
     padding: 20px;

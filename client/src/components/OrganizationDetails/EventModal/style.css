@@ -1,0 +1,12 @@
+.org-event-form-container{
+    width: 100%;
+}
+.new-org-event-form-container {
+    gap:20px;
+    padding: 20px;
+    width: 100%;
+}
+.org-event-form{
+    width: 100%;
+    gap:10px;
+}

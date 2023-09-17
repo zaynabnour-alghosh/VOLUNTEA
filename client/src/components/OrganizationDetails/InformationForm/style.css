@@ -27,13 +27,13 @@
 
 .logo-file .base-input-row input[type="file"] {
     background-color: var(--white);
-    padding-left:0px;
+    padding-left:100px;
     display: inline-block;
     justify-content: flex-end;
 }
 .file .base-input-row input[type="file"] {
     background-color: var(--white);
-    padding-left:125px;
+    padding-left:310px;
     display: inline-block;
     justify-content: flex-end;
 }
