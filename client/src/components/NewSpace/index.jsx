@@ -56,7 +56,7 @@ const NewSpace=({onToggle})=>{
 					response.user.token
 				);
                 localStorage.setItem("org_id",response.user.org.id)
-                navigate('/personal-info')
+                setTimeout(() => {navigate(`/personal-info`)},1000);
             }
         }catch(error){
             console.log(error)
