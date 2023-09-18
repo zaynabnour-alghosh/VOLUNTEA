@@ -1,16 +1,26 @@
 import React from "react";
 import './style.css';
 import {icons} from '../../../../icons.js';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memberSearch,value,readOnly})=>{
+const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memberSearch,readOnly,onChange,value })=>{
     const [showPassword, setShowPassword] = useState(false);
+    const [inputValue, setInputValue] = useState(value);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
       };
       const inputStyle = {
         width: '100%',
-      }; 
+      };
+    const handleChange = (e) => { 
+        if (!readOnly) {
+            setInputValue(e.target.value);
+        }   
+        onChange(e);
+    };
+    useEffect(() => {
+        setInputValue(value);
+    }, [value]); 
     return(
         <div className={`flex column  ${search? 'search':' base-input-row'} ${memberSearch? 'member-search':' base-input-row'}`}>
             {label? 
@@ -20,7 +30,8 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
                     type={type}
                     placeholder={placeholder}
                     style={fill?  inputStyle:{}}
-                    value={value}
+                    value={inputValue}
+                    onChange={(e) => onChange(e.target.value)}
                 />
             </>:
             <>
@@ -37,6 +48,8 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
                             }}
                             rows={4} 
                             cols={30}
+                            onChange={handleChange}
+                            value={inputValue}
                         />
                     ) : (
                    <>
@@ -46,15 +59,17 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
                                 type={showPassword ? 'text' : type}
                                 placeholder={placeholder}
                                 style={fill?  inputStyle:{}}
-                                value={value}
+                                onChange={handleChange}                                
                                 readOnly
+                                value={inputValue}
                             />:
                         
                         <input
                             type={showPassword ? 'text' : type}
                             placeholder={placeholder}
-                            value={value}
+                            onChange={handleChange}
                             style={fill?  inputStyle:{}}
+                            value={inputValue}
                         />}
                         {type === 'password' && (
                             <span

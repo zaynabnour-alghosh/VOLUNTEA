@@ -42,7 +42,7 @@ const PersonalInformation=()=>{
                                             fill={true}
                                         />
                                         <Input
-                                            label={"Mobile number"}
+                                            label={"Mobile"}
                                             type={"text"}
                                             placeholder={"Mobile"}
                                             fill={true}
