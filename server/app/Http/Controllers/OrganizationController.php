@@ -75,8 +75,8 @@ class OrganizationController extends Controller
             $impact->image_url=$path;
         }
         $impact->save();
-        $organization=OrganizationProfile::where('org_id',$org_id)->first();
-        $impact->organization=$organization->name;
+        // $organization=OrganizationProfile::where('org_id',$org_id)->first();
+        // $impact->organization=$organization->name;
         return response()->json([
             'status'=>'success',
             'data'=>$impact
