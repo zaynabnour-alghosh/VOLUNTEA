@@ -65,8 +65,20 @@ const InformationForm=()=>{
             console.log(error)
         }
     };
-    const handleAddEvent=()=>{
-
+    const handleAddEvent=async(data)=>{
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/organization-event",
+                body:data,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+            }
+        }catch(error){
+            console.log(error)
+        }
     }
     const handleAddOrgInfo=()=>{
 

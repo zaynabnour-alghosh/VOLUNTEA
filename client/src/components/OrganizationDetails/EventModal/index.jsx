@@ -3,8 +3,8 @@ import './style.css';
 import ModalComponent from "../../../main/components/common/modal";
 import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
-
-const OrgEventModal=({showEventModal , onRequestClose})=>{
+import { useState } from "react";
+const OrgEventModal=({showEventModal , onRequestClose,addEvent})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -41,6 +41,22 @@ const OrgEventModal=({showEventModal , onRequestClose})=>{
         }
     
     };
+    const [topic, setTopic] = useState("");
+    const [description, setDescription] = useState("");
+    const [image, setImage] = useState("");
+    const [date, setDate] = useState("");
+    const org_id=localStorage.getItem("org_id");
+    const handleAddEvent=()=>{
+        const eventData=new FormData();
+        eventData.append('topic',topic);
+        eventData.append('description',description);
+        eventData.append('org_id',org_id);
+        eventData.append('image_url',image);
+        eventData.append('event_date',date);
+
+        addEvent(eventData);
+        onRequestClose();
+    }
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showEventModal} onRequestClose={onRequestClose} >
@@ -54,6 +70,8 @@ const OrgEventModal=({showEventModal , onRequestClose})=>{
                                         placeholder={"Event Topic"}
                                         type={"text"}
                                         fill={true}
+                                        value={topic}
+                                        onChange={(e)=>setTopic(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -64,6 +82,8 @@ const OrgEventModal=({showEventModal , onRequestClose})=>{
                                         placeholder={"Description"}
                                         type={"textarea"}
                                         fill={true}
+                                        value={description}
+                                        onChange={(e)=>setDescription(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -73,6 +93,8 @@ const OrgEventModal=({showEventModal , onRequestClose})=>{
                                         label={"Date"}
                                         type={"date"}
                                         fill={true}
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -83,6 +105,7 @@ const OrgEventModal=({showEventModal , onRequestClose})=>{
                                         label={"Image"}
                                         type={"file"}
                                         fill={true}
+                                        onChange={(e)=>setImage(e.target.files[0])}
                                     />
                                 </span>
                             </div>
@@ -91,6 +114,7 @@ const OrgEventModal=({showEventModal , onRequestClose})=>{
                                     text={"Add"}
                                     isAction={true}
                                     medium={true}
+                                    onClick={handleAddEvent}
                                 />
                             </div>
                         </div>
