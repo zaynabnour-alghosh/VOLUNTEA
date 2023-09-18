@@ -14,7 +14,16 @@ const InformationForm=()=>{
     const [isImpactModalOpen, setIsImpactModalOpen] = useState(false);
     const [isMissionModalOpen, setIsMissionModalOpen] = useState(false);
     const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-    
+    const [name,setName]=useState('');    
+    const [description,setDescription]=useState('');
+    const [logo,setLogo]=useState('');
+    const [face,setFace]=useState('');
+    const [insta,setInsta]=useState('');
+    const [whats,setWhats]=useState('');
+    const [location,setLocation]=useState('');
+    const [phone,setPhone]=useState('');
+    const [email,setEmail]=useState('');
+
     const showImpcatModal = () => {
         setIsImpactModalOpen(true);
       };
@@ -80,8 +89,35 @@ const InformationForm=()=>{
             console.log(error)
         }
     }
-    const handleAddOrgInfo=()=>{
+    const handleAddOrgInfo=async(e)=>{
+        const orgData=new FormData();
+        const org_id=localStorage.getItem("org_id");
+        orgData.append('name',name);
+        orgData.append('description',description);
+        orgData.append('logo_url',logo);
+        orgData.append('location',location);
+        orgData.append('email',email);
+        orgData.append('phone',phone);
+        orgData.append('face_link',face);
+        orgData.append('insta_link',insta);
+        orgData.append('whats_link',whats);
+        orgData.append('org_id',org_id);
 
+
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/organization-info",
+                body:orgData,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setTimeout(() => {navigate(`/voluntea/orgname/admin`)},1000);
+            }
+        }catch(error){
+            console.log(error)
+        }
     }
 
     return(
@@ -98,6 +134,9 @@ const InformationForm=()=>{
                                 type={"text"}
                                 placeholder={"Name"}
                                 fill={true}
+                                value={name}
+                                onChange={(e)=>setName(e.target.value)}
+
                             />
                         </div>
                         <div className="logo-file fullwidth org-file">
@@ -105,6 +144,7 @@ const InformationForm=()=>{
                                 label={"Logo"}
                                 type={"file"}
                                 fill={true}
+                                onChange={(e)=>setLogo(e.target.files[0])}
                             />
                         </div>                                
                     </div>
@@ -114,6 +154,8 @@ const InformationForm=()=>{
                             type={"text"}
                             placeholder={"Description"}
                             fill={true}
+                            value={description}
+                            onChange={(e)=>setDescription(e.target.value)}
                         />
                     </div>                    
                     <div className="flex fullwidth center row gap-10">
@@ -144,18 +186,24 @@ const InformationForm=()=>{
                             type={"text"}
                             placeholder={"Location"}
                             fill={true}
+                            value={location}
+                            onChange={(e)=>setLocation(e.target.value)}
                         />
                         <Input
                             label={"Mobile"}
                             type={"text"}
                             placeholder={"Mobile"}
                             fill={true}
+                            value={phone}
+                            onChange={(e)=>setPhone(e.target.value)}
                         />
                         <Input
                             label={"Email"}
                             type={"text"}
                             placeholder={"Email"}
                             fill={true}
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
                         />
                     </div>
                     <div className="other flex row spaceBetween gap-10 pt-5 ">
@@ -164,18 +212,24 @@ const InformationForm=()=>{
                             type={"text"}
                             placeholder={"Link"}
                             fill={true}
+                            value={face}
+                            onChange={(e)=>setFace(e.target.value)}
                         />
                         <Input
                             label={"Instagram"}
                             type={"text"}
                             placeholder={"Link"}
                             fill={true}
+                            value={insta}
+                            onChange={(e)=>setInsta(e.target.value)}
                         />
                         <Input
                             label={"Whatsapp"}
                             type={"text"}
                             placeholder={"Link"}
                             fill={true}
+                            value={whats}
+                            onChange={(e)=>setWhats(e.target.value)}
                         />
                     </div>
                     <div className="add-info-btn flex fullwidth pt-10 center">
