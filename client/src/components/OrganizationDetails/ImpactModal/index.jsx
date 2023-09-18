@@ -54,8 +54,6 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
         impactData.append('image_url',image);
         impactData.append('org_id',org_id);
 
-
-
         addImpact(impactData);
         onRequestClose();
     }

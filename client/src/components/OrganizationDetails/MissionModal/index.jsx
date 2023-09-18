@@ -3,8 +3,9 @@ import './style.css';
 import ModalComponent from "../../../main/components/common/modal";
 import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
+import { useState } from "react";
 
-const MissionModal=({showMissionModal , onRequestClose})=>{
+const MissionModal=({showMissionModal , onRequestClose,addMission})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -41,6 +42,18 @@ const MissionModal=({showMissionModal , onRequestClose})=>{
         }
     
     };
+    const [topic, setTopic] = useState("");
+    const [description, setDescription] = useState("");
+    const org_id=localStorage.getItem("org_id");
+    const handleAddMission=()=>{
+        const missionData=new FormData();
+        missionData.append('header',topic);
+        missionData.append('description',description);
+        missionData.append('org_id',org_id);
+
+        addMission(missionData);
+        onRequestClose();
+    }
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showMissionModal} onRequestClose={onRequestClose} >
@@ -54,6 +67,8 @@ const MissionModal=({showMissionModal , onRequestClose})=>{
                                         placeholder={"Mission Topic"}
                                         type={"text"}
                                         fill={true}
+                                        value={topic}
+                                        onChange={(e)=>setTopic(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -64,6 +79,8 @@ const MissionModal=({showMissionModal , onRequestClose})=>{
                                         placeholder={"description"}
                                         type={"textarea"}
                                         fill={true}
+                                        value={description}
+                                        onChange={(e)=>setDescription(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -72,6 +89,7 @@ const MissionModal=({showMissionModal , onRequestClose})=>{
                                     text={"Add"}
                                     isAction={true}
                                     medium={true}
+                                    onClick={handleAddMission}
                                 />
                             </div>
                         </div>

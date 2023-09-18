@@ -50,8 +50,20 @@ const InformationForm=()=>{
         }
 
     };
-    const handleAddMission=()=>{
-
+    const handleAddMission=async(data)=>{
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/organization-mission",
+                body:data,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+            }
+        }catch(error){
+            console.log(error)
+        }
     };
     const handleAddEvent=()=>{
 
