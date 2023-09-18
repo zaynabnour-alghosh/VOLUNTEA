@@ -4,7 +4,7 @@ import ModalComponent from "../../../main/components/common/modal";
 import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
 
-const ImpactModal=({showImpactModal , onRequestClose})=>{
+const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -41,6 +41,10 @@ const ImpactModal=({showImpactModal , onRequestClose})=>{
         }
     
     };
+    const [topic, setTopic] = useState("");
+    const [description, setDescription] = useState("");
+    const [image, setImage] = useState("");
+
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showImpactModal} onRequestClose={onRequestClose} >

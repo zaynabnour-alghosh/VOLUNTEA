@@ -33,6 +33,18 @@ const InformationForm=()=>{
     const toggleEventModal=()=>{
         setIsEventModalOpen(!isEventModalOpen);
     }
+    const handleAddImpact=()=>{
+
+    };
+    const handleAddMission=()=>{
+
+    };
+    const handleAddEvent=()=>{
+
+    }
+    const handleAddOrgInfo=()=>{
+
+    }
 
     return(
         <div className="fill-org-container page flex">
@@ -96,13 +108,13 @@ const InformationForm=()=>{
                             fill={true}
                         />
                         <Input
-                            label={"Mobile number"}
+                            label={"Mobile"}
                             type={"text"}
                             placeholder={"Mobile"}
                             fill={true}
                         />
                         <Input
-                            label={"Email Address"}
+                            label={"Email"}
                             type={"text"}
                             placeholder={"Email"}
                             fill={true}
@@ -133,7 +145,7 @@ const InformationForm=()=>{
                         text={"Finish"}
                         isLight={true}
                         medium={true}
-                        onClick={()=>navigate('/voluntea/orgname/admin')}
+                        onClick={handleAddOrgInfo}
                         />
                     </div>                            
                 </div>                                                                
@@ -143,16 +155,19 @@ const InformationForm=()=>{
             <ImpactModal 
                 showImpactModal={isImpactModalOpen}
                 onRequestClose={toggleImpactModal}
+                addImpact={handleAddImpact}
             />}
         {isMissionModalOpen && 
             <MissionModal 
                 showMissionModal={isMissionModalOpen}
                 onRequestClose={toggleMissionModal}
+                addMission={handleAddMission}
             />}
         {isEventModalOpen && 
             <OrgEventModal 
                 showEventModal={isEventModalOpen}
                 onRequestClose={toggleEventModal}
+                addEvent={handleAddEvent}
             />}
     </div>
     );
