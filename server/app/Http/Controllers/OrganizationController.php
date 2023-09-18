@@ -93,8 +93,8 @@ class OrganizationController extends Controller
         $mission->header=$request->header;
         $mission->description=$request->description;
         $mission->save();
-        $organization=OrganizationProfile::where('org_id',$org_id)->first();
-        $mission->organization=$organization->name;
+        // $organization=OrganizationProfile::where('org_id',$org_id)->first();
+        // $mission->organization=$organization->name;
         return response()->json([
             'status'=>'success',
             'data'=>$mission
@@ -122,8 +122,8 @@ class OrganizationController extends Controller
         $event->location=$request->location;
         $formattedEventDate = Carbon::parse($request->event_date)->format('F d, Y');
         $event->save();
-        $organization=OrganizationProfile::where('org_id',$org_id)->first();
-        $event->organization=$organization->name;
+        // $organization=OrganizationProfile::where('org_id',$org_id)->first();
+        // $event->organization=$organization->name;
         return response()->json([
             'status'=>'success',
             'data'=>$event,
