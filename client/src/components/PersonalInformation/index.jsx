@@ -26,32 +26,30 @@ const PersonalInformation=()=>{
     };
     const toggleScheduleModal=()=>{
     setIsScheduleModalOpen(!isScheduleModalOpen);
-}
-    const addSchedule=(data)=>{
+    }
+    const addSchedule=async(data)=>{
         const newScheduleEntry = {
             day: data.get('weekday'),
             from: data.get('start_time'),
             to: data.get('end_time'),
-          };
-        
-          setSchedule([...schedule, newScheduleEntry]);
-
-        // try{
-        //     const response=await sendRequest({
-        //         method:"POST",
-        //         route:"/schedule/add",
-        //         body:data,
-        //         includeHeaders:true
-        //     });
-        //     if(response){
-        //         console.log(response);
-        //     }
-        // }catch(error){
-        //     console.log(error)
-        // }
+          };    
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/schedule/add",
+                body:data,
+                includeHeaders:true
+            });
+            if(response){
+                setSchedule([...schedule, newScheduleEntry]);
+                console.log(response);
+            }
+        }catch(error){
+            console.log(error)
+        }
 
     }
-    const handlePersonalDetails=()=>{
+    const handlePersonalDetails=async(e)=>{
         console.log("clicked info");
         const personalData=new FormData();
         personalData.append('description',description);
@@ -61,6 +59,20 @@ const PersonalInformation=()=>{
         personalData.append('avatar_url',avatar);
         personalData.append('dob',dob);
         console.log(description,location,dob,mobile,avatar,selectedGender);
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/profile/add",
+                body:personalData,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setTimeout(() => {navigate(`/fill-organization-info`)},1000);
+            }
+        }catch(error){
+            console.log(error)
+        }
 
     }
 
@@ -85,10 +97,9 @@ const PersonalInformation=()=>{
                                         label={"Avatar"}
                                         type={"file"}
                                         fill={true}
-                                        onChange={(e) => setAvatar(e.target.value)}
+                                        onChange={(e)=>setAvatar(e.target.files[0])}
 
                                     />
-                                    {/* <FileInput /> */}
                                 </div>                                
                                 <div className="other-personal-info flex row gap-20 fullwidth">
                                     <div className="other flex column gap-10 fullwidth">
