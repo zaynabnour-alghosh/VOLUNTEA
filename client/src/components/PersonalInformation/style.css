@@ -50,4 +50,5 @@
     padding-left:245px;
     display: inline-block;
     justify-content: flex-end;
+    color: var(--text_primary);
 }

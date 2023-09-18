@@ -16,6 +16,7 @@
 .base-input-row input[type="file"] {
     background-color: var(--white);
     padding: 0px;
+    color:var(--text_primary);
     display: inline-block;
     justify-content: flex-end;
 }

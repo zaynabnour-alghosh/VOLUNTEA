@@ -1,0 +1,22 @@
+.custom-file-input {
+    position: relative;
+  }  
+  .custom-label {
+    height:42px;
+    padding: 10px 10%;
+    background-color:var(--white);
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    color:var(--text_primary);
+    outline-color:var(--stroke_primary);
+    outline-style: none;
+    border-radius: 5px;
+    width:250px;
+    max-width: 100%;
+    min-width: 0;
+  }
+  
+  .custom-label:hover {
+    background-color: #e0e0e0;
+  }  

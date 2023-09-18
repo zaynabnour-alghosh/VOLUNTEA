@@ -30,13 +30,10 @@ const NewSpace=({onToggle})=>{
         console.log("clicked");
         const adminData = new FormData();
 
-        // Append the form fields and values to the FormData
         adminData.append('name', fullName);
         adminData.append('email', email);
         adminData.append('password', password);
-        // formData.append('confirmPassword', confirmPassword);
         adminData.append('code', organizationCode);
-        // console.log(name,email,password,organizationCode);
         console.log(fullName,email,password,organizationCode);
         setFullName('');
         setEmail('');

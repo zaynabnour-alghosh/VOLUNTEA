@@ -4,8 +4,34 @@ import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button";
 import logoS from "../../assets/logo-secondary.svg";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import FileInput from "../../main/components/common/file";
 const PersonalInformation=()=>{
     const navigate=useNavigate();
+    const [description,setDescription]=useState('');
+    const [avatar,setAvatar]=useState('');
+    const [location,setLocation]=useState('');
+    const [mobile,setMobile]=useState('');
+    const [dob,setDob]=useState('');
+    const [selectedGender, setSelectedGender] = useState("female");
+
+    const handleGenderChange = (e) => {
+        setSelectedGender(e.target.value);
+      };
+
+    const handlePersonalDetails=()=>{
+        console.log("clicked info");
+        const personalData=new FormData();
+        personalData.append('description',description);
+        personalData.append("gender", selectedGender);
+        personalData.append('address',location);
+        personalData.append('mobile',mobile);
+        personalData.append('avatar_url',avatar);
+        personalData.append('dob',dob);
+        console.log(description,location,dob,mobile,avatar,selectedGender);
+
+    }
+
     return(
            <div className="fill-personal-container page flex">
                 <div className="fill-personal flex column gap-30">
@@ -15,23 +41,22 @@ const PersonalInformation=()=>{
                         <div class="personal-form flex pt-10 gap-5">
                             <div className="persoanl-left flex fullwidth p-10 column gap-10">
                                 <Input
-                                    label={"Name"}
-                                    type={"text"}
-                                    placeholder={"Full Name"}
-                                    fill={true}
-                                />
-                                <Input
                                     label={"Description"}
-                                    type={"textarea"}
+                                    type={"text"}
                                     placeholder={"Description"}
                                     fill={true}
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
                                 />
                                 <div className="fullwidth user-file">
                                     <Input
                                         label={"Avatar"}
                                         type={"file"}
                                         fill={true}
+                                        onChange={(e) => setAvatar(e.target.value)}
+
                                     />
+                                    {/* <FileInput /> */}
                                 </div>                                
                                 <div className="other-personal-info flex row gap-20 fullwidth">
                                     <div className="other flex column gap-10 fullwidth">
@@ -40,26 +65,37 @@ const PersonalInformation=()=>{
                                             type={"text"}
                                             placeholder={"Location"}
                                             fill={true}
+                                            value={location}
+                                            onChange={(e) => setLocation(e.target.value)}
                                         />
                                         <Input
                                             label={"Mobile"}
                                             type={"text"}
                                             placeholder={"Mobile"}
                                             fill={true}
+                                            value={mobile}
+                                            onChange={(e) => setMobile(e.target.value)}
                                         />
                                     </div>
                                     <div className="other flex column gap-25 fullwidth">
                                         <div className="user-gender flex column fullwidth ">
                                             <label htmlFor="gender">Gender</label>
-                                            <select name="gender" id="" className="gender select">
-                                                <option value="">Female</option>
-                                                <option value="">Male</option>
+                                            <select 
+                                                name="gender" 
+                                                className="gender select"
+                                                value={selectedGender}
+                                                onChange={handleGenderChange}
+                                            >
+                                                <option value="femal">Female</option>
+                                                <option value="male">Male</option>
                                             </select>
                                         </div>
                                         <Input
                                             label={"Date of Birth"}
                                             type={"date"}
                                             fill={true}
+                                            value={dob}
+                                            onChange={(e) => setDob(e.target.value)}
                                         />
                                     </div>
                                 </div> 
@@ -100,7 +136,7 @@ const PersonalInformation=()=>{
                                         text={"Add"}
                                         isLight={true}
                                         medium={true}
-                                        onClick={()=>navigate('/fill-organization-info')}
+                                        onClick={handlePersonalDetails}
                                 />
                                 </div>
                             </div>                            

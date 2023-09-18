@@ -31,7 +31,7 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
                     placeholder={placeholder}
                     style={fill?  inputStyle:{}}
                     value={inputValue}
-                    onChange={(e) => onChange(e.target.value)}
+                    onChange={handleChange}
                 />
             </>:
             <>
