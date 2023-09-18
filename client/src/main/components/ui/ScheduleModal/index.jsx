@@ -38,7 +38,7 @@ const ScheduleModal=({showScheduleModal , onRequestClose,addSchedule})=>{
     const [toTime, setToTime] = useState("");
     const handleDayChange = (e) => {
         setDay(e.target.value);
-      };
+    };
     const handleConfirm = () => {
         
         const scheduleData=new FormData();

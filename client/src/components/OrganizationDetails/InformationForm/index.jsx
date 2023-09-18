@@ -8,6 +8,7 @@ import { useState } from "react";
 import ImpactModal from "../ImpactModal";
 import MissionModal from "../MissionModal";
 import OrgEventModal from "../EventModal";
+import { sendRequest } from "../../../config/request";
 const InformationForm=()=>{
     const navigate=useNavigate();
     const [isImpactModalOpen, setIsImpactModalOpen] = useState(false);
@@ -33,7 +34,20 @@ const InformationForm=()=>{
     const toggleEventModal=()=>{
         setIsEventModalOpen(!isEventModalOpen);
     }
-    const handleAddImpact=()=>{
+    const handleAddImpact=async(data)=>{
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/organization-impact",
+                body:data,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+            }
+        }catch(error){
+            console.log(error)
+        }
 
     };
     const handleAddMission=()=>{

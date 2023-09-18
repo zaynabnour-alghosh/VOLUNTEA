@@ -3,7 +3,8 @@ import './style.css';
 import ModalComponent from "../../../main/components/common/modal";
 import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
-
+import { Form } from "react-router-dom";
+import { useState } from "react";
 const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
     const customStyles = {
         content: {
@@ -44,6 +45,20 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
     const [topic, setTopic] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
+    const org_id=localStorage.getItem("org_id");
+    console.log(org_id);
+    const handleAddImpact=()=>{
+        const impactData=new FormData();
+        impactData.append('header',topic);
+        impactData.append('description',description);
+        impactData.append('image_url',image);
+        impactData.append('org_id',org_id);
+
+
+
+        addImpact(impactData);
+        onRequestClose();
+    }
 
     return(
         <div >
@@ -58,6 +73,8 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
                                         placeholder={"Impact Topic"}
                                         type={"text"}
                                         fill={true}
+                                        value={topic}
+                                        onChange={(e)=>setTopic(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -68,6 +85,8 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
                                         placeholder={"Description"}
                                         type={"textarea"}
                                         fill={true}
+                                        value={description}
+                                        onChange={(e)=>setDescription(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -77,6 +96,7 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
                                         label={"Image"}
                                         type={"file"}
                                         fill={true}
+                                        onChange={(e)=>setImage(e.target.files[0])}
                                     />
                                 </span>
                             </div>
@@ -85,6 +105,7 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
                                     text={"Add"}
                                     isAction={true}
                                     medium={true}
+                                    onClick={handleAddImpact}
                                 />
                             </div>
                         </div>
