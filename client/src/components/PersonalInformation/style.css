@@ -47,7 +47,7 @@
 }
 .user-file .base-input-row input[type="file"] {
     background-color: var(--white);
-    padding-left:310px;
+    padding-left:245px;
     display: inline-block;
     justify-content: flex-end;
 }
