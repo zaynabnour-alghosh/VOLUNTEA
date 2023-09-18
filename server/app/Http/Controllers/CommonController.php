@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\Profile;
@@ -122,7 +123,7 @@ class CommonController extends Controller
             'gender' => 'required|string|max:255',
             'dob'=>'required|date',
             'description' => 'required|string|max:1500',
-            'avatar_url' => 'required|image',            
+            'avatar_url' => 'required',            
             'address' => 'required|string|max:255',
             'mobile' => 'required|string|min:6',
         ]);
@@ -145,6 +146,7 @@ class CommonController extends Controller
         $old_profile=$profile->avatar_url;
 
         $avatar_url=$request->file('avatar_url');
+        
         if($request->hasFile('avatar_url')){
             $path=$request->file('avatar_url')->store('public/images/profiles/');
             $path=basename($path);
@@ -210,28 +212,28 @@ class CommonController extends Controller
         $schedule->end_time=$request->end_time;       
         $schedule->user_id=$user->id;
         $user->save();
-        $formatted_start_time = '';
-        $formatted_end_time = '';
-        $formatted_date='';
-        if($request->start_time){
-            $start_time = Carbon::createFromFormat('H:i:s', $request->start_time);
-            $formatted_start_time = $start_time->format('h:i:s A');
-        }
-        if($request->end_time){
-            $end_time = Carbon::createFromFormat('H:i:s', $request->end_time);
-            $formatted_end_time = $end_time->format('h:i:s A');
-        }
-        if($request->event_date){
-            $formatted_date = Carbon::parse($request->event_date)->format('F d, Y');
-        }      
+        // $formatted_start_time = '';
+        // $formatted_end_time = '';
+        // $formatted_date='';
+        // if($request->start_time){
+        //     $start_time = Carbon::createFromFormat('H:i:s', $request->start_time);
+        //     $formatted_start_time = $start_time->format('h:i:s A');
+        // }
+        // if($request->end_time){
+        //     $end_time = Carbon::createFromFormat('H:i:s', $request->end_time);
+        //     $formatted_end_time = $end_time->format('h:i:s A');
+        // }
+        // if($request->event_date){
+        //     $formatted_date = Carbon::parse($request->event_date)->format('F d, Y');
+        // }      
         $schedule->save();
         return response()->json([
             'status'=>'success',
             'user'=>$user->name,
             'data'=>$schedule,
-            'start'=>$formatted_start_time,
-            'end'=>$formatted_end_time,
-            'date'=>$formatted_date
+            // 'start'=>$formatted_start_time,
+            // 'end'=>$formatted_end_time,
+            // 'date'=>$formatted_date
         ]);
     }
     public function deleteUser($id){
