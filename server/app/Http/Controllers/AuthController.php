@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\SignupRequest;
+use App\Models\Organization;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\EmailVerification;
 use Illuminate\Mail\Mailable;
@@ -95,10 +96,18 @@ class AuthController extends Controller
             $signup_request->org_code=$request->code;
             $signup_request->status='pending';
             $signup_request->save();
+            $user->state='pending';
+            
+        }
+        if($role==='admin'){
+            $org=New Organization;
+            $org->code=$request->code;
+            $org->admin_id=$user->id;
+            $org->save();
+            $user->org=$org;
         }
         $token = Auth::login($user);
         $user->token = $token;
-
         $emailVerificationNotification = new EmailVerification($verificationToken);
         $user->notify($emailVerificationNotification);
 

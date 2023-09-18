@@ -117,8 +117,8 @@ class CommonController extends Controller
     //update profile info
     public function addOrupdateProfile(Request $request,$action='update'){
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
+            'name' => 'string|max:255',
+            'email' => 'string|max:255',
             'gender' => 'required|string|max:255',
             'dob'=>'required|date',
             'description' => 'required|string|max:1500',
@@ -127,22 +127,22 @@ class CommonController extends Controller
             'mobile' => 'required|string|min:6',
         ]);
         $user=Auth::user();
-        $user->name=$request->name;
-        $user->email=$request->email;
         if($action==='update'){
+            
+            $user->name=$request->name;
+            $user->email=$request->email;
             $profile=Profile::where('user_id',$user->id)->first();           
         }
         else{
             $profile=New Profile;
+            $profile->user_id=$user->id;
         }
-        $user->name=$request->name;
-        $user->email=$request->email;
         $profile->gender=$request->gender;
         $profile->address=$request->address;
         $profile->dob=$request->dob;
         $profile->description=$request->description;
         $profile->mobile=$request->mobile;
-        $old_event=$profile->avatar_url;
+        $old_profile=$profile->avatar_url;
 
         $avatar_url=$request->file('avatar_url');
         if($request->hasFile('avatar_url')){
@@ -153,7 +153,7 @@ class CommonController extends Controller
         if (Storage::exists('public/images/profiles/' . $old_profile)) {
             Storage::delete('public/images/profiles/' . $old_profile);
         }
-        $profile->user_id=$user->id;
+        
         $user->save();
         $profile->save();
         return response()->json([
