@@ -1,9 +1,10 @@
 import React from "react";
 import './style.css';
+import { useState } from "react";
 import Input from "../../common/input";
 import Button from "../../common/button";
 import ModalComponent from "../../common/modal";
-const ScheduleModal=({showScheduleModal , onRequestClose})=>{
+const ScheduleModal=({showScheduleModal , onRequestClose,addSchedule})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -32,36 +33,61 @@ const ScheduleModal=({showScheduleModal , onRequestClose})=>{
             width:'100%'
         }
     };
+    const [day, setDay] = useState("Monday");
+    const [fromTime, setFromTime] = useState("");
+    const [toTime, setToTime] = useState("");
+    const handleDayChange = (e) => {
+        setDay(e.target.value);
+      };
+    const handleConfirm = () => {
+        
+        const scheduleData=new FormData();
+        scheduleData.append('weekday',day);
+        scheduleData.append('start_time',fromTime);
+        scheduleData.append("end_time", toTime);
+
+        addSchedule(scheduleData);
+        onRequestClose();
+
+        };
     return(
         <div>
             <ModalComponent customStyles={customStyles} showModal={showScheduleModal} onRequestClose={onRequestClose} >
                 <div className="schedule-modal-container p-30 fullwidth flex column  gap-10 center">
                     <div className="schedule-title flex fullwidth flex column gap-10 center p-10">EDIT SCHEDULE</div>
                         <div className="flex column gap-15">
-                            <select name="week" id="" className="pt-10 fullwidth weekdays-list select">
-                                    <option value="">Moday</option>
-                                    <option value="">Tuesday</option>
-                                    <option value="">Wednesday</option>
-                                    <option value="">Thursday</option>
-                                    <option value="">Friday</option>
-                                    <option value="">Saturday</option>
-                                    <option value="">Sunday</option>
+                            <select name="week"  
+                                    className="pt-10 fullwidth weekdays-list select"
+                                    value={day}
+                                    onChange={handleDayChange}                            
+                            >
+                                    <option value="Monday">Moday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                    <option value="Sunday">Sunday</option>
                             </select>
                             
                             <Input
                                 placeholder={"from"}
                                 type={"time"}
+                                value={fromTime}
+                                onChange={(e) => setFromTime(e.target.value)}
                             />
                             <Input
                                 placeholder={"To"}
                                 type={"time"}
+                                value={toTime}
+                                onChange={(e) => setToTime(e.target.value)}
                             />
                         </div>
                         <Button
                             text={"CONFIRM"}
                             isPrimary={true} 
                             medium={true}
-                            onClick={()=>{onRequestClose();}}
+                            onClick={handleConfirm}
                         />
                 </div>
             </ModalComponent>

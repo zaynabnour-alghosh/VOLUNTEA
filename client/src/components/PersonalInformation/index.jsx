@@ -5,7 +5,9 @@ import Button from "../../main/components/common/button";
 import logoS from "../../assets/logo-secondary.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { sendRequest } from "../../config/request";
 import FileInput from "../../main/components/common/file";
+import ScheduleModal from "../../main/components/ui/ScheduleModal";
 const PersonalInformation=()=>{
     const navigate=useNavigate();
     const [description,setDescription]=useState('');
@@ -14,11 +16,41 @@ const PersonalInformation=()=>{
     const [mobile,setMobile]=useState('');
     const [dob,setDob]=useState('');
     const [selectedGender, setSelectedGender] = useState("female");
-
+    const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
+    const [schedule, setSchedule] = useState([]);
     const handleGenderChange = (e) => {
         setSelectedGender(e.target.value);
-      };
+    };
+    const showScheduleModal = () => {
+    setIsScheduleModalOpen(true);
+    };
+    const toggleScheduleModal=()=>{
+    setIsScheduleModalOpen(!isScheduleModalOpen);
+}
+    const addSchedule=(data)=>{
+        const newScheduleEntry = {
+            day: data.get('weekday'),
+            from: data.get('start_time'),
+            to: data.get('end_time'),
+          };
+        
+          setSchedule([...schedule, newScheduleEntry]);
 
+        // try{
+        //     const response=await sendRequest({
+        //         method:"POST",
+        //         route:"/schedule/add",
+        //         body:data,
+        //         includeHeaders:true
+        //     });
+        //     if(response){
+        //         console.log(response);
+        //     }
+        // }catch(error){
+        //     console.log(error)
+        // }
+
+    }
     const handlePersonalDetails=()=>{
         console.log("clicked info");
         const personalData=new FormData();
@@ -106,30 +138,20 @@ const PersonalInformation=()=>{
                                         text={"Schedule"}
                                         isAction={true}
                                         isWide={true}
+                                        onClick={showScheduleModal}
+
                                     />
                                 </div>
                                 <div className="personal-schedule flex column gap-20">
-                                    <div className="weekday-info flex fullwidth gap-10">
+                                    {schedule.map((entry, index) => (
+                                        <div className="weekday-info flex fullwidth gap-10" key={index}>
                                         <div className="grid week-grid-container">
-                                            <div className="week-grid-item">Mon</div>
-                                            <div className="week-grid-item">From: 10:00 </div>
-                                            <div className="week-grid-item">To: 10:00 </div>
+                                            <div className="week-grid-item">{entry.day}</div>
+                                            <div className="week-grid-item">From: {entry.from}</div>
+                                            <div className="week-grid-item">To: {entry.to}</div>
                                         </div>
-                                    </div>
-                                    <div className="weekday-info flex fullwidth gap-10">
-                                        <div className="grid week-grid-container">
-                                            <div className="week-grid-item">Mon</div>
-                                            <div className="week-grid-item">From: 10:00 </div>
-                                            <div className="week-grid-item">To: 10:00 </div>
                                         </div>
-                                    </div>
-                                    <div className="weekday-info flex fullwidth gap-10">
-                                        <div className="grid week-grid-container">
-                                            <div className="week-grid-item">Mon</div>
-                                            <div className="week-grid-item">From: 10:00 </div>
-                                            <div className="week-grid-item">To: 10:00 </div>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                                 <div className="add-info-btn flex fullwidth  pt-20 center">
                                     <Button
@@ -143,6 +165,11 @@ const PersonalInformation=()=>{
                         </div>                                      
                     </div>
                 </div>
+                {isScheduleModalOpen && <ScheduleModal 
+                                            addSchedule={addSchedule} 
+                                            showScheduleModal={isScheduleModalOpen}
+                                            onRequestClose={toggleScheduleModal}
+                                            />}
             </div> 
     );
 }
