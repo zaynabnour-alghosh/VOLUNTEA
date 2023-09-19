@@ -62,7 +62,18 @@ class AuthController extends Controller
         $user = Auth::user();
         $user->token = $token; 
         if($user->role_id=='1'){            
-            $user->org=$user->organizations;
+            $orgs=Organization::all()
+            ->where('admin_id',$user->id);
+            $orgDetails = [];
+            foreach ($orgs as $org) {
+                $organizationProfile = OrganizationProfile::where('org_id', $org->id)->first();
+                $orgDetails[] = [
+                    'org_id' => $org->id,
+                    'org_name' => $organizationProfile->name,
+                    'code'=>$org->code
+                ];                
+            }    
+            $user->organizations=$orgDetails;
         }
         elseif($user->role_id=='2'){
             // $user->role_id='2';
