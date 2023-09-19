@@ -2,7 +2,8 @@ import React from "react";
 import './style.css';
 import ModalComponent from "../../main/components/common/modal";
 import RowCard from "../../main/components/common/rowcard";
-const SpaceModal=({onRequestClose,showSpaceModal,organizations})=>{
+import { useNavigate } from "react-router-dom";
+const SpaceModal=({onRequestClose,showSpaceModal,organizations,role})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -39,15 +40,27 @@ const SpaceModal=({onRequestClose,showSpaceModal,organizations})=>{
         }
     
     };
-    // console.log("hi",organizations);
+    const navigate=useNavigate();
+    const handleCardClick = (role, org_id) => {
+        console.log("card");
+        console.log(role);
+        if (role ==1) {
+            navigate(`/voluntea/${org_id}/admin/dashboard`);
+        }else if (role== 2) {
+            navigate(`/voluntea/${org_id}/volunteer/dashboard`);
+        }
+    };
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showSpaceModal} onRequestClose={onRequestClose} >
                 <div className="org-space-container  flex column center">
                     <div className="fullwidth flex column">
                     {organizations.map(org => (
-                            <span className="pt-10" key={org.org_id}>
-                                <RowCard title={org.org_name} desc={org.code} />
+                            <span 
+                                className="pt-10" 
+                                key={org.org_id}                                
+                                onClick={() => handleCardClick(role, org.org_id)}>
+                                <RowCard title={org.org_name} desc={org.code}/>
                             </span>
                         ))}
                     </div>

@@ -43,10 +43,14 @@ const Login=()=>{
 					"token",
 					response.data.token
 				);
+                localStorage.setItem(
+					"role",
+					response.data.role_id
+				);
                 showSpaceModal();
                 // localStorage.setItem("org_id",response.user.org.id)
                 // setTimeout(() => {navigate(`/personal-info`)},1000);
-            }
+            };
         }catch(error){
             console.log(error)
         }
@@ -105,7 +109,11 @@ const Login=()=>{
                     </div>
                 </div>
                 {isSpaceModalOpen && 
-                <SpaceModal showSpaceModal={isSpaceModalOpen} onRequestClose={toggleSpaceModal} organizations={organizations}/>
+                <SpaceModal 
+                    showSpaceModal={isSpaceModalOpen} 
+                    onRequestClose={toggleSpaceModal} 
+                    organizations={organizations}
+                    role={localStorage.getItem("role")}/>
                 }   
             </div>
             

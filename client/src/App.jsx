@@ -8,6 +8,7 @@ import Admin from './Pages/Admin';
 import InformationForm from './components/OrganizationDetails/InformationForm';
 import Volunteer from './Pages/Volunteer';
 import PersonalInformation from './components/PersonalInformation';
+import Dashboard from './Pages/Dashboard';
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
 
         <Route path='/login' element={<Login/>} />
         <Route path='/voluntea/orgname' element={<OrganizationLanding/>} />
-        <Route path='/voluntea/orgname/admin' element={<Admin/>} />
-        <Route path='/voluntea/orgname/volunteer' element={<Volunteer/>} />
+        <Route path='/voluntea/:org_id/admin/dashboard' element={<Dashboard role="admin"/>} />
+        <Route path='/voluntea/:org_id/volunteer/dashboard' element={<Dashboard role="volunteer"/>} />
 
 
 
