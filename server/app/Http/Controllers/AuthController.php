@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\SignupRequest;
+use App\Models\OrganizationProfile;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\EmailVerification;
@@ -59,7 +60,31 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $user->token = $token;        
+        $user->token = $token; 
+        if($user->role_id=='1'){            
+            $user->org=$user->organizations;
+        }
+        elseif($user->role_id=='2'){
+            // $user->role_id='2';
+            $orgDetails = [];
+            $orgs=SignupRequest::all()
+                ->where('user_id',$user->id)
+                ->where('status','accepted');
+            foreach ($orgs as $org) {
+                $organization=$org->organization;
+                $organizationProfile = OrganizationProfile::where('org_id', $organization->id)->first();
+            
+                
+                $orgDetails[] = [
+                    'org_id' => $organization->id,
+                    'org_name' => $organizationProfile->name,
+                    'code'=>$org->org_code
+                ];                
+            }    
+            
+            $user->organizations=$orgDetails;
+
+        }       
         return response()->json([
                 'status' => 'Success',
                 'data' => $user
