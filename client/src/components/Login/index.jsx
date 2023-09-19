@@ -7,21 +7,13 @@ import {BsFillLockFill} from "react-icons/bs";
 import { Link } from "react-router-dom";
 import './style.css';
 import ForgetPassword from "../ForgetPassword";
+import Input from "../../main/components/common/input/index.jsx";
+import Button from "../../main/components/common/button/index.jsx";
 const Login=()=>{
     const [login,setLogin]=useState(true);
-    const [passwordType, setPasswordType] = useState("password");
-    const [passwordInput, setPasswordInput] = useState("");
-    const handlePasswordChange =(e)=>{
-        setPasswordInput(e.target.value);
-    }
-    const togglePassword =()=>{
-      if(passwordType==="password")
-      {
-       setPasswordType("text")
-       return;
-      }
-      setPasswordType("password")
-    }
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
     return(
         <>
             {login?
@@ -36,25 +28,32 @@ const Login=()=>{
                         <div>Voluntea App</div>
                     </div>
                     <div className="content-form flex column">
-                        <div className="login-row flex">
-                            <span><MdEmail /></span>
-                            <input type="email" placeholder="Email" />
+                        <div className="login-row fullwidth flex">
+                            <Input 
+                                type={"email"} 
+                                placeholder={"Email"}
+                                icon={icons['email']}
+                                noBorder={true}
+                                fill={true}
+                            />
                         </div>
                         <div className="login-row pwd flex">
                             <div>
-                                <span><BsFillLockFill/></span>
-                                <input 
-                                    type={passwordType} 
-                                    placeholder="Password" 
-                                    onChange={handlePasswordChange}    
-                                />
+                            <Input 
+                                type={"password"} 
+                                placeholder={"Password"}
+                                icon={icons['lock']}
+                                noBorder={true}
+                                
+                            />
                             </div>
-                            <span onClick={togglePassword}>
-                                {passwordType==="password"? <AiFillEyeInvisible/>:<AiFillEye/>}
-                            </span>
                         </div>
                         <div className="btn-login">
-                            <button>Continue</button>
+                            <Button 
+                                text={"Continue"}
+                                isLight={true}
+                                fill={true}
+                            />
                         </div>
                     </div>
                     <div className="content-bottom flex column center">

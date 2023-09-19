@@ -3,7 +3,7 @@ import './style.css';
 import {icons} from '../../../../icons.js';
 import { useState,useEffect } from "react";
 
-const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memberSearch,readOnly,onChange,value })=>{
+const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memberSearch,noContainer,readOnly,onChange,value })=>{
     const [showPassword, setShowPassword] = useState(false);
     const [inputValue, setInputValue] = useState(value);
     const togglePasswordVisibility = () => {
@@ -53,7 +53,7 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
                         />
                     ) : (
                    <>
-                    <div className={`${type==='password'?'join-input':''} flex fullwidth`}>
+                    <div className={`${type==='password'?<>{noContainer?'no-container':'join-input'} </>:''} flex fullwidth centered`}>
                         {readOnly? 
                             <input
                                 type={showPassword ? 'text' : type}
@@ -75,7 +75,7 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
                             <span
                                 className={`assword-toggle-icon}`}
                                 onClick={togglePasswordVisibility}
-                                style={{ color: 'gray',fontSize: '20px'}}
+                                style={{ color: 'rgb(194, 200, 208)',fontSize: '20px'}}
                             >
                                 {showPassword ? icons['invisible'] : icons['visible']}
                             </span>

@@ -115,6 +115,7 @@ const NewSpace=({onToggle})=>{
                                 value={organizationCode}
                                 readOnly={true}
                                 onChange={(e) => setOrganizationCode(e.target.value)}
+                                container={true}
 
                             />   
                         </div>

@@ -1,25 +1,11 @@
 import React from "react";
 import './style.css';
 import logo from '../../images/logo-mini.png';
-import {AiFillEye,AiFillEyeInvisible} from 'react-icons/ai';
-import {MdEmail} from 'react-icons/md';
-import {BsFillLockFill} from "react-icons/bs";
-import {FaKey} from 'react-icons/fa';
 import { useState } from "react";
+import Input from "../../main/components/common/input";
+import Button from "../../main/components/common/button";
+import { icons } from "../../icons";
 const ForgetPassword=({onToggle})=>{
-    const [passwordType, setPasswordType] = useState("password");
-    const [passwordInput, setPasswordInput] = useState("");
-    const handlePasswordChange =(e)=>{
-        setPasswordInput(e.target.value);
-    }
-    const togglePassword =()=>{
-      if(passwordType==="password")
-      {
-       setPasswordType("text")
-       return;
-      }
-      setPasswordType("password")
-    }
 
     return(
         <div className="page flex center">
@@ -33,39 +19,39 @@ const ForgetPassword=({onToggle})=>{
                             <div>Enter a valid email and reset your password</div>
                         </div>
                         <div className="content-form flex column">
-                            <div className="forget-row flex">
-                                <span><MdEmail /></span>
-                                <input type="email" placeholder="Email" />
+                            <div className="forget-row fullwidth flex">
+                            <Input 
+                                type={"email"} 
+                                placeholder={"Email"}
+                                icon={icons['email']}
+                                noBorder={true}
+                                fill={true}
+                            />
+                            </div>
+                            <div className="forget-row fullwidth pwd flex">
+                                <Input 
+                                    type={"text"} 
+                                    placeholder={"Token"}
+                                    icon={icons['key']}
+                                    noBorder={true}
+                                    fill={true}
+                                />
                             </div>
                             <div className="forget-row pwd flex">
-                                <div>
-                                    <span><BsFillLockFill/></span>
-                                    <input 
-                                        type={passwordType}
-                                        placeholder="New Password"
-                                        onChange={handlePasswordChange}    
-
-                                    />
-                                </div>
-                                <span onClick={togglePassword}>
-                                    {passwordType==="password"? <AiFillEyeInvisible/>:<AiFillEye/>}
-                                </span>
-                            </div>
-                            <div className="forget-row pwd flex">
-                                <div>
-                                    <span><FaKey/></span>
-                                    <input 
-                                        type={passwordType} 
-                                        placeholder="Confirm Password" 
-                                        onChange={handlePasswordChange}    
-                                    />
-                                </div>
-                                <span onClick={togglePassword}>
-                                    {passwordType==="password"? <AiFillEyeInvisible/>:<AiFillEye/>}
-                                </span>
+                                <Input 
+                                    type={"password"} 
+                                    placeholder={"Password"}
+                                    icon={icons['lock']}
+                                    noBorder={true}
+                                    // no_container={true}
+                                />
                             </div>
                             <div className="btn-forget">
-                                <button>Continue</button>
+                            <Button 
+                                text={"Confirm"}
+                                isLight={true}
+                                fill={true}
+                            />
                             </div>
                         </div>
                         <div className="content-bottom flex column center">

@@ -5,6 +5,7 @@
     margin-bottom: 20px;
     display: flex; 
     max-width: 100%;
+    width: 100%;
     /* max-width: 350px;  */
     /* margin: 0 auto; */
 }
@@ -61,7 +62,24 @@
     outline-color:var(--stroke_primary);
     outline-style: none;
     border-radius: 5px;
+    align-items: center;
 }
+.no-container{
+    border-style: none;
+    outline-style: none;
+    align-items: center;
+}
+.no-container input{
+    border-style: none;
+}
+.no-container .base-input-row input:focus{
+    background-color: transparent;
+    border: 0px solid;
+}
+.centered{
+    align-items: center;
+}
+
 textarea{
     width: 100%;
 }
@@ -101,6 +119,7 @@ textarea{
     display: flex;
     align-items: center;
     gap:5px;
+    max-width: 100%;
 }
 
 .base-input-row input[type="file"]::-webkit-file-upload-button {
@@ -113,8 +132,13 @@ textarea{
     justify-content:flex-end;
     position: relative;
     left:150px;
+    
 }
 .no-border input{
     border-style: none;
     width: 100%;
+}
+.no-border input :focus{
+    border-style: none;
+    outline: transparent;
 }

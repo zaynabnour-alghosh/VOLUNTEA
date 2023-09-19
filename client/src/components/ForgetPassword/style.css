@@ -3,7 +3,6 @@
 }
 .forget-container{
     width: 100%;
-    padding:20px;
     max-width: 350px;
     gap:30px;
 }
@@ -25,7 +24,7 @@
 .content-form{
     gap:15px;
 }
-.content-form input{
+/* .content-form input{
     height:32px;
     padding:10px;
     background-color:transparent;
@@ -38,7 +37,7 @@
     outline-style: none;
     border-radius: 5px;
     margin-bottom: 5px;
-}
+} */
 .content-form span{
     color:rgb(194, 200, 208);
     
