@@ -12,7 +12,7 @@ import Profile from "../../ui/Profile";
 import OpportunityDetails from "../../ui/OpportunityDetails";
 import MemberProfile from "../../ui/MemberProfile";
 
-const AdminDashboard=()=>{
+const AdminDashboard=({orgId})=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
         { icon: 'task', name: 'Opportunities' , size: 32},
@@ -82,7 +82,7 @@ const AdminDashboard=()=>{
                                     {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
-                                    {selectedTab === 'Dashboard' &&<Info />}
+                                    {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
                                     {selectedTab === 'Opportunities' && <Project toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}

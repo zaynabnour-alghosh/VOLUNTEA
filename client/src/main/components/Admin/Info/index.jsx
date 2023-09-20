@@ -5,8 +5,46 @@ import Card from '../../common/card';
 import RowCard from "../../common/rowcard";
 import Button from "../../common/button";
 import orgLogo from '../../../../images/org-logo.png';
+import { useEffect ,useState} from "react";
+import { sendRequest } from "../../../../config/request";
+const Info=(orgId)=>{
+    const [orgInfo, setOrgInfo] = useState(null);
+    const [impacts, setImpacts] = useState([]);
+    const [missions, setMissions] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    useEffect(() => {
+        const getOrg = async () => {
+			try {
+				const response = await sendRequest({
+                method:"GET",
+                route: `organization-info/1`,
+                body:" ",
+                })
+                
+			if (response) {
+                console.log(response.data);
+                setOrgInfo(response.data);
 
-const Info=()=>{
+                console.log(response.impacts);
+                setImpacts(response.impacts);
+
+                console.log(response.missions);
+                setMissions(response.missions);
+
+                console.log(response.events);
+                setEvents(response.events);
+			}
+			} catch (error) {
+				console.log(error);
+			}
+		} 
+        getOrg();
+    }, []);
+
+//   const handleEditClick = () => {
+//     setIsEditing(true);
+//   };
     return(
         <div className="edit-org-info flex wrap">
             <div className="admin-org-info-container flex column">
@@ -46,24 +84,15 @@ const Info=()=>{
                     <div><h3>Impacts</h3></div>
                     <hr/>
                     <div className="flex center pt- gap-40">
-                        <Card 
+                    {impacts.map((impact, index) => (
+                        <Card
+                            key={index}
                             image={true}
-                            title={"Impact on Climate Change"}
-                            src={"https://www.pblworks.org/sites/default/files/inline-images/blog_planet-b.png"}
-                            desc={'By restoring critical ecosystems, we have significantly contributed to mitigating climate change and preserving biodiversity.'}
+                            title={impact.header}
+                            src={`http://localhost:8000/storage/images/impacts/${impact.image_url}`}
+                            desc={impact.description}
                         />
-                        <Card 
-                            image={true}
-                            title={"Impact on Climate Change"}
-                            src={"https://www.pblworks.org/sites/default/files/inline-images/blog_planet-b.png"}
-                            desc={'By restoring critical ecosystems, we have significantly contributed to mitigating climate change and preserving biodiversity.'}
-                        />
-                        <Card 
-                            image={true}
-                            title={"Impact on Climate Change"}
-                            src={"https://www.pblworks.org/sites/default/files/inline-images/blog_planet-b.png"}
-                            desc={'By restoring critical ecosystems, we have significantly contributed to mitigating climate change and preserving biodiversity.'}
-                        />                 
+                    ))}             
                     </div>
                 </div>
                 <div className="org-mission pt-10 fullwidth">
