@@ -120,6 +120,8 @@ class CommonController extends Controller
         foreach($opps as $opp){
             $opp_tasks=$opp->tasks()->pluck('description');
             $opp->tasks=$opp_tasks;
+            $coordinator=User::find($opp->coordinator_id);
+            $opp->coordinator=$coordinator->name;           
             $all[]=$opp;
        }
         return response()->json([
