@@ -6,6 +6,8 @@ import RowCard from "../../common/rowcard";
 import Button from "../../common/button";
 import { useEffect ,useState} from "react";
 import ImpactModal from "../../../../components/OrganizationDetails/ImpactModal";
+import MissionModal from "../../../../components/OrganizationDetails/MissionModal";
+import EventModal from "../../ui/EventModal";
 import { sendRequest } from "../../../../config/request";
 const Info=(orgId)=>{
     const [orgInfo, setOrgInfo] = useState(null);
@@ -58,40 +60,59 @@ const Info=(orgId)=>{
 		} 
         getOrg();
     }, []);
-const handleEditImpact = (impact) =>()=> {
-    setSelectedImpactToEdit(prevImpact => impact);
-    toggleImpactModal();
-};
-const handleEditMission = (mission) =>()=> {
-    setSelectedImpactToEdit(prevImpact => impact);
-    toggleImpactModal();
-};
-const handleEditEvent = (event) =>()=> {
-    setSelectedImpactToEdit(prevImpact => impact);
-    toggleImpactModal();
-};
+    const handleEditImpact = (impact) =>()=> {
+        setSelectedImpactToEdit(prevImpact => impact);
+        toggleImpactModal();
+    };
+    const handleEditMission = (mission) =>()=> {
+        setSelectedMissionToEdit(prevMission => mission);
+        toggleMissionModal();
+    };
+    const handleEditEvent = (event) =>()=> {
+        setSelectedEventToEdit(prevEvent => event);
+        toggleEventModal();
+    };
 
-const handleUpdateImpact=async(impact)=>{
-    try{
-        const response=await sendRequest({
-            method:"POST",
-            route:"/admin/edit-impact",
-            body:impact,
-            includeHeaders:true
-        });
-        if(response){
-            console.log(response);
-            setImpacts(
-                prevImpacts => prevImpacts.map
-                (impact => impact.id === response.data.id ? 
-                    response.data : impact));
+    const handleUpdateImpact=async(impact)=>{
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/edit-impact",
+                body:impact,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setImpacts(
+                    prevImpacts => prevImpacts.map
+                    (impact => impact.id === response.data.id ? 
+                        response.data : impact));
 
+            }
+        }catch(error){
+            console.log(error)
         }
-    }catch(error){
-        console.log(error)
-    }
+    };
 
-};
+    const handleUpdateMission=async(mission)=>{
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/edit-mission",
+                body:mission,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setMissions(
+                    prevMissions => prevMissions.map
+                    (mission => mission.id === response.data.id ? 
+                        response.data : mission));
+            }
+        }catch(error){
+            console.log(error)
+        }
+    };
     return(
         <div className="edit-org-info flex wrap">
             <div className="admin-org-info-container flex column">
