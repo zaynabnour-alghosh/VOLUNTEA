@@ -27,7 +27,11 @@ const AdminDashboard=({orgId})=>{
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
     const [showOpportunityDetails, setShowOpportunityDetails] = useState(false);    
-    const [showMemberProfile, setShowMemeberProfile] = useState(false);    
+    const [showMemberProfile, setShowMemeberProfile] = useState(false);  
+    const [selectedOpportunity, setSelectedOpportunity] = useState(null); 
+    const handleOpportunitySelect = (opportunity) => {
+        setSelectedOpportunity(opportunity);
+      };
     
     useEffect(() => {
         setShowNotificationModal(false);
@@ -83,7 +87,7 @@ const AdminDashboard=({orgId})=>{
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
-                                    {selectedTab === 'Opportunities' && <Project orgId={orgId} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
+                                    {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity}  toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
@@ -92,7 +96,7 @@ const AdminDashboard=({orgId})=>{
                                 </div>
                             </>      
                         }
-                        {showOpportunityDetails && <OpportunityDetails />}
+                        {showOpportunityDetails && <OpportunityDetails opportunity={selectedOpportunity}/>}
                         {showMemberProfile && <MemberProfile remove={true}/>}
                     </div>
                 </div>

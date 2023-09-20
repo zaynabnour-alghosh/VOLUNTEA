@@ -4,6 +4,7 @@ import Admin from "../Admin";
 import Volunteer from "../Volunteer";
 const Dashboard=({ role })=>{
     const { org_id: orgId } = useParams();
+    localStorage.setItem("orgId",orgId);
     return(
         <div>
             {role =='admin' && (

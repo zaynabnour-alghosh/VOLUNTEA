@@ -3,8 +3,9 @@ import './style.css';
 import OpportunityCard from "../OpportunityCard";
 import OpportunityApplications from "../OpportunityApplications";
 import OpportunityFeedback from "../OpportunityFeedback";
-const OpportunityDetails=()=>{
+const OpportunityDetails=({opportunity})=>{
     const [selectedTab, setSelectedTab] = useState('applications');
+    
 
     const handleTabClick = (tab) => {
     setSelectedTab(tab);
@@ -13,7 +14,7 @@ const OpportunityDetails=()=>{
     return (
         <div class="opp-details-container flex column">
             <div className="opp-card-info flex column center gap-20">
-                <OpportunityCard buttons={false} />
+                <OpportunityCard buttons={false} opportunity={opportunity}/>
                 <div className="opp-details-main flex column fullwidth gap-20">
                     <div className="opp-details-action-tabs flex row fullwidth">
                         <div className={`opp-tab flex center ${selectedTab === 'applications' ? 'selected-tab' : 'unselected-tab'}`} onClick={() => handleTabClick('applications')}>

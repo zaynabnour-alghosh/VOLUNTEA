@@ -1,10 +1,13 @@
 import React from "react";
 import './style.css';
 import { useState } from "react";
+import { useParams } from 'react-router-dom';
+
 import Button from './../../common/button';
 import ModalComponent from "../../common/modal";
 import Input from "../../common/input";
-const OpportunityModal=({showOppModal , onRequestClose,edit,orgId,opp,addOpportunity})=>{
+import { sendRequest } from "../../../../config/request";
+const OpportunityModal=({showOppModal , onRequestClose,edit,opp,addOpportunityToProject})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -41,15 +44,17 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,orgId,opp,addOpportu
         }
     
     };
+    const { org_id: orgId } = useParams();
+    console.log(orgId);
     const [topic, setTopic] = useState(opp ? opp.topic : "");
     const [description, setDescription] = useState(opp ? opp.description : "");
-    const [date, setDate] = useState(opp ? opp.opportunity_date : "");
+    const [date, setDate] = useState("");
+
     const [location, setLocation] = useState(opp ? opp.location : "");
     const [nbVolunteers, setNbVolunteers] = useState(opp ? opp.location : "");
     const [tasks, setTasks] = useState(opp ? opp.tasks : []);
     const [task, setTask] = useState('');
-    // const org_id=localStorage.getItem("org_id");
-
+    
     const handleTaskChange = () => {        
         const newTask =task
         if (newTask) {
@@ -59,22 +64,36 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,orgId,opp,addOpportu
       };
 
 
-    const handleAddOpp=()=>{
+    const add=async()=>{
         const oppData=new FormData();
         oppData.append('topic',topic);
         oppData.append('description',description);
         oppData.append('opportunity_date',date);
         oppData.append('location',location);
-        oppData.append('nb_volunteers',nbVolunteers);
+        oppData.append('nb_volunteers',parseInt(nbVolunteers));
         oppData.append('org_id',orgId);
-        oppData.append('nb_volunteers',date);
         tasks.forEach((task,index) => {
             oppData.append(`tasks[${index}]`,task);
         });
-
-        console.log(tasks);
-        // addOpportunity(oppData);
-        // onRequestClose();
+        console.log(date);
+        try {
+            const response = await sendRequest({
+              method: 'POST',
+              route: 'admin/opportunity',
+              body: oppData
+            });
+      
+            if (response) {
+                console.log(response)
+                 onRequestClose();
+            //   const updatedOpportunities = [...opportunities, response.data];
+            //   setOpportunities(updatedOpportunities);
+            addOpportunityToProject(response.data);
+            }
+          } catch (error) {
+            console.log('Error adding opportunity:', error);
+          } 
+       
     }
 
     
@@ -89,7 +108,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,orgId,opp,addOpportu
                             text={edit? 'EDIT':'ADD'}
                             isSecondary={true}
                             medium={true}
-                            onClick={handleAddOpp}
+                            onClick={add}
                         />
                     </div>
                     <div className="new-opp-form-container">
@@ -108,7 +127,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,orgId,opp,addOpportu
                             </div>
                             <div className="opp-card-coord flex column new-opp-grid-item">
                                 <span className="pt-10">
-                                    <Input
+                                <Input
                                         label={"Date"}
                                         type={"date"}
                                         fill={true}
@@ -151,9 +170,6 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,orgId,opp,addOpportu
                                 {tasks.map((task, index) => (
                                 <div key={index}>{task}</div>
                                 ))}
-                                    {/* <div>Lorem ipsum dolor sit</div>
-                                    <div>Lorem ipsum dolor sit</div>
-                                    <div>Lorem ipsum dolor sit</div> */}
                                 </div>
                             </div>
                             <div className="opp-card-location flex column new-opp-grid-item">

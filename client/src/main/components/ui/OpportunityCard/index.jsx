@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './style.css';
 import { useState } from 'react';
 import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
 import FeedbackModal from "../FeedbackModal";
 
-const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied ,opportunity})=>{
+const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied ,opportunity,setSelectedOpportunity})=>{
     const {
         topic,
         description,
@@ -18,6 +18,8 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
     } = opportunity;
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
+     
+
     
     const showOppModal = () => {
         setIsOppModalOpen(true);
@@ -32,7 +34,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
     const toggleFeedModal=()=>{
         setIsFeedModalOpen(!isFeedModalOpen);
     }
-
+    
 
 
     return(
@@ -46,7 +48,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
                         <Button
                             text={"VIEW"}
                             isPrimary={true}
-                            onClick={toggleOpportunityDetails}
+                            onClick={() => {toggleOpportunityDetails(); setSelectedOpportunity(opportunity)}}
                             medium={true}
                         />
                         <Button
