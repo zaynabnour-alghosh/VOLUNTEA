@@ -113,6 +113,24 @@ class CommonController extends Controller
             'data'=>$opp
         ]);
     }
+
+    public function getAllOpportunities($id){
+        $opps= Opportunity::all()->where('org_id',$id);
+        $all=[];
+        foreach($opps as $opp){
+            $opp_tasks=$opp->tasks()->pluck('description');
+            $opp->tasks=$opp_tasks;
+            $all[]=$opp;
+       }
+        return response()->json([
+            'status'=>'success',
+            'data'=>$all
+        ]);
+    }
+
+
+
+
     //todo
     //fill profile info
     //update profile info
