@@ -11,6 +11,15 @@ import OrgEventModal from "../../../../components/OrganizationDetails/EventModal
 import { sendRequest } from "../../../../config/request";
 const Info=(orgId)=>{
     const [orgInfo, setOrgInfo] = useState(null);
+    const [name, setName] = useState(orgInfo ? orgInfo.name: "");
+    const [description, setDescription] = useState(orgInfo ? orgInfo.description : "");
+    const [logo, setLogo] = useState(orgInfo ? orgInfo.logo: "");
+    const [location, setLocation] = useState(orgInfo ? orgInfo.location: "");
+    const [phone, setPhone] = useState(orgInfo ? orgInfo.phone: "");
+    const [email, setEmail] = useState(orgInfo ? orgInfo.email: "");
+    const [face_link, setFace] = useState(orgInfo ? orgInfo.face_link: "");
+    const [whats_link, setWhats] = useState(orgInfo ? orgInfo.whats_link: "");
+    const [insta_link, setInsta] = useState(orgInfo ? orgInfo.insta_link: "");
 
     const [impacts, setImpacts] = useState([]);
     const [missions, setMissions] = useState([]);
@@ -372,6 +381,8 @@ const Info=(orgId)=>{
                     event={selectedEventToEdit}
                 />
             }
+
+
         </div>
     );
 }
