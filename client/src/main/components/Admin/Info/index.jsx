@@ -4,14 +4,22 @@ import Input from "../../common/input";
 import Card from '../../common/card';
 import RowCard from "../../common/rowcard";
 import Button from "../../common/button";
-import orgLogo from '../../../../images/org-logo.png';
 import { useEffect ,useState} from "react";
+import ImpactModal from "../../../../components/OrganizationDetails/ImpactModal";
 import { sendRequest } from "../../../../config/request";
 const Info=(orgId)=>{
     const [orgInfo, setOrgInfo] = useState(null);
     const [impacts, setImpacts] = useState([]);
     const [missions, setMissions] = useState([]);
     const [events, setEvents] = useState([]);
+    const [selectedImpactToEdit, setSelectedImpactToEdit] = useState(null);
+    const showImpcatModal = () => {
+        setIsImpactModalOpen(true);
+      };
+    const toggleImpactModal=()=>{
+        setIsImpactModalOpen(!isImpactModalOpen);
+    }
+
     const [isEditing, setIsEditing] = useState(false);
     useEffect(() => {
         const getOrg = async () => {
@@ -46,6 +54,14 @@ const Info=(orgId)=>{
 //   const handleEditClick = () => {
 //     setIsEditing(true);
 //   };
+const handleEditImpact = (impact) => {
+    setSelectedImpactToEdit(impact);
+    toggleImpactModal();
+};
+
+const handleUpdateImpact=()=>{
+
+}
     return(
         <div className="edit-org-info flex wrap">
             <div className="admin-org-info-container flex column">
@@ -88,13 +104,17 @@ const Info=(orgId)=>{
                     <hr/>
                     <div className="flex center pt- gap-40">
                     {impacts.map((impact, index) => (
-                        <Card
-                            key={index}
-                            image={true}
-                            title={impact.header}
-                            src={`http://localhost:8000/storage/images/impacts/${impact.image_url}`}
-                            desc={impact.description}
-                        />
+                        <div key={index}>
+                            <Card
+                                id={impact.id}
+                                key={index}
+                                image={true}
+                                title={impact.header}
+                                src={`http://localhost:8000/storage/images/impacts/${impact.image_url}`}
+                                desc={impact.description}
+                                onClick={handleEditImpact(impact)}
+                            />
+                        </div>
                     ))}             
                     </div>
                 </div>
@@ -104,6 +124,7 @@ const Info=(orgId)=>{
                     <div className="grid center pt-10 grid-container">
                     {missions.map((mission, index) => (
                         <RowCard
+                            id={mission.id}
                             key={index}
                             className="grid-item"
                             title={mission.title}
@@ -119,6 +140,7 @@ const Info=(orgId)=>{
                     <div className="flex center pt-10 gap-40">
                     {events.map((event, index) => (
                         <Card
+                            id={event.id}
                             key={index}
                             image={true}
                             title={event.title}
@@ -194,6 +216,15 @@ const Info=(orgId)=>{
                     />
                 </div>
             </div>
+            {isImpactModalOpen && selectedImpactToEdit &&
+                <ImpactModal 
+                    showImpactModal={isImpactModalOpen}
+                    onRequestClose={toggleImpactModal}
+                    editImpact={handleUpdateImpact}
+                    impact={selectedImpactToEdit}
+                />
+            }
+
         </div>
     );
 }

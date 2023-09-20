@@ -5,7 +5,7 @@ import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
 import { Form } from "react-router-dom";
 import { useState } from "react";
-const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
+const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impact})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -42,12 +42,27 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
         }
     
     };
-    const [topic, setTopic] = useState("");
-    const [description, setDescription] = useState("");
+    const [topic, setTopic] = useState(impact ? impact.header : "");
+    const [description, setDescription] = useState(impact ? impact.description : "");
     const [image, setImage] = useState("");
     const org_id=localStorage.getItem("org_id");
     console.log(org_id);
     const handleAddImpact=()=>{
+        const impactData=new FormData();
+        impactData.append('header',topic);
+        impactData.append('description',description);
+        impactData.append('image_url',image);
+        impactData.append('org_id',org_id);
+
+        addImpact(impactData);
+        onRequestClose();
+    }
+    const handleUpdateImpact=()=>{
+        if(impact){
+            const updatedImpact = { ...impact, header: topic, description: description, image_url: image };
+            editImpact(updatedImpact);
+            onRequestClose();
+        }
         const impactData=new FormData();
         impactData.append('header',topic);
         impactData.append('description',description);
@@ -100,10 +115,10 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact})=>{
                             </div>
                             <div className="btn-add-impcat flex ">
                                 <Button 
-                                    text={"Add"}
+                                    text={impact ? "Update" : "Add"}
                                     isAction={true}
                                     medium={true}
-                                    onClick={handleAddImpact}
+                                    onClick={impact ? handleUpdateImpact : handleAddImpact}
                                 />
                             </div>
                         </div>
