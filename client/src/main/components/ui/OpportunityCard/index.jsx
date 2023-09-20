@@ -39,11 +39,16 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
 
     return(
         <div className="opp-card-container flex column">
+            
             <div className="opp-card-content pt-20 grid opp-grid-container">
-                    <div className="flex column opp-grid-item opp-date">Date:{date}</div>
+                {!buttons &&<>
+                <div className="flex column opp-grid-item opp-date">Date:{date}</div> 
+                <div className="flex column opp-grid-item opp-date"></div> 
+                </>}
+           
                 {buttons &&
                 <>
-                    
+                    <div className="flex column opp-grid-item opp-date">Date:{date}</div>
                     <div className="opp-card-top flex row gap-10 opp-grid-item">
                         <Button
                             text={"VIEW"}

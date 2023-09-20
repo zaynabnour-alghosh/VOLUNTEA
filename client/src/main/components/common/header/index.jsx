@@ -6,7 +6,7 @@ import Input from "../input";
 import {icons} from "../../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
-const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov})=>{
+const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov,setOpportunities})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
@@ -33,6 +33,7 @@ const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov}
                         isPrimary={true}
                         onClick={showOppModal}  
                         medium={true}
+
                     />
                     <Button
                         text={"+GROUP"}
@@ -125,6 +126,7 @@ const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov}
                 <OpportunityModal 
                     showOppModal={isOppModalOpen}
                     onRequestClose={toggleOppModal}
+                    setOpportunities={setOpportunities}
                 />}
             {isGroupModalOpen &&
                 <GroupModal

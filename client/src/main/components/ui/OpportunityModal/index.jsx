@@ -7,7 +7,7 @@ import Button from './../../common/button';
 import ModalComponent from "../../common/modal";
 import Input from "../../common/input";
 import { sendRequest } from "../../../../config/request";
-const OpportunityModal=({showOppModal , onRequestClose,edit,opp,addOpportunityToProject})=>{
+const OpportunityModal=({showOppModal , onRequestClose,edit,opp,setOpportunities,opportunities})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -56,7 +56,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,addOpportunityTo
     const [task, setTask] = useState('');
     
     const handleTaskChange = () => {        
-        const newTask =task
+        const newTask =task.trim();
         if (newTask) {
             setTasks([...tasks, newTask]);
             setTask('');
@@ -85,10 +85,9 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,addOpportunityTo
       
             if (response) {
                 console.log(response)
-                 onRequestClose();
-            //   const updatedOpportunities = [...opportunities, response.data];
-            //   setOpportunities(updatedOpportunities);
-            addOpportunityToProject(response.data);
+                
+                setOpportunities(prevOpportunities => [...prevOpportunities, response.data]);
+                onRequestClose();
             }
           } catch (error) {
             console.log('Error adding opportunity:', error);

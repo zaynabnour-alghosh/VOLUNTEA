@@ -29,6 +29,8 @@ const AdminDashboard=({orgId})=>{
     const [showOpportunityDetails, setShowOpportunityDetails] = useState(false);    
     const [showMemberProfile, setShowMemeberProfile] = useState(false);  
     const [selectedOpportunity, setSelectedOpportunity] = useState(null); 
+    const [opportunities, setOpportunities] = useState([]);
+
     const handleOpportunitySelect = (opportunity) => {
         setSelectedOpportunity(opportunity);
       };
@@ -79,7 +81,7 @@ const AdminDashboard=({orgId})=>{
                             <>
                                 <div className="dash-header">
                                     {selectedTab==='Dashboard' && <Header title={"ADMIN DASHBOARD"}/>}
-                                    {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true}/>}
+                                    {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true} setOpportunities={setOpportunities}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
                                     {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
@@ -87,7 +89,7 @@ const AdminDashboard=({orgId})=>{
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
-                                    {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity}  toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
+                                    {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity} opportunities={opportunities} setOpportunities={setOpportunities} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}

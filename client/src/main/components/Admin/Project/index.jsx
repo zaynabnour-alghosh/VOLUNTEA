@@ -4,17 +4,7 @@ import { useEffect,useState } from "react";
 import { sendRequest } from "../../../../config/request";
 import OpportunityModal from "../../ui/OpportunityModal";
 import OpportunityCard from "../../ui/OpportunityCard";
-const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity})=>{
-    const [opportunities, setOpportunities] = useState([]);
-    const [isOppModalOpen, setIsOppModalOpen] = useState(false);
-
-    const showOppModal = () => {
-        setIsOppModalOpen(true);
-      };
-    const toggleOppModal=()=>{
-        setIsOppModalOpen(!isOppModalOpen);
-    }
-
+const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunities,setOpportunities})=>{
     useEffect(() => {
         const getOpp = async () => {
 			try {
@@ -35,7 +25,8 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity})=>{
         getOpp();
     }, []);
     const handleAddOpportunityToProject = (newOpportunity) => {
-        setOpportunities( ...opportunities,newOpportunity);
+        console.log("new opp:",newOpportunity);
+        setOpportunities((prevOpportunities) => [...prevOpportunities, newOpportunity]);
       };
 
    
@@ -43,7 +34,7 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity})=>{
     return(
         <div className="opp-container flex column gap-40">
             {/* <OpportunityCard toggleOpportunityDetails={toggleOpportunityDetails} buttons={true}/> */}
-            {opportunities.map(opportunity => (
+            { opportunities && opportunities.map(opportunity => (
                 <OpportunityCard
                     key={opportunity.id}
                     setSelectedOpportunity={setSelectedOpportunity} 
@@ -53,19 +44,6 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity})=>{
                     orgId={orgId}
                 />
             ))}
-
-
-            {isOppModalOpen && 
-                <OpportunityModal 
-                    showOppModal={isOppModalOpen}
-                    onRequestClose={toggleOppModal}
-                    edit={false}
-                    orgId={orgId}
-                    
-                    addOpportunityToProject={handleAddOpportunityToProject}
-                />}
-
-
 
 
         </div>
