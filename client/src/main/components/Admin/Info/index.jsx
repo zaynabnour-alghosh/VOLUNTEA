@@ -41,6 +41,7 @@ const Info=(orgId)=>{
 		} 
         getOrg();
     }, []);
+    // const {name,logo_url,description,email,phone,location,face_link,insta_link,whats_link}=orgInfo;
 
 //   const handleEditClick = () => {
 //     setIsEditing(true);
@@ -58,6 +59,7 @@ const Info=(orgId)=>{
                                     label={"Orgainzation"}
                                     placeholder={"Organization Name"}
                                     type={"text"}
+                                    value={orgInfo ? orgInfo.name : ""}
                                 />
                                 <Input
                                     label={"Logo"}
@@ -72,11 +74,12 @@ const Info=(orgId)=>{
                                 type={"textarea"}
                                 className="fullwidth"
                                 fill={true}
+                                value={orgInfo ? orgInfo.description : ""}
                             />
                             </div>
                         </div>
                         <div className="org-info-logo">
-                            <img src={orgLogo} alt="logo" />
+                            <img src={`http://localhost:8000/storage/images/organizations/${orgInfo.logo_url}`} alt="logo" />
                         </div>
                     </div>
                 </div>
@@ -136,16 +139,22 @@ const Info=(orgId)=>{
                                 label={"Location"}
                                 placeholder={"location"}
                                 type={"text"}
+                                value={orgInfo ? orgInfo.location : ""}
+
                             />
                             <Input
                                 label={"Mobile Number"}
                                 placeholder={"mobile"}
                                 type={"text"}
+                                value={orgInfo ? orgInfo.phone : ""}
+
                             />
                             <Input
                                 label={"Email"}
                                 placeholder={"email address"}
                                 type={"text"}
+                                value={orgInfo ? orgInfo.email : ""}
+
                             />                 
                         </div>
                     </div>
@@ -157,16 +166,22 @@ const Info=(orgId)=>{
                                 label={"Facebook"}
                                 placeholder={"link"}
                                 type={"text"}
+                                value={orgInfo ? orgInfo.face_link : ""}
+
                             />
                             <Input
                                 label={"Instagram"}
                                 placeholder={"link"}
                                 type={"text"}
+                                value={orgInfo ? orgInfo.insta_link : ""}
+
                             />
                             <Input
                                 label={"Whatsapp"}
-                                placeholder={"email linkaddress"}
+                                placeholder={"link"}
                                 type={"text"}
+                                value={orgInfo ? orgInfo.whats_link : ""}
+
                             />                 
                         </div>
                     </div>
