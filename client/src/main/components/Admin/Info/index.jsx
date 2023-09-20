@@ -19,7 +19,6 @@ const Info=(orgId)=>{
     const [email, setEmail] = useState(orgInfo ? orgInfo.email: "");
     const [face_link, setFace] = useState(orgInfo ? orgInfo.face_link: "");
     const [whats_link, setWhats] = useState(orgInfo ? orgInfo.whats_link: "");
-    const [insta_link, setInsta] = useState(orgInfo ? orgInfo.insta_link: "");
 
     const [impacts, setImpacts] = useState([]);
     const [missions, setMissions] = useState([]);
