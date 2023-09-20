@@ -1,8 +1,10 @@
 import React from "react";
 import './style.css';
 const Card=({image,src,desc,title,dateState,date,onClick})=>{
-    if (onClick){
-        onClick();
+    const handleClick=()=>{
+        if (onClick){
+            onClick();
+        }
     }
     return(
         <div className="basecard-container flex column" onClick={handleClick}>

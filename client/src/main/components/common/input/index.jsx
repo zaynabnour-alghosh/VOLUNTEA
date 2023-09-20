@@ -3,7 +3,7 @@ import './style.css';
 import {icons} from '../../../../icons.js';
 import { useState,useEffect } from "react";
 
-const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memberSearch,noContainer,readOnly,onChange,value })=>{
+const Input=({icon, label, placeholder, type = "text",fill ,fileName,search,noBorder,memberSearch,noContainer,readOnly,onChange,value })=>{
     const [showPassword, setShowPassword] = useState(false);
     const [inputValue, setInputValue] = useState(value);
     const togglePasswordVisibility = () => {
@@ -70,6 +70,7 @@ const Input=({icon, label, placeholder, type = "text",fill ,search,noBorder,memb
                             onChange={handleChange}
                             style={fill?  inputStyle:{}}
                             value={inputValue}
+                            
                         />}
                         {type === 'password' && (
                             <span

@@ -44,7 +44,8 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
     };
     const [topic, setTopic] = useState(impact ? impact.header : "");
     const [description, setDescription] = useState(impact ? impact.description : "");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(impact ? impact.image_url : "");
+    const [fileName, setFileName] = useState("");
     const org_id=localStorage.getItem("org_id");
     console.log(org_id);
     const handleAddImpact=()=>{
@@ -59,8 +60,15 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
     }
     const handleUpdateImpact=()=>{
         if(impact){
-            const updatedImpact = { ...impact, header: topic, description: description, image_url: image };
-            editImpact(updatedImpact);
+            // const updatedImpact = { ...impact, header: topic, description: description, image_url: image };
+            const impactData=new FormData();
+            impactData.append('impact_id',impact.id);
+            impactData.append('header',topic);
+            impactData.append('description',description);
+            impactData.append('image_url',image);
+            // impactData.append('org_id',org_id);
+
+            editImpact(impactData);
             onRequestClose();
         }
         const impactData=new FormData();
@@ -69,10 +77,16 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
         impactData.append('image_url',image);
         impactData.append('org_id',org_id);
 
-        addImpact(impactData);
+        editImpact(impactData);
         onRequestClose();
     }
-
+    const handleAction=()=>{
+        if (impact){
+            handleUpdateImpact();
+        }else{
+            handleAddImpact();
+        }
+    }
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showImpactModal} onRequestClose={onRequestClose} >
@@ -109,7 +123,8 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
                                         label={"Image"}
                                         type={"file"}
                                         fill={true}
-                                        onChange={(e)=>setImage(e.target.files[0])}
+                                        fileName={fileName}
+                                        onChange={(e)=>{setImage(e.target.files[0]);setFileName(e.target.files[0].name);}}
                                     />
                                 </span>
                             </div>
@@ -118,7 +133,7 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
                                     text={impact ? "Update" : "Add"}
                                     isAction={true}
                                     medium={true}
-                                    onClick={impact ? handleUpdateImpact : handleAddImpact}
+                                    onClick={handleAction}
                                 />
                             </div>
                         </div>

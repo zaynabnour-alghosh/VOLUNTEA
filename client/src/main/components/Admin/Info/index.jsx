@@ -13,6 +13,8 @@ const Info=(orgId)=>{
     const [missions, setMissions] = useState([]);
     const [events, setEvents] = useState([]);
     const [selectedImpactToEdit, setSelectedImpactToEdit] = useState(null);
+    const [isImpactModalOpen, setIsImpactModalOpen] = useState(false);
+    
     const showImpcatModal = () => {
         setIsImpactModalOpen(true);
       };
@@ -54,14 +56,32 @@ const Info=(orgId)=>{
 //   const handleEditClick = () => {
 //     setIsEditing(true);
 //   };
-const handleEditImpact = (impact) => {
-    setSelectedImpactToEdit(impact);
+const handleEditImpact = (impact) =>()=> {
+    setSelectedImpactToEdit(prevImpact => impact);
     toggleImpactModal();
 };
 
-const handleUpdateImpact=()=>{
+const handleUpdateImpact=async(impact)=>{
+    try{
+        const response=await sendRequest({
+            method:"POST",
+            route:"/admin/edit-impact",
+            body:impact,
+            includeHeaders:true
+        });
+        if(response){
+            console.log(response);
+            setImpacts(
+                prevImpacts => prevImpacts.map
+                (impact => impact.id === response.data.id ? 
+                    response.data : impact));
 
-}
+        }
+    }catch(error){
+        console.log(error)
+    }
+
+};
     return(
         <div className="edit-org-info flex wrap">
             <div className="admin-org-info-container flex column">
@@ -95,7 +115,7 @@ const handleUpdateImpact=()=>{
                             </div>
                         </div>
                         <div className="org-info-logo">
-                            <img src={`http://localhost:8000/storage/images/organizations/${orgInfo.logo_url}`} alt="logo" />
+                            <img src={orgInfo? `http://localhost:8000/storage/images/organizations/${ orgInfo.logo_url}`:'logo'} alt="logo" />
                         </div>
                     </div>
                 </div>
