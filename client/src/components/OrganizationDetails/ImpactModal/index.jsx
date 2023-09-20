@@ -60,25 +60,15 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
     }
     const handleUpdateImpact=()=>{
         if(impact){
-            // const updatedImpact = { ...impact, header: topic, description: description, image_url: image };
             const impactData=new FormData();
             impactData.append('impact_id',impact.id);
             impactData.append('header',topic);
             impactData.append('description',description);
             impactData.append('image_url',image);
-            // impactData.append('org_id',org_id);
 
             editImpact(impactData);
             onRequestClose();
         }
-        const impactData=new FormData();
-        impactData.append('header',topic);
-        impactData.append('description',description);
-        impactData.append('image_url',image);
-        impactData.append('org_id',org_id);
-
-        editImpact(impactData);
-        onRequestClose();
     }
     const handleAction=()=>{
         if (impact){

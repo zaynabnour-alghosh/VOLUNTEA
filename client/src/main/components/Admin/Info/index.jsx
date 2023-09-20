@@ -174,13 +174,16 @@ const Info=(orgId)=>{
                     <hr/>
                     <div className="grid center pt-10 grid-container">
                     {missions.map((mission, index) => (
-                        <RowCard
+                        <div key={index}>
+                            <RowCard
                             id={mission.id}
                             key={index}
                             className="grid-item"
-                            title={mission.title}
+                            title={mission.header}
                             desc={mission.description}
-                        />
+                            onClick={handleEditMission(mission)}
+                            />
+                        </div>
                     ))}                 
                     </div>
 
@@ -275,6 +278,16 @@ const Info=(orgId)=>{
                     impact={selectedImpactToEdit}
                 />
             }
+
+            {isMissionModalOpen && selectedMissionToEdit &&
+                <MissionModal 
+                    showMissionModal={isMissionModalOpen}
+                    onRequestClose={toggleMissionModal}
+                    editMission={handleUpdateMission}
+                    mission={selectedMissionToEdit}
+                />
+            }
+
 
         </div>
     );

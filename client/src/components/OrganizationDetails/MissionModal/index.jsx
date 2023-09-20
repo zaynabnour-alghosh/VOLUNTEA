@@ -5,7 +5,7 @@ import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
 import { useState } from "react";
 
-const MissionModal=({showMissionModal , onRequestClose,addMission})=>{
+const MissionModal=({showMissionModal , onRequestClose,addMission,editMission, mission})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -42,8 +42,8 @@ const MissionModal=({showMissionModal , onRequestClose,addMission})=>{
         }
     
     };
-    const [topic, setTopic] = useState("");
-    const [description, setDescription] = useState("");
+    const [topic, setTopic] = useState(mission ? mission.header : "");
+    const [description, setDescription] = useState(mission ? mission.description : "");
     const org_id=localStorage.getItem("org_id");
     const handleAddMission=()=>{
         const missionData=new FormData();
@@ -54,6 +54,26 @@ const MissionModal=({showMissionModal , onRequestClose,addMission})=>{
         addMission(missionData);
         onRequestClose();
     }
+
+    const handleUpdateMission=()=>{
+        if(mission){
+            const missionData=new FormData();
+            missionData.append('mission_id',mission.id);
+            missionData.append('header',topic);
+            missionData.append('description',description);
+        
+            editMission(missionData);
+            onRequestClose();
+        }
+    }
+    const handleAction=()=>{
+        if (mission){
+            handleUpdateMission();
+        }else{
+            handleAddMission();
+        }
+    }
+
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showMissionModal} onRequestClose={onRequestClose} >
@@ -86,10 +106,10 @@ const MissionModal=({showMissionModal , onRequestClose,addMission})=>{
                             </div>
                             <div className="btn-add-mission flex ">
                                 <Button 
-                                    text={"Add"}
+                                    text={mission ? "Update" : "Add"}
                                     isAction={true}
                                     medium={true}
-                                    onClick={handleAddMission}
+                                    onClick={handleAction}
                                 />
                             </div>
                         </div>

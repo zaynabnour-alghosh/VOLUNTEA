@@ -1,8 +1,13 @@
 import React from "react";
 import './style.css';
-const RowCard=({title,desc,notice,date, isCertification,time})=>{
+const RowCard=({title,desc,notice,date, onClick,isCertification,time})=>{
+    const handleClick=()=>{
+        if (onClick){
+            onClick();
+        }
+    }
     return(
-        <div className={`rowcard-container flex ${isCertification  ? 'limit':' '}`}>
+        <div className={`rowcard-container flex ${isCertification  ? 'limit':' '}`} onClick={handleClick}>
             <div className="rowcard-content flex column flex-start">
                 <div className="rowcard-topic">
                     <h4>{title}</h4>
