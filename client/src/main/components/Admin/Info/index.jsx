@@ -13,16 +13,23 @@ const Info=(orgId)=>{
     const [missions, setMissions] = useState([]);
     const [events, setEvents] = useState([]);
     const [selectedImpactToEdit, setSelectedImpactToEdit] = useState(null);
-    const [isImpactModalOpen, setIsImpactModalOpen] = useState(false);
+    const [selectedMissionToEdit, setSelectedMissionToEdit] = useState(null);
+    const [selectedEventToEdit, setSelectedEventToEdit] = useState(null);
     
-    const showImpcatModal = () => {
-        setIsImpactModalOpen(true);
-      };
+    const [isImpactModalOpen, setIsImpactModalOpen] = useState(false);
+    const [isMissionModalOpen, setIsMissionModalOpen] = useState(false);
+    const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+
     const toggleImpactModal=()=>{
         setIsImpactModalOpen(!isImpactModalOpen);
     }
+    const toggleMissionModal=()=>{
+        setIsMissionModalOpen(!isMissionModalOpen);
+    }
+    const toggleEventModal=()=>{
+        setIsEventModalOpen(!isEventModalOpen);
+    }
 
-    const [isEditing, setIsEditing] = useState(false);
     useEffect(() => {
         const getOrg = async () => {
 			try {
@@ -51,12 +58,15 @@ const Info=(orgId)=>{
 		} 
         getOrg();
     }, []);
-    // const {name,logo_url,description,email,phone,location,face_link,insta_link,whats_link}=orgInfo;
-
-//   const handleEditClick = () => {
-//     setIsEditing(true);
-//   };
 const handleEditImpact = (impact) =>()=> {
+    setSelectedImpactToEdit(prevImpact => impact);
+    toggleImpactModal();
+};
+const handleEditMission = (mission) =>()=> {
+    setSelectedImpactToEdit(prevImpact => impact);
+    toggleImpactModal();
+};
+const handleEditEvent = (event) =>()=> {
     setSelectedImpactToEdit(prevImpact => impact);
     toggleImpactModal();
 };
