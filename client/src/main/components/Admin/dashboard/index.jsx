@@ -83,7 +83,7 @@ const AdminDashboard=({orgId})=>{
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
-                                    {selectedTab === 'Opportunities' && <Project toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
+                                    {selectedTab === 'Opportunities' && <Project orgId={orgId} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
