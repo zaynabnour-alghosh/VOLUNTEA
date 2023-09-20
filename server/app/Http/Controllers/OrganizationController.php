@@ -175,15 +175,16 @@ class OrganizationController extends Controller
            
             $logo_url=$request->file('logo_url');
             if($request->hasFile('logo_url')){
+                if (Storage::exists('public/images/organizations/' . $old_logo)) {
+                    Storage::delete('public/images/organizations/' . $old_logo);
+                }
                 $path=$request->file('logo_url')->store('public/images/organizations/');
                 $path=basename($path);
                 $organization->logo_url=$path;
             }
             $organization->org_id=$org_id;
 
-            if (Storage::exists('public/images/organizations/' . $old_logo)) {
-                Storage::delete('public/images/organizations/' . $old_logo);
-            }
+            
             $organization->save();
             return response()->json([
                 'status'=>'success ful update',
