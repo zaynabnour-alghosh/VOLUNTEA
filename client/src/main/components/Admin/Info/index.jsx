@@ -99,36 +99,14 @@ const Info=(orgId)=>{
                     <div><h3>Missions</h3></div>
                     <hr/>
                     <div className="grid center pt-10 grid-container">
-                        <RowCard 
+                    {missions.map((mission, index) => (
+                        <RowCard
+                            key={index}
                             className="grid-item"
-                            title={"Reforestation Revolution"}
-                            desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
+                            title={mission.title}
+                            desc={mission.description}
                         />
-                        <RowCard 
-                            className="grid-item"
-                            title={"Reforestation Revolution"}
-                            desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
-                        />
-                        <RowCard 
-                            className="grid-item"
-                            title={"Reforestation Revolution"}
-                            desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
-                        />
-                         <RowCard 
-                            className="grid-item"
-                            title={"Reforestation Revolution"}
-                            desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
-                        />
-                        <RowCard 
-                            className="grid-item"
-                            title={"Reforestation Revolution"}
-                            desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
-                        />
-                        <RowCard 
-                            className="grid-item"
-                            title={"Reforestation Revolution"}
-                            desc={"CEI aims to restore and protect 100 million acres of deforested land by 2030,combating climate change and preserving vital ecosystems."}
-                        />                 
+                    ))}                 
                     </div>
 
                 </div>
@@ -136,30 +114,17 @@ const Info=(orgId)=>{
                     <div><h3>Events</h3></div>
                     <hr/>
                     <div className="flex center pt-10 gap-40">
-                        <Card 
+                    {events.map((event, index) => (
+                        <Card
+                            key={index}
                             image={true}
-                            title={"Earth Day Symposium"}
-                            src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_rMs8oSJR3UOFJtam12ydE8CFGxdnamF4zg&usqp=CAU"}
-                            desc={ "A virtual event featuring renowned environmentalists and scientists discussing climate change solutions and sustainable practices."}
+                            title={event.title}
+                            src={`http://localhost:8000/storage/images/events/${event.image_url}`}
+                            desc={event.description}
                             dateState={true}
-                            date={"April 22.2023"}                        
+                            date={event.event_date}
                         />
-                        <Card 
-                            image={true}
-                            title={"Earth Day Symposium"}
-                            src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_rMs8oSJR3UOFJtam12ydE8CFGxdnamF4zg&usqp=CAU"}
-                            desc={ "A virtual event featuring renowned environmentalists and scientists discussing climate change solutions and sustainable practices."}
-                            dateState={true}
-                            date={"April 22.2023"}                        
-                        />
-                        <Card 
-                            image={true}
-                            title={"Earth Day Symposium"}
-                            src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_rMs8oSJR3UOFJtam12ydE8CFGxdnamF4zg&usqp=CAU"}
-                            desc={ "A virtual event featuring renowned environmentalists and scientists discussing climate change solutions and sustainable practices."}
-                            dateState={true}
-                            date={"April 22.2023"}                        
-                        />                 
+                    ))}             
                     </div>
                 </div>
                 <div className="org-details flex row spaceBetween pt-20">
