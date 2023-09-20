@@ -7,7 +7,7 @@ import Button from "../../common/button";
 import { useEffect ,useState} from "react";
 import ImpactModal from "../../../../components/OrganizationDetails/ImpactModal";
 import MissionModal from "../../../../components/OrganizationDetails/MissionModal";
-import EventModal from "../../ui/EventModal";
+import OrgEventModal from "../../../../components/OrganizationDetails/EventModal";
 import { sendRequest } from "../../../../config/request";
 const Info=(orgId)=>{
     const [orgInfo, setOrgInfo] = useState(null);
@@ -113,6 +113,26 @@ const Info=(orgId)=>{
             console.log(error)
         }
     };
+    
+    const handleUpdateEvent=async(event)=>{
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/edit-event",
+                body:event,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setEvents(
+                    prevEvents => prevEvents.map
+                    (event => event.id === response.data.id ? 
+                        response.data : event));
+            }
+        }catch(error){
+            console.log(error)
+        }
+    };
     return(
         <div className="edit-org-info flex wrap">
             <div className="admin-org-info-container flex column">
@@ -193,7 +213,8 @@ const Info=(orgId)=>{
                     <hr/>
                     <div className="flex center pt-10 gap-40">
                     {events.map((event, index) => (
-                        <Card
+                        <div key={index}>
+                            <Card
                             id={event.id}
                             key={index}
                             image={true}
@@ -202,7 +223,9 @@ const Info=(orgId)=>{
                             desc={event.description}
                             dateState={true}
                             date={event.event_date}
+                            onClick={handleEditEvent(event)}
                         />
+                        </div>
                     ))}             
                     </div>
                 </div>
@@ -285,6 +308,15 @@ const Info=(orgId)=>{
                     onRequestClose={toggleMissionModal}
                     editMission={handleUpdateMission}
                     mission={selectedMissionToEdit}
+                />
+            }
+
+            {isEventModalOpen && selectedEventToEdit &&
+                 <OrgEventModal
+                    showEventModal={isEventModalOpen}
+                    onRequestClose={toggleEventModal}
+                    editEvent={handleUpdateEvent}
+                    event={selectedEventToEdit}
                 />
             }
 

@@ -3,7 +3,7 @@ import './style.css';
 import Input from "../../common/input";
 import Button from "../../common/button";
 import ModalComponent from "../../common/modal";
-const EventModal=({showAddEventModal , onRequestClose})=>{
+const EventModal=({showAddEventModal , onRequestClose })=>{
     const customStyles = {
         content: {
             top: '50%',

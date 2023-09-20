@@ -4,7 +4,7 @@ import ModalComponent from "../../../main/components/common/modal";
 import Input from "../../../main/components/common/input";
 import Button from "../../../main/components/common/button";
 import { useState } from "react";
-const OrgEventModal=({showEventModal , onRequestClose,addEvent})=>{
+const OrgEventModal=({showEventModal , onRequestClose,addEvent,editEvent, event})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -41,10 +41,10 @@ const OrgEventModal=({showEventModal , onRequestClose,addEvent})=>{
         }
     
     };
-    const [topic, setTopic] = useState("");
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
-    const [date, setDate] = useState("");
+    const [topic, setTopic] = useState(event ? event.topic : "");
+    const [description, setDescription] = useState(event ? event.description : "");
+    const [image, setImage] = useState(event ? event.image_url : "");
+    const [date, setDate] = useState(event ? event.event_date : "");
     const org_id=localStorage.getItem("org_id");
     const handleAddEvent=()=>{
         const eventData=new FormData();
@@ -56,6 +56,26 @@ const OrgEventModal=({showEventModal , onRequestClose,addEvent})=>{
 
         addEvent(eventData);
         onRequestClose();
+    }
+    const handleUpdatedEvent=()=>{
+        if(event){
+            const eventData=new FormData();
+            eventData.append('event_id',event.id);
+            eventData.append('topic',topic);
+            eventData.append('description',description);
+            eventData.append('image_url',image);
+            eventData.append('event_date',date);
+
+            editEvent(eventData);
+            onRequestClose();
+        }
+    }
+    const handleAction=()=>{
+        if (event){
+            handleUpdatedEvent();
+        }else{
+            handleAddEvent();
+        }
     }
     return(
         <div >
@@ -111,10 +131,10 @@ const OrgEventModal=({showEventModal , onRequestClose,addEvent})=>{
                             </div>
                             <div className="btn-add-impcat flex ">
                                 <Button 
-                                    text={"Add"}
+                                    text={event ? "Update" : "Add"}
                                     isAction={true}
                                     medium={true}
-                                    onClick={handleAddEvent}
+                                    onClick={handleAction}
                                 />
                             </div>
                         </div>
