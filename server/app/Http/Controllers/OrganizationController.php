@@ -208,14 +208,15 @@ class OrganizationController extends Controller
 
             $image_url=$request->file('image_url');
             if($request->hasFile('image_url')){
+                if (Storage::exists('public/images/impacts/' . $old_impact)) {
+                    Storage::delete('public/images/impacts/' . $old_impact);
+                }
                 $path=$request->file('image_url')->store('public/images/impacts/');
                 $path=basename($path);
                 $impact->image_url=$path;
             }
                 
-            if (Storage::exists('public/images/impacts/' . $old_impact)) {
-                Storage::delete('public/images/impacts/' . $old_impact);
-            }
+           
             $impact->save();
             return response()->json([
                 'status'=>'successfull update',
@@ -258,6 +259,9 @@ class OrganizationController extends Controller
 
             $image_url=$request->file('image_url');
             if($request->hasFile('image_url')){
+                if (Storage::exists('public/images/events/' . $old_event)) {
+                    Storage::delete('public/images/events/' . $old_eventt);
+                }
                 $path=$request->file('image_url')->store('public/images/events/');
                 $path=basename($path);
                 $event->image_url=$path;
@@ -265,9 +269,7 @@ class OrganizationController extends Controller
             $event->event_date=$request->event_date;
             $event->location=$request->location;
              
-            if (Storage::exists('public/images/events/' . $old_event)) {
-                Storage::delete('public/images/events/' . $old_eventt);
-            }
+            
             $event->save(); 
             return response()->json([
                 'status'=>'successfull update',
