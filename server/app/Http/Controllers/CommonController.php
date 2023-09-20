@@ -118,10 +118,14 @@ class CommonController extends Controller
         $opps= Opportunity::all()->where('org_id',$id);
         $all=[];
         foreach($opps as $opp){
+            $formatted_date='';            
+            $opp_date = Carbon::parse($opp->event_date)->format('F d, Y');                
+
             $opp_tasks=$opp->tasks()->pluck('description');
             $opp->tasks=$opp_tasks;
             $coordinator=User::find($opp->coordinator_id);
-            $opp->coordinator=$coordinator->name;           
+            $opp->coordinator=$coordinator->name; 
+            $opp->date=$opp_date;          
             $all[]=$opp;
        }
         return response()->json([
