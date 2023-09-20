@@ -5,7 +5,19 @@ import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
 import FeedbackModal from "../FeedbackModal";
 
-const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
+const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied ,opportunity})=>{
+    const {
+        id,
+        org_id: orgId,
+        topic,
+        description,
+        opportunity_date: opportunityDate,
+        location,
+        nb_volunteers: nbVolunteers,
+        tasks,
+        coordinator,
+        date
+    } = opportunity;
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
     
@@ -28,9 +40,10 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
     return(
         <div className="opp-card-container flex column">
             <div className="opp-card-content pt-20 grid opp-grid-container">
+                    <div className="flex column opp-grid-item opp-date">Date:{date}</div>
                 {buttons &&
                 <>
-                    <div className="flex column opp-grid-item"></div>
+                    
                     <div className="opp-card-top flex row gap-10 opp-grid-item">
                         <Button
                             text={"VIEW"}
@@ -84,39 +97,35 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied})=>{
 
                 <div className="opp-card-topic flex column opp-grid-item">
                     <h3>Topic</h3>
-                    <span>Lorem ipsum dolor sit amet</span>
+                    <span>{topic}</span>
                 </div>
                 <div className="opp-card-coord flex column opp-grid-item">
                     <h3>Coordinator</h3>
-                    <span>Lorem ipsum </span>
+                    <span>{coordinator}</span>
                 </div>
                 <div className="opp-card-desc flex column opp-grid-item">
                     <h3>Description</h3>
                     <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit. Ut laoreet faucibus purus 
-                        et suscipit. Maecenas ultricies ante sit amet
-                        cursus venenatis. In auctor venenatis imperdiet. 
+                        {description} 
                     </span>
                 </div>
                 <div className="opp-card-task flex column opp-grid-item">
                     <h3>Tasks</h3>
                     <div className="opp-task-list flex column">
-                        <div>Lorem ipsum dolor sit amet, consectetur</div>
-                        <div>Lorem ipsum dolor sit amet, consectetur</div>
-                        <div>Lorem ipsum dolor sit amet, consectetur</div>
+                        {tasks.map(task=>(
+                            <div>{task}</div>
+                        ))}
+                        {/* <div>Lorem ipsum dolor sit amet, consectetur</div>
+                        <div>Lorem ipsum dolor sit amet, consectetur</div> */}
                     </div>
                 </div>
                 <div className="opp-card-location flex column opp-grid-item">
                     <h3>Location</h3>
-                    <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.
-                    </span>
+                    <span>{location}</span>
                 </div>
                 <div className="opp-card-vacancies flex column opp-grid-item">
                     <h3>Vacancies</h3>
-                    <span>8 volunteers</span>
+                    <span>{nbVolunteers} volunteers</span>
                 </div>
             
             </div>
