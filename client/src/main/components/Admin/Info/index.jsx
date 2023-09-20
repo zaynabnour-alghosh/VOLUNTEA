@@ -11,6 +11,7 @@ import OrgEventModal from "../../../../components/OrganizationDetails/EventModal
 import { sendRequest } from "../../../../config/request";
 const Info=(orgId)=>{
     const [orgInfo, setOrgInfo] = useState(null);
+
     const [impacts, setImpacts] = useState([]);
     const [missions, setMissions] = useState([]);
     const [events, setEvents] = useState([]);
@@ -133,6 +134,35 @@ const Info=(orgId)=>{
             console.log(error)
         }
     };
+
+    const editOrgInfo=async(info)=>{
+
+        const orgData=new FormData();
+        orgData.append('org_id',info.org_id);
+        orgData.append('name',info.name);
+        orgData.append('description',info.description);
+        orgData.append('logo_url',info.logo_url);
+        orgData.append('location',info.location);
+        orgData.append('phone',info.phone);
+        orgData.append('email',info.email);
+        orgData.append('insta_link',info.insta_link);
+        orgData.append('face_link',info.face_link);
+        orgData.append('whats_link',info.whats_link);
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/edit-organization-info",
+                body:orgData,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                
+            }
+        }catch(error){
+            console.log(error)
+        }
+    }
     return(
         <div className="edit-org-info flex wrap">
             <div className="admin-org-info-container flex column">
@@ -147,11 +177,14 @@ const Info=(orgId)=>{
                                     placeholder={"Organization Name"}
                                     type={"text"}
                                     value={orgInfo ? orgInfo.name : ""}
+                                    onChange={(e)=>setName(e.target.value)}
                                 />
                                 <Input
                                     label={"Logo"}
                                     placeholder={"Choose Logo"}
                                     type={"file"}
+                                    onChange={(e)=>setLogo(e.target.files[0])}
+
                                 />                            
                             </div>
                             <div>
@@ -162,6 +195,8 @@ const Info=(orgId)=>{
                                 className="fullwidth"
                                 fill={true}
                                 value={orgInfo ? orgInfo.description : ""}
+                                onChange={(e)=>setDescription(e.target.value)}
+                            
                             />
                             </div>
                         </div>
@@ -239,6 +274,7 @@ const Info=(orgId)=>{
                                 placeholder={"location"}
                                 type={"text"}
                                 value={orgInfo ? orgInfo.location : ""}
+                                onChange={(e)=>setLocation(e.target.value)}
 
                             />
                             <Input
@@ -246,6 +282,7 @@ const Info=(orgId)=>{
                                 placeholder={"mobile"}
                                 type={"text"}
                                 value={orgInfo ? orgInfo.phone : ""}
+                                onChange={(e)=>setPhone(e.target.value)}
 
                             />
                             <Input
@@ -253,6 +290,7 @@ const Info=(orgId)=>{
                                 placeholder={"email address"}
                                 type={"text"}
                                 value={orgInfo ? orgInfo.email : ""}
+                                onChange={(e)=>setEmail(e.target.value)}
 
                             />                 
                         </div>
@@ -266,6 +304,7 @@ const Info=(orgId)=>{
                                 placeholder={"link"}
                                 type={"text"}
                                 value={orgInfo ? orgInfo.face_link : ""}
+                                onChange={(e)=>setFace(e.target.value)}
 
                             />
                             <Input
@@ -273,6 +312,7 @@ const Info=(orgId)=>{
                                 placeholder={"link"}
                                 type={"text"}
                                 value={orgInfo ? orgInfo.insta_link : ""}
+                                onChange={(e)=>setInsta(e.target.value)}
 
                             />
                             <Input
@@ -280,6 +320,7 @@ const Info=(orgId)=>{
                                 placeholder={"link"}
                                 type={"text"}
                                 value={orgInfo ? orgInfo.whats_link : ""}
+                                onChange={(e)=>setWhats(e.target.value)}
 
                             />                 
                         </div>
@@ -289,7 +330,19 @@ const Info=(orgId)=>{
                     <Button
                         text={"Edit"}
                         isSecondary={true}
-                        medium={true}                                      
+                        medium={true} 
+                        onClick={() => editOrgInfo({
+                            org_id: orgInfo?.id,
+                            name,
+                            description,
+                            logo_url: logo,
+                            location,
+                            phone,
+                            email,
+                            insta_link,
+                            face_link,
+                            whats_link
+                        })}
                     />
                 </div>
             </div>
@@ -319,8 +372,6 @@ const Info=(orgId)=>{
                     event={selectedEventToEdit}
                 />
             }
-
-
         </div>
     );
 }
