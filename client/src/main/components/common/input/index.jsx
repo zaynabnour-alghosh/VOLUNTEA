@@ -3,7 +3,7 @@ import './style.css';
 import {icons} from '../../../../icons.js';
 import { useState,useEffect } from "react";
 
-const Input=({icon, label, placeholder, type = "text",fill ,fileName,search,noBorder,memberSearch,noContainer,readOnly,onChange,value })=>{
+const Input=({icon, label, placeholder, type = "text",fill ,fileName,search,noBorder,onKeyDown,memberSearch,noContainer,readOnly,onChange,value })=>{
     const [showPassword, setShowPassword] = useState(false);
     const [inputValue, setInputValue] = useState(value);
     const togglePasswordVisibility = () => {
@@ -12,6 +12,14 @@ const Input=({icon, label, placeholder, type = "text",fill ,fileName,search,noBo
       const inputStyle = {
         width: '100%',
       };
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+            if (onKeyDown) {
+                onKeyDown();
+            }
+        }
+    };
     const handleChange = (e) => { 
         if (!readOnly) {
             setInputValue(e.target.value);
@@ -32,6 +40,7 @@ const Input=({icon, label, placeholder, type = "text",fill ,fileName,search,noBo
                     style={fill?  inputStyle:{}}
                     value={inputValue}
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                 />
             </>:
             <>
@@ -70,6 +79,8 @@ const Input=({icon, label, placeholder, type = "text",fill ,fileName,search,noBo
                             onChange={handleChange}
                             style={fill?  inputStyle:{}}
                             value={inputValue}
+                            onKeyDown={handleKeyDown}
+
                             
                         />}
                         {type === 'password' && (

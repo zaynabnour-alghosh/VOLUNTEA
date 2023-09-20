@@ -5,10 +5,8 @@ import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
 import FeedbackModal from "../FeedbackModal";
 
-const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied ,opportunity})=>{
+const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied ,opportunity})=>{
     const {
-        id,
-        org_id: orgId,
         topic,
         description,
         opportunity_date: opportunityDate,
@@ -134,6 +132,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,apply,applied ,oppo
                     showOppModal={isOppModalOpen}
                     onRequestClose={toggleOppModal}
                     edit={true}
+                    orgId={orgId}
                 />}
             {isFeedModalOpen && 
                 <FeedbackModal 

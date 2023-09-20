@@ -1,9 +1,10 @@
 import React from "react";
 import './style.css';
+import { useState } from "react";
 import Button from './../../common/button';
 import ModalComponent from "../../common/modal";
 import Input from "../../common/input";
-const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
+const OpportunityModal=({showOppModal , onRequestClose,edit,orgId,opp,addOpportunity})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -40,6 +41,43 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
         }
     
     };
+    const [topic, setTopic] = useState(opp ? opp.topic : "");
+    const [description, setDescription] = useState(opp ? opp.description : "");
+    const [date, setDate] = useState(opp ? opp.opportunity_date : "");
+    const [location, setLocation] = useState(opp ? opp.location : "");
+    const [nbVolunteers, setNbVolunteers] = useState(opp ? opp.location : "");
+    const [tasks, setTasks] = useState(opp ? opp.tasks : []);
+    const [task, setTask] = useState('');
+    // const org_id=localStorage.getItem("org_id");
+
+    const handleTaskChange = () => {        
+        const newTask =task
+        if (newTask) {
+            setTasks([...tasks, newTask]);
+            setTask('');
+          }
+      };
+
+
+    const handleAddOpp=()=>{
+        const oppData=new FormData();
+        oppData.append('topic',topic);
+        oppData.append('description',description);
+        oppData.append('opportunity_date',date);
+        oppData.append('location',location);
+        oppData.append('nb_volunteers',nbVolunteers);
+        oppData.append('org_id',orgId);
+        oppData.append('nb_volunteers',date);
+        tasks.forEach((task,index) => {
+            oppData.append(`tasks[${index}]`,task);
+        });
+
+        console.log(tasks);
+        // addOpportunity(oppData);
+        // onRequestClose();
+    }
+
+    
     
     return(
         <div >
@@ -51,6 +89,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                             text={edit? 'EDIT':'ADD'}
                             isSecondary={true}
                             medium={true}
+                            onClick={handleAddOpp}
                         />
                     </div>
                     <div className="new-opp-form-container">
@@ -62,16 +101,19 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                                         placeholder={"topic"}
                                         type={"text"}
                                         fill={true}
+                                        value={topic}
+                                        onChange={(e)=>setTopic(e.target.value)}
                                     />
                                 </span>
                             </div>
                             <div className="opp-card-coord flex column new-opp-grid-item">
                                 <span className="pt-10">
                                     <Input
-                                        label={"Coordinator"}
-                                        placeholder={"coordinator"}
-                                        type={"text"}
+                                        label={"Date"}
+                                        type={"date"}
                                         fill={true}
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -82,6 +124,8 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                                         placeholder={"decription"}
                                         type={"textarea"}
                                         fill={true}
+                                        value={description}
+                                        onChange={(e)=>setDescription(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -92,16 +136,24 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                                         placeholder={"Tasks"}
                                         type={"text"}
                                         fill={true}
+                                        value={task}
+                                        onChange={(e)=>setTask(e.target.value)}
+                                        onKeyDown={handleTaskChange}
+                                        
                                     />
                                 </span>
                             </div>
                             <div className="opp-card-topic flex column new-opp-grid-item">
+                                
                             </div>
                             <div className="opp-card-coord flex column new-opp-grid-item">
                                 <div className="add-task-list flex column">
+                                {tasks.map((task, index) => (
+                                <div key={index}>{task}</div>
+                                ))}
+                                    {/* <div>Lorem ipsum dolor sit</div>
                                     <div>Lorem ipsum dolor sit</div>
-                                    <div>Lorem ipsum dolor sit</div>
-                                    <div>Lorem ipsum dolor sit</div>
+                                    <div>Lorem ipsum dolor sit</div> */}
                                 </div>
                             </div>
                             <div className="opp-card-location flex column new-opp-grid-item">
@@ -111,6 +163,8 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                                         placeholder={"location"}
                                         type={"text"}
                                         fill={true}
+                                        value={location}
+                                        onChange={(e)=>setLocation(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -121,6 +175,8 @@ const OpportunityModal=({showOppModal , onRequestClose,edit})=>{
                                         placeholder={"vacancies"}
                                         type={"text"}
                                         fill={true}
+                                        value={nbVolunteers}
+                                        onChange={(e)=>setNbVolunteers(e.target.value)}
                                     />
                                 </span>
                             </div>

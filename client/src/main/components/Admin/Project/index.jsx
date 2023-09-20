@@ -32,7 +32,8 @@ const Project=({orgId,toggleOpportunityDetails})=>{
                     key={opportunity.id} 
                     toggleOpportunityDetails={toggleOpportunityDetails}
                     buttons={true}
-                    opportunity={opportunity} 
+                    opportunity={opportunity}
+                    orgId={orgId} 
                 />
             ))}
         </div>
