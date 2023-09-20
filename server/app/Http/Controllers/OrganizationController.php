@@ -246,8 +246,8 @@ class OrganizationController extends Controller
     }
     public function editEvent(Request $request){
         $user=Auth::user();
-        $event_id=$request->event;
-        $event = Event::find($event);
+        $event_id=$request->event_id;
+        $event = Event::find($event_id);
         if (!$user || $user->role_id != 1){
             return response()->json([
                 'status' => 'Permission denied or Invalid input',
@@ -261,7 +261,7 @@ class OrganizationController extends Controller
             $image_url=$request->file('image_url');
             if($request->hasFile('image_url')){
                 if (Storage::exists('public/images/events/' . $old_event)) {
-                    Storage::delete('public/images/events/' . $old_eventt);
+                    Storage::delete('public/images/events/' . $old_event);
                 }
                 $path=$request->file('image_url')->store('public/images/events/');
                 $path=basename($path);
