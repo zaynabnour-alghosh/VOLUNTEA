@@ -95,32 +95,29 @@ class OpportunityController extends Controller
         }
     }
     public function viewOpportunityDetails($id){
-        $opportunity=Opportunity::find($id);
         $info=[];
-        if ($opportunity){
-            $opportunity->tasks=$opportunity->tasks()->pluck('description');
-           $feedback=$opportunity->feedbacks;
-           foreach($feedback as $f){
-            $volunteer_info=$f->volunteer;
-            if ($volunteer_info) {
-                $volunteer_id = $volunteer_info->id;
-                $volunteer_profile = Profile::where('user_id',$volunteer_id)->first();
-                if ($volunteer_profile) {
-                    $volunteer_info->avatar = $volunteer_profile->avatar_url;
-                    $info[] = $volunteer_info;
-                }
-            }
-           }
-            return response()->json([
-                'status'=>'success',
-                'data'=>$opportunity,
-            ]);
-        }else{
-            return response()->json([
-                'status'=>'failure',
-                'message'=>'Invalid data'
-            ]);
+    
+        $feed=Feedback::where('opp_id',$id)->get();
+        foreach($feed as $f){
+        $volunteer=$f->volunteer;
+        $name=$volunteer->name;
+        
+        $profile=$volunteer->profile;
+        $avatar=$profile->avatar_url;
+        $info[]=[
+            'feed'=>$f->feedback,
+            'opp_id'=>$f->opp_id,
+            'volunteer_id'=>$f->volunteer_id,
+            'name'=>$name,
+            'avatar'=>$avatar,
+        ];
         }
+
+
+        return response()->json([
+            'status'=>'success',
+            'data'=>$info,
+        ]);
     }
     
     //  todo:
