@@ -73,13 +73,10 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
             if(response){
                 console.log(response);
                 onRequestClose();
-
             }
-        }catch(error){
-            console.log(error)
-        }
-       
-
+            }catch(error){
+                console.log(error)
+            }
         };
     return(
         <div >

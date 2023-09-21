@@ -3,6 +3,8 @@ import './style.css';
 import Button from './../../common/button';
 import Input from "../../common/input";
 import ModalComponent from "../../common/modal";
+import { sendRequest } from "../../../../config/request";
+import { useState } from "react";
 const MeetingModal=({showModal , onRequestClose})=>{
     const customStyles = {
         content: {
@@ -40,6 +42,37 @@ const MeetingModal=({showModal , onRequestClose})=>{
         }
     
     };
+    const [link, setLink] = useState("");
+    const [description, setDescription] = useState("");
+    const [date,setDate ] = useState("");
+    const [location,setLocation ] = useState("");
+    
+    const handleMeet = async() => {
+        console.log("click");
+        const id=localStorage.getItem("organizationId");
+        const data=new FormData();
+        data.append('org_id',id);        
+        data.append('link',link);
+        data.append('description',description);
+        data.append('date_at',date);
+        data.append('location',location);
+       
+
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/new-meeting",
+                body:data,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                onRequestClose();
+            }
+            }catch(error){
+                console.log(error)
+            }
+        };
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showModal} onRequestClose={onRequestClose} >
@@ -56,6 +89,8 @@ const MeetingModal=({showModal , onRequestClose})=>{
                                         placeholder={"meeting link"}
                                         type={"text"}
                                         fill={true}
+                                        value={link}
+                                        onChange={(e)=>setLink(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -66,6 +101,8 @@ const MeetingModal=({showModal , onRequestClose})=>{
                                         placeholder={"description"}
                                         type={"textarea"}
                                         fill={true}
+                                        value={description}
+                                        onChange={(e)=>setDescription(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -76,6 +113,8 @@ const MeetingModal=({showModal , onRequestClose})=>{
                                         placeholder={"location"}
                                         type={"text"}
                                         fill={true}
+                                        value={location}
+                                        onChange={(e)=>setLocation(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -85,6 +124,8 @@ const MeetingModal=({showModal , onRequestClose})=>{
                                         label={"Date"}
                                         type={"date"}
                                         fill={true}
+                                        value={date}
+                                        onChange={(e)=>setDate(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -92,6 +133,7 @@ const MeetingModal=({showModal , onRequestClose})=>{
                                 <Button 
                                     text={"SCHEDULE"}
                                     isSecondary={true}
+                                    onClick={handleMeet}
                                 />
                             </div>
                         </div>
