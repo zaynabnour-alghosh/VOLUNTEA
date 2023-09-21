@@ -8,29 +8,30 @@ import { sendRequest } from "../../../../config/request";
 const OpportunityDetails=({opportunity})=>{
     const [selectedTab, setSelectedTab] = useState('applications');
     const [feed, setFeed] = useState([]);
+    const [app, setApp] = useState([]);
     
     const handleTabClick = (tab) => {
     setSelectedTab(tab);
   };
-    // useEffect(() => {
-    //     const getApp = async () => {
-    //         try {
-    //             const response = await sendRequest({
-    //             method:"GET",
-    //             route: `all-opportunities/${opportunity.org_id}`,
-    //             body:" ",
-    //             })
+    useEffect(() => {
+        const getApp = async () => {
+            try {
+                const response = await sendRequest({
+                method:"GET",
+                route: `admin/applications/${opportunity.id}`,
+                body:" ",
+                })
                 
-    //         if (response) {
-    //             console.log(response.data);
-    //             setOpportunities(response.data);
-    //         }
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     } 
-    //     getApp();
-    // }, []);
+            if (response) {
+                console.log(response);
+                setApp(response.applicants);
+            }
+            } catch (error) {
+                console.log(error);
+            }
+        } 
+        getApp();
+    }, []);
     useEffect(() => {
             const getFeed = async () => {
                 try {
@@ -64,8 +65,8 @@ const OpportunityDetails=({opportunity})=>{
                         </div>
                     </div>
                     <div className="opp-details-content flex column fullwidth">
-                        {selectedTab === 'applications' && <div className="total-opp-app fullwidth flex ">Total: <span>4</span> </div>}
-                        {selectedTab === 'applications' && <OpportunityApplications/>}
+                        {selectedTab === 'applications' && <div className="total-opp-app fullwidth flex ">Total: <span>{app.length}</span> </div>}
+                        {selectedTab === 'applications' && <OpportunityApplications app={app} setApp={setApp} oppId={opportunity.id}/>}
                         {selectedTab === 'feedback' &&  <OpportunityFeedback feed={feed}/>}
                     </div>
                 </div>
