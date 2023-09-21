@@ -28,9 +28,9 @@ class OpportunityController extends Controller
         $request->validate([
             'topic' => 'required|string|max:255',
             'description' => 'required|string|max:1500',
-            'opportunity_date' => 'required|date',
+            'opportunity_date' => 'required',
             'location' => 'required|string|max:255',
-            'nb_volunteers' => 'required|integer'
+            
         ]);
 
         $coordinator=Auth::user();
@@ -44,12 +44,13 @@ class OpportunityController extends Controller
         else{
             if($id){
                 $opportunity=Opportunity:: find($id);
-                $tasks=Task::all()->where('opp_Id',$id);
+                Task::where('opp_id', $id)->delete();
             }
             else{
                 $opportunity=new Opportunity;
-                $tasks=$request->tasks;                
+                                
             }
+            $tasks=$request->tasks;
             $opportunity->topic=$request->topic;
             $opportunity->description=$request->description;
             $opportunity->opportunity_date=$request->opportunity_date;
@@ -61,9 +62,9 @@ class OpportunityController extends Controller
 
             
             foreach($tasks as $t){
-                if(!$id){
-                    $task=new Task;
-                }
+                
+                $task=new Task;
+            
                 $task->description=$t;
                 $task->opp_id=$opportunity->id;
                 $task->save();
