@@ -5,6 +5,7 @@ import { sendRequest } from "../../../../config/request";
 import OpportunityModal from "../../ui/OpportunityModal";
 import OpportunityCard from "../../ui/OpportunityCard";
 const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunities,setOpportunities})=>{
+    const [opportunity, setOpportunity] = useState(null);
     useEffect(() => {
         const getOpp = async () => {
 			try {
@@ -41,6 +42,9 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunit
                     toggleOpportunityDetails={toggleOpportunityDetails}
                     buttons={true}
                     opportunity={opportunity}
+                    setOpportunity={setOpportunity}
+                    setOpportunities={setOpportunities}
+                    opportunities={opportunities}
                     orgId={orgId}
                 />
             ))}

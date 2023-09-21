@@ -7,7 +7,7 @@ import Button from './../../common/button';
 import ModalComponent from "../../common/modal";
 import Input from "../../common/input";
 import { sendRequest } from "../../../../config/request";
-const OpportunityModal=({showOppModal , onRequestClose,edit,opp,setOpportunities,opportunities})=>{
+const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setOpportunity,setOpportunities,opportunities})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -48,11 +48,11 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,setOpportunities
     console.log(orgId);
     const [topic, setTopic] = useState(opp ? opp.topic : "");
     const [description, setDescription] = useState(opp ? opp.description : "");
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState(opp ? opp.opportunity_date : "");
 
     const [location, setLocation] = useState(opp ? opp.location : "");
-    const [nbVolunteers, setNbVolunteers] = useState(opp ? opp.location : "");
-    const [tasks, setTasks] = useState(opp ? opp.tasks : []);
+    const [nbVolunteers, setNbVolunteers] = useState(opp ? opp.nb_volunteers : "");
+    const [tasks, setTasks] = useState([]);
     const [task, setTask] = useState('');
     
     const handleTaskChange = () => {        
@@ -94,6 +94,41 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,setOpportunities
           } 
        
     }
+    const update=async()=>{
+        if(opp &&edit){
+            const oppData=new FormData();
+            oppData.append('topic',topic);
+            oppData.append('description',description);
+            oppData.append('opportunity_date',date);
+            oppData.append('location',location);
+            oppData.append('nb_volunteers',parseInt(nbVolunteers));
+            oppData.append('org_id',orgId);
+            tasks.forEach((task,index) => {
+            oppData.append(`tasks[${index}]`,task);
+        });
+
+            console.log("to edit:",opp);
+            try {
+                const response = await sendRequest({
+                  method: 'POST',
+                  route: `admin/opportunity/${opp.id}`,
+                  body: oppData
+                });
+          
+                if (response) {
+                    console.log(response)
+                    setOpportunity(response.data);
+                    
+                    setOpportunities(prevOpportunities => prevOpportunities.map(
+                        opp => opp.id === response.data.id ? response.data : opp
+                    ));
+                    onRequestClose();
+                }
+              } catch (error) {
+                console.log('Error adding opportunity:', error);
+              } 
+        }
+    }
 
     
     
@@ -107,7 +142,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,setOpportunities
                             text={edit? 'EDIT':'ADD'}
                             isSecondary={true}
                             medium={true}
-                            onClick={add}
+                            onClick={edit?update:add}
                         />
                     </div>
                     <div className="new-opp-form-container">

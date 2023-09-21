@@ -5,7 +5,7 @@ import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
 import FeedbackModal from "../FeedbackModal";
 
-const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied ,opportunity,setSelectedOpportunity})=>{
+const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied ,opportunity,setSelectedOpportunity,setOpportunity,opportunities,setOpportunities})=>{
     const {
         topic,
         description,
@@ -59,7 +59,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
                         <Button
                             text={"EDIT"}
                             isPrimary={true}  
-                            onClick={showOppModal}                                      
+                            onClick={()=>{showOppModal(); setSelectedOpportunity(prevOpportunity=>opportunity)} }                                      
                             medium={true}
                         />
                         <Button
@@ -140,6 +140,10 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
                     onRequestClose={toggleOppModal}
                     edit={true}
                     orgId={orgId}
+                    opp={opportunity}
+                    setOpportunity={setOpportunity}
+                    opportunities={opportunities}
+                    setOpportunities={setOpportunities}
                 />}
             {isFeedModalOpen && 
                 <FeedbackModal 
