@@ -131,7 +131,7 @@ class OrganizationController extends Controller
         ]);
     }
     public function getOrganizationInfo($id){
-        $profile=OrganizationProfile::find($id);
+        $profile=OrganizationProfile::where('org_id',$id)->first();
         $org=Organization::find($id);
         $impacts=$org->impacts;
         $missions=$org->missions;
