@@ -2,7 +2,6 @@ import React from "react";
 import './style.css';
 import { useEffect,useState } from "react";
 import { sendRequest } from "../../../../config/request";
-import OpportunityModal from "../../ui/OpportunityModal";
 import OpportunityCard from "../../ui/OpportunityCard";
 const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunities,setOpportunities})=>{
     const [opportunity, setOpportunity] = useState(null);
@@ -25,13 +24,7 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunit
 		} 
         getOpp();
     }, []);
-    const handleAddOpportunityToProject = (newOpportunity) => {
-        console.log("new opp:",newOpportunity);
-        setOpportunities((prevOpportunities) => [...prevOpportunities, newOpportunity]);
-      };
-
-   
-   
+       
     return(
         <div className="opp-container flex column gap-40">
             {/* <OpportunityCard toggleOpportunityDetails={toggleOpportunityDetails} buttons={true}/> */}
@@ -48,8 +41,6 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunit
                     orgId={orgId}
                 />
             ))}
-
-
         </div>
     );
 }
