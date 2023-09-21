@@ -12,7 +12,7 @@ const OpportunityFeedback=(feed)=>{
                             image={f.avatar?`http://localhost:8000/storage/images/profiles/${f.avatar}`:''}
                             top={f.name}
                             info={f.feed}
-                            date={"April 22.2023"}
+                            date={f.formatted}
                             isWide={true}  
                         />
                     </div>
