@@ -5,7 +5,9 @@ import './style.css';
 import {icons} from "../../icons.js";
 import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button";
+import { useNavigate } from "react-router-dom";
 const SearchLanding=({onToggle})=>{
+    const navigate=useNavigate();
     return (
         <div className="fill-registarion-container page flex center">
             <div className="fill-form flex column center">
@@ -25,6 +27,7 @@ const SearchLanding=({onToggle})=>{
                             text={"Search"} 
                             isLight={true}
                             medium={true}
+                            onClick={()=>{navigate('/voluntea/orgname');}}
                         />
                     </div>
                 

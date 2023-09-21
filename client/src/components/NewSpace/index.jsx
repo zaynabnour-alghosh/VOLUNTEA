@@ -6,14 +6,20 @@ import { useNavigate } from 'react-router-dom';
 import "./style.css";
 import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button/index.jsx";
+import ConfirmationModal from "../../main/components/ui/ConfirmationModal/index.jsx";
 import { sendRequest } from "../../config/request.js";
-const NewSpace=({onToggle})=>{
+const NewSpace=({onToggle,volunteer})=>{
     const navigate = useNavigate();
     const [fullName,setFullName]=useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('')
     const [organizationCode, setOrganizationCode] = useState('');
+    const [user,setUser]=useState(null);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
+    const toggleConfirmationModal = () => {
+        setShowConfirmationModal(!showConfirmationModal);
+    };
 
     const generateRandomCode=()=>{
     const alphanumericChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -25,9 +31,14 @@ const NewSpace=({onToggle})=>{
     }
     setOrganizationCode(result);
     }    
+    const handleVolunteerSignup=()=>{
+        console.log("clicked volunteer");
+        setShowConfirmationModal(true);
+        // navigate('/login')
+    }
 
     const handleAdminSignup=async(e)=>{
-        console.log("clicked");
+        console.log("clicked admin");
         const adminData = new FormData();
 
         adminData.append('name', fullName);
@@ -53,11 +64,17 @@ const NewSpace=({onToggle})=>{
 					response.user.token
 				);
                 localStorage.setItem("org_id",response.user.org.id)
-                setTimeout(() => {navigate(`/personal-info`)},1000);
+                setShowConfirmationModal(true);
+
+                // setTimeout(() => {navigate(`/personal-info`)},1000);
             }
         }catch(error){
             console.log(error)
         }
+    }
+    const fillPersonal=(user)=>{
+        console.log(user);
+        navigate('/personal-info');
     }
     return (
         <div className="fill-registarion-container page flex center">
@@ -65,7 +82,10 @@ const NewSpace=({onToggle})=>{
                 <div><img src={logoS} alt="logoS" /></div>
                 
                 <div className="fill-form-content flex column">
-                    <span><h2>Create Your Space</h2></span>
+                    {volunteer? <span><h2>Join Our Space</h2></span>
+                    :
+                    <span><h2>Create Your Space</h2></span>                    
+                    }
                     <div class="new-space-form flex column pt-10 gap-5">
                         <Input
                             icon={icons['profile']}
@@ -91,6 +111,8 @@ const NewSpace=({onToggle})=>{
                             fill={true}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            join={true}
+                            
 
                         />
                         <Input
@@ -100,6 +122,7 @@ const NewSpace=({onToggle})=>{
                             fill={true}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
+                            join={true}
 
                         />
                     </div>
@@ -120,22 +143,22 @@ const NewSpace=({onToggle})=>{
                             />   
                         </div>
                         <div className="space-btn flex fullwidth row gap-40 center">
-                            <Button 
+                            {!volunteer && <Button 
                                 onClick={generateRandomCode} 
                                 text={"Generate"} 
                                 isLight={true}
                                 medium={true}
-                            />
+                            />}
                             <Button 
-                                onClick={handleAdminSignup} 
+                                onClick={volunteer? handleVolunteerSignup:handleAdminSignup} 
                                 text={"Next"} 
                                 isLight={true}
                                 medium={true}
                             /> 
                         </div>
-                        <div className="option-search">
+                        {!volunteer && <div className="option-search">
                             Looking for an organization?<span onClick={() => onToggle()}>Look up</span>
-                        </div>
+                        </div>}
 
                     </div>
                                           
@@ -146,6 +169,14 @@ const NewSpace=({onToggle})=>{
                     
                 </div>
             </div>
+            {showConfirmationModal && 
+                <ConfirmationModal 
+                showConfirmationModal={showConfirmationModal}
+                onRequestClose={toggleConfirmationModal}
+                verify={true}
+                setUser={setUser}
+                fillPersonal={fillPersonal}
+                />}
         </div>
     );
 }

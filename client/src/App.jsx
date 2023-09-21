@@ -9,6 +9,7 @@ import InformationForm from './components/OrganizationDetails/InformationForm';
 import Volunteer from './Pages/Volunteer';
 import PersonalInformation from './components/PersonalInformation';
 import Dashboard from './Pages/Dashboard';
+import SignUp from './components/OrganizationComponents/Signup';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path='/fill-organization-info' element={<InformationForm />} />
 
         <Route path='/login' element={<Login/>} />
+        <Route path='/signup' element={<SignUp/>} />
+
         <Route path='/voluntea/orgname' element={<OrganizationLanding/>} />
         <Route path='/voluntea/:org_id/admin/dashboard' element={<Dashboard role="admin"/>} />
         <Route path='/voluntea/:org_id/volunteer/dashboard' element={<Dashboard role="volunteer"/>} />

@@ -1,8 +1,12 @@
 import React from "react";
 import './style.css';
+import { useState } from "react";
+import Input from "../../common/input";
+import {icons} from "../../../../icons.js";
 import Button from "../../common/button";
 import ModalComponent from "../../common/modal";
-const ConfirmationModal=({body,confirm,cancel,showConfirmationModal , onRequestClose})=>{
+import { sendRequest } from "../../../../config/request";
+const ConfirmationModal=({body,confirm,cancel,fillPersonal,setUser,showConfirmationModal , onRequestClose,verify})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -31,12 +35,66 @@ const ConfirmationModal=({body,confirm,cancel,showConfirmationModal , onRequestC
             width:'100%'
         }
     };
+    const [email, setEmail] = useState("");
+    const [token, setToken] = useState("");
+    const [message,setMessage]=useState('');
+    const verifyUser=async()=>{
+        if (verify){
+            const data=new FormData();
+            data.append('email',email);
+            data.append('token',token);
+            try{
+                const response=await sendRequest({
+                    method:"POST",
+                    route:"/guest/verify-email",
+                    body:data
+                });
+                if(response){
+                    console.log(response);
+                   
+                    if(response.verification_status==true)
+                    setMessage(response.message);
+                    setUser(response);
+                    fillPersonal(response.user);
+
+
+
+                    // setTimeout(() => {navigate(`/personal-info`)},1000);
+                }
+            }catch(error){
+                console.log(error)
+            }
+        }
+    }
     return(
         <div>
             <ModalComponent customStyles={customStyles} showModal={showConfirmationModal} onRequestClose={onRequestClose} >
                 <div className="confirmation-modal-cotainer flex column center">
-                    <div className="confirm-body flex p-30 center">
-                        <p>Are you sure you want to proceed with this action?</p>
+                    <div className="confirm-body flex  column p-30 center">
+                       {verify && <>
+                        <p>We sent you a verification email</p>
+                            <div className="verify-content pt-20">
+                                <Input 
+                                type={"email"} 
+                                placeholder={"Email"}
+                                icon={icons['email']}
+                                fill={true}
+                                value={email}
+                                onChange={(e)=>setEmail(e.target.value)}
+                            />
+                            <Input 
+                                type={"text"} 
+                                placeholder={"Token"}
+                                icon={icons['key']}
+                                fill={true}
+                                value={token}
+                                onChange={(e)=>setToken(e.target.value)}
+                            /> 
+                            </div>
+                        {message && <h4>{message}</h4>}
+                            
+                        </>}
+                        {!verify &&<p>Are you sure you want to proceed with this action?</p>}
                     </div>
                     <div className="confirm-actions fullwidth flex row gap-30 center p-10">
                         <Button
@@ -49,7 +107,7 @@ const ConfirmationModal=({body,confirm,cancel,showConfirmationModal , onRequestC
                             text={"Confirm"}
                             isPrimary={true} 
                             medium={true}
-                            
+                            onClick={verify?verifyUser:onRequestClose}                            
                         />
                         </div>
                 </div>

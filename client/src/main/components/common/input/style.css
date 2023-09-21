@@ -69,6 +69,20 @@
     outline-style: none;
     align-items: center;
 }
+.join{
+    border-color: var(--color-primary-dark);
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    outline-color: var(--color-primary-dark);
+    outline-style: none;
+    border-radius: 5px;
+    align-items: center;
+}
+.join input:focus{
+    border-style: none;
+    border-color: transparent;
+}
 .no-container input{
     border-style: none;
 }

@@ -24,20 +24,7 @@
 .content-form{
     gap:15px;
 }
-/* .content-form input{
-    height:32px;
-    padding:10px;
-    background-color:transparent;
-    border-color:rgb(194, 200, 208);
-    border-style: solid;
-    border-width: 0px;
-    box-sizing: border-box;
-    color:rgb(45, 51, 58);
-    outline-color:rgb(45, 51, 58);
-    outline-style: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
-} */
+
 .content-form span{
     color:rgb(194, 200, 208);
     
@@ -54,9 +41,7 @@
     font-size: 12px;
     color:rgb(146, 152, 159);
 }
-/* .pwd{
-    justify-content: space-between;
-} */
+
 .pwd input{
     padding-left: 15px;
     border-style: none;

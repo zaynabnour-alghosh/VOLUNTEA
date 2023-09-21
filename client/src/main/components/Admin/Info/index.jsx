@@ -43,11 +43,12 @@ const Info=(orgId)=>{
     }
 
     useEffect(() => {
+        const id=localStorage.getItem("organizationId");
         const getOrg = async () => {
 			try {
 				const response = await sendRequest({
                 method:"GET",
-                route: `organization-info/1`,
+                route: `organization-info/${id}`,
                 body:" ",
                 })
                 

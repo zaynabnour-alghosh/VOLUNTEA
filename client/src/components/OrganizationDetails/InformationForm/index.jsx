@@ -113,7 +113,7 @@ const InformationForm=()=>{
             });
             if(response){
                 console.log(response);
-                setTimeout(() => {navigate(`/voluntea/orgname/admin`)},1000);
+                setTimeout(() => {navigate(`/login`)},1000);
             }
         }catch(error){
             console.log(error)

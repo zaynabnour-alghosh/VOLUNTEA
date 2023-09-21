@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import Admin from "../Admin";
 import Volunteer from "../Volunteer";
 const Dashboard=({ role })=>{
-    const { org_id: orgId } = useParams();
-    localStorage.setItem("orgId",orgId);
+    // const {orgId } = useParams();
+    const orgId=localStorage.getItem("organizationId");
     return(
         <div>
             {role =='admin' && (

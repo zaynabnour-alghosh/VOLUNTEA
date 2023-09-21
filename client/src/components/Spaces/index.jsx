@@ -42,13 +42,15 @@ const SpaceModal=({onRequestClose,showSpaceModal,organizations,role})=>{
     };
     const navigate=useNavigate();
     const handleCardClick = (role, org_id) => {
-        console.log("card");
+        console.log("space org",org_id);
         console.log(role);
         if (role ==1) {
             navigate(`/voluntea/${org_id}/admin/dashboard`);
+            
         }else if (role== 2) {
             navigate(`/voluntea/${org_id}/volunteer/dashboard`);
         }
+        localStorage.setItem('organizationId',org_id);
     };
     return(
         <div >

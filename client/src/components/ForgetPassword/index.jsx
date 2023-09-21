@@ -43,7 +43,6 @@ const ForgetPassword=({onToggle})=>{
                                     placeholder={"Password"}
                                     icon={icons['lock']}
                                     noBorder={true}
-                                    // no_container={true}
                                 />
                             </div>
                             <div className="btn-forget">

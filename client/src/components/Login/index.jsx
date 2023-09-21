@@ -81,17 +81,19 @@ const Login=()=>{
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="login-row pwd flex">
-                            <div>
-                            <Input 
-                                type={"password"} 
-                                placeholder={"Password"}
-                                icon={icons['lock']}
-                                noBorder={true}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                
-                            />
+                        <div className="flex">
+                            <div className="login-row fullwidth flex">
+                            <Input
+                            type={"password"}
+                            icon={icons['key']}
+                            placeholder={"Password"}
+                            fill={true}
+                            value={password}
+                            noBorder={true}
+                            onChange={(e) => setPassword(e.target.value)}
+                            
+
+                        />
                             </div>
                         </div>
                         <div className="btn-login">
