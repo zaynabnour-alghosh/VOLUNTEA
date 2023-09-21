@@ -174,9 +174,9 @@ class AdminController extends Controller
     }
     public function acceptRequest(Request $request,$action='accept'){
         $admin=Auth::user();
-        $org=Organization::where('admin_id',$admin->id)->first();
-        $code=$org->code;
-        $sign_request=SignupRequest::where('user_id',$request->id)->where('org_code',$code)->first();
+        $org=Organization::where('admin_id',$admin->id)->where('code',$request->code)->first();
+        // $code=$org->code;
+        $sign_request=SignupRequest::where('user_id',$request->id)->where('org_code',$request->code)->first();
         if($action==='accept'){
             $sign_request->status='accepted';
             $sign_request->save();
@@ -186,7 +186,7 @@ class AdminController extends Controller
             $chatroom_admin_user->user_id=$admin->id;
             $chatroom_admin_user->other_user_id=$request->id;
             $chatroom_admin_user->save();
-            $members_ids=SignupRequest::all()->where('org_code',$code)->where('status','accepted')->pluck('user_id');
+            $members_ids=SignupRequest::all()->where('org_code',$request->code)->where('status','accepted')->pluck('user_id');
             foreach($members_ids as $mid){
                 $chatroom_user_member=new Chatroom;
                 $chatroom_user_member->org_id=$org->id;

@@ -145,11 +145,13 @@ class OpportunityController extends Controller
         }
         return response()->json([
             'status'=>'success',
-            'applicats'=>$applicants
+            'applicants'=>$applicants
         ]);
     }  
     public function acceptApplicant(Request $request, $action='accept'){
-        $application=OpportunityApplication::where('opp_id',$request->opp_id)->where('user_id',$request->applicant_id)->first();
+        $application=OpportunityApplication::where('opp_id',$request->opp_id)
+        ->where('user_id',$request->applicant_id)
+        ->where('status','pending')->first();
         if($action==='accept'){
             $application->status='accepted';
             $application->save();
@@ -157,6 +159,7 @@ class OpportunityController extends Controller
                 $opp->nb_volunteers=$opp->nb_volunteers-1;
                 $opp->save();
             return response()->json([
+                'data'=>$application,
                 'message'=>'application accepted'
             ]);
         }
@@ -164,6 +167,7 @@ class OpportunityController extends Controller
             $application->status='rejected';
             $application->save();
             return response()->json([
+                'data'=>$application,
                 'message'=>'application rejected'
             ]);
         }
