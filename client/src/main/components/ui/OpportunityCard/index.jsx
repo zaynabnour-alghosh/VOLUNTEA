@@ -4,9 +4,11 @@ import { useState } from 'react';
 import Button from "../../common/button";
 import OpportunityModal from "../../ui/OpportunityModal";
 import FeedbackModal from "../FeedbackModal";
+import { sendRequest } from "../../../../config/request";
 
 const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied ,opportunity,setSelectedOpportunity,setOpportunity,opportunities,setOpportunities})=>{
     const {
+        id,
         topic,
         description,
         opportunity_date: opportunityDate,
@@ -34,7 +36,27 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
     const toggleFeedModal=()=>{
         setIsFeedModalOpen(!isFeedModalOpen);
     }
-    
+    const handleDelete=async()=>{
+        setSelectedOpportunity(prevOpportunity=>opportunity);
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:`/admin/delete-opportunity/${id}`,
+                body:"",
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setOpportunities(prevOpportunities =>
+                    prevOpportunities.filter(opp => opp.id !== id)
+                  );      
+
+            }
+        }catch(error){
+            console.log(error)
+        }
+
+    }
 
 
     return(
@@ -66,6 +88,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
                             text={"DELETE"}
                             isPrimary={true} 
                             medium={true}
+                            onClick={handleDelete}
                         />
                     </div>
                 </>}
