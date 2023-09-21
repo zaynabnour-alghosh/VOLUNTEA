@@ -2,6 +2,8 @@ import React from "react";
 import './style.css';
 import Button from './../../common/button';
 import ModalComponent from "../../common/modal";
+import { useState } from "react";
+import { sendRequest } from "../../../../config/request";
 import Input from "../../common/input";
 const AnnouncementModal=({showModal , onRequestClose})=>{
     const customStyles = {
@@ -40,6 +42,45 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
         }
     
     };
+    const [header, setHeader] = useState("Event");
+    const [topic, setTopic] = useState("");
+    const [description, setDescription] = useState("");
+    const [date, setDate] = useState("");
+    const [fromTime, setFromTime] = useState("");
+    const [toTime, setToTime] = useState("");
+    const handleHeaderChange = (e) => {
+        setHeader(e.target.value);
+    };
+    const handleAnnounce = async() => {
+        console.log("click");
+        const id=localStorage.getItem("organizationId");
+        const data=new FormData();
+        data.append('org_id',id);        
+        data.append('header',header);
+        data.append('topic',topic);
+        data.append('date_at',date);
+        data.append('description',description);
+        data.append('from',fromTime);
+        data.append("to", toTime);
+
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/admin/new-announcement",
+                body:data,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                onRequestClose();
+
+            }
+        }catch(error){
+            console.log(error)
+        }
+       
+
+        };
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showModal} onRequestClose={onRequestClose} >
@@ -52,15 +93,19 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                             <div className="announcement-card-topic flex column new-announcement-grid-item">
                                 <span className="pt-10">
                                     <label htmlFor="header">Header</label>
-                                    <select name="header" id="" className="pt-10 fullwidth  select header-list">
-                                        <option value="">Event</option>
-                                        <option value="">Opportunity</option>
-                                        <option value="">Reminder</option>
-                                        <option value="">Updates</option>
-                                        <option value="">Emergency</option>
-                                        <option value="">Feedbackent</option>
-                                        <option value="">Resources</option>
-                                        <option value="">Others</option>
+                                    <select name="header" 
+                                        className="pt-10 fullwidth  select header-list"
+                                        value={header}
+                                        onChange={handleHeaderChange}
+                                        >
+                                        <option value="Event">Event</option>
+                                        <option value="Opportunity">Opportunity</option>
+                                        <option value="Reminder">Reminder</option>
+                                        <option value="Updates">Updates</option>
+                                        <option value="Emergency">Emergency</option>
+                                        <option value="Feedbackent">Feedbackent</option>
+                                        <option value="Resources">Resources</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                 </span>
                             </div>
@@ -71,6 +116,8 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                                         placeholder={"topic"}
                                         type={"text"}
                                         fill={true}
+                                        value={topic}
+                                        onChange={(e) => setTopic(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -81,6 +128,8 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                                         placeholder={"decription"}
                                         type={"textarea"}
                                         fill={true}
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -90,6 +139,8 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                                         label={"Date"}
                                         type={"date"}
                                         fill={true}
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -99,6 +150,8 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                                         label={"From"}
                                         type={"time"}
                                         fill={true}
+                                        value={fromTime}
+                                        onChange={(e) => setFromTime(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -108,6 +161,8 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                                         label={"To"}
                                         type={"time"}
                                         fill={true}
+                                        value={toTime}
+                                        onChange={(e) => setToTime(e.target.value)}
                                     />
                                 </span>
                             </div>
@@ -116,6 +171,7 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
                             <Button 
                                 text={"Announce"}
                                 isSecondary={true}
+                                onClick={handleAnnounce}
                             />
                         </div>
                     </div>
