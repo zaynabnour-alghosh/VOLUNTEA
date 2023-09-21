@@ -99,6 +99,8 @@ class OpportunityController extends Controller
     
         $feed=Feedback::where('opp_id',$id)->get();
         foreach($feed as $f){
+        $formatted_date='';
+        $formatted_date = Carbon::parse($f->created_at)->format('F d, Y');
         $volunteer=$f->volunteer;
         $name=$volunteer->name;
         
@@ -110,6 +112,8 @@ class OpportunityController extends Controller
             'volunteer_id'=>$f->volunteer_id,
             'name'=>$name,
             'avatar'=>$avatar,
+            'date'=>$f->created_at,
+            'formatted'=>$formatted_date
         ];
         }
 
