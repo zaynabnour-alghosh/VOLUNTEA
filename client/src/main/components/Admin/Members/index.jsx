@@ -15,12 +15,7 @@ const Members=({toggleMemberProfile,members})=>{
                     <div key={index}>
                         <MemberRow toggleMemberProfile={toggleMemberProfile} member={member}/>
                     </div>
-
-                                        
                 ))}
-                {/* <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/> */}
             </div>
         </div>
     );

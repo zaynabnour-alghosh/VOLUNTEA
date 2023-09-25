@@ -6,7 +6,7 @@ import Input from "../input";
 import {icons} from "../../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
-const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov,setOpportunities})=>{
+const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov,setOpportunities,onSearchChange})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
@@ -106,6 +106,10 @@ const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov,
                         className="search"
                         search={true}
                         icon={icons['search']}
+                        onChange={(e)=>{
+                            const searchTerm=e.target.value;
+                            onSearchChange(searchTerm);
+                        }}
                        
                     />
                 </div>

@@ -33,9 +33,16 @@ const AdminDashboard=({orgId})=>{
     const [selectedOpportunity, setSelectedOpportunity] = useState(null); 
     const [opportunities, setOpportunities] = useState([]);
     const [members,setMembers]=useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const handleOpportunitySelect = (opportunity) => {
         setSelectedOpportunity(opportunity);
       };
+    const handleSearchChange = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    };
+    const filteredMembers = members.filter((member) =>
+    member.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
     
     useEffect(() => {
         setShowNotificationModal(false);
@@ -104,7 +111,7 @@ const AdminDashboard=({orgId})=>{
                                 <div className="dash-header">
                                     {selectedTab==='Dashboard' && <Header title={"ADMIN DASHBOARD"}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true} setOpportunities={setOpportunities}/>}
-                                    {selectedTab=='Members' && <Header title={"MEMBERS"} search={true}/>}
+                                    {selectedTab=='Members' && <Header title={"MEMBERS"} search={true} onSearchChange={handleSearchChange}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
                                     {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
                                     {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
@@ -112,7 +119,7 @@ const AdminDashboard=({orgId})=>{
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
                                     {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity} opportunities={opportunities} setOpportunities={setOpportunities} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
-                                    {selectedTab === 'Members' && <Members members={members} toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
+                                    {selectedTab === 'Members' && <Members members={filteredMembers} toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream orgId={orgId} members={members}/>}
                                     {selectedTab === 'Profile' && <Profile />}
