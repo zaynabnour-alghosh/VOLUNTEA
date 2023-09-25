@@ -88,7 +88,6 @@ class AdminController extends Controller
             'header' => 'required|string|max:255',
             'topic' => 'required|string|max:255',
             'description' => 'required|string|max:1500',
-            'date_at'=>'date'
         ]);
         $admin=Auth::user();
         $announcemnt=new Announcement;
@@ -114,15 +113,19 @@ class AdminController extends Controller
         }
         if($request->date_at){
             $formatted_date = Carbon::parse($request->date_at)->format('F d, Y');
-        }      
-
-        return response()->json([
+        }    
+        $carbonDate = Carbon::parse($announcemnt->created_at);
+        $a_date = $carbonDate->format('M d Y'); 
+        $a_time = $carbonDate->format('H:i');
+        return response()->json([           
             'status'=>'success',
             'data'=>$announcemnt,
             'admin'=>$admin->name,
             'date'=>$formatted_date,
             'from'=>$formatted_from,
-            'to'=>$formatted_to
+            'to'=>$formatted_to,
+            'on'=>$a_date,
+            'at'=>$a_time
         ]);
     }
     public function scheduleMeeting(Request $request){
@@ -130,7 +133,6 @@ class AdminController extends Controller
             'link' => 'required|string|max:500',
             'description' => 'required|string|max:1500',
             'date_at'=>'required|date',
-            'location'=>'string|max:500'
         ]);
         $admin=Auth::user();
         $meeting=new Meeting;
@@ -141,12 +143,17 @@ class AdminController extends Controller
         $meeting->date_at=$request->date_at;
         $meeting->location=$request->location;
         $meeting->save();
+        $carbonDate = Carbon::parse($meeting->created_at);
+        $a_date = $carbonDate->format('M d Y'); 
+        $a_time = $carbonDate->format('H:i');
         $formatted_date = Carbon::parse($request->date_at)->format('F d, Y');
         return response()->json([
             'status'=>'success',
             'data'=>$meeting,
             'admin'=>$admin->name,
-            'date'=>$formatted_date
+            'date'=>$formatted_date,
+            'on'=>$a_date,
+            'at'=>$a_time
         ]);
     }
     public function certifyVolunteer(Request $request){
@@ -160,6 +167,10 @@ class AdminController extends Controller
         $certification->opp_id=$request->opp_id;
         $certification->content=$request->content;
         $certification->save();
+        $carbonDate = Carbon::parse($certification->created_at);
+        $a_date = $carbonDate->format('M d Y'); 
+        $a_time = $carbonDate->format('H:i');
+
         $opportunity=Opportunity::find($request->opp_id);
         $certification->topic=$opportunity->topic;
         
@@ -169,7 +180,9 @@ class AdminController extends Controller
         $certification->date=$certification->created_at->format('F d, Y');
         return response()->json([
             'status'=>'success',
-            'data'=>$certification
+            'data'=>$certification,
+            'on'=>$a_date,
+            'at'=>$a_time
         ]);
     }
     public function acceptRequest(Request $request,$action='accept'){

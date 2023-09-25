@@ -66,7 +66,7 @@ class CommonController extends Controller
         }
         return response()->json([
             'status'=>'succuess',
-            'mambers'=>$members
+            'members'=>$members
         ]);
     }
     public function getStream($id){
