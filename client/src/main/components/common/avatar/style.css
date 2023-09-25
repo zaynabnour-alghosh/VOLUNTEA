@@ -74,3 +74,8 @@
 .img-info-combo{
     align-items: center;
 }
+.avatarcard-desc a{
+    padding: 0px;
+    color: var(--stroke_action);
+    text-decoration: underline;
+}

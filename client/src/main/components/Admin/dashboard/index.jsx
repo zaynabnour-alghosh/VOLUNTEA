@@ -114,7 +114,7 @@ const AdminDashboard=({orgId})=>{
                                     {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity} opportunities={opportunities} setOpportunities={setOpportunities} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
-                                    {selectedTab === 'Stream' && <Stream  members={members}/>}
+                                    {selectedTab === 'Stream' && <Stream orgId={orgId} members={members}/>}
                                     {selectedTab === 'Profile' && <Profile />}
 
                                 </div>

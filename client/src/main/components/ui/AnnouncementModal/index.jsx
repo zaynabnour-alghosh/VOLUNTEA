@@ -5,7 +5,7 @@ import ModalComponent from "../../common/modal";
 import { useState } from "react";
 import { sendRequest } from "../../../../config/request";
 import Input from "../../common/input";
-const AnnouncementModal=({showModal , onRequestClose})=>{
+const AnnouncementModal=({showModal , onRequestClose,onUpdateStream})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -73,6 +73,7 @@ const AnnouncementModal=({showModal , onRequestClose})=>{
             if(response){
                 console.log(response);
                 onRequestClose();
+                onUpdateStream();
             }
             }catch(error){
                 console.log(error)
