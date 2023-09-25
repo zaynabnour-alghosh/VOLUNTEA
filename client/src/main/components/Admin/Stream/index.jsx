@@ -5,7 +5,7 @@ import StreamTab from "../../common/streamtab";
 import AnnouncementModal from "../../ui/AnnouncementModal";
 import MeetingModal from "../../ui/MeetingModal";
 import CertificationModal from "../../ui/CertificationModal";
-const Stream = () => {
+const Stream = ({members}) => {
   const [selectedTab, setSelectedTab] = useState("Stream");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -92,6 +92,7 @@ const Stream = () => {
                 {selectedTab === 'Certification' && <CertificationModal 
                 showModal={isModalOpen}
                 onRequestClose={toggleModal}
+                members={members}
                 />}
             </div>        
         </div>

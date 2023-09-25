@@ -11,6 +11,7 @@ import Stream from "../Stream";
 import Profile from "../../ui/Profile";
 import OpportunityDetails from "../../ui/OpportunityDetails";
 import MemberProfile from "../../ui/MemberProfile";
+import { sendRequest } from "../../../../config/request";
 
 const AdminDashboard=({orgId})=>{
     // console.log('id',orgId);
@@ -31,7 +32,7 @@ const AdminDashboard=({orgId})=>{
     const [showMemberProfile, setShowMemeberProfile] = useState(false);  
     const [selectedOpportunity, setSelectedOpportunity] = useState(null); 
     const [opportunities, setOpportunities] = useState([]);
-
+    const [members,setMembers]=useState([]);
     const handleOpportunitySelect = (opportunity) => {
         setSelectedOpportunity(opportunity);
       };
@@ -65,6 +66,26 @@ const AdminDashboard=({orgId})=>{
             setShowMemeberProfile(false);
         }
     }
+    const id=localStorage.getItem('organizationId');
+    useEffect(() => {
+        const getMembers=async()=>{
+        try{
+            const response=await sendRequest({
+                method:"GET",
+                route:`members/${id}`,
+                body:"",
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setMembers(response.members);
+            }
+            }catch(error){
+                console.log(error)
+            }
+        }
+        getMembers();
+    }, []);
     return(
         <div>
             <div className="dash light">
@@ -93,7 +114,7 @@ const AdminDashboard=({orgId})=>{
                                     {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity} opportunities={opportunities} setOpportunities={setOpportunities} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
-                                    {selectedTab === 'Stream' && <Stream />}
+                                    {selectedTab === 'Stream' && <Stream  members={members}/>}
                                     {selectedTab === 'Profile' && <Profile />}
 
                                 </div>

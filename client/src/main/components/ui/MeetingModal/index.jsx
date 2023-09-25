@@ -56,8 +56,6 @@ const MeetingModal=({showModal , onRequestClose})=>{
         data.append('description',description);
         data.append('date_at',date);
         data.append('location',location);
-       
-
         try{
             const response=await sendRequest({
                 method:"POST",
