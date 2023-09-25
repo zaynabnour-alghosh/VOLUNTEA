@@ -94,27 +94,6 @@ useEffect(() => {
                             />
                         </div>
                     ))}
-
-
-
-
-                    
-                    {/* <AvatarCard
-                    notice={"Admin posted a new announcement"}
-                    top={"Reminder"}
-                    info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                    time={"12:45"}
-                    date={"April 22.2023"} 
-                    isWide={true}
-                    />
-                    <AvatarCard
-                    notice={"Admin posted a new announcement"}
-                    top={"Reminder"}
-                    info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                    time={"12:45"}
-                    date={"April 22.2023"} 
-                    isWide={true}
-                    /> */}
                 </div>
                 {selectedTab === 'Announcement' && <AnnouncementModal 
                 showModal={isModalOpen}
@@ -124,6 +103,7 @@ useEffect(() => {
                {selectedTab === 'Meeting' && <MeetingModal 
                 showModal={isModalOpen}
                 onRequestClose={toggleModal}
+                onUpdateStream={fetchAndUpdateStream}
                 />}
                 {selectedTab === 'Certification' && <CertificationModal 
                 showModal={isModalOpen}

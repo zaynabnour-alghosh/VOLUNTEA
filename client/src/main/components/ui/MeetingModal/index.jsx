@@ -5,7 +5,7 @@ import Input from "../../common/input";
 import ModalComponent from "../../common/modal";
 import { sendRequest } from "../../../../config/request";
 import { useState } from "react";
-const MeetingModal=({showModal , onRequestClose})=>{
+const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -66,6 +66,7 @@ const MeetingModal=({showModal , onRequestClose})=>{
             if(response){
                 console.log(response);
                 onRequestClose();
+                onUpdateStream();
             }
             }catch(error){
                 console.log(error)
