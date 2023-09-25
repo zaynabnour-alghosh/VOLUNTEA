@@ -106,6 +106,7 @@ const Header=({title,buttons,search,avatar,volunteer_pov,name, joined,admin_pov,
                         className="search"
                         search={true}
                         icon={icons['search']}
+                       
                     />
                 </div>
                 

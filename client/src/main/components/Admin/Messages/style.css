@@ -67,4 +67,9 @@
 }
 .member-search{
     width: 90%;
+    padding-left: 10px;
+
+}
+.member-chat-search input:focus{
+    border-style: none;
 }

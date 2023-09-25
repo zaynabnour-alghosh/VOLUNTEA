@@ -2,7 +2,7 @@ import React from "react";
 import './style.css';
 import MemberRow from "../../ui/MemberRow";
 
-const Members=({toggleMemberProfile})=>{
+const Members=({toggleMemberProfile,members})=>{
     return(
         <div className="member-grid">
             <div className="member-row members-top">
@@ -11,10 +11,16 @@ const Members=({toggleMemberProfile})=>{
                 <div>Action</div>
             </div>
             <div className="members-content">
+                {members.map((member, index) => (
+                    <div key={index}>
+                        <MemberRow toggleMemberProfile={toggleMemberProfile} member={member}/>
+                    </div>
+
+                                        
+                ))}
+                {/* <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
                 <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
-                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/>
+                <MemberRow toggleMemberProfile={toggleMemberProfile} certify={true}/> */}
             </div>
         </div>
     );
