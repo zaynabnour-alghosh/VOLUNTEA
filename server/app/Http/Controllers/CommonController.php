@@ -77,9 +77,15 @@ class CommonController extends Controller
             return strtotime($a['created_at']) - strtotime($b['created_at']);
         });
         foreach ($stream as &$s) {
+            if (isset($s['from']) && isset($s['to'])) {
+                $s['from'] = \DateTime::createFromFormat('H:i:s', $s['from'])->format('h:i A');
+                $s['to'] = \DateTime::createFromFormat('H:i:s', $s['to'])->format('h:i A');
+            }
             $admin = User::find($s['admin_id']);
             $s['admin_name'] = $admin ? $admin->name:' ';
-            $s['created_at'] = date('F d, Y 00:00', strtotime($s['created_at']));
+            $dateTime = new \DateTime($s['created_at']);
+            $s['date'] = $dateTime->format('F d, Y');
+            $s['time'] = $dateTime->format('h:i A');
         }
         return response()->json([
             'status'=>'succuess',
