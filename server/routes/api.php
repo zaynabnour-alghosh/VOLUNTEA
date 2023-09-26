@@ -79,4 +79,6 @@ Route::group(["prefix" => "guest"], function(){
     Route::post("password/reset/verify",[PasswordResetController::class, "resetPassword"]);
 });
     Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);
+    Route::get("organization-landing/{code}", [OrganizationController::class, "getOrganizationLanding"]);
+
 

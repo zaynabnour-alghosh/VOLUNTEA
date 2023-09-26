@@ -153,6 +153,41 @@ class OrganizationController extends Controller
             ]);
         }
     }
+    public function getOrganizationLanding($code){
+        $org=Organization::where('code',$code)->first();
+        $profile=OrganizationProfile::where('org_id',$org->id)->first();
+        $impacts=$org->impacts;
+        $missions=$org->missions;
+        $events=$org->events;
+       
+        if ($profile){
+            return response()->json([
+                'status'=>'success',
+                'data'=>$profile,
+                'impacts'=>$impacts,
+                'missions'=>$missions,
+                'events'=>$events
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>'failure',
+                'message'=>'An error has occured, Invalid Input'
+            ]);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function editOrganizationInfo(Request $request){
         $user=Auth::user();
         $org_id = $request->org_id;

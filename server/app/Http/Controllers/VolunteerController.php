@@ -63,7 +63,7 @@ class VolunteerController extends Controller
             $app->status='pending';
             $app->save();
             return response()->json([
-                'status'=>'success',
+                'status'=>'pending',
                 'message'=>'your application request has been sent successfully'
             ]);
         }
@@ -87,7 +87,7 @@ class VolunteerController extends Controller
             ]);
         }
     }
-    public function Feedback($id){
+    public function getFeedback($id){
         $org=Organization::find($id);
         $opp_arr=$org->opportunities;
         $feedback=[];
