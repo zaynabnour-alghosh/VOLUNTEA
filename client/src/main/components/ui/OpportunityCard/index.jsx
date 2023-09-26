@@ -208,6 +208,7 @@ const OpportunityCard=({ toggleOpportunityDetails , setApplications, buttons ,or
                 <FeedbackModal 
                     showFeedModal={isFeedModalOpen}
                     onRequestClose={toggleFeedModal}
+                    id={id}
                 />}
         </div>
     );

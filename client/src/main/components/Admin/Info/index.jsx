@@ -9,7 +9,7 @@ import ImpactModal from "../../../../components/OrganizationDetails/ImpactModal"
 import MissionModal from "../../../../components/OrganizationDetails/MissionModal";
 import OrgEventModal from "../../../../components/OrganizationDetails/EventModal";
 import { sendRequest } from "../../../../config/request";
-const Info=(orgId)=>{
+const Info=({orgId})=>{
     const [orgInfo, setOrgInfo] = useState(null);
     const [name, setName] = useState(orgInfo ? orgInfo.name: "");
     const [description, setDescription] = useState(orgInfo ? orgInfo.description : "");

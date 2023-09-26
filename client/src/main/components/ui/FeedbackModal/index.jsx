@@ -3,7 +3,9 @@ import './style.css';
 import Button from "../../common/button";
 import ModalComponent from "../../common/modal";
 import Input from "../../common/input";
-const FeedbackModal=({showFeedModal , onRequestClose})=>{
+import { sendRequest } from "../../../../config/request";
+import { useEffect ,useState} from "react";
+const FeedbackModal=({showFeedModal , onRequestClose,id})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -32,13 +34,45 @@ const FeedbackModal=({showFeedModal , onRequestClose})=>{
             width:'100%'
         }
     };
+    const [feed, setFeed] = useState("");
+
+    const handleSendFeed = async () => {
+        const feed=new FormData();
+        feed.append('feedback',feed);
+        try {
+            const response = await sendRequest({
+            method:"POST",
+            route: `volunteer/new-feedback/${id}`,
+            body:feed,
+            })
+            
+        if (response) {
+            console.log(response);
+            onRequestClose();
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+
+
+
+
+
     return(
         <div>
             <ModalComponent customStyles={customStyles} showModal={showFeedModal} onRequestClose={onRequestClose} >
                 <div className="confirmation-modal-cotainer flex column center">
                     <div className="confirm-body fullwidth flex column gap-20 p-30 center">
                         <p>We greatly value your input and feedback!</p>
-                        <Input  type={"text"} placeholder={"Write your feedback.."}/>
+                        <Input  
+                            type={"text"} 
+                            placeholder={"Write your feedback.."}
+                            value={feed}
+                            onChange={(e)=>setFeed(e.target.value)}
+                            />
                     </div>
                     <div className="confirm-actions fullwidth flex row gap-30 center p-10">
                         <Button
@@ -51,6 +85,7 @@ const FeedbackModal=({showFeedModal , onRequestClose})=>{
                             text={"Send"}
                             isPrimary={true} 
                             medium={true}
+                            onClick={handleSendFeed}
                             
                         />
                         </div>
