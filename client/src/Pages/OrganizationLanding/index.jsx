@@ -11,7 +11,7 @@ import MissionSection from '../../components/OrganizationComponents/MissionSecti
 import EventSection from '../../components/OrganizationComponents/EventSection';
 import {FaPhone} from 'react-icons/fa';
 import {MdKeyboardDoubleArrowRight} from 'react-icons/md';
-const OrganizationLanding=({orgInfo})=>{
+const OrganizationLanding=({orgInfo,events,missions,impacts})=>{
     
     console.log("info" ,orgInfo);
     const [scrolling, setScrolling] = useState(false);
@@ -54,22 +54,22 @@ const OrganizationLanding=({orgInfo})=>{
                 </div>
             </div>
             <div id="about-us" >
-            <   HeroSection data={orgInfo?.data}/>
+            <   HeroSection data={orgInfo}/>
             </div> 
             <div id="impact" className='light'>
-                <ImpactSection data={orgInfo?.impacts}/>
+                <ImpactSection data={events}/>
             </div>
             <div id="mission" className='light'>
-                <MissionSection data={orgInfo?.missions}/>
+                <MissionSection data={missions}/>
             </div>
             <div id="event" className='light'>
-                <EventSection data={orgInfo?.events}/>
+                <EventSection data={impacts}/>
             </div>
             <div id="contact " className='light'>
                <div className="footer-container flex column">
                     <div className="footer-content flex">
                         <div className="org-info flex column">
-                            <h3>{orgInfo?.data.name}</h3>
+                            <h3>{orgInfo.name}</h3>
                             <p>A global non-profit organization 
                                 dedicated to empowering humanity and kindness
                             </p>
@@ -87,23 +87,23 @@ const OrganizationLanding=({orgInfo})=>{
                             <div className="footer-links flex column">
                                 <div className="flex gap-10">
                                     {icons['location']}
-                                    <p>{orgInfo?.data.location}</p>
+                                    <p>{orgInfo.location}</p>
                                 </div>
                                 <div className="flex gap-10">
                                     {icons['phone']}
-                                    <p>{orgInfo?.data.phone}</p>
+                                    <p>{orgInfo.phone}</p>
                                 </div>
                                 <div className="flex gap-10">
                                     {icons['email']}
-                                    <p>{orgInfo?.data.email}</p>
+                                    <p>{orgInfo.email}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className=" flex center fullwidth p-10 org-social">
-                       <a href={orgInfo?.data.face_link}> {icons['fb']}</a>
-                       <a href={orgInfo?.data.insta}> {icons['insta']}</a>
-                       <a href={orgInfo?.data.whats}> {icons['whats']}</a>
+                       <a href={orgInfo.face_link}> {icons['fb']}</a>
+                       <a href={orgInfo.insta}> {icons['insta']}</a>
+                       <a href={orgInfo.whats}> {icons['whats']}</a>
                         
                         
                     </div>

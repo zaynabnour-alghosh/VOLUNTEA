@@ -8,7 +8,7 @@ import Button from "../../main/components/common/button";
 import { useNavigate } from "react-router-dom";
 import { sendRequest } from "../../config/request";
 import { useState } from "react";
-const SearchLanding=({onToggle,setOrgInfo})=>{
+const SearchLanding=({onToggle,setOrgInfo,setImpacts,setMissions,setEvents})=>{
     const navigate=useNavigate();
     const [organizationCode, setOrganizationCode] = useState("");
     const handleSearch = async () => {
@@ -21,6 +21,9 @@ const SearchLanding=({onToggle,setOrgInfo})=>{
             if(response){
                 console.log(response);
                 setOrgInfo(response.data);
+                setImpacts(response.impacts);
+                setMissions(response.missions);
+                setEvents(response.events);
                 navigate(`/voluntea/organization/${response.data.name}`);
             }
         }catch(error){

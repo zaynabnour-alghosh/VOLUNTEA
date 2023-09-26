@@ -3,6 +3,7 @@ import './style.css';
 import {Link} from 'react-router-dom';
 import heroSection from "../../../images/hero-section.webp";
 const HeroSection=({data})=>{
+    console.log("data",data);
     return(
         <div className="hero fullwidth">
             <div className="hero-content flex column fullwidth">
