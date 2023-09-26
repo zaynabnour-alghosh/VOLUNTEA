@@ -3,6 +3,7 @@ import './style.css';
 import { useState } from "react";
 import Input from "../../common/input";
 import Button from "../../common/button";
+import { sendRequest } from "../../../../config/request";
 import MemberSchedule from "../MemberSchedule";
 const Profile=({userInfo})=>{
     const [showSchedule, setShowSchedule] = useState(false);
@@ -21,17 +22,37 @@ const Profile=({userInfo})=>{
     const handleViewScheduleClick = () => {
         setShowSchedule(true);
     };
-     const handleGenderChange = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault(); 
-
-            const newSkill = skill.trim();
-            if (newSkill) {
-                setNewSkills(prevNewSkills => [...prevNewSkills, newSkill]);
-                setSkill('');
-            }
-        }
+    const handleGenderChange = (e) => {
+        setSelectedGender(e.target.value);
     };
+
+    const editProfile=async(info)=>{
+
+        const userData=new FormData();
+        userData.append('name',info.name);
+        userData.append('email',info.userEmail);
+        userData.append('gender',info.selectedGender);
+        userData.append('address',info.address);
+        userData.append('dob',info.dob);
+        userData.append('description',info.description);
+        userData.append('mobile',info.mobile);
+        userData.append('avatar_url',info.avatar);
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/profile/update",
+                body:userData,
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setAvatar(`http://localhost:8000/storage/images/profiles/${response.profile.avatar_url}`);
+                
+            }
+        }catch(error){
+            console.log(error)
+        }
+    }
     console.log(userSchedule);
     return(
     <div className="fullwidth">
@@ -47,13 +68,25 @@ const Profile=({userInfo})=>{
                                     <div className="profile-img">
                                         <img src={`http://localhost:8000/storage/images/profiles/${userInfo?.profile.avatar_url}`} alt="prfile" />
                                     </div>
-                                    <input type="file" />
+                                    <input type="file" 
+                                    onChange={(e)=>setAvatar(e.target.files[0])}
+                                    />
                                 </div>
                                 <div className=" profile-edit">
                                     <Button 
                                         text={"Edit"}
                                         isPrimary={true}
                                         medium={true}
+                                        onClick={() => editProfile({
+                                            username,
+                                            description,
+                                            avatar,
+                                            address,
+                                            mobile,
+                                            userEmail,
+                                            selectedGender,
+                                            dob,
+                                        })}
                                     />
                                 </div>
                             </div>
@@ -143,7 +176,6 @@ const Profile=({userInfo})=>{
                                             placeholder={"skills"}
                                             type={"text"}
                                             value={skill}
-                                            // value={"skill"} // Display edited skills
                                             onChange={(e) => {
                                                 setSkill(e.target.value);
                                             }}

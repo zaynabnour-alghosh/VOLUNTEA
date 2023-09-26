@@ -33,6 +33,7 @@ const ScheduleModal=({showScheduleModal , onRequestClose,addSchedule})=>{
             width:'100%'
         }
     };
+    
     const [day, setDay] = useState("Monday");
     const [fromTime, setFromTime] = useState("");
     const [toTime, setToTime] = useState("");
