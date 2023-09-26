@@ -9,6 +9,7 @@ import Opportunities from "../Opportunities";
 import Messages from "../Messages";
 import Stream from "../Stream";
 import Profile from "../../ui/Profile";
+import { sendRequest } from "../../../../config/request";
 
 import MemberProfile from "../../ui/MemberProfile";
 
@@ -24,11 +25,24 @@ const VolunteerDashboard=({orgId})=>{
         { icon: 'logout', name: 'Logout', size: 32}       
     ];
     const [selectedTab, setSelectedTab] = useState('Dashboard');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [members,setMembers]=useState([]);
+    const [memberSkills, setMemberSkills] = React.useState(null);
+    const [memberSchedule, setMemberSchedule] = React.useState(null);
+    const [memberName,setMemberName]=useState('');
+    const [memberEmail,setMemberEmail]=useState('');
+    const [selectedMember, setSelectedMember] = React.useState(null);
+
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
     const [showMemberProfile, setShowMemeberProfile] = useState(false);    
     const [joinedAt, setJoinedAt] = useState('');
-    
+    const handleSearchChange = (searchTerm) => {
+        setSearchTerm(searchTerm);
+        };
+        const filteredMembers = members.filter((member) =>
+        member.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     useEffect(() => {
         setShowNotificationModal(false);
     }, [selectedTab]);
@@ -57,6 +71,48 @@ const VolunteerDashboard=({orgId})=>{
             setShowMemeberProfile(false);
         }
     }
+    const toggleMemberProfile=async(memberId)=>{
+        setShowMemeberProfile(true);
+            try{
+                const response=await sendRequest({
+                    method:"GET",
+                    route:`user/${memberId}`,
+                    body:"",
+                    includeHeaders:true
+                });
+                if(response){
+                    console.log(response);
+                    setMemberName(response.name);
+                    setMemberEmail(response.email);
+                    setSelectedMember(response.profile);
+                    setMemberSkills(response.skills);
+                    setMemberSchedule(response.schedule);
+                }
+                }catch(error){
+                    console.log(error)
+                }
+        
+    }
+    const id=localStorage.getItem('organizationId');
+    useEffect(() => {
+        const getMembers=async()=>{
+        try{
+            const response=await sendRequest({
+                method:"GET",
+                route:`members/${id}`,
+                body:"",
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setMembers(response.members);
+            }
+            }catch(error){
+                console.log(error)
+            }
+        }
+        getMembers();
+    }, []);
     return(
         <div>
             <div className="admin-dash light">
@@ -75,7 +131,7 @@ const VolunteerDashboard=({orgId})=>{
                                 <div className="dash-header">
                                     {selectedTab==='Dashboard' && <Header title={"VOLUNTEER DASHBOARD"} joined={joinedAt? joinedAt:''}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"}/>}
-                                    {selectedTab=='Members' && <Header title={"MEMBERS"} search={true}/>}
+                                    {selectedTab=='Members' && <Header title={"MEMBERS"} search={true} onSearchChange={handleSearchChange}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
                                     {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
                                     {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
@@ -83,7 +139,7 @@ const VolunteerDashboard=({orgId})=>{
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId} setJoinedAt={setJoinedAt}/>}
                                     {selectedTab === 'Opportunities' && <Opportunities orgId={orgId}/>}
-                                    {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
+                                    {selectedTab === 'Members' && <Members  members={filteredMembers} toggleMemberProfile={toggleMemberProfile}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
                                     {selectedTab === 'Profile' && <Profile />}
@@ -91,7 +147,16 @@ const VolunteerDashboard=({orgId})=>{
                                 </div>
                             </>      
                          } 
-                        {showMemberProfile && <MemberProfile remove={false}/>}
+                        {showMemberProfile && 
+                            <MemberProfile 
+                            remove={false}
+                            name={memberName} 
+                            email={memberEmail}
+                            skills={memberSkills}
+                            schedule={memberSchedule}
+                            selectedMember={selectedMember}
+                            
+                            />}
                     </div>
                 </div>
             </div>

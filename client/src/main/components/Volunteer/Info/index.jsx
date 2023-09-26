@@ -79,7 +79,7 @@ const Info=({orgId,setJoinedAt})=>{
                     {certs?.map((cert, index) => (
                         <div key={index}>
                             <RowCard 
-                            // notice={cert.admin}
+                            notice={cert.admin}
                             title={cert.topic}
                             desc={cert.content}
                             date={cert.issued}
