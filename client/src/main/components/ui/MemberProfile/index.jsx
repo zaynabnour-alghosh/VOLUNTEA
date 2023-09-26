@@ -20,7 +20,7 @@ const MemberProfile=({name,selectedMember,email,skills,schedule,remove})=>{
         <div className="member-profile-container fullwidth flex column scroll">
             {remove ?
             <Header 
-                profile={true}
+                profile={`http://localhost:8000/storage/images/profiles/${selectedMember?.avatar_url}`}
                 name={name}
                 admin_pov={true}
                         
