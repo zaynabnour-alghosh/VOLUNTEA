@@ -33,6 +33,15 @@ const AdminDashboard=({orgId})=>{
     const [selectedOpportunity, setSelectedOpportunity] = useState(null); 
     const [opportunities, setOpportunities] = useState([]);
     const [members,setMembers]=useState([]);
+    const [selectedMember, setSelectedMember] = React.useState(null);
+    const [memberProfile, setMemberProfile] = React.useState(null);
+    const [memberSkills, setMemberSkills] = React.useState(null);
+    const [memberSchedule, setMemberSchedule] = React.useState(null);
+    const [memberName,setMemberName]=useState('');
+    const [memberEmail,setMemberEmail]=useState('');
+
+    
+    
     const [searchTerm, setSearchTerm] = useState('');
     const handleOpportunitySelect = (opportunity) => {
         setSelectedOpportunity(opportunity);
@@ -54,6 +63,28 @@ const AdminDashboard=({orgId})=>{
     const toggleConfirmationModal = () => {
         setShowConfirmationModal(!showConfirmationModal);
     };
+    const toggleMemberProfile=async(memberId)=>{
+        setShowMemeberProfile(true);
+            try{
+                const response=await sendRequest({
+                    method:"GET",
+                    route:`user/${memberId}`,
+                    body:"",
+                    includeHeaders:true
+                });
+                if(response){
+                    console.log(response);
+                    setMemberName(response.name);
+                    setMemberEmail(response.email);
+                    setSelectedMember(response.profile);
+                    setMemberSkills(response.skills);
+                    setMemberSchedule(response.schedule);
+                }
+                }catch(error){
+                    console.log(error)
+                }
+        
+    }
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
         if (tabName === 'Notifications') {
@@ -119,7 +150,7 @@ const AdminDashboard=({orgId})=>{
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
                                     {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity} opportunities={opportunities} setOpportunities={setOpportunities} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
-                                    {selectedTab === 'Members' && <Members members={filteredMembers} toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
+                                    {selectedTab === 'Members' && <Members members={filteredMembers} toggleMemberProfile={toggleMemberProfile}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream orgId={orgId} members={members}/>}
                                     {selectedTab === 'Profile' && <Profile />}
@@ -128,7 +159,13 @@ const AdminDashboard=({orgId})=>{
                             </>      
                         }
                         {showOpportunityDetails && <OpportunityDetails opportunity={selectedOpportunity}/>}
-                        {showMemberProfile && <MemberProfile remove={true}/>}
+                        {showMemberProfile && <MemberProfile 
+                            name={memberName} 
+                            email={memberEmail}
+                            skills={memberSkills}
+                            schedule={memberSchedule}
+                            selectedMember={selectedMember} 
+                            remove={true}/>}
                     </div>
                 </div>
             </div>

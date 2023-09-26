@@ -6,8 +6,12 @@ import Item from "../../common/item";
 import {icons} from "../../../../icons.js";
 import MemberSchedule from "../MemberSchedule";
 import { useState } from "react";
-const MemberProfile=({remove})=>{
+const MemberProfile=({name,selectedMember,email,skills,schedule,remove})=>{
     const [showSchedule, setShowSchedule] = useState(false);
+    console.log("member",name);
+    console.log(skills);
+    console.log(selectedMember);
+    console.log(schedule);
 
     const handleViewScheduleClick = () => {
         setShowSchedule(true);
@@ -17,17 +21,17 @@ const MemberProfile=({remove})=>{
             {remove ?
             <Header 
                 profile={true}
-                name={"Jane Doe"}
+                name={name}
                 admin_pov={true}
                         
             />:
             <Header 
                 profile={true}
-                name={"Jane Doe"}
+                name={name}
                 volunteer_pov={true}
             />}
             {showSchedule ? (
-                <MemberSchedule goBack={() => setShowSchedule(false)} />
+                <MemberSchedule schedule={schedule} goBack={() => setShowSchedule(false)} />
             ) : (
                 <>
                     <div className="member-profile-personal flex column fullwidth pt-40">
@@ -36,22 +40,22 @@ const MemberProfile=({remove})=>{
                         <div className="profile-personal-container fullwidth flex column gap-20">
                             <div className="pro-grid-container pt-20">
                                 <div className="pro-grid-item">
-                                    <Item label={"Full Name"} value={"Jane Doe"} />
+                                    <Item label={"Full Name"} value={name} />
                                 </div>
                                 <div className="pro-grid-item">
-                                    <Item label={"Gender"} value={"Female"} />
+                                    <Item label={"Gender"} value={selectedMember?.gender} />
                                 </div>
                                 <div className="pro-grid-item">
-                                    <Item label={"Birth Date"} value={"22/02/2002"} />
+                                    <Item label={"Birth Date"} value={selectedMember?.dob} />
                                 </div>
                                 <div className="pro-grid-item">
-                                    <Item label={"Phone"} value={"+ (961) 01 123123"} />
+                                    <Item label={"Phone"} value={selectedMember?.mobile} />
                                 </div>
                                 <div className="pro-grid-item">
-                                    <Item label={"Address"} value={"Beirut, Lebanon"} />
+                                    <Item label={"Address"} value={selectedMember?.address} />
                                 </div>
                                 <div className="pro-grid-item">
-                                    <Item label={"Email"} value={"janeDoe@mail.com"} />
+                                    <Item label={"Email"} value={email} />
                                 </div>
                             </div>
                             <div className="flex fullwidth btn-member-schedule">
@@ -70,30 +74,13 @@ const MemberProfile=({remove})=>{
                         <hr/>
                         <div className="profile-sills-container fullwidth pt-20 p-10">
                             <div className="skill-grid-container fullwidth pt-20">
-                                <div className="skill-grid-item gap-20 flex">
+
+                            {skills && skills.map((skill, index) => (
+                                <div className="skill-grid-item gap-20 flex" key={index}>
                                 <span className="checked">{icons['tick']}</span>
-                                <span className="m-skill">Communication</span>
+                                <span className="m-skill fullwidth">{skill}</span>
                                 </div>
-                                <div className="skill-grid-item gap-20 flex">
-                                <span className="checked">{icons['tick']}</span>
-                                <span className="m-skill">Communication</span>
-                                </div>
-                                <div className="skill-grid-item gap-20 flex">
-                                <span className="checked">{icons['tick']}</span>
-                                <span className="m-skill">Communication</span>
-                                </div>
-                                <div className="skill-grid-item gap-20 flex">
-                                <span className="checked">{icons['tick']}</span>
-                                <span className="m-skill">Communication</span>
-                                </div>
-                                <div className="skill-grid-item gap-20 flex">
-                                <span className="checked">{icons['tick']}</span>
-                                <span className="m-skill">Communication</span>
-                                </div>
-                                <div className="skill-grid-item gap-20 flex">
-                                <span className="checked">{icons['tick']}</span>
-                                <span className="m-skill">Communication</span>
-                                </div>
+                            ))}
                             </div>
                         </div>
                     </div>
@@ -102,10 +89,7 @@ const MemberProfile=({remove})=>{
                         <hr/>
                         <div className="profile-description-container fullwidth pt-20">
                             <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Donec tempor vestibulum ante, quis eleifend urna venenatis ut. 
-                            Vivamus eu enim auctor elit vestibulum fermentum. 
-                            Nullam vitae tellus a neque consectetur iaculis non non lorem.
+                            {selectedMember?.description}
                             </p>
                         </div>
                     </div>

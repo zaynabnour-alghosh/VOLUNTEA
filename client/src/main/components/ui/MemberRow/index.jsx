@@ -3,6 +3,9 @@ import './style.css';
 import Button from "../../common/button";
 const MemberRow=({toggleMemberProfile ,member})=>{
     const {id,name,email,avatar}=member;
+    const handleViewDetails = () => {
+        toggleMemberProfile(id);
+    };
     return(
         <div className="member-row-container flex row spaceBetween">
             <div className="member-full-name flex row">
@@ -21,7 +24,7 @@ const MemberRow=({toggleMemberProfile ,member})=>{
                 <Button 
                     isLink={true} 
                     text={"View"} 
-                    onClick={toggleMemberProfile}/>
+                    onClick={handleViewDetails}/>
             </div>
         </div>
     );
