@@ -108,6 +108,7 @@ const Opportunities=({orgId})=>{
                             key={opportunity.id}
                             opportunity={opportunity}
                             orgId={orgId}
+                            setApplications={setApplications}
                         />
                         </div>))}
                 </div>        

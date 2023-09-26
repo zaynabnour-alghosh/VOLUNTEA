@@ -6,7 +6,7 @@ import OpportunityModal from "../../ui/OpportunityModal";
 import FeedbackModal from "../FeedbackModal";
 import { sendRequest } from "../../../../config/request";
 
-const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied ,opportunity,setSelectedOpportunity,setOpportunity,opportunities,setOpportunities})=>{
+const OpportunityCard=({ toggleOpportunityDetails , setApplications, buttons ,orgId,apply,applied ,opportunity,setSelectedOpportunity,setOpportunity,opportunities,setOpportunities})=>{
     const {
         id,
         topic,
@@ -21,6 +21,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
     const [isPending, setIsPending] = useState(false);
+    const [isCancelled, setIsCancelled] = useState(false);
      
 
     
@@ -69,6 +70,24 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
         if (response) {
             console.log(response);
             setIsPending(true);
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const handleCancelApp = async () => {
+        try {
+            const response = await sendRequest({
+            method:"POST",
+            route: `volunteer/application/${id}/cancel`,
+            body:" ",
+            })
+            
+        if (response) {
+            console.log(response);
+            setApplications(prevApplications =>
+                prevApplications.filter(opp => opp.id !== id)
+              ); 
         }
         } catch (error) {
             console.log(error);
@@ -136,6 +155,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
                             text={"CANCEL"}
                             isPrimary={true}  
                             medium={true}
+                            onClick={()=>{handleCancelApp();}}
                             
                         />
                     </div>
@@ -161,8 +181,6 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
                         {tasks.map(task=>(
                             <div>{task}</div>
                         ))}
-                        {/* <div>Lorem ipsum dolor sit amet, consectetur</div>
-                        <div>Lorem ipsum dolor sit amet, consectetur</div> */}
                     </div>
                 </div>
                 <div className="opp-card-location flex column opp-grid-item">
