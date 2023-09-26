@@ -14,28 +14,6 @@ import {MdKeyboardDoubleArrowRight} from 'react-icons/md';
 const OrganizationLanding=({orgInfo})=>{
     
     console.log("info" ,orgInfo);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     const [scrolling, setScrolling] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
@@ -76,26 +54,24 @@ const OrganizationLanding=({orgInfo})=>{
                 </div>
             </div>
             <div id="about-us" >
-            <   HeroSection/>
+            <   HeroSection data={orgInfo?.data}/>
             </div> 
             <div id="impact" className='light'>
-                <ImpactSection/>
+                <ImpactSection data={orgInfo?.impacts}/>
             </div>
             <div id="mission" className='light'>
-                <MissionSection/>
+                <MissionSection data={orgInfo?.missions}/>
             </div>
             <div id="event" className='light'>
-                <EventSection/>
+                <EventSection data={orgInfo?.events}/>
             </div>
             <div id="contact " className='light'>
                <div className="footer-container flex column">
                     <div className="footer-content flex">
                         <div className="org-info flex column">
-                            <h3>CEI</h3>
-                            <p>Clean Earth Initiative is a 
-                                global non-profit organization 
-                                dedicated to environmental 
-                                conservation.
+                            <h3>{orgInfo?.data.name}</h3>
+                            <p>A global non-profit organization 
+                                dedicated to empowering humanity and kindness
                             </p>
                         </div>
                         <div className="footer-about flex column">
@@ -111,23 +87,25 @@ const OrganizationLanding=({orgInfo})=>{
                             <div className="footer-links flex column">
                                 <div className="flex gap-10">
                                     {icons['location']}
-                                    <p>Beirut, Lebanon</p>
+                                    <p>{orgInfo?.data.location}</p>
                                 </div>
                                 <div className="flex gap-10">
                                     {icons['phone']}
-                                    <p>+ (961) 78 845418</p>
+                                    <p>{orgInfo?.data.phone}</p>
                                 </div>
                                 <div className="flex gap-10">
                                     {icons['email']}
-                                    <p>info_voluntea@gmail.com</p>
+                                    <p>{orgInfo?.data.email}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className=" flex center fullwidth p-10 org-social">
-                        {icons['fb']}
-                        {icons['insta']}
-                        {icons['whats']}
+                       <a href={orgInfo?.data.face_link}> {icons['fb']}</a>
+                       <a href={orgInfo?.data.insta}> {icons['insta']}</a>
+                       <a href={orgInfo?.data.whats}> {icons['whats']}</a>
+                        
+                        
                     </div>
                     <div className=' flex center'>
                         <h2>COPYRIGHT 2023 &copy;</h2>

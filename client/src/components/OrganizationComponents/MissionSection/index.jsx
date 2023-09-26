@@ -1,7 +1,7 @@
 import React from "react";
 import './style.css';
 import MissionCard from "../MissionCard";
-const MissionSection=()=>{
+const MissionSection=({data})=>{
     return(
         <div className="page mission-page flex column">
         <div className="missions-header flex center">
@@ -9,12 +9,11 @@ const MissionSection=()=>{
         </div>
         <div className="missions flex center">
             <div className="missions-container grid-container">
-                <MissionCard className="grid-item" />
-                <MissionCard className="grid-item"/>
-                <MissionCard className="grid-item"/>
-                <MissionCard className="grid-item"/>
-                <MissionCard className="grid-item"/>
-                <MissionCard className="grid-item"/>
+            {data.map((mission, index) => (
+            <div key={index}>
+                <MissionCard className="grid-item" mission={mission} />
+            </div>
+            ))}
             </div>
         </div>
     </div>

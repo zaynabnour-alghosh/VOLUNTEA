@@ -2,7 +2,7 @@ import React from "react";
 import './style.css';
 import ImpactCard from "../ImpactCard";
 
-const ImpactSection=()=>{
+const ImpactSection=({data})=>{
     return(
         <div className="page impact-page flex column">
             <div className="impacts-header flex center">
@@ -10,9 +10,11 @@ const ImpactSection=()=>{
             </div>
             <div className="impacts flex">
                 <div className="impacts-container flex center">
-                    <ImpactCard/>
-                    <ImpactCard/>
-                    <ImpactCard/>
+                {data.map((impact, index) => (
+                    <div key={index}>
+                        <ImpactCard impact={impact}/>
+                    </div>
+                ))}
                 </div>
             </div>
         </div>

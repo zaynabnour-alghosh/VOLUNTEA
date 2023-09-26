@@ -1,7 +1,7 @@
 import React from "react";
 import './style.css';
 import EventCard from "../EventCard";
-const EventSection=()=>{
+const EventSection=({data})=>{
     return(
         <div className="page event-page flex column">
             <div className="events-header flex center">
@@ -9,9 +9,9 @@ const EventSection=()=>{
             </div>
             <div className="events flex">
                 <div className="events-container flex center">
-                    <EventCard/>
-                    <EventCard/>
-                    <EventCard/>
+                {data.map((event, index) => (
+                <div key={index}> <EventCard event={event}/></div>
+                ))}
                 </div>
             </div>
         </div>
