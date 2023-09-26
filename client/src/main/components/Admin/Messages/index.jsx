@@ -16,6 +16,7 @@ const Messages=()=>{
     const [isGroupChatboxOpen, setGroupChatboxOpen] = useState(false);
     const [singleChats, setSingleChats] = useState([]);
     const [groupChats, setGroupChats] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
     const [selectedVolunteer, setSelectedVolunteer] = useState(null);
     const selectHandler = (value) => {
       setSelectedTab(value);
@@ -45,17 +46,6 @@ const Messages=()=>{
                 console.log(response.group);
                 setSingleChats(response.single || []);
                 setGroupChats(response.group || []);
-                  
-                // setOrgInfo(response.data);
-
-                // console.log(response.impacts);
-                // setImpacts(response.impacts);
-
-                // console.log(response.missions);
-                // setMissions(response.missions);
-
-                // console.log(response.events);
-                // setEvents(response.events);
 			}
 			} catch (error) {
 				console.log(error);
@@ -63,6 +53,8 @@ const Messages=()=>{
 		} 
         getChatrooms();
     }, []);
+    const filteredChats = (selectedTab === "Single" ? singleChats : groupChats)
+    .filter((chat) => chat.other.toLowerCase().includes(searchValue.toLowerCase()));
 
     return(
         <div className="messages-base-container flex row">
@@ -84,17 +76,21 @@ const Messages=()=>{
                 <div className="member-chat-search flex">
                 <div className="member-search">
                     <Input 
+                        value={searchValue}
+                        onChange={(e)=>setSearchValue(e.target.value)}
                         placeholder={"Search members..."}
                         className="search"
                         memberSearch={true}
                         noBorder={true}
                         icon={icons['search']
+                        
+
                     }
                     />
                 </div>
                 </div>
                 <div className="member-messagebox-container flex column">
-                    {(selectedTab === "Single" ? singleChats : groupChats).map((chat, index) => (
+                    {filteredChats.map((chat, index) => (
                         <div key={index} onClick={() => openSingleChat(selectedTab === "Single" ? chat.other : chat.top, `http://localhost:8000/storage/images/profiles/${chat.avatar}`)}>
                         <AvatarCard
                             image={`http://localhost:8000/storage/images/profiles/${chat.avatar}`}
