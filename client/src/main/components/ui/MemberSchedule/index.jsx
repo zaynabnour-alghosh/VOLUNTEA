@@ -6,7 +6,7 @@ import Button from "../../common/button";
 import EventModal from "../EventModal";
 import { useState } from "react";
 import ScheduleModal from "../ScheduleModal";
-const MemberSchedule=({goBack, auth})=>{
+const MemberSchedule=({schedule,goBack, auth})=>{
     const [isAddEventModalOpen, setIsAddEventModalOpen] = useState(false);
     const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
     
@@ -47,7 +47,7 @@ const MemberSchedule=({goBack, auth})=>{
                 </div>
             }
             <div className="flex center fullwidth p-20">
-                <CalendarComponent/>
+                <CalendarComponent schedule={schedule}/>
             </div>
             {isAddEventModalOpen && 
                 <EventModal showAddEventModal={isAddEventModalOpen} onRequestClose={toggleEventModal}
