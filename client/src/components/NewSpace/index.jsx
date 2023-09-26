@@ -115,17 +115,8 @@ const NewSpace=({onToggle,volunteer})=>{
                             
 
                         />
-                        <Input
-                            type={"password"}
-                            icon={icons['key']}
-                            placeholder={"Confirm Password"}
-                            fill={true}
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            join={true}
-
-                        />
                     </div>
+                    <br />
                     <hr/>
                     <div className="flex column gap-10 fullwidth">
                         
@@ -139,7 +130,6 @@ const NewSpace=({onToggle,volunteer})=>{
                                 readOnly={true}
                                 onChange={(e) => setOrganizationCode(e.target.value)}
                                 container={true}
-
                             />   
                         </div>
                         <div className="space-btn flex fullwidth row gap-40 center">

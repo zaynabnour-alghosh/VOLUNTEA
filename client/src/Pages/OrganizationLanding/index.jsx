@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
 import { useEffect} from 'react';
 import { useState } from 'react';
 import {icons} from '../../icons.js';
@@ -11,10 +10,32 @@ import ImpactSection from '../../components/OrganizationComponents/ImpactSection
 import MissionSection from '../../components/OrganizationComponents/MissionSection';
 import EventSection from '../../components/OrganizationComponents/EventSection';
 import {FaPhone} from 'react-icons/fa';
-import {MdEmail,MdLocationPin,MdKeyboardDoubleArrowRight} from 'react-icons/md';
-import {FaFacebookSquare} from 'react-icons/fa';
-import {BsInstagram,BsWhatsapp} from 'react-icons/bs';
-const OrganizationLanding=()=>{
+import {MdKeyboardDoubleArrowRight} from 'react-icons/md';
+const OrganizationLanding=({orgInfo})=>{
+    
+    console.log("info" ,orgInfo);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     const [scrolling, setScrolling] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
