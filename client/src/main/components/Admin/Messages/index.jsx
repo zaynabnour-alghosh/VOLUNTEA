@@ -16,13 +16,15 @@ const Messages=()=>{
     const [isGroupChatboxOpen, setGroupChatboxOpen] = useState(false);
     const [singleChats, setSingleChats] = useState([]);
     const [groupChats, setGroupChats] = useState([]);
+    const [selectedVolunteer, setSelectedVolunteer] = useState(null);
     const selectHandler = (value) => {
       setSelectedTab(value);
     };
 
-    const openSingleChat = () => {
+    const openSingleChat = (volunteerName, avatar) => {
         setSingleChatboxOpen(true);
-        setGroupChatboxOpen(false)
+        setGroupChatboxOpen(false);
+        setSelectedVolunteer({ volunteerName, avatar });
     };
     const openGroupChat = () => {
         setSingleChatboxOpen(false);
@@ -92,33 +94,12 @@ const Messages=()=>{
                 </div>
                 </div>
                 <div className="member-messagebox-container flex column">
-                    {/* {selectedTab==="Single" && 
-                    <div onClick={openSingleChat}>
-                        <AvatarCard
-                        image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU"}
-                        top={"Volunteer Name"}
-                        info={"Lorem ipsum dolor."}
-                        date={"April 22.2023"}
-                        isWide={true}                        
-                        />
-                    </div>}
-                    {selectedTab==="Group" && 
-                    <div onClick={openGroupChat}>
-                        <AvatarCard
-                        top={"Group Name"}
-                        info={"Lorem ipsum dolor sit amet."}
-                        date={"April 22.2023"}
-                        isWide={true}                       
-                        />
-                    
-                    </div>} */}
                     {(selectedTab === "Single" ? singleChats : groupChats).map((chat, index) => (
-                        <div key={index} onClick={selectedTab === "Single" ? openSingleChat : openGroupChat}>
+                        <div key={index} onClick={() => openSingleChat(selectedTab === "Single" ? chat.other : chat.top, `http://localhost:8000/storage/images/profiles/${chat.avatar}`)}>
                         <AvatarCard
                             image={`http://localhost:8000/storage/images/profiles/${chat.avatar}`}
                             top={selectedTab === "Single" ? chat.other : chat.top}
                             info={chat.info}
-                            // date={"April 22.2023"}
                             isWide={true}
                         />
                         </div>
@@ -127,8 +108,11 @@ const Messages=()=>{
                 </div>
             </div>
             {!isSingleChatboxOpen && !isGroupChatboxOpen && <EmptyChatState/>}
-            {isSingleChatboxOpen && (
-                    <SingleChatBox/>
+            {isSingleChatboxOpen && selectedVolunteer && (
+                    <SingleChatBox
+                    volunteerName={selectedVolunteer.volunteerName}
+                    avatar={selectedVolunteer.avatar}
+                    />
                 )}
             {isGroupChatboxOpen && (
                 <GroupChatBox/>

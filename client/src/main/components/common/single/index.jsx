@@ -3,16 +3,16 @@ import './style.css';
 import MessageRow from "../../ui/MessageRow";
 import {icons} from '../../../../icons.js';
 import Input from "../input";
-const SingleChatBox=()=>{
+const SingleChatBox=({ volunteerName, avatar })=>{
     return(
         <div className="singlebox members-chatbox-container flex column fullWidth">
             <div className="chatbox-header flex row">
                 <div className="base-avatar">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU" alt="avatar" />
+                    <img src={avatar} alt="avatar" />
                 </div>
                 <div className="avatarcard-content flex column flex-start">
                     <div className="avatarcard-topic">
-                        <h4>Volunteer Name</h4>
+                        <h4>{volunteerName}</h4>
                     </div>               
                     <div className="avatarcard-desc">
                         <p>online</p>
