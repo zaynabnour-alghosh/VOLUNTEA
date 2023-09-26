@@ -20,6 +20,7 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
     } = opportunity;
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isFeedModalOpen, setIsFeedModalOpen] = useState(false);
+    const [isPending, setIsPending] = useState(false);
      
 
     
@@ -57,6 +58,22 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
         }
 
     }
+    const handleSendApp = async () => {
+        try {
+            const response = await sendRequest({
+            method:"POST",
+            route: `volunteer/application/${id}/add`,
+            body:" ",
+            })
+            
+        if (response) {
+            console.log(response);
+            setIsPending(true);
+        }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 
     return(
@@ -97,9 +114,10 @@ const OpportunityCard=({ toggleOpportunityDetails , buttons ,orgId,apply,applied
                     <div className="flex column opp-grid-item"></div>
                         <div className="send-app-btn flex opp-card-top flex opp-grid-item">
                         <Button
-                        text={"Send Application"}
+                        text={isPending ? "Pending ..":"Send Application"}
                         isPrimary={true}
                         isWide={true}
+                        onClick={()=>{handleSendApp();}}
                         />
                     </div>
                 </>}

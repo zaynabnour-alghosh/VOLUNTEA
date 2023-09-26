@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './style.css';
 import OpportunityCard from "../../ui/OpportunityCard";
+import { sendRequest } from "../../../../config/request";
 import StreamTab from "../../common/streamtab";
 
-const Opportunities=()=>{
+const Opportunities=({orgId})=>{
     const [selectedTab, setSelectedTab] = useState("All");
     const [isAllOppOpen, setIsAllOppOpen] = useState(false);
     const [isMyAppOpen, setIsMyAppOpen] = useState(false);
+    const [opportunities, setOpportunities] = useState([]);
+    const [applications, setApplications] = useState([]);
+
 
     const selectHandler = (value) => {
         setSelectedTab(value);
@@ -23,6 +27,46 @@ const Opportunities=()=>{
     const toggleApp=()=>{
         setIsMyAppOpen(!isMyAppOpen);
     }
+    useEffect(() => {
+        const getOpp = async () => {
+			try {
+				const response = await sendRequest({
+                method:"GET",
+                route: `all-opportunities/${orgId}`,
+                body:" ",
+                })
+                
+			if (response) {
+                console.log(response.data);
+                setOpportunities(response.data);
+			}
+			} catch (error) {
+				console.log(error);
+			}
+		} 
+        getOpp();
+    }, []);
+    
+    useEffect(() => {
+        const getApp = async () => {
+			try {
+				const response = await sendRequest({
+                method:"GET",
+                route: `volunteer/applications`,
+                body:" ",
+                })
+                
+			if (response) {
+                console.log(response);
+                setApplications(response.data);
+			}
+			} catch (error) {
+				console.log(error);
+			}
+		} 
+        getApp();
+    }, []);
+
     return(
         <div className="volunteer-stream-container flex column">
             <div className="flex row stream-tabs spaceBetween">
@@ -44,8 +88,28 @@ const Opportunities=()=>{
                 <div className="volunteer-stream-main flex column">
                     <div className="opp-container scroll flex column gap-40">
                     </div>
-                    {selectedTab === 'All' && <OpportunityCard apply={true}/>}
-                    {selectedTab === 'My Applications' && <OpportunityCard applied={true}/>}
+                    {selectedTab === 'All' && 
+                    
+                     opportunities && opportunities.map((opportunity,index) => (
+                        <div key={index}>
+                            <OpportunityCard
+                            apply={true}
+                            key={opportunity.id}
+                            opportunity={opportunity}
+                            orgId={orgId}
+                        />
+                        </div>))}
+                    {selectedTab === 'My Applications' && 
+
+                    applications && applications.map((opportunity,index) => (
+                        <div key={index}>
+                            <OpportunityCard
+                            applied={true}
+                            key={opportunity.id}
+                            opportunity={opportunity}
+                            orgId={orgId}
+                        />
+                        </div>))}
                 </div>        
             </div>
         </div>

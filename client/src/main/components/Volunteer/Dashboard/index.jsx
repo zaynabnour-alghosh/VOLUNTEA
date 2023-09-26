@@ -82,7 +82,7 @@ const VolunteerDashboard=({orgId})=>{
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId} setJoinedAt={setJoinedAt}/>}
-                                    {selectedTab === 'Opportunities' && <Opportunities/>}
+                                    {selectedTab === 'Opportunities' && <Opportunities orgId={orgId}/>}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
