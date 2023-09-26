@@ -100,20 +100,20 @@ class AdminController extends Controller
         $announcemnt->from=$request->from;
         $announcemnt->to=$request->to;
         $announcemnt->save();
-        $formatted_from = '';
-        $formatted_to = '';
-        $formatted_date='';
-        if($request->from){
-            $from = Carbon::createFromFormat('H:i:s', $request->from);
-            $formatted_from = $from->format('h:i:s A');
-        }
-        if($request->to){
-            $to = Carbon::createFromFormat('H:i:s', $request->to);
-            $formatted_to = $to->format('h:i:s A');
-        }
-        if($request->date_at){
-            $formatted_date = Carbon::parse($request->date_at)->format('F d, Y');
-        }    
+        // $formatted_from = '';
+        // $formatted_to = '';
+        // $formatted_date='';
+        // if($request->from){
+        //     $from = Carbon::createFromFormat('H:i:s', $request->from);
+        //     $formatted_from = $from->format('h:i:s A');
+        // }
+        // if($request->to){
+        //     $to = Carbon::createFromFormat('H:i:s', $request->to);
+        //     $formatted_to = $to->format('h:i:s A');
+        // }
+        // if($request->date_at){
+        //     $formatted_date = Carbon::parse($request->date_at)->format('F d, Y');
+        // }    
         $carbonDate = Carbon::parse($announcemnt->created_at);
         $a_date = $carbonDate->format('M d Y'); 
         $a_time = $carbonDate->format('H:i');
@@ -121,9 +121,9 @@ class AdminController extends Controller
             'status'=>'success',
             'data'=>$announcemnt,
             'admin'=>$admin->name,
-            'date'=>$formatted_date,
-            'from'=>$formatted_from,
-            'to'=>$formatted_to,
+            // 'date'=>$formatted_date,
+            // 'from'=>$formatted_from,
+            // 'to'=>$formatted_to,
             'on'=>$a_date,
             'at'=>$a_time
         ]);

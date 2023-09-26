@@ -87,6 +87,7 @@ class CommonController extends Controller
             $s['date'] = $dateTime->format('F d, Y');
             $s['time'] = $dateTime->format('h:i A');
         }
+        $stream = array_reverse($stream);
         return response()->json([
             'status'=>'succuess',
             'stream'=>$stream
@@ -315,6 +316,36 @@ class CommonController extends Controller
             'single'=>$single,
             'group'=>$group
         ]);
+    }
+    public function getAuthUser(){
+        $user=Auth::user();
+        $info=$user->profile;
+        $name=$user->name;
+        $email=$user->email;
+        $availability=[];
+        $schedule=Schedule::all()->where('user_id',$user->id);
+        foreach($schedule as $s){
+            $day=$s->weekday;
+            $start = Carbon::createFromFormat('H:i:s', $s->start_time);
+            $formattedStart = $start->format('h:i:s A');
+            $end = Carbon::createFromFormat('H:i:s', $s->end_time);
+            $formattedEnd = $end->format('h:i:s A');
+
+            $availability[] = [
+                'day'=>$day,
+                'start'=>$formattedStart,
+                'end'=>$formattedEnd
+            ];
+        }
+        $skills=$user->skills()->get()->pluck('name');
+        return response()->json([
+                'status'=>'success',
+                'name'=>$name,
+                'email'=>$email,
+                'profile'=>$info,
+                'schedule'=>$availability,
+                'skills'=>$skills,
+            ]);
     }
 
 }
