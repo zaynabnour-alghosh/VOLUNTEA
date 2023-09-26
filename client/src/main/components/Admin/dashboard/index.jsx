@@ -172,7 +172,7 @@ const AdminDashboard=({orgId})=>{
                                     {selectedTab === 'Members' && <Members members={filteredMembers} toggleMemberProfile={toggleMemberProfile}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream orgId={orgId} members={members}/>}
-                                    {selectedTab === 'Profile' && <Profile />}
+                                    {selectedTab === 'Profile' && <Profile userInfo={adminInfo}/>}
 
                                 </div>
                             </>      

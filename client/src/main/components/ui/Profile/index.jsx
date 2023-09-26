@@ -4,11 +4,24 @@ import { useState } from "react";
 import Input from "../../common/input";
 import Button from "../../common/button";
 import MemberSchedule from "../MemberSchedule";
-const Profile=()=>{
+const Profile=({userInfo})=>{
     const [showSchedule, setShowSchedule] = useState(false);
+    const [username, setUsername] = useState(userInfo? userInfo.name:"");
+    const [userEmail, setUserEmail] = useState(userInfo ? userInfo.email: "");
+    const [mobile, setMobile] = useState(userInfo? userInfo.profile.mobile : "");
+    const [address, setAddress] = useState(userInfo? userInfo.profile.address: "");
+    const [description, setDescription] = useState(userInfo? userInfo.profile.description: "");
+    const [dob, setDob] = useState(userInfo? userInfo.profile.dob: "");
+    const [selectedGender, setSelectedGender] = useState(userInfo? userInfo.profile.gender: "");
+    const [avatar, setAvatar] = useState(userInfo? userInfo.profile.avatar_url: "");
+    const [userSkills, setSkills] = useState(userInfo? userInfo.skills: []);
+    const [userSchedule, setSchedule] = useState(userInfo? userInfo.schedule: []);
 
     const handleViewScheduleClick = () => {
         setShowSchedule(true);
+    };
+     const handleGenderChange = (e) => {
+        setSelectedGender(e.target.value);
     };
     return(
     <div className="fullwidth">
@@ -22,7 +35,7 @@ const Profile=()=>{
                             <div className="profile-avatar-container flex row spaceBetween">
                                 <div className="profile-avatar-img flex row ">
                                     <div className="profile-img">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU" alt="prfile" />
+                                        <img src={`http://localhost:8000/storage/images/profiles/${userInfo?.profile.avatar_url}`} alt="prfile" />
                                     </div>
                                     <input type="file" />
                                 </div>
@@ -42,56 +55,74 @@ const Profile=()=>{
                                                 label={"First Name"}
                                                 placeholder={"first name"}
                                                 type={"text"}
+                                                value={userInfo ? userInfo.name : ""}
+                                                onChange={(e)=>setUsername(e.target.value)}
+                                                
                                             />
-                                            <Input
-                                                label={"Gender"}
-                                                placeholder={"first gender"}
-                                                type={"text"}
-                                            />
+                                            <div className="user-gender flex column fullwidth ">
+                                                <label htmlFor="gender">Gender</label>
+                                                <select 
+                                                    name="gender" 
+                                                    className="gender select mt-5"
+                                                    value={selectedGender}
+                                                    onChange={handleGenderChange}
+                                                >
+                                                    <option value="femal">Female</option>
+                                                    <option value="male">Male</option>
+                                                </select>
+                                            </div>
                                             <Input
                                                 label={"Email"}
                                                 placeholder={"Email"}
                                                 type={"email"}
+                                                value={userInfo ? userInfo.email : ""}
+                                                onChange={(e)=>setUserEmail(e.target.value)}
                                             />
-                                            <Input
-                                                label={"Address"}
-                                                placeholder={"address"}
-                                                type={"text"}
-                                            />
+                                            
                                         </div>
                                         <div className="profile-form-row flex gap-10 column">
                                             <Input
-                                                label={"Last Name"}
-                                                placeholder={"last name"}
+                                                label={"Phone Number"}
+                                                placeholder={"phone"}
                                                 type={"text"}
+                                                value={userInfo ? userInfo.profile.mobile : ""}
+                                                onChange={(e)=>setMobile(e.target.value)}
                                             />
                                             <Input
                                                 label={"Birth Date"}
                                                 placeholder={"date of birth"}
                                                 type={"date"}
+                                                value={userInfo ? userInfo.profile.dob : ""}
+                                                onChange={(e)=>setDob(e.target.value)}
                                             />
-                                            <Input
-                                                label={"Phone Number"}
-                                                placeholder={"phone"}
+                                            
+                                            <div className=" fullwidth pt-5">
+                                                <Input
+                                                label={"Address"}
+                                                placeholder={"address"}
                                                 type={"text"}
-                                            />
-                                            <div className=" fullwidth pt-20">
-                                                <Button
-                                                    className="btn-schedule"
-                                                    text={"View Schedule"}
-                                                    isPrimary={true}
-                                                    onClick={handleViewScheduleClick} 
-                                                    isWide={true}
+                                                value={userInfo ? userInfo.profile.address : ""}
+                                                onChange={(e)=>setAddress(e.target.value)}
                                                 />
+                                                
                                             </div>
                                         </div>
                                     </div>
+                                    <Button
+                                            className="btn-schedule"
+                                            text={"View Schedule"}
+                                            isPrimary={true}
+                                            onClick={handleViewScheduleClick} 
+                                            isWide={true}
+                                    />
                                     <div className="profile-description">
                                         <Input
                                         label={"Description "}
                                         placeholder={"description"}
                                         type={"textarea"}
                                         fill={true}
+                                        value={userInfo ? userInfo.profile.description : ""}
+                                        onChange={(e)=>setDescription(e.target.value)}
                                     /> 
                                     </div>
                                 </div>
@@ -105,12 +136,13 @@ const Profile=()=>{
                                     </div>
                                     <div className="profile-form-list flex">
                                         <ul className="skill-list flex column gap-10">
+                                        {userInfo?.skills.map((skill, index) => (
+                                            <li key={index}>{skill}</li>
+                                        ))}
+                                            {/* <li>Lorem ipsum dolor sit</li>
                                             <li>Lorem ipsum dolor sit</li>
                                             <li>Lorem ipsum dolor sit</li>
-                                            <li>Lorem ipsum dolor sit</li>
-                                            <li>Lorem ipsum dolor sit</li>
-                                            <li>Lorem ipsum dolor sit</li>
-                                            <li>Lorem ipsum dolor sit</li>
+                                            <li>Lorem ipsum dolor sit</li> */}
 
                                         </ul>
                                     </div>

@@ -80,6 +80,9 @@ input[type="file"] {
 .fullwidth {
   width: 100%;
 }
+.mt-5{
+  margin-top: 5px;
+}
 .mt-10{
   margin-top: 10px;
 }
@@ -91,6 +94,9 @@ input[type="file"] {
 }
 .p-30{
   padding:30px;
+}
+.pt-5{
+  padding-top: 5px;
 }
 .pt-10{
   padding-top: 10px;
