@@ -83,8 +83,6 @@ const Messages=()=>{
                         memberSearch={true}
                         noBorder={true}
                         icon={icons['search']
-                        
-
                     }
                     />
                 </div>

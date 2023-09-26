@@ -3,26 +3,18 @@ import './style.css';
 import MessageRow from "../../ui/MessageRow";
 import {icons} from '../../../../icons.js';
 import Input from "../input";
-const GroupChatBox=()=>{
+const GroupChatBox=({groupName})=>{
     return(
         <div className="groupbox members-chatbox-container flex column fullWidth">
             <div className="chatbox-header flex row">
-                <div className="base-avatar">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU" alt="avatar" />
-                </div>
                 <div className="avatarcard-content flex column flex-start">
                     <div className="avatarcard-topic">
-                        <h4>Group Name</h4>
+                        <h4>{groupName}</h4>
                     </div>               
-                    <div className="avatarcard-desc">
-                        <p>Member1, Member2, Member3</p>
-                    </div>
-            
                 </div>
             </div>
             <hr />
             <div className="chatbox-content flex column">
-                {/* message */}
                 <MessageRow sender={true} text={"hi"} />
                 <MessageRow  text={"hi there!"}/>
                 <MessageRow sender={true} text={"Lorem ipsum dolor sit amet"} />

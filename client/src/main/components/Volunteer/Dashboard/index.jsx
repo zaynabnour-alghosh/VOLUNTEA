@@ -32,6 +32,7 @@ const VolunteerDashboard=({orgId})=>{
     const [memberName,setMemberName]=useState('');
     const [memberEmail,setMemberEmail]=useState('');
     const [selectedMember, setSelectedMember] = React.useState(null);
+    const [volInfo, setVolInfo] = React.useState(null);
 
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
@@ -113,6 +114,25 @@ const VolunteerDashboard=({orgId})=>{
         }
         getMembers();
     }, []);
+    useEffect(() => {
+        const getAuth=async()=>{
+        try{
+            const response=await sendRequest({
+                method:"GET",
+                route:'/user',
+                body:"",
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setVolInfo(response);
+            }
+            }catch(error){
+                console.log(error)
+            }
+        }
+        getAuth();
+    }, []);
     return(
         <div>
             <div className="admin-dash light">
@@ -132,9 +152,9 @@ const VolunteerDashboard=({orgId})=>{
                                     {selectedTab==='Dashboard' && <Header title={"VOLUNTEER DASHBOARD"} joined={joinedAt? joinedAt:''}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true} onSearchChange={handleSearchChange}/>}
-                                    {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
-                                    {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
-                                    {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
+                                    {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={`http://localhost:8000/storage/images/profiles/${volInfo?.profile.avatar_url}`} user={volInfo?.name}/>}
+                                    {selectedTab=='Stream' && <Header title={"STREAM"} avatar={`http://localhost:8000/storage/images/profiles/${volInfo?.profile.avatar_url}`} user={volInfo?.name}/>}
+                                    {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={`http://localhost:8000/storage/images/profiles/${volInfo?.profile.avatar_url}`} user={volInfo?.name}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId} setJoinedAt={setJoinedAt}/>}
@@ -142,7 +162,7 @@ const VolunteerDashboard=({orgId})=>{
                                     {selectedTab === 'Members' && <Members  members={filteredMembers} toggleMemberProfile={toggleMemberProfile}/>}
                                     {selectedTab === 'Messages' && <Messages />}
                                     {selectedTab === 'Stream' && <Stream />}
-                                    {selectedTab === 'Profile' && <Profile />}
+                                    {selectedTab === 'Profile' && <Profile userInfo={volInfo} />}
 
                                 </div>
                             </>      
