@@ -27,9 +27,9 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunit
        
     return(
         <div className="opp-container flex column gap-40">
-            {/* <OpportunityCard toggleOpportunityDetails={toggleOpportunityDetails} buttons={true}/> */}
-            { opportunities && opportunities.map(opportunity => (
-                <OpportunityCard
+            { opportunities && opportunities.map((opportunity,index) => (
+                <div key={index}>
+                    <OpportunityCard
                     key={opportunity.id}
                     setSelectedOpportunity={setSelectedOpportunity} 
                     toggleOpportunityDetails={toggleOpportunityDetails}
@@ -40,6 +40,9 @@ const Project=({orgId,toggleOpportunityDetails,setSelectedOpportunity,opportunit
                     opportunities={opportunities}
                     orgId={orgId}
                 />
+
+                </div>
+                
             ))}
         </div>
     );

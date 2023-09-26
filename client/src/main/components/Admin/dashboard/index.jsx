@@ -34,7 +34,7 @@ const AdminDashboard=({orgId})=>{
     const [opportunities, setOpportunities] = useState([]);
     const [members,setMembers]=useState([]);
     const [selectedMember, setSelectedMember] = React.useState(null);
-    const [memberProfile, setMemberProfile] = React.useState(null);
+    const [adminInfo, setAdminInfo] = React.useState(null);
     const [memberSkills, setMemberSkills] = React.useState(null);
     const [memberSchedule, setMemberSchedule] = React.useState(null);
     const [memberName,setMemberName]=useState('');
@@ -124,6 +124,25 @@ const AdminDashboard=({orgId})=>{
         }
         getMembers();
     }, []);
+    useEffect(() => {
+        const getAuth=async()=>{
+        try{
+            const response=await sendRequest({
+                method:"GET",
+                route:'/user',
+                body:"",
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setAdminInfo(response);
+            }
+            }catch(error){
+                console.log(error)
+            }
+        }
+        getAuth();
+    }, []);
     return(
         <div>
             <div className="dash light">
@@ -143,9 +162,9 @@ const AdminDashboard=({orgId})=>{
                                     {selectedTab==='Dashboard' && <Header title={"ADMIN DASHBOARD"}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true} setOpportunities={setOpportunities} members={members}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true} onSearchChange={handleSearchChange}/>}
-                                    {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
-                                    {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}
-                                    {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
+                                    {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={`http://localhost:8000/storage/images/profiles/${adminInfo?.profile.avatar_url}`} user={adminInfo?.name}/>}
+                                    {selectedTab=='Stream' && <Header title={"STREAM"}  avatar={`http://localhost:8000/storage/images/profiles/${adminInfo?.profile.avatar_url}`} user={adminInfo?.name}/>}
+                                    {selectedTab=='Profile' && <Header title={"PROFILE "}  avatar={`http://localhost:8000/storage/images/profiles/${adminInfo?.profile.avatar_url}`} user={adminInfo?.name}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
                                     {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}

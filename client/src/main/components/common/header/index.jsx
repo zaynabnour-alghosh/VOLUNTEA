@@ -6,7 +6,7 @@ import Input from "../input";
 import {icons} from "../../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
-const Header=({title,avatar,buttons,search,profile,volunteer_pov,name, joined,admin_pov,setOpportunities,onSearchChange,members})=>{
+const Header=({title,avatar,buttons,search,profile,volunteer_pov,name,user, joined,admin_pov,setOpportunities,onSearchChange,members})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
@@ -107,10 +107,10 @@ const Header=({title,avatar,buttons,search,profile,volunteer_pov,name, joined,ad
             }      
             {avatar &&
             <div className="member-full-name flex row stream-header">
-                 <span>Jane Doe</span>
+                 <span>{user}</span>
                 <div className="member-avatar">
                     <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcXoPJYatB85JN3M9hP3wvJs1gYxgHm-0ZpA&usqp=CAU"
+                        src={avatar}
                         alt="member"
                     />
                 </div>
