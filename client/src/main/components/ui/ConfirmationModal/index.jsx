@@ -98,7 +98,7 @@ const ConfirmationModal=({body,confirm,cancel,fillPersonal,setUser,showConfirmat
                         {message && <h4>{message}</h4>}
                             
                         </>}
-                        {!verify &&<p>Are you sure you want to proceed with this action?</p>}
+                        {!verify &&<p>Are you sure you want to proceed?</p>}
                     </div>
                     <div className="confirm-actions fullwidth flex row gap-30 center p-10">
                         <Button

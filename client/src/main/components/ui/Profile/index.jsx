@@ -193,11 +193,6 @@ const Profile=({userInfo})=>{
                                         {newSkills?.map((skill, index) => (
                                             <li key={index}>{skill}</li>
                                         ))}
-                                            {/* <li>Lorem ipsum dolor sit</li>
-                                            <li>Lorem ipsum dolor sit</li>
-                                            <li>Lorem ipsum dolor sit</li>
-                                            <li>Lorem ipsum dolor sit</li> */}
-
                                         </ul>
                                     </div>
                                 </div>

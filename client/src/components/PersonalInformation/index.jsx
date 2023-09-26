@@ -10,6 +10,9 @@ import FileInput from "../../main/components/common/file";
 import ScheduleModal from "../../main/components/ui/ScheduleModal";
 const PersonalInformation=()=>{
     const navigate=useNavigate();
+    const [skill,setSkill]=useState('');
+    const [skills,setSkills]=useState([]);
+
     const [description,setDescription]=useState('');
     const [avatar,setAvatar]=useState('');
     const [location,setLocation]=useState('');
@@ -18,6 +21,12 @@ const PersonalInformation=()=>{
     const [selectedGender, setSelectedGender] = useState("female");
     const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
     const [schedule, setSchedule] = useState([]);
+    const handleAddSkill = (e) => {        
+        if (e.key === 'Enter' && skill.trim() !== '') {
+            setSkills((prevSkills) => [...prevSkills, skill.trim()]);
+            setSkill('');
+          }
+      };
     const handleGenderChange = (e) => {
         setSelectedGender(e.target.value);
     };
@@ -58,6 +67,10 @@ const PersonalInformation=()=>{
         personalData.append('mobile',mobile);
         personalData.append('avatar_url',avatar);
         personalData.append('dob',dob);
+        const skillData=new FormData();
+        skills.forEach((skill, index) => {
+            skillData.append(`skills[${index}]`, skill);
+          });
         console.log(description,location,dob,mobile,avatar,selectedGender);
         try{
             const response=await sendRequest({
@@ -65,14 +78,24 @@ const PersonalInformation=()=>{
                 route:"/profile/add",
                 body:personalData,
                 includeHeaders:true
+            
             });
-            if(response){
+            const response2=await sendRequest({
+                method:"POST",
+                route:"/skills",
+                body:skillData,
+                includeHeaders:true
+            
+            });
+            if(response && response2){
                 console.log(response);
+                console.log(response2);
                 setTimeout(() => {navigate(`/fill-organization-info`)},1000);
             }
         }catch(error){
             console.log(error)
         }
+
 
     }
 
@@ -120,7 +143,7 @@ const PersonalInformation=()=>{
                                             onChange={(e) => setMobile(e.target.value)}
                                         />
                                     </div>
-                                    <div className="other flex column gap-25 fullwidth">
+                                    <div className="other flex column fullwidth">
                                         <div className="user-gender flex column fullwidth ">
                                             <label htmlFor="gender">Gender</label>
                                             <select 
@@ -164,6 +187,38 @@ const PersonalInformation=()=>{
                                         </div>
                                     ))}
                                 </div>
+
+                                <div className="pt-15">
+                                    <Input
+                                        type={"text"}
+                                        placeholder={"skills (required 6)"}
+                                        value={skill}
+                                        fill={true}
+                                        onChange={(e)=>setSkill(e.target.value)}
+                                        onKeyDown={handleAddSkill}
+
+                                    />
+                                </div>
+                                <div className="personal-schedule fullwidth flex center gap-20">
+                                    {skills.map((skill, index) => (
+                                    <div key={index}>{skill}</div>
+                                    ))}
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <div className="add-info-btn flex fullwidth  pt-20 center">
                                     <Button
                                         text={"Add"}
