@@ -32,10 +32,11 @@ const Profile=({userInfo})=>{
             }
         }
     };
+    console.log(userSchedule);
     return(
     <div className="fullwidth">
         {showSchedule ? (
-            <MemberSchedule goBack={() => setShowSchedule(false) }  auth={true}/>
+            <MemberSchedule schedule={userSchedule} goBack={() => setShowSchedule(false) }  auth={true}/>
         ) : (
             <>
                 <div className="profile-main-content fullwidth ">
