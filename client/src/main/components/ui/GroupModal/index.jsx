@@ -2,9 +2,11 @@ import React from "react";
 import './style.css';
 import Button from './../../common/button';
 import Input from "../../common/input";
+import { useState } from "react";
+import { sendRequest } from "../../../../config/request";
 import ModalComponent from "../../common/modal";
 
-const GroupModal=({showGroupModal , onRequestClose})=>{
+const GroupModal=({showGroupModal , onRequestClose,members})=>{
     const customStyles = {
         content: {
             top: '50%',
@@ -41,6 +43,49 @@ const GroupModal=({showGroupModal , onRequestClose})=>{
         }
     
     };
+    const [name, setName] = useState("");
+    const [selectedMembers, setSelectedMembers] = useState([]);
+    const [groupAdmin, setGroupAdmin] = useState(null);
+    const [selectedAdminName, setSelectedAdminName] = useState("");
+    const memberNamesById = {};
+    members.forEach(member => {
+        memberNamesById[member.id] = member.name;
+    });
+    const handleMemberSelection = (e) => {
+        const selectedMemberIds = Array.from(e.target.selectedOptions, (option) => option.value);
+        setSelectedMembers(selectedMemberIds);
+        console.log('Selected Member IDs:', selectedMemberIds);
+    };
+    const makeAdmin=(memberId)=>{
+        setGroupAdmin(memberId);
+        setSelectedAdminName(memberNamesById[memberId] || '');
+    }
+    const handleCreateGroup=async()=>{
+        const orgId=localStorage.getItem("organizationId");
+        const grpData=new FormData();
+        grpData.append('name',name);
+        grpData.append('member_admin',groupAdmin);
+        grpData.append('org_id',orgId);
+        selectedMembers.forEach((member,index) => {
+            grpData.append(`members[${index}]`,member);
+        });
+        console.log(selectedMembers,selectedAdminName);
+        try {
+            const response = await sendRequest({
+              method: 'POST',
+              route: 'admin/new-group',
+              body: grpData
+            });
+      
+            if (response) {
+                console.log(response)
+                onRequestClose();
+            }
+          } catch (error) {
+            console.log('Error creating group:', error);
+          } 
+    }
+
     return(
         <div >
             <ModalComponent customStyles={customStyles} showModal={showGroupModal} onRequestClose={onRequestClose} >
@@ -57,35 +102,44 @@ const GroupModal=({showGroupModal , onRequestClose})=>{
                                         placeholder={"group name"}
                                         type={"text"}
                                         fill={true}
+                                        value={name}
+                                        onChange={(e)=>setName(e.target.value)}
                                     />
                                 </span>
                             </div>
                             <div className="group-member-combo flex fullwidth">
                                 <span className=" fullwidth pt-10">
                                     <label htmlFor="groupMembers">Choose group members</label>
-                                    <select name="groupMembers"  className="pt-10 fullwidth member-name-list" id="" multiple>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
+                                    <select 
+                                        name="groupMembers"
+                                        onChange={handleMemberSelection}  
+                                        className="pt-10 fullwidth member-name-list" id="" multiple>
+                                    {members.map((member, index) => (
+                                    <option value={member.id} key={index}>{member.name}</option>
+                                    ))}
                                     </select>
                                 </span>
                             </div>
                             <div className="group-member-list-container fullwidth flex fullWidth">
                                 <span className="g-member-list flex column gap-20">
-                                        <div>Member1 </div>
-                                        <div>Member2 </div>
-                                        <div>Member3 </div>
-                                        <div >Member4 </div>
+                                {selectedMembers?.map((member, index) =>
+                                    (
+                                    <div key={index} onClick={() => makeAdmin(member)}>
+                                        {memberNamesById[member] || ''}
+                                    </div>
+                                    )
+                                )}
                                 </span>
                             </div>
                             <div className="select-group-admin flex row gap-10">
                                 <h3>Group Admin:</h3>
-                                <span>Member2</span>
+                                <span>{selectedAdminName}</span>
                             </div>
                             <div className="btn-add-group flex ">
                                 <Button 
                                     text={"CREATE"}
                                     isSecondary={true}
+                                    onClick={handleCreateGroup}
                                 />
                             </div>
                         </div>

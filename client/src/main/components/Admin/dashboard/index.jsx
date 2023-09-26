@@ -141,7 +141,7 @@ const AdminDashboard=({orgId})=>{
                             <>
                                 <div className="dash-header">
                                     {selectedTab==='Dashboard' && <Header title={"ADMIN DASHBOARD"}/>}
-                                    {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true} setOpportunities={setOpportunities}/>}
+                                    {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true} setOpportunities={setOpportunities} members={members}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true} onSearchChange={handleSearchChange}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
                                     {selectedTab=='Stream' && <Header title={"STREAM"} avatar={true}/>}

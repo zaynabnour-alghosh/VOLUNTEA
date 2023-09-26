@@ -6,7 +6,7 @@ import Input from "../input";
 import {icons} from "../../../../icons.js"
 import OpportunityModal from "../../ui/OpportunityModal";
 import GroupModal from "../../ui/GroupModal";
-const Header=({title,avatar,buttons,search,profile,volunteer_pov,name, joined,admin_pov,setOpportunities,onSearchChange})=>{
+const Header=({title,avatar,buttons,search,profile,volunteer_pov,name, joined,admin_pov,setOpportunities,onSearchChange,members})=>{
     const [isOppModalOpen, setIsOppModalOpen] = useState(false);
     const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
     const showOppModal = () => {
@@ -89,16 +89,6 @@ const Header=({title,avatar,buttons,search,profile,volunteer_pov,name, joined,ad
 
             }
 
-
-
-
-
-
-
-
-
-
-
             {search &&
                 <div className="member-icon-search">
                     <Input 
@@ -137,6 +127,7 @@ const Header=({title,avatar,buttons,search,profile,volunteer_pov,name, joined,ad
                 <GroupModal
                     showGroupModal={isGroupModalOpen}
                     onRequestClose={toggleGroupModal}
+                    members={members}
                 />}
         </div>
         {joined && <div className="joined-at-notice  fullwidth flex pt-10 ">joined at: {joined}</div>}
