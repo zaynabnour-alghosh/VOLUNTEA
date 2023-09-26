@@ -1,33 +1,25 @@
 import React from "react";
 import './style.css';
 import AvatarCard from "../../common/avatar";
-const StreamList=()=>{
+const StreamList=({stream})=>{
     return(
         <div className="volunteer-stream-main flex column">
-                <AvatarCard
-                notice={"Admin posted a new announcement"}
-                top={"Reminder"}
-                info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                time={"12:45"}
-                date={"April 22.2023"} 
-                isWide={true}
-                />
-                <AvatarCard
-                notice={"Admin posted a new announcement"}
-                top={"Reminder"}
-                info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                time={"12:45"}
-                date={"April 22.2023"} 
-                isWide={true}
-                />
-                <AvatarCard
-                notice={"Admin posted a new announcement"}
-                top={"Reminder"}
-                info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                time={"12:45"}
-                date={"April 22.2023"} 
-                isWide={true}
+            {stream.map((s, index) => (
+                <div key={index}>
+                    <AvatarCard
+                    notice={s.header? `${s.admin_name} posted a new ${s.header}`:`${s.admin_name} scheduled a new meeting`}
+                    top={s.header? `${s.header}`:'Meeting'}
+                    info={s.description}
+                    time={s.time}
+                    date={s.date} 
+                    isWide={true}
+                    from={s.from}
+                    to={s.to}
+                    meet={s.link}
+                    dateAt={s.date_at}
                     />
+                </div>
+            ))}
         </div>
     );
 }
