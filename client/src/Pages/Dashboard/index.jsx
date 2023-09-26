@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import Admin from "../Admin";
 import Volunteer from "../Volunteer";
 const Dashboard=({ role })=>{
-    // const {orgId } = useParams();
     const orgId=localStorage.getItem("organizationId");
     return(
         <div>

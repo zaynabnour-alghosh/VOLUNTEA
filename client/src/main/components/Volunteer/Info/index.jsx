@@ -1,8 +1,32 @@
 import React from "react";
 import './style.css';
 import RowCard from "../../common/rowcard";
+import { useEffect ,useState} from "react";
+import { sendRequest } from "../../../../config/request";
+
 import orgLogo from '../../../../images/org-logo.png';
-const Info=()=>{
+const Info=(orgId)=>{
+    const [orgInfo, setOrgInfo] = useState(null);
+    useEffect(() => {
+        const id=localStorage.getItem("organizationId");
+        const getOrg = async () => {
+			try {
+				const response = await sendRequest({
+                method:"GET",
+                route: `organization-info/${id}`,
+                body:" ",
+                })
+                
+			if (response) {
+                console.log(response.data);
+                setOrgInfo(response.data);
+			}
+			} catch (error) {
+				console.log(error);
+			}
+		} 
+        getOrg();
+    }, []);
     return(
         <div className="vol-org-info flex fullwidth wrap">
             <div className="vol-org-info-container fullwidth flex column">
@@ -11,30 +35,27 @@ const Info=()=>{
                     <hr/>
                     <div className="vol-org-info-form flex row gap-30 fullwidth spaceBetween">
                         <div className="org-info-logo">
-                            <img src={orgLogo} alt="logo" />
+                            <img src={orgInfo? `http://localhost:8000/storage/images/organizations/${ orgInfo.logo_url}`:'logo'} alt="logo" />
                         </div>
                         <div className="flex-column-gap-20">
                             <div className="info-row flex-column gap-10 fullwidth">
                                 <span>Organization</span>
-                                <div>CLEAN EARTH INITIATIVE</div>
+                                <div>{orgInfo?.name}</div>
                             </div>
                             <div className="info-row flex-column fullwidth">
                                 <span>Description</span>
                                 <div>
                                     <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Etiam et luctus orci, vitae maximus enim. 
-                                    Proin facilisis in libero vitae mattis. 
-                                    Donec feugiat quam nunc, ut vehicula lectus congue a.
+                                    {orgInfo?.description}
                                     </p>
                                 </div>
                             </div>
                             <div className="info-row flex-column fullwidth">
                                 <span>Information</span>
                                 <div className="flex column">
-                                    <p>Centralized Education Initiative (CEI)</p>
-                                    <p>123 Main Street</p>
-                                    <p>Lebanon</p>
+                                    <p>{orgInfo?.location}</p>
+                                    <p>{orgInfo?.phone}</p>
+                                    <p>{orgInfo?.email}</p>
                                 </div>
                             </div>
                             <div className="info-row flex fullwidth">

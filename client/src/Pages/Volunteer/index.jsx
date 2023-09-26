@@ -1,9 +1,9 @@
 import VolunteerDashboard from "../../main/components/Volunteer/Dashboard";
 
-const Volunteer=()=>{
+const Volunteer=({orgId})=>{
     return(
         <div>
-            <VolunteerDashboard/>
+            <VolunteerDashboard orgId={orgId}/>
         </div>
     );
 }

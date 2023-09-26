@@ -12,7 +12,7 @@ import Profile from "../../ui/Profile";
 
 import MemberProfile from "../../ui/MemberProfile";
 
-const VolunteerDashboard=()=>{
+const VolunteerDashboard=({orgId})=>{
     const tabs = [
         { icon: 'home', name: 'Dashboard', size: 32},
         { icon: 'task', name: 'Opportunities' , size: 32},
@@ -80,7 +80,7 @@ const VolunteerDashboard=()=>{
                                     {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
-                                    {selectedTab === 'Dashboard' &&<Info />}
+                                    {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
                                     {selectedTab === 'Opportunities' && <Opportunities/>}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
