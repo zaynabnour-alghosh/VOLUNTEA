@@ -6,6 +6,7 @@ import {icons} from "../../../../icons.js";
 import Button from "../../common/button";
 import ModalComponent from "../../common/modal";
 import { sendRequest } from "../../../../config/request";
+import { useNavigate } from "react-router-dom";
 const ConfirmationModal=({body,confirm,cancel,fillPersonal,setUser,showConfirmationModal , onRequestClose,verify})=>{
     const customStyles = {
         content: {
@@ -35,6 +36,7 @@ const ConfirmationModal=({body,confirm,cancel,fillPersonal,setUser,showConfirmat
             width:'100%'
         }
     };
+    const navigate=useNavigate();
     const [email, setEmail] = useState("");
     const [token, setToken] = useState("");
     const [message,setMessage]=useState('');
@@ -56,15 +58,17 @@ const ConfirmationModal=({body,confirm,cancel,fillPersonal,setUser,showConfirmat
                     setMessage(response.message);
                     setUser(response);
                     fillPersonal(response.user);
-
-
-
-                    // setTimeout(() => {navigate(`/personal-info`)},1000);
                 }
             }catch(error){
                 console.log(error)
             }
         }
+    }
+    const logout=()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('organizationId');
+        localStorage.removeItem('role');
+        navigate('/login');
     }
     return(
         <div>
@@ -107,7 +111,7 @@ const ConfirmationModal=({body,confirm,cancel,fillPersonal,setUser,showConfirmat
                             text={"Confirm"}
                             isPrimary={true} 
                             medium={true}
-                            onClick={verify?verifyUser:onRequestClose}                            
+                            onClick={verify?verifyUser:logout}                            
                         />
                         </div>
                 </div>
