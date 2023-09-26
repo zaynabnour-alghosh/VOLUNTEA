@@ -15,13 +15,22 @@ const Profile=({userInfo})=>{
     const [selectedGender, setSelectedGender] = useState(userInfo? userInfo.profile.gender: "");
     const [avatar, setAvatar] = useState(userInfo? userInfo.profile.avatar_url: "");
     const [userSkills, setSkills] = useState(userInfo? userInfo.skills: []);
+    const [skill, setSkill] = useState('');
     const [userSchedule, setSchedule] = useState(userInfo? userInfo.schedule: []);
-
+    const [newSkills, setNewSkills] = useState(userSkills);    
     const handleViewScheduleClick = () => {
         setShowSchedule(true);
     };
      const handleGenderChange = (e) => {
-        setSelectedGender(e.target.value);
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+
+            const newSkill = skill.trim();
+            if (newSkill) {
+                setNewSkills(prevNewSkills => [...prevNewSkills, newSkill]);
+                setSkill('');
+            }
+        }
     };
     return(
     <div className="fullwidth">
@@ -132,11 +141,23 @@ const Profile=({userInfo})=>{
                                             label={"Skills"}
                                             placeholder={"skills"}
                                             type={"text"}
+                                            value={skill}
+                                            // value={"skill"} // Display edited skills
+                                            onChange={(e) => {
+                                                setSkill(e.target.value);
+                                            }}
+                                            onKeyDown={() => {        
+                                                const newSkill =skill.trim();
+                                                if (newSkill) {
+                                                    setSkills([...userSkills, newSkill]);
+                                                    setSkill('');
+                                                  }
+                                            }}
                                         />
                                     </div>
                                     <div className="profile-form-list flex">
                                         <ul className="skill-list flex column gap-10">
-                                        {userInfo?.skills.map((skill, index) => (
+                                        {newSkills?.map((skill, index) => (
                                             <li key={index}>{skill}</li>
                                         ))}
                                             {/* <li>Lorem ipsum dolor sit</li>
