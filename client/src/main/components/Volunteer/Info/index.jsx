@@ -5,21 +5,25 @@ import { useEffect ,useState} from "react";
 import { sendRequest } from "../../../../config/request";
 
 import orgLogo from '../../../../images/org-logo.png';
-const Info=(orgId)=>{
+const Info=({orgId,setJoinedAt})=>{
     const [orgInfo, setOrgInfo] = useState(null);
+    const [certs, setCerts] = useState([]);
+    
     useEffect(() => {
         const id=localStorage.getItem("organizationId");
         const getOrg = async () => {
 			try {
 				const response = await sendRequest({
                 method:"GET",
-                route: `organization-info/${id}`,
+                route: `volunteer/dashboard-home/${id}`,
                 body:" ",
                 })
                 
 			if (response) {
-                console.log(response.data);
-                setOrgInfo(response.data);
+                console.log(response);
+                setOrgInfo(response);
+                setCerts(response.badges);
+                setJoinedAt(response.joined);
 			}
 			} catch (error) {
 				console.log(error);
@@ -27,6 +31,7 @@ const Info=(orgId)=>{
 		} 
         getOrg();
     }, []);
+    
     return(
         <div className="vol-org-info flex fullwidth wrap">
             <div className="vol-org-info-container fullwidth flex column">
@@ -35,7 +40,7 @@ const Info=(orgId)=>{
                     <hr/>
                     <div className="vol-org-info-form flex row gap-30 fullwidth spaceBetween">
                         <div className="org-info-logo">
-                            <img src={orgInfo? `http://localhost:8000/storage/images/organizations/${ orgInfo.logo_url}`:'logo'} alt="logo" />
+                            <img src={orgInfo? `http://localhost:8000/storage/images/organizations/${ orgInfo.logo}`:'logo'} alt="logo" />
                         </div>
                         <div className="flex-column-gap-20">
                             <div className="info-row flex-column gap-10 fullwidth">
@@ -55,7 +60,6 @@ const Info=(orgId)=>{
                                 <div className="flex column">
                                     <p>{orgInfo?.location}</p>
                                     <p>{orgInfo?.phone}</p>
-                                    <p>{orgInfo?.email}</p>
                                 </div>
                             </div>
                             <div className="info-row flex fullwidth">
@@ -72,27 +76,17 @@ const Info=(orgId)=>{
                     <div><h3>Certifications</h3></div>
                     <hr/>
                     <div className="vol-certification-info-form flex center row gap-30 p-20">
-                        <RowCard 
-                            title={"Opportunity Name"}
-                            desc={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et luctus orci, vitae maximus enim. Proin facilisis in libero vitae mattis"}
-                            notice={"Issued by: Admin Name"}
-                            date={"Jan 1st, 2022"}
+                    {certs?.map((cert, index) => (
+                        <div key={index}>
+                            <RowCard 
+                            // notice={cert.admin}
+                            title={cert.topic}
+                            desc={cert.content}
+                            date={cert.issued}
                             isCertification={true}
-                        />
-                        <RowCard 
-                            title={"Opportunity Name"}
-                            desc={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et luctus orci, vitae maximus enim. Proin facilisis in libero vitae mattis"}
-                            notice={"Issued by: Admin Name"}
-                            date={"Jan 1st, 2022"}
-                            isCertification={true}
-                        />
-                        <RowCard 
-                            title={"Opportunity Name"}
-                            desc={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et luctus orci, vitae maximus enim. Proin facilisis in libero vitae mattis"}
-                            notice={"Issued by: Admin Name"}
-                            date={"Jan 1st, 2022"}
-                            isCertification={true}
-                        />
+                            />
+                        </div>
+                    ))}     
                     </div>
                 </div>
             </div>

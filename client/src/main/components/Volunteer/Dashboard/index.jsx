@@ -27,6 +27,7 @@ const VolunteerDashboard=({orgId})=>{
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
     const [showMemberProfile, setShowMemeberProfile] = useState(false);    
+    const [joinedAt, setJoinedAt] = useState('');
     
     useEffect(() => {
         setShowNotificationModal(false);
@@ -72,7 +73,7 @@ const VolunteerDashboard=({orgId})=>{
                         {!showMemberProfile &&
                              <> 
                                 <div className="dash-header">
-                                    {selectedTab==='Dashboard' && <Header title={"VOLUNTEER DASHBOARD"} joined={"22-08-2023"}/>}
+                                    {selectedTab==='Dashboard' && <Header title={"VOLUNTEER DASHBOARD"} joined={joinedAt? joinedAt:''}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={true}/>}
@@ -80,7 +81,7 @@ const VolunteerDashboard=({orgId})=>{
                                     {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={true}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
-                                    {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
+                                    {selectedTab === 'Dashboard' &&<Info  orgId={orgId} setJoinedAt={setJoinedAt}/>}
                                     {selectedTab === 'Opportunities' && <Opportunities/>}
                                     {selectedTab === 'Members' && <Members toggleMemberProfile={() => setShowMemeberProfile(true)}/>}
                                     {selectedTab === 'Messages' && <Messages />}
