@@ -161,7 +161,7 @@ const VolunteerDashboard=({orgId})=>{
                                     {selectedTab === 'Opportunities' && <Opportunities orgId={orgId}/>}
                                     {selectedTab === 'Members' && <Members  members={filteredMembers} toggleMemberProfile={toggleMemberProfile}/>}
                                     {selectedTab === 'Messages' && <Messages />}
-                                    {selectedTab === 'Stream' && <Stream />}
+                                    {selectedTab === 'Stream' && <Stream orgId={orgId}/>}
                                     {selectedTab === 'Profile' && <Profile userInfo={volInfo} />}
 
                                 </div>

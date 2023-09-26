@@ -17,12 +17,6 @@ const GroupChatBox=({groupName})=>{
             <div className="chatbox-content flex column">
                 <MessageRow sender={true} text={"hi"} />
                 <MessageRow  text={"hi there!"}/>
-                <MessageRow sender={true} text={"Lorem ipsum dolor sit amet"} />
-                <MessageRow sender={true} text={"lorem ipsum ..."} />
-                <MessageRow text={"lorem ipsum ..."} />
-                <MessageRow sender={true} text={"Lorem ipsum dolor sit amet"} />
-                <MessageRow sender={true} text={"lorem ipsum ..."} />
-                <MessageRow text={"lorem ipsum ..."} />
             </div>
             <hr />
             <div className="chatbox-message-input flex row">
