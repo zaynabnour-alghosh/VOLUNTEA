@@ -12,6 +12,8 @@ const Login=()=>{
     const [login,setLogin]=useState(true);
     const [isSpaceModalOpen, setIsSpaceModalOpen] = useState(false);
     const [organizations, setOrganizations] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const showSpaceModal = () => {
         setIsSpaceModalOpen(true);
         
@@ -22,6 +24,16 @@ const Login=()=>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleUserLogin=async(e)=>{
+        if (!email || !password) {
+            setErrorMessage('Email and password are required.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+      
+          setErrorMessage('');
+          setLoading(true);
         console.log("clicked");
         const userData = new FormData();
 
@@ -36,6 +48,7 @@ const Login=()=>{
                 body:userData
             });
             if(response){
+                setLoading(false);
                 console.log(response);
                 setOrganizations(response.data.organizations);
                 
@@ -48,8 +61,6 @@ const Login=()=>{
 					response.data.role_id
 				);
                 showSpaceModal();
-                // localStorage.setItem("org_id",response.user.org.id)
-                // setTimeout(() => {navigate(`/personal-info`)},1000);
             };
         }catch(error){
             console.log(error)
@@ -96,9 +107,12 @@ const Login=()=>{
                         />
                             </div>
                         </div>
+                        {errorMessage && (
+                        <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                        )}
                         <div className="btn-login">
                             <Button 
-                                text={"Continue"}
+                                text={loading ? 'Loading...' : 'Continue'}
                                 isLight={true}
                                 fill={true}
                                 onClick={handleUserLogin}

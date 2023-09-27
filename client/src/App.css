@@ -166,3 +166,7 @@ input[type="file"] {
   color: var(--color-primary);
   font-weight: 700;
 }
+.error-message{
+  font-size: 12px;
+  color: var(--red);
+}
