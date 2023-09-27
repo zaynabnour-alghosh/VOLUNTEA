@@ -361,7 +361,7 @@ const Info=({orgId})=>{
                 )}
                 <div className="flex center">
                     <Button
-                        text={"Edit"}
+                        text={loading ? 'Loading...' : 'Edit'}
                         isSecondary={true}
                         medium={true} 
                         onClick={() => editOrgInfo({
