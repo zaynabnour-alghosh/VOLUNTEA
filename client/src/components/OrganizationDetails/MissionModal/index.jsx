@@ -44,8 +44,18 @@ const MissionModal=({showMissionModal , onRequestClose,addMission,editMission, m
     };
     const [topic, setTopic] = useState(mission ? mission.header : "");
     const [description, setDescription] = useState(mission ? mission.description : "");
+    const [errorMessage, setErrorMessage] = useState('');
+    
     const org_id=localStorage.getItem("org_id");
     const handleAddMission=()=>{
+        if (!topic ||!description) {
+            setErrorMessage('Please fill in all fields.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         const missionData=new FormData();
         missionData.append('header',topic);
         missionData.append('description',description);
@@ -104,6 +114,9 @@ const MissionModal=({showMissionModal , onRequestClose,addMission,editMission, m
                                     />
                                 </span>
                             </div>
+                            {errorMessage && (
+                            <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                            )}
                             <div className="btn-add-mission flex ">
                                 <Button 
                                     text={mission ? "Update" : "Add"}

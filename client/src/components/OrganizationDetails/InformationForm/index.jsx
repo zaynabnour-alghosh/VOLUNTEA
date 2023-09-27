@@ -59,7 +59,7 @@ const InformationForm=()=>{
                 setSuccessMessage('SUCCESS');
                 setTimeout(() => {
                 setSuccessMessage('');
-              }, 4000);
+              }, 2000);
             }
         }catch(error){
             console.log(error)
@@ -76,6 +76,11 @@ const InformationForm=()=>{
             });
             if(response){
                 console.log(response);
+                console.log(response);
+                setSuccessMessage('SUCCESS');
+                setTimeout(() => {
+                setSuccessMessage('');
+              }, 2000);
             }
         }catch(error){
             console.log(error)
