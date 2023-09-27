@@ -56,7 +56,6 @@ const ForgetPassword=({onToggle})=>{
             console.log(error)
             setLoading(false);
         }
-
     }
     return(
         <div className="page flex center">
