@@ -16,6 +16,8 @@ const NewSpace=({onToggle,volunteer,code})=>{
     const [confirmPassword, setConfirmPassword] = useState('')
     const [organizationCode, setOrganizationCode] = useState('');
     const [user,setUser]=useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
     const toggleConfirmationModal = () => {
         setShowConfirmationModal(!showConfirmationModal);
@@ -32,6 +34,15 @@ const NewSpace=({onToggle,volunteer,code})=>{
     setOrganizationCode(result);
     }    
     const handleVolunteerSignup=async()=>{
+        if (!fullName || !email || !password || !code) {
+            setErrorMessage('All fields are required.');
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 5000);
+            return;
+        }
+
+        setLoading(true);
         console.log("clicked volunteer");
         const volunteerData = new FormData();
 
@@ -51,6 +62,7 @@ const NewSpace=({onToggle,volunteer,code})=>{
                 route:"/guest/register/volunteer",
                 body:volunteerData
             });
+            setLoading(false);
             if(response){
                 console.log(response);
                 localStorage.setItem(
@@ -60,11 +72,22 @@ const NewSpace=({onToggle,volunteer,code})=>{
                 setShowConfirmationModal(true);
             }
         }catch(error){
-            console.log(error)
+            setLoading(false);
+            console.log(error);
+            setErrorMessage('Registration failed. Please try again.');
         }
     }
 
     const handleAdminSignup=async(e)=>{
+        if (!fullName || !email || !password || !organizationCode) {
+            setErrorMessage('All fields are required.');
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 5000);
+            return;
+        }
+
+        setLoading(true);
         console.log("clicked admin");
         const adminData = new FormData();
 
@@ -84,6 +107,7 @@ const NewSpace=({onToggle,volunteer,code})=>{
                 route:"/guest/register/admin",
                 body:adminData
             });
+            setLoading(false);
             if(response){
                 console.log(response);
                 localStorage.setItem(
@@ -93,10 +117,12 @@ const NewSpace=({onToggle,volunteer,code})=>{
                 localStorage.setItem("org_id",response.user.org.id)
                 setShowConfirmationModal(true);
 
-                // setTimeout(() => {navigate(`/personal-info`)},1000);
             }
         }catch(error){
-            console.log(error)
+            setLoading(false);
+            console.log(error);
+            setErrorMessage('Registration failed. Please try again.');
+        
         }
     }
     const fillPersonal=(user)=>{
@@ -163,6 +189,8 @@ const NewSpace=({onToggle,volunteer,code})=>{
                                 container={true}
                             />   
                         </div>
+                        {errorMessage && <div className="error-message flex fullwidth center">{errorMessage}</div>}
+                        {loading && <div className="loading-message flex fullwidth center">Loading...</div>}
                         <div className="space-btn flex fullwidth row gap-40 center">
                             {!volunteer && <Button 
                                 onClick={generateRandomCode} 

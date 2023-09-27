@@ -31,8 +31,8 @@ function App() {
         <Route path='/signup' element={<SignUp/>} />
 
         <Route path='/voluntea/organization/:org_name' element={<OrganizationLanding all={all} orgInfo={orgInfo} events={events} missions={missions} impacts={impacts}/>} />
-        <Route path='/voluntea/:org_id/admin/dashboard' element={<Dashboard role="admin"/>} />
-        <Route path='/voluntea/:org_id/volunteer/dashboard' element={<Dashboard role="volunteer"/>} />
+        <Route path='/voluntea/:org_id/admin/dashboard' element={<Dashboard />} />
+        <Route path='/voluntea/:org_id/volunteer/dashboard' element={<Dashboard />} />
 
         <Route path="/e401" element={<E401 />} />
 				<Route path="*" element={<E404 />} />
