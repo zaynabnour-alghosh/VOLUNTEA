@@ -80,5 +80,6 @@ Route::group(["prefix" => "guest"], function(){
 });
     Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);
     Route::get("organization-landing/{code}", [OrganizationController::class, "getOrganizationLanding"]);
+    Route::post("send-notif",[AdminController::class, "sendNotificationrToUser"]);
 
 

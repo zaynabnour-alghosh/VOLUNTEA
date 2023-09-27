@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Services\FCMService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -229,6 +229,35 @@ class AdminController extends Controller
             ]); 
         }       
     }    
+
+
+
+
+
+    public function sendNotificationrToUser(Request $request)
+    {
+       $user = $request->to;
+        $notificationData = $request->data;
+       FCMService::send(
+        $user,
+        $notificationData
+    );
+      return response()->json([
+        'status' => 'success',
+        'data' => $notificationData,"user"=>$user
+      ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
