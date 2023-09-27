@@ -2,7 +2,7 @@ import NewSpace from "../../components/NewSpace";
 import SearchLanding from "../../components/SearchLanding";
 import { useState } from "react";
 import './style.css';
-const StartupPage=({setOrgInfo,setImpacts,setMissions,setEvents})=>{
+const StartupPage=({setOrgInfo,setImpacts,setMissions,setEvents,setAll})=>{
     const[startUp,setStartUp]=useState(true);
 
     return (
@@ -12,6 +12,7 @@ const StartupPage=({setOrgInfo,setImpacts,setMissions,setEvents})=>{
             (<NewSpace onToggle={()=>setStartUp(false)}/>)
             :
             (<SearchLanding 
+                setAll={setAll}
                 setOrgInfo={setOrgInfo} 
                 setEvents={setEvents}
                 setMissions={setMissions}

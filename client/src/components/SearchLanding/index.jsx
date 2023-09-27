@@ -8,7 +8,7 @@ import Button from "../../main/components/common/button";
 import { useNavigate } from "react-router-dom";
 import { sendRequest } from "../../config/request";
 import { useState } from "react";
-const SearchLanding=({onToggle,setOrgInfo,setImpacts,setMissions,setEvents})=>{
+const SearchLanding=({onToggle,setOrgInfo,setImpacts,setMissions,setEvents,setAll})=>{
     const navigate=useNavigate();
     const [organizationCode, setOrganizationCode] = useState("");
     const handleSearch = async () => {
@@ -20,6 +20,7 @@ const SearchLanding=({onToggle,setOrgInfo,setImpacts,setMissions,setEvents})=>{
             });
             if(response){
                 console.log(response);
+                setAll(response);
                 setOrgInfo(response.data);
                 setImpacts(response.impacts);
                 setMissions(response.missions);

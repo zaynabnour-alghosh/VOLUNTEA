@@ -16,19 +16,19 @@ function App() {
   const [events,setEvents]=useState(null);
   const [missions,setMissions]=useState(null);
   const [impacts,setImpacts]=useState(null);
-
+  const[all,setAll]=useState(null);
   return (
     <BrowserRouter>
       <Routes>      
         <Route path='/' element={<LandingPage />} />
-        <Route path='/startup' element={<StartupPage setOrgInfo={setOrgInfo} setImpacts={setImpacts} setMissions={setMissions} setEvents={setEvents}/>} />
+        <Route path='/startup' element={<StartupPage setAll={setAll} setOrgInfo={setOrgInfo} setImpacts={setImpacts} setMissions={setMissions} setEvents={setEvents}/>} />
         <Route path='/personal-info' element={<PersonalInformation />} />
         <Route path='/fill-organization-info' element={<InformationForm />} />
 
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<SignUp/>} />
 
-        <Route path='/voluntea/organization/:org_name' element={<OrganizationLanding orgInfo={orgInfo} events={events} missions={missions} impacts={impacts}/>} />
+        <Route path='/voluntea/organization/:org_name' element={<OrganizationLanding all={all} orgInfo={orgInfo} events={events} missions={missions} impacts={impacts}/>} />
         <Route path='/voluntea/:org_id/admin/dashboard' element={<Dashboard role="admin"/>} />
         <Route path='/voluntea/:org_id/volunteer/dashboard' element={<Dashboard role="volunteer"/>} />
 

@@ -11,8 +11,8 @@ import MissionSection from '../../components/OrganizationComponents/MissionSecti
 import EventSection from '../../components/OrganizationComponents/EventSection';
 import {FaPhone} from 'react-icons/fa';
 import {MdKeyboardDoubleArrowRight} from 'react-icons/md';
-const OrganizationLanding=({orgInfo,events,missions,impacts})=>{
-    
+const OrganizationLanding=({orgInfo,events,missions,impacts,all})=>{
+    console.log("all", all);
     console.log("info" ,orgInfo);
     const [scrolling, setScrolling] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +40,7 @@ const OrganizationLanding=({orgInfo,events,missions,impacts})=>{
     return(
         <div>
             <div className={`header fullwidth flex  ${navbarClass}`}>
-                <img src={orgLogo} alt="logo" className="logoO"/>
+                <img src={`http://localhost:8000/storage/images/organizations/${orgInfo.logo_url}`} alt="logo" className="logoO"/>
                 <div className={`menu-toggle ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                    <div className="menu">{icons['menu']}</div>
                 </div>
@@ -57,13 +57,13 @@ const OrganizationLanding=({orgInfo,events,missions,impacts})=>{
             <   HeroSection data={orgInfo}/>
             </div> 
             <div id="impact" className='light'>
-                <ImpactSection data={events}/>
+                <ImpactSection data={impacts}/>
             </div>
             <div id="mission" className='light'>
                 <MissionSection data={missions}/>
             </div>
             <div id="event" className='light'>
-                <EventSection data={impacts}/>
+                <EventSection data={events}/>
             </div>
             <div id="contact " className='light'>
                <div className="footer-container flex column">
