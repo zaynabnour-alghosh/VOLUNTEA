@@ -130,9 +130,9 @@ class AuthController extends Controller
             $signup_request=new SignupRequest;
             $signup_request->user_id=$user->id;
             $signup_request->org_code=$request->code;
-            $signup_request->status='pending';
+            $signup_request->status='accepted';
             $signup_request->save();
-            $user->state='pending';
+            $user->state='accepted';
             
         }
         if($role==='admin'){

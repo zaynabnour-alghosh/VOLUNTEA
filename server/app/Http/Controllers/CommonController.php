@@ -42,7 +42,7 @@ class CommonController extends Controller
                 $name=$member->name;
                 $email=$member->email;
                 $profile=Profile::where('user_id',$i)->first();                
-                $avatar=$profile->avatar_url;
+                $avatar=$profile->avatar_url ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAMAAAC4XpwXAAAAMFBMVEXi4uKrq6uoqKjl5eXd3d3Ly8u1tbXW1tavr6/CwsLR0dG7u7vGxsalpaXOzs7a2tr7SBtpAAADAklEQVRoge2a25KEIAxEhSAiXvj/v11gdlfLdRwSG62tsh+m5u3YIYRLaJpHjx49evTo0aNHj+4SUWNM6LoumPifriWHdrBORWnlnO29ueoDiMJoldZa/Sr+t625gk/BrsHLF6ihqc2P7GkH/eJPQ1X/1PRqz/fiv60IN+6InfnVwk/zofFvvOuq4Kn9zM7yFfDUv023rf0Zjqex0HnCo92TL3We6Dpg6aGcnfAOS7flcc/4ARh76nlw7NDz4p6Fiz0NXOvRfIsyH/hwnHmJdaB5xlRf0R2ETrPEulJTgOBFgY/mRwTdiNhRFgCnTjTsyTyCzljcNnTAPkM23zIdMfBWCFe6v5OuEAudu5Nu5HTAlPu/9P8+7vfm/L3VRl5pJ8DOkrzYuzkNjxLCISusOO0gZb785LzRBDrIy7YXGgMnUegx2zpx1kMyPuGZJ9hsHZJzWR2f7lDWRSdo2CGy4S+zesCx06aeaR57ZUojZ9KjCs2CZyy00EH/VjEeVWdE+DrwsnmnFf6e9Bv/+cJSK8ydwS7+Y/Rx9XVX/qBBoG2du/lF1LRuvyukra/eFkp8P2yaFFprN3QXsDOfjO/tFBWx6df2V6F/v4BM5/3sfbi4E7r+hDuwj1Lk74h9gobOz22Uzx3469BNmHubarrOilvIqzrw1HS5+/6n0jk7hsqTnsy4331/rW92rjgGRMcN8NQSGCvhyfRTQQ9at1Xi3xb0v1/+4U1oMoyzHPoJQFHjf22/Q8L7t4n+jg/cWwpO0BNqh/f5rceue8hBsuChSUW8FI7BC8Z8wZ8ce8mVzaLp3JGOf2WycX9m4rFemuzjT1weiVuwi+RXxfLGwMq8dOil18MbvPBkeaIbtZYs9mfz/Ud6ltAFj2z2JXmAgbIunPRnp/pKbLq8EfZXE3+ng0n4l9iLnbgLtyduvUWUuRWdeXELqjQ/YlYcQS/kUKyHlrjJ/hLvqaGsBXdAZ+2vwcPOfASBHnZWg0z6pO69NKPcoZOOl3bYWpPpjHqDTvm3Sf8F43MgtyvZSFwAAAAASUVORK5CYII=";
                 $members[]=[
                     'id'=>$i,
                     'name'=>$name,
