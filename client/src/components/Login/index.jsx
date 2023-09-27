@@ -29,6 +29,7 @@ const Login=()=>{
             setTimeout(() => {
                 setErrorMessage('');
               }, 5000);
+              setLoading(false)
               return;
           }
       
@@ -47,8 +48,9 @@ const Login=()=>{
                 route:"/guest/login",
                 body:userData
             });
+            setLoading(false);
             if(response){
-                setLoading(false);
+               
                 console.log(response);
                 setOrganizations(response.data.organizations);
                 
@@ -63,8 +65,41 @@ const Login=()=>{
                 showSpaceModal();
             };
         }catch(error){
-            console.log(error)
+            setLoading(false);
+            setErrorMessage('Login Failed');
+            console.error('Error during login:', error);
         }
+    }
+    const handleForgetPass=async()=>{
+        const data=new FormData();
+        data.append("email",email);
+        try {
+            const response = await sendRequest({
+                method: "POST",
+                route: "guest/password/reset/request",
+                body:data
+            });
+            if (response) {
+                
+                console.log(response);
+                setLogin(false);
+            }
+                
+            
+        } catch (error) {
+            setErrorMessage('Login Failed');
+                setTimeout(() => {
+                setLoading(false);
+                setErrorMessage('');
+                }, 5000);
+                setErrorMessage('');
+           
+            console.log("Error sending password reset email:", error);
+              
+          }
+      
+            
+        
     }
     
     return(
@@ -120,7 +155,7 @@ const Login=()=>{
                         </div>
                     </div>
                     <div className="content-bottom flex column center">
-                        <div className="forget-pass" onClick={()=>setLogin(false)}>Forgot Password?</div>
+                        <div className="forget-pass" onClick={handleForgetPass}>Forgot Password?</div>
                         <Link to='/'><div className="return">Back to Main</div></Link>
                     </div>
                 </div>

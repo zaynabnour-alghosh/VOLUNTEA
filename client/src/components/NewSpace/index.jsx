@@ -178,7 +178,7 @@ const NewSpace=({onToggle,volunteer,code})=>{
                             /> 
                         </div>
                         {!volunteer && <div className="option-search">
-                            Looking for an organization?<span onClick={() => onToggle()}>Look up</span>
+                            Looking for an organization? &nbsp;<span onClick={() => onToggle()}>Look up</span>
                         </div>}
 
                     </div>
