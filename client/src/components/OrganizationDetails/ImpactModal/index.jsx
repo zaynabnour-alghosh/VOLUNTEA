@@ -46,9 +46,18 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
     const [description, setDescription] = useState(impact ? impact.description : "");
     const [image, setImage] = useState(impact ? impact.image_url : "");
     const [fileName, setFileName] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
     const org_id=localStorage.getItem("org_id");
     console.log(org_id);
     const handleAddImpact=()=>{
+        if (!topic ||!description || !image) {
+            setErrorMessage('Please fill in all fields.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         const impactData=new FormData();
         impactData.append('header',topic);
         impactData.append('description',description);
@@ -118,6 +127,10 @@ const ImpactModal=({showImpactModal , onRequestClose ,addImpact,editImpact, impa
                                     />
                                 </span>
                             </div>
+                             {errorMessage && (
+                            <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                            )}
+                            
                             <div className="btn-add-impcat flex ">
                                 <Button 
                                     text={impact ? "Update" : "Add"}

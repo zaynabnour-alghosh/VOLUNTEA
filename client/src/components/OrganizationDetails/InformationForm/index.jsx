@@ -24,6 +24,8 @@ const InformationForm=()=>{
     const [phone,setPhone]=useState('');
     const [email,setEmail]=useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    
 
     const showImpcatModal = () => {
         setIsImpactModalOpen(true);
@@ -54,6 +56,10 @@ const InformationForm=()=>{
             });
             if(response){
                 console.log(response);
+                setSuccessMessage('SUCCESS');
+                setTimeout(() => {
+                setSuccessMessage('');
+              }, 4000);
             }
         }catch(error){
             console.log(error)
@@ -248,6 +254,7 @@ const InformationForm=()=>{
                             onChange={(e)=>setWhats(e.target.value)}
                         />
                     </div>
+                    {successMessage && (<div className=" fullwidth flex center success-message">{successMessage}</div>)}
                     {errorMessage && <div className="error-message pt-10 flex fullwidth center">{errorMessage}</div>}
                     <div className="add-info-btn flex fullwidth pt-10 center">
                     <Button

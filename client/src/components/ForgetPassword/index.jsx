@@ -43,7 +43,7 @@ const ForgetPassword=({onToggle})=>{
                 setSuccessMessage('SUCCESS');
                 setTimeout(() => {
                 setSuccessMessage('');
-              }, 1000);
+              }, 4000);
               
               setLoading(false);
               console.log(response);
