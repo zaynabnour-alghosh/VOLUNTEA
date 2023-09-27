@@ -32,6 +32,10 @@ const Info=({orgId})=>{
     const [isMissionModalOpen, setIsMissionModalOpen] = useState(false);
     const [isEventModalOpen, setIsEventModalOpen] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
     const toggleImpactModal=()=>{
         setIsImpactModalOpen(!isImpactModalOpen);
     }
@@ -146,9 +150,10 @@ const Info=({orgId})=>{
     };
 
     const editOrgInfo=async(info)=>{
-
+        console.log("info",info);
+        setLoading(true);
         const orgData=new FormData();
-        orgData.append('org_id',info.org_id);
+        orgData.append('org_id',orgId);
         orgData.append('name',info.name);
         orgData.append('description',info.description);
         orgData.append('logo_url',info.logo_url);
@@ -158,6 +163,7 @@ const Info=({orgId})=>{
         orgData.append('insta_link',info.insta_link);
         orgData.append('face_link',info.face_link);
         orgData.append('whats_link',info.whats_link);
+        console.log("location",location);
         try{
             const response=await sendRequest({
                 method:"POST",
@@ -167,10 +173,21 @@ const Info=({orgId})=>{
             });
             if(response){
                 console.log(response);
+                 setSuccessMessage('SUCCESS');
+                setTimeout(() => {
+                setSuccessMessage('');
+              }, 4000);
+              
+              setLoading(false)
                 
             }
         }catch(error){
             console.log(error)
+            setLoading(false);
+            setErrorMessage('Edit information failed.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
         }
     }
     return(
@@ -336,13 +353,18 @@ const Info=({orgId})=>{
                         </div>
                     </div>
                 </div>
+                {errorMessage && (
+                    <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                )}
+                {successMessage && (
+                    <div className=" fullwidth flex center success-message">{successMessage}</div>
+                )}
                 <div className="flex center">
                     <Button
                         text={"Edit"}
                         isSecondary={true}
                         medium={true} 
                         onClick={() => editOrgInfo({
-                            org_id: orgInfo?.id,
                             name,
                             description,
                             logo_url: logo,

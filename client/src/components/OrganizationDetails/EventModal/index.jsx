@@ -46,6 +46,8 @@ const OrgEventModal=({showEventModal , onRequestClose,addEvent,editEvent, event}
     const [image, setImage] = useState(event ? event.image_url : "");
     const [date, setDate] = useState(event ? event.event_date : "");
     const org_id=localStorage.getItem("org_id");
+    const [errorMessage, setErrorMessage] = useState('');
+
     const handleAddEvent=()=>{
         if (!topic ||!description || !image || !date) {
             setErrorMessage('Please fill in all fields.');
