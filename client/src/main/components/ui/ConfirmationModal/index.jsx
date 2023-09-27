@@ -40,8 +40,18 @@ const ConfirmationModal=({body,confirm,cancel,volunteer,fillPersonal,setUser,sho
     const [email, setEmail] = useState("");
     const [token, setToken] = useState("");
     const [message,setMessage]=useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const verifyUser=async()=>{
         if (verify){
+            if (!email ||!token) {
+                setErrorMessage('Please fill in all fields.');
+                setTimeout(() => {
+                    setErrorMessage('');
+                  }, 5000);
+                  return;
+              }
+              setErrorMessage('');
             const data=new FormData();
             data.append('email',email);
             data.append('token',token);
@@ -60,7 +70,11 @@ const ConfirmationModal=({body,confirm,cancel,volunteer,fillPersonal,setUser,sho
                     fillPersonal(response.user);
                 }
             }catch(error){
-                console.log(error)
+                console.log(error);
+                setErrorMessage('Error verifying user.');
+                setTimeout(() => {
+                    setErrorMessage('');
+                }, 5000);
             }
         }
     }
