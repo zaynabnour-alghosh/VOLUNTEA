@@ -35,19 +35,30 @@ const FeedbackModal=({showFeedModal , onRequestClose,id})=>{
         }
     };
     const [feed, setFeed] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const handleSendFeed = async () => {
-        const feed=new FormData();
-        feed.append('feedback',feed);
+        if (!feed) {
+            setErrorMessage('Cannot send empty feedback.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
+        const feedback=new FormData();
+        feedback.append('feedback',feed);
         try {
             const response = await sendRequest({
             method:"POST",
             route: `volunteer/new-feedback/${id}`,
-            body:feed,
+            body:feedback,
             })
             
         if (response) {
             console.log(response);
+            setSuccess(true);
             onRequestClose();
         }
         } catch (error) {
@@ -82,7 +93,7 @@ const FeedbackModal=({showFeedModal , onRequestClose,id})=>{
                             onClick={()=>{onRequestClose();}}
                         />
                         <Button
-                            text={"Send"}
+                            text={success? "Sent":"Send"}
                             isPrimary={true} 
                             medium={true}
                             onClick={handleSendFeed}
