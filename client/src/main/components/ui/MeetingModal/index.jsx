@@ -46,9 +46,18 @@ const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
     const [description, setDescription] = useState("");
     const [date,setDate ] = useState("");
     const [location,setLocation ] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
     
     const handleMeet = async() => {
         console.log("click");
+        if (!link ||!description || !date) {
+            setErrorMessage('Please fill in the fields (location is optional.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         const id=localStorage.getItem("organizationId");
         const data=new FormData();
         data.append('org_id',id);        
@@ -69,7 +78,11 @@ const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
                 onUpdateStream();
             }
             }catch(error){
-                console.log(error)
+                console.log(error);
+                setErrorMessage('Error creating meeting.');
+                setTimeout(() => {
+                    setErrorMessage('');
+                }, 5000);
             }
         };
     return(
@@ -128,7 +141,10 @@ const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
                                     />
                                 </span>
                             </div>
-                            <div className="btn-add-meeting flex ">
+                            {errorMessage && (
+                            <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                            )}
+                            <div className="pt-10 btn-add-meeting flex ">
                                 <Button 
                                     text={"SCHEDULE"}
                                     isSecondary={true}
