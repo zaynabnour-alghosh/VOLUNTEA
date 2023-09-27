@@ -192,7 +192,7 @@ class OrganizationController extends Controller
     public function editOrganizationInfo(Request $request){
         $user=Auth::user();
         $org_id = $request->org_id;
-        $organization = OrganizationProfile::find($org_id);
+        $organization = OrganizationProfile::where('org_id',$org_id)->first();
         if (!$user || $user->role_id != 1){
             return response()->json([
                 'status' => 'Permission denied or Invalid input',

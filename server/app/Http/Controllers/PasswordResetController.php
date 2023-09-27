@@ -26,8 +26,8 @@ class PasswordResetController extends Controller
         $password_reset->token=$verificationToken;
         $password_reset->save();
         
-        $passwordResetNotification = new ResetPasswordNotification($verificationToken);
-        $user->notify($passwordResetNotification);
+        // $passwordResetNotification = new ResetPasswordNotification($verificationToken);
+        // $user->notify($passwordResetNotification);
 
         return response()->json(['message' => 'Password reset email sent.','token'=>$verificationToken]);
     }    
