@@ -53,7 +53,7 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setO
     const [location, setLocation] = useState(opp ? opp.location : "");
     const [nbVolunteers, setNbVolunteers] = useState(opp ? opp.nb_volunteers : "");
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('')
+    const [successMessage, setSuccessMessage] = useState('');
     const [tasks, setTasks] = useState([]);
     const [task, setTask] = useState('');
     

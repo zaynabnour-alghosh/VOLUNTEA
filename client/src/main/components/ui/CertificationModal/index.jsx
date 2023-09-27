@@ -43,6 +43,8 @@ const CertificationModal=({showModal , onRequestClose,members})=>{
         }
     
     };
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     console.log(members);
     useEffect(() => {
         const getOpps=async()=>{
@@ -80,6 +82,14 @@ const CertificationModal=({showModal , onRequestClose,members})=>{
 
     const handleCertify =async() => {
         console.log("click");
+        if (!member ||!opp || !content) {
+            setErrorMessage('Please fill in all fields.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         
         console.log("Certifying for opportunity", opp, "and member", member);
        
@@ -97,10 +107,18 @@ const CertificationModal=({showModal , onRequestClose,members})=>{
             });
             if(response){
                 console.log(response);
+                setSuccessMessage('SUCCESS');
+                setTimeout(() => {
+                setSuccessMessage('');
+              }, 4000);
                 onRequestClose();
             }
             }catch(error){
-                console.log(error)
+                console.log(error);
+                setErrorMessage('Error making certification.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
             }
     };
     
@@ -152,7 +170,13 @@ const CertificationModal=({showModal , onRequestClose,members})=>{
                                     />
                                 </span>
                             </div>
-                            <div className="btn-add-certification flex ">
+                            {errorMessage && (
+                        <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                        )}
+                        {successMessage && (
+                        <div className=" fullwidth flex center success-message">{successMessage}</div>
+                        )}
+                            <div className="pt-10 btn-add-certification flex ">
                                 <Button 
                                     text={"CERTIFY"}
                                     isSecondary={true}
