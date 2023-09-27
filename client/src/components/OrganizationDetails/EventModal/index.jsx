@@ -47,6 +47,14 @@ const OrgEventModal=({showEventModal , onRequestClose,addEvent,editEvent, event}
     const [date, setDate] = useState(event ? event.event_date : "");
     const org_id=localStorage.getItem("org_id");
     const handleAddEvent=()=>{
+        if (!topic ||!description || !image || !date) {
+            setErrorMessage('Please fill in all fields.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         const eventData=new FormData();
         eventData.append('topic',topic);
         eventData.append('description',description);
@@ -129,6 +137,9 @@ const OrgEventModal=({showEventModal , onRequestClose,addEvent,editEvent, event}
                                     />
                                 </span>
                             </div>
+                            {errorMessage && (
+                            <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                            )}
                             <div className="btn-add-impcat flex ">
                                 <Button 
                                     text={event ? "Update" : "Add"}
