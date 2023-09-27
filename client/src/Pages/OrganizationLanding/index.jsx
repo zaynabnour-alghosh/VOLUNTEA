@@ -50,7 +50,7 @@ const OrganizationLanding=({orgInfo,events,missions,impacts,all})=>{
                     <a href="#mission" className="mission" onClick={closeMenu}>Missions</a>
                     <a href="#event" className="event" onClick={closeMenu}>Events</a>
                     <a href="#contact" className="contact" onClick={closeMenu}>Contact</a>
-                    <Link to="/signup" className="signup-option" onClick={closeMenu}>Signup</Link>
+                    <Link to={`/signup?code=${all.code}`} className="signup-option" onClick={closeMenu}>Signup</Link>
                 </div>
             </div>
             <div id="about-us" >

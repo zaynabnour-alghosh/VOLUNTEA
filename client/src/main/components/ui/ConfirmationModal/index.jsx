@@ -7,7 +7,7 @@ import Button from "../../common/button";
 import ModalComponent from "../../common/modal";
 import { sendRequest } from "../../../../config/request";
 import { useNavigate } from "react-router-dom";
-const ConfirmationModal=({body,confirm,cancel,fillPersonal,setUser,showConfirmationModal , onRequestClose,verify})=>{
+const ConfirmationModal=({body,confirm,cancel,volunteer,fillPersonal,setUser,showConfirmationModal , onRequestClose,verify})=>{
     const customStyles = {
         content: {
             top: '50%',

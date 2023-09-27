@@ -4,11 +4,15 @@ import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button";
 import logoS from "../../assets/logo-secondary.svg";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { useState } from "react";
 import { sendRequest } from "../../config/request";
 import FileInput from "../../main/components/common/file";
 import ScheduleModal from "../../main/components/ui/ScheduleModal";
 const PersonalInformation=()=>{
+    const loc = useLocation();
+    const queryParams = new URLSearchParams(loc.search);
+    const isVolunteer = queryParams.get('volunteer') === 'true';
     const navigate=useNavigate();
     const [skill,setSkill]=useState('');
     const [skills,setSkills]=useState([]);
@@ -21,12 +25,6 @@ const PersonalInformation=()=>{
     const [selectedGender, setSelectedGender] = useState("female");
     const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
     const [schedule, setSchedule] = useState([]);
-    const handleAddSkill = (e) => {        
-        if (e.key === 'Enter' && skill.trim() !== '') {
-            setSkills((prevSkills) => [...prevSkills, skill.trim()]);
-            setSkill('');
-          }
-      };
     const handleGenderChange = (e) => {
         setSelectedGender(e.target.value);
     };
@@ -90,7 +88,12 @@ const PersonalInformation=()=>{
             if(response && response2){
                 console.log(response);
                 console.log(response2);
+                if(isVolunteer){
+                 navigate(`/login`);
+                }
+                else{
                 setTimeout(() => {navigate(`/fill-organization-info`)},1000);
+                }
             }
         }catch(error){
             console.log(error)
@@ -195,7 +198,10 @@ const PersonalInformation=()=>{
                                         value={skill}
                                         fill={true}
                                         onChange={(e)=>setSkill(e.target.value)}
-                                        onKeyDown={handleAddSkill}
+                                        onKeyDown={()=>{ 
+                                            setSkills((prevSkills) => [...prevSkills, skill.trim()]);
+                                            setSkill('');
+                                        }}
 
                                     />
                                 </div>

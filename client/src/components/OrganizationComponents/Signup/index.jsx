@@ -1,11 +1,14 @@
 import React from "react";
 import './style.css';
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import NewSpace from "../../NewSpace";
 const SignUp=()=>{
-       return(
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const code = queryParams.get("code");
+    return(
         <div>
-            <NewSpace volunteer={true}/>
+            <NewSpace volunteer={true} code={code}/>
         </div>
     );
 }

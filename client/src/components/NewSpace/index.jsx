@@ -8,7 +8,7 @@ import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button/index.jsx";
 import ConfirmationModal from "../../main/components/ui/ConfirmationModal/index.jsx";
 import { sendRequest } from "../../config/request.js";
-const NewSpace=({onToggle,volunteer})=>{
+const NewSpace=({onToggle,volunteer,code})=>{
     const navigate = useNavigate();
     const [fullName,setFullName]=useState('');
     const [email, setEmail] = useState('');
@@ -31,10 +31,37 @@ const NewSpace=({onToggle,volunteer})=>{
     }
     setOrganizationCode(result);
     }    
-    const handleVolunteerSignup=()=>{
+    const handleVolunteerSignup=async()=>{
         console.log("clicked volunteer");
-        setShowConfirmationModal(true);
-        // navigate('/login')
+        const volunteerData = new FormData();
+
+        volunteerData.append('name', fullName);
+        volunteerData.append('email', email);
+        volunteerData.append('password', password);
+        volunteerData.append('code', code);
+        console.log(fullName,email,password,code);
+        setFullName('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setOrganizationCode('');
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/guest/register/volunteer",
+                body:volunteerData
+            });
+            if(response){
+                console.log(response);
+                localStorage.setItem(
+					"token",
+					response.user.token
+				);
+                setShowConfirmationModal(true);
+            }
+        }catch(error){
+            console.log(error)
+        }
     }
 
     const handleAdminSignup=async(e)=>{
@@ -74,7 +101,11 @@ const NewSpace=({onToggle,volunteer})=>{
     }
     const fillPersonal=(user)=>{
         console.log(user);
-        navigate('/personal-info');
+        if (volunteer){
+        navigate(`/personal-info?volunteer=true`);
+        }else{
+            navigate(`/personal-info`);
+        }
     }
     return (
         <div className="fill-registarion-container page flex center">
@@ -126,9 +157,9 @@ const NewSpace=({onToggle,volunteer})=>{
                                 icon={icons['code']}
                                 placeholder={"Organization"}
                                 fill={true}
-                                value={organizationCode}
+                                value={volunteer ? code : organizationCode}
                                 readOnly={true}
-                                onChange={(e) => setOrganizationCode(e.target.value)}
+                                onChange={(e) => volunteer ? setOrganizationCode(code) : setOrganizationCode(e.target.value)}
                                 container={true}
                             />   
                         </div>
@@ -166,6 +197,7 @@ const NewSpace=({onToggle,volunteer})=>{
                 verify={true}
                 setUser={setUser}
                 fillPersonal={fillPersonal}
+                volunteer={volunteer}
                 />}
         </div>
     );
