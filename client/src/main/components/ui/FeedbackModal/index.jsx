@@ -93,7 +93,7 @@ const FeedbackModal=({showFeedModal , onRequestClose,id})=>{
                             onClick={()=>{onRequestClose();}}
                         />
                         <Button
-                            text={success? "Sent":"Send"}
+                            text={"Send"}
                             isPrimary={true} 
                             medium={true}
                             onClick={handleSendFeed}
