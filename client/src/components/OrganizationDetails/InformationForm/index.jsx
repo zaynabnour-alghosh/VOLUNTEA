@@ -23,6 +23,7 @@ const InformationForm=()=>{
     const [location,setLocation]=useState('');
     const [phone,setPhone]=useState('');
     const [email,setEmail]=useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const showImpcatModal = () => {
         setIsImpactModalOpen(true);
@@ -90,6 +91,21 @@ const InformationForm=()=>{
         }
     }
     const handleAddOrgInfo=async(e)=>{
+        if (!name 
+            || !email 
+            || !description 
+            || !logo 
+            || !location 
+            || !phone 
+            || !face 
+            || !whats 
+            || !insta) {
+            setErrorMessage('All input fields are required.');
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 5000);
+            return;
+        }
         const orgData=new FormData();
         const org_id=localStorage.getItem("org_id");
         orgData.append('name',name);
@@ -232,6 +248,7 @@ const InformationForm=()=>{
                             onChange={(e)=>setWhats(e.target.value)}
                         />
                     </div>
+                    {errorMessage && <div className="error-message pt-10 flex fullwidth center">{errorMessage}</div>}
                     <div className="add-info-btn flex fullwidth pt-10 center">
                     <Button
                         text={"Finish"}
