@@ -25,6 +25,11 @@ const PersonalInformation=()=>{
     const [selectedGender, setSelectedGender] = useState("female");
     const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
     const [schedule, setSchedule] = useState([]);
+
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
+
     const handleGenderChange = (e) => {
         setSelectedGender(e.target.value);
     };
@@ -57,6 +62,15 @@ const PersonalInformation=()=>{
 
     }
     const handlePersonalDetails=async(e)=>{
+        console.log("clicked");
+        if (!description || !location || !dob || !mobile || !avatar || !selectedGender) {
+            setError('Please fill in all the fields.');
+            return;
+        }
+        if (skills.length !== 6) {
+            setError('Please add exactly 6 skills.');
+            return;
+        }
         console.log("clicked info");
         const personalData=new FormData();
         personalData.append('description',description);
@@ -92,14 +106,13 @@ const PersonalInformation=()=>{
                  navigate(`/login`);
                 }
                 else{
-                setTimeout(() => {navigate(`/fill-organization-info`)},1000);
+                    setSuccessMessage('Personal information and skills added successfully!');
+                    setTimeout(() => { navigate(`/fill-organization-info`) }, 1000);
                 }
             }
         }catch(error){
             console.log(error)
         }
-
-
     }
 
     return(
@@ -211,18 +224,8 @@ const PersonalInformation=()=>{
                                     ))}
                                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
+                                {error && <div className="error-message flex fullwidth center">{error}</div>}
+                                {successMessage && <div className="success-message flex fulwidth center">{successMessage}</div>}
 
 
                                 <div className="add-info-btn flex fullwidth  pt-20 center">
