@@ -16,7 +16,7 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("logout", [AuthController::class, "logout"]);
         Route::post("refresh", [AuthController::class, "refresh"]);
     });
-    Route::group(["prefix"=>"admin"],function(){
+    Route::group(["middleware" => "admin", "prefix" => "admin"],function(){
         Route::post("new-organization",[AdminController::class,"createOrganization"]);
         Route::post("organization-info",[OrganizationController::class,"addInformation"]);
         Route::post("organization-impact",[OrganizationController::class,"addImpact"]);
@@ -45,7 +45,7 @@ Route::group(["middleware" => "auth:api"], function(){
         
         
     });
-    Route::group(["prefix"=>"volunteer"],function(){
+    Route::group(["middleware" => "volunteer", "prefix" => "volunteer"],function(){
         Route::get("dashboard-home/{id}",[VolunteerController::class,"viewDashboardDetails"]);
         Route::post("application/{id}/{action?}",[VolunteerController::class,"sendApplication"]);
         Route::get("feedback/{id}",[VolunteerController::class,"getFeedback"]);
