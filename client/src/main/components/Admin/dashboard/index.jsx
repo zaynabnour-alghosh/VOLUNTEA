@@ -16,7 +16,7 @@ import { sendRequest } from "../../../../config/request";
 const AdminDashboard=({orgId})=>{
     // console.log('id',orgId);
     const tabs = [
-        { icon: 'home', name: 'Dashboard', size: 32},
+        { icon: 'home', name: 'Content', size: 32},
         { icon: 'task', name: 'Opportunities' , size: 32},
         { icon: 'people', name: 'Members', size: 32},
         { icon: 'chat', name: 'Messages', size: 32},
@@ -25,7 +25,7 @@ const AdminDashboard=({orgId})=>{
         { icon: 'profile', name: 'Profile', size: 32},
         { icon: 'logout', name: 'Logout', size: 32}       
     ];
-    const [selectedTab, setSelectedTab] = useState('Dashboard');
+    const [selectedTab, setSelectedTab] = useState('Content');
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
     const [showOpportunityDetails, setShowOpportunityDetails] = useState(false);    
@@ -93,7 +93,7 @@ const AdminDashboard=({orgId})=>{
             toggleConfirmationModal();
         }
         else if (tabName === 'Opportunities' 
-               || tabName==='Dashboard' 
+               || tabName==='Content' 
                || tabName==='Members' 
                || tabName==='Messages' 
                || tabName==='Notifications' 
@@ -159,7 +159,7 @@ const AdminDashboard=({orgId})=>{
                         {!showOpportunityDetails && !showMemberProfile &&
                             <>
                                 <div className="dash-header">
-                                    {selectedTab==='Dashboard' && <Header title={"ADMIN DASHBOARD"}/>}
+                                    {selectedTab==='Content' && <Header title={"ADMIN DASHBOARD"}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"} buttons={true} setOpportunities={setOpportunities} members={members}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true} onSearchChange={handleSearchChange}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={`http://localhost:8000/storage/images/profiles/${adminInfo?.profile.avatar_url}`} user={adminInfo?.name}/>}
@@ -167,7 +167,7 @@ const AdminDashboard=({orgId})=>{
                                     {selectedTab=='Profile' && <Header title={"PROFILE "}  avatar={`http://localhost:8000/storage/images/profiles/${adminInfo?.profile.avatar_url}`} user={adminInfo?.name}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
-                                    {selectedTab === 'Dashboard' &&<Info  orgId={orgId}/>}
+                                    {selectedTab === 'Content' &&<Info  orgId={orgId}/>}
                                     {selectedTab === 'Opportunities' && <Project orgId={orgId} setSelectedOpportunity={setSelectedOpportunity} opportunities={opportunities} setOpportunities={setOpportunities} toggleOpportunityDetails={() => setShowOpportunityDetails(true)} />}
                                     {selectedTab === 'Members' && <Members members={filteredMembers} toggleMemberProfile={toggleMemberProfile}/>}
                                     {selectedTab === 'Messages' && <Messages />}

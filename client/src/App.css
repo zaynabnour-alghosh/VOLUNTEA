@@ -161,3 +161,8 @@ input[type="file"] {
 .scroll::-webkit-scrollbar {
     background-color:var(--sidebar);
 }
+.error{
+  font-size: 36px;
+  color: var(--color-primary);
+  font-weight: 700;
+}

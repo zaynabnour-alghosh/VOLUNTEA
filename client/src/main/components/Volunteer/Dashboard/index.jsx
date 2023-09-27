@@ -15,7 +15,7 @@ import MemberProfile from "../../ui/MemberProfile";
 
 const VolunteerDashboard=({orgId})=>{
     const tabs = [
-        { icon: 'home', name: 'Dashboard', size: 32},
+        { icon: 'home', name: 'Content', size: 32},
         { icon: 'task', name: 'Opportunities' , size: 32},
         { icon: 'people', name: 'Members', size: 32},
         { icon: 'chat', name: 'Messages', size: 32},
@@ -24,7 +24,7 @@ const VolunteerDashboard=({orgId})=>{
         { icon: 'profile', name: 'Profile', size: 32},
         { icon: 'logout', name: 'Logout', size: 32}       
     ];
-    const [selectedTab, setSelectedTab] = useState('Dashboard');
+    const [selectedTab, setSelectedTab] = useState('Content');
     const [searchTerm, setSearchTerm] = useState('');
     const [members,setMembers]=useState([]);
     const [memberSkills, setMemberSkills] = React.useState(null);
@@ -62,7 +62,7 @@ const VolunteerDashboard=({orgId})=>{
             toggleConfirmationModal();
         }
         else if (tabName === 'Opportunities' 
-               || tabName==='Dashboard' 
+               || tabName==='Content' 
                || tabName==='Members' 
                || tabName==='Messages' 
                || tabName==='Notifications' 
@@ -149,7 +149,7 @@ const VolunteerDashboard=({orgId})=>{
                         {!showMemberProfile &&
                              <> 
                                 <div className="dash-header">
-                                    {selectedTab==='Dashboard' && <Header title={"VOLUNTEER DASHBOARD"} joined={joinedAt? joinedAt:''}/>}
+                                    {selectedTab==='Content' && <Header title={"VOLUNTEER DASHBOARD"} joined={joinedAt? joinedAt:''}/>}
                                     {selectedTab=='Opportunities' && <Header title={"OPPORTUNITIES"}/>}
                                     {selectedTab=='Members' && <Header title={"MEMBERS"} search={true} onSearchChange={handleSearchChange}/>}
                                     {selectedTab=='Messages' && <Header title={"CHATS"}  avatar={`http://localhost:8000/storage/images/profiles/${volInfo?.profile.avatar_url}`} user={volInfo?.name}/>}
@@ -157,7 +157,7 @@ const VolunteerDashboard=({orgId})=>{
                                     {selectedTab=='Profile' && <Header title={"PROFILE "} avatar={`http://localhost:8000/storage/images/profiles/${volInfo?.profile.avatar_url}`} user={volInfo?.name}/>}
                                 </div>
                                 <div className={`dash-content flex ${selectedTab==='Messages'?'chat-bg':''}`} >
-                                    {selectedTab === 'Dashboard' &&<Info  orgId={orgId} setJoinedAt={setJoinedAt}/>}
+                                    {selectedTab === 'Content' &&<Info  orgId={orgId} setJoinedAt={setJoinedAt}/>}
                                     {selectedTab === 'Opportunities' && <Opportunities orgId={orgId}/>}
                                     {selectedTab === 'Members' && <Members  members={filteredMembers} toggleMemberProfile={toggleMemberProfile}/>}
                                     {selectedTab === 'Messages' && <Messages />}

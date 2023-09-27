@@ -10,6 +10,8 @@ import Volunteer from './Pages/Volunteer';
 import PersonalInformation from './components/PersonalInformation';
 import Dashboard from './Pages/Dashboard';
 import SignUp from './components/OrganizationComponents/Signup';
+import E404 from './Pages/Errors/E404';
+import E401 from './Pages/Errors/E401';
 
 function App() {
   const [orgInfo,setOrgInfo]=useState(null);
@@ -32,7 +34,8 @@ function App() {
         <Route path='/voluntea/:org_id/admin/dashboard' element={<Dashboard role="admin"/>} />
         <Route path='/voluntea/:org_id/volunteer/dashboard' element={<Dashboard role="volunteer"/>} />
 
-
+        <Route path="/e401" element={<E401 />} />
+				<Route path="*" element={<E404 />} />
 
       </Routes>
     </BrowserRouter>
