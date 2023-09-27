@@ -47,6 +47,8 @@ const GroupModal=({showGroupModal , onRequestClose,members})=>{
     const [selectedMembers, setSelectedMembers] = useState([]);
     const [groupAdmin, setGroupAdmin] = useState(null);
     const [selectedAdminName, setSelectedAdminName] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('')
     const memberNamesById = {};
     members.forEach(member => {
         memberNamesById[member.id] = member.name;
@@ -61,6 +63,14 @@ const GroupModal=({showGroupModal , onRequestClose,members})=>{
         setSelectedAdminName(memberNamesById[memberId] || '');
     }
     const handleCreateGroup=async()=>{
+        if (!name ||!groupAdmin || members.length==0) {
+            setErrorMessage('Please fill in all fields.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         const orgId=localStorage.getItem("organizationId");
         const grpData=new FormData();
         grpData.append('name',name);
@@ -79,10 +89,18 @@ const GroupModal=({showGroupModal , onRequestClose,members})=>{
       
             if (response) {
                 console.log(response)
+                setSuccessMessage('SUCCESS');
+                setTimeout(() => {
+                setSuccessMessage('');
+              }, 4000);
                 onRequestClose();
             }
           } catch (error) {
             console.log('Error creating group:', error);
+            setErrorMessage('Error creating group.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
           } 
     }
 
@@ -135,6 +153,12 @@ const GroupModal=({showGroupModal , onRequestClose,members})=>{
                                 <h3>Group Admin:</h3>
                                 <span>{selectedAdminName}</span>
                             </div>
+                            {errorMessage && (
+                            <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                            )}
+                            {successMessage && (
+                            <div className=" fullwidth flex center success-message">{successMessage}</div>
+                            )}
                             <div className="btn-add-group flex ">
                                 <Button 
                                     text={"CREATE"}
