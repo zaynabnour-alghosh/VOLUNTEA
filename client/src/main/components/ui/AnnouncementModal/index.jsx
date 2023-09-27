@@ -48,11 +48,25 @@ const AnnouncementModal=({showModal , onRequestClose,onUpdateStream})=>{
     const [date, setDate] = useState("");
     const [fromTime, setFromTime] = useState("");
     const [toTime, setToTime] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const handleHeaderChange = (e) => {
         setHeader(e.target.value);
     };
     const handleAnnounce = async() => {
         console.log("click");
+        if (!header 
+            ||!topic 
+            
+            || !description 
+            ) {
+            setErrorMessage('Please fill in all fields.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         const id=localStorage.getItem("organizationId");
         const data=new FormData();
         data.append('org_id',id);        
@@ -62,6 +76,7 @@ const AnnouncementModal=({showModal , onRequestClose,onUpdateStream})=>{
         data.append('description',description);
         data.append('from',fromTime);
         data.append("to", toTime);
+        
 
         try{
             const response=await sendRequest({
@@ -72,11 +87,21 @@ const AnnouncementModal=({showModal , onRequestClose,onUpdateStream})=>{
             });
             if(response){
                 console.log(response);
+                setHeader('');
+                setTopic('');
+                setDate('');
+                setDescription('');
+                setFromTime('');
+                setToTime('');
                 onRequestClose();
                 onUpdateStream();
             }
             }catch(error){
                 console.log(error)
+                setErrorMessage('Error creating announcement.');
+                setTimeout(() => {
+                    setErrorMessage('');
+                  }, 5000);
             }
         };
     return(
@@ -165,7 +190,10 @@ const AnnouncementModal=({showModal , onRequestClose,onUpdateStream})=>{
                                 </span>
                             </div>
                         </div>
-                        <div className="btn-add-announcement flex fullwidth center">
+                        {errorMessage && (
+                        <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                        )}
+                        <div className="pt-10 btn-add-announcement flex fullwidth center">
                             <Button 
                                 text={"Announce"}
                                 isSecondary={true}
