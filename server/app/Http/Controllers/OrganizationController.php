@@ -160,13 +160,14 @@ class OrganizationController extends Controller
         $missions=$org->missions;
         $events=$org->events;
        
-        if ($profile){
+        if ($org){
             return response()->json([
                 'status'=>'success',
                 'data'=>$profile,
                 'impacts'=>$impacts,
                 'missions'=>$missions,
-                'events'=>$events
+                'events'=>$events,
+                'code'=>$code
             ]);
         }
         else{
