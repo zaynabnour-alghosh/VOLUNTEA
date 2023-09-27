@@ -174,3 +174,7 @@ input[type="file"] {
   font-size: 12px;
   color: var(--green);
 }
+.loading-messag{
+  font-size: 12px;
+  color: var(--stroke_action);
+}

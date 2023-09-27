@@ -11,13 +11,24 @@ import { useState } from "react";
 const SearchLanding=({onToggle,setOrgInfo,setImpacts,setMissions,setEvents,setAll})=>{
     const navigate=useNavigate();
     const [organizationCode, setOrganizationCode] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const handleSearch = async () => {
+        if (!organizationCode) {
+            setErrorMessage('Organization code is required.');
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 5000);
+            return;
+        }
+         setLoading(true);
         try{
             const response=await sendRequest({
                 method:"GET",
                 route:`organization-landing/${organizationCode}`,
                 body:'',
             });
+            setLoading(false);
             if(response){
                 console.log(response);
                 setAll(response);
@@ -29,6 +40,7 @@ const SearchLanding=({onToggle,setOrgInfo,setImpacts,setMissions,setEvents,setAl
             }
         }catch(error){
             console.log(error)
+            navigate('/404');
         }
       };
     return (
@@ -47,9 +59,10 @@ const SearchLanding=({onToggle,setOrgInfo,setImpacts,setMissions,setEvents,setAl
                             onChange={(e) => setOrganizationCode(e.target.value)}
                         />
                     </div>
+                    {errorMessage && <div className="error-message flex fullwidth center">{errorMessage}</div>}
                     <div className="fullwidth flex center">
                         <Button 
-                            text={"Search"} 
+                            text={loading ? "Searching..." : "Search"} 
                             isLight={true}
                             medium={true}
                             onClick={handleSearch}
