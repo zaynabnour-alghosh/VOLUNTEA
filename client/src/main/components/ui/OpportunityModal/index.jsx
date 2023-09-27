@@ -52,6 +52,8 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setO
 
     const [location, setLocation] = useState(opp ? opp.location : "");
     const [nbVolunteers, setNbVolunteers] = useState(opp ? opp.nb_volunteers : "");
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('')
     const [tasks, setTasks] = useState([]);
     const [task, setTask] = useState('');
     
@@ -65,6 +67,14 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setO
 
 
     const add=async()=>{
+        if (!topic ||!description || !date ||!location || !nbVolunteers || tasks.length==0) {
+            setErrorMessage('Please fill in all fields.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
+              return;
+          }
+          setErrorMessage('');
         const oppData=new FormData();
         oppData.append('topic',topic);
         oppData.append('description',description);
@@ -76,6 +86,12 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setO
             oppData.append(`tasks[${index}]`,task);
         });
         console.log(date);
+        setTopic('');
+        setDescription('');
+        setDate('');
+        setLocation('');
+        setNbVolunteers('');
+        setTasks([]);
         try {
             const response = await sendRequest({
               method: 'POST',
@@ -85,12 +101,19 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setO
       
             if (response) {
                 console.log(response)
-                
+                setSuccessMessage('SUCCESS');
+                setTimeout(() => {
+                setSuccessMessage('');
+              }, 4000);
                 setOpportunities(prevOpportunities => [...prevOpportunities, response.data]);
                 onRequestClose();
             }
           } catch (error) {
             console.log('Error adding opportunity:', error);
+            setErrorMessage('Error adding opportunity.');
+            setTimeout(() => {
+                setErrorMessage('');
+              }, 5000);
           } 
        
     }
@@ -125,7 +148,11 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setO
                     onRequestClose();
                 }
               } catch (error) {
-                console.log('Error adding opportunity:', error);
+                console.log('Error updating opportunity:', error);
+                setErrorMessage('Error updating opportunity.');
+                setTimeout(() => {
+                    setErrorMessage('');
+                  }, 5000);
               } 
         }
     }
@@ -231,6 +258,12 @@ const OpportunityModal=({showOppModal , onRequestClose,edit,opp,opportunity,setO
                                 </span>
                             </div>
                         </div>
+                        {errorMessage && (
+                        <div className=" fullwidth flex center error-message">{errorMessage}</div>
+                        )}
+                        {successMessage && (
+                        <div className=" fullwidth flex center success-message">{successMessage}</div>
+                        )}
                     </div>
                 </div>
             </ModalComponent>
