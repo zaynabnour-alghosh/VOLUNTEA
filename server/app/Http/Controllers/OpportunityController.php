@@ -129,11 +129,6 @@ class OpportunityController extends Controller
         ]);
     }
     
-    //  todo:
-    // view application-opp
-    // accept application
-    // reject application
-    // view user-applicat-profile
     public function viewOpportunityApplications($id){
         $applications=OpportunityApplication::all()->where('opp_id',$id)->where('status','pending');
         $applicants=[];

@@ -16,6 +16,8 @@ use App\Models\Meeting;
 use App\Models\Certification;
 use App\Models\Opportunity;
 use App\Models\SignupRequest;
+use App\Models\Notification;
+
 use Carbon\Carbon;
 
 
@@ -100,20 +102,16 @@ class AdminController extends Controller
         $announcemnt->from=$request->from;
         $announcemnt->to=$request->to;
         $announcemnt->save();
-        // $formatted_from = '';
-        // $formatted_to = '';
-        // $formatted_date='';
-        // if($request->from){
-        //     $from = Carbon::createFromFormat('H:i:s', $request->from);
-        //     $formatted_from = $from->format('h:i:s A');
-        // }
-        // if($request->to){
-        //     $to = Carbon::createFromFormat('H:i:s', $request->to);
-        //     $formatted_to = $to->format('h:i:s A');
-        // }
-        // if($request->date_at){
-        //     $formatted_date = Carbon::parse($request->date_at)->format('F d, Y');
-        // }    
+        $code=Organization::find($request->org_id)->first()->code;
+        $ids=SignupRequest::all()->where('status','accepted')->where('org_code',$code)->pluck('user_id');
+        foreach($ids as $id){
+            $n=new Notification;
+            $n->user_id=$id;
+            $n->org_id=$request->org_id;
+            $n->topic="New Announcement: ".$request->header;
+            $n->content=$admin->name." posted: ".$request->topic;
+            $n->save();
+        }            
         $carbonDate = Carbon::parse($announcemnt->created_at);
         $a_date = $carbonDate->format('M d Y'); 
         $a_time = $carbonDate->format('H:i');
@@ -121,9 +119,6 @@ class AdminController extends Controller
             'status'=>'success',
             'data'=>$announcemnt,
             'admin'=>$admin->name,
-            // 'date'=>$formatted_date,
-            // 'from'=>$formatted_from,
-            // 'to'=>$formatted_to,
             'on'=>$a_date,
             'at'=>$a_time
         ]);

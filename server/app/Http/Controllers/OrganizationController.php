@@ -178,17 +178,6 @@ class OrganizationController extends Controller
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
     public function editOrganizationInfo(Request $request){
         $user=Auth::user();
         $org_id = $request->org_id;
