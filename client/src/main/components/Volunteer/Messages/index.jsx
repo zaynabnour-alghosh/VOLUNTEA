@@ -92,8 +92,8 @@ const Messages=()=>{
                     />
                 </div>
                 </div>
-                <div className="box flex fullwidth">
-                    <div className="member-messagebox-container flex column">
+                <div className="box flex center fullwidth">
+                    <div className="member-messagebox-container flex  fullwidth p-10 column">
                     {filteredChats.map((chat, index) => (
                         <div key={index} onClick={() => selectedTab === 'Single' ? openSingleChat(chat.other, `http://localhost:8000/storage/images/profiles/${chat.avatar}`) : openGroupChat(chat.other)}>
                         {selectedTab === 'Single' ? (

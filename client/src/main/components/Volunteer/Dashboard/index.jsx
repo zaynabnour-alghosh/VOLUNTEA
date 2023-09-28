@@ -41,9 +41,9 @@ const VolunteerDashboard=({orgId})=>{
     const handleSearchChange = (searchTerm) => {
         setSearchTerm(searchTerm);
         };
-        const filteredMembers = members.filter((member) =>
-        member.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+    const filteredMembers = members.filter((member) =>
+    member.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
     useEffect(() => {
         setShowNotificationModal(false);
     }, [selectedTab]);
@@ -74,6 +74,7 @@ const VolunteerDashboard=({orgId})=>{
     }
     const toggleMemberProfile=async(memberId)=>{
         setShowMemeberProfile(true);
+        console.log(memberId);
             try{
                 const response=await sendRequest({
                     method:"GET",
