@@ -8,6 +8,7 @@ use App\Models\OrganizationProfile;
 use App\Models\SignupRequest;
 use App\Models\OpportunityApplication;
 use App\Models\Opportunity;
+use App\Models\Notification;
 use App\Models\Profile;
 use App\Models\Feedback;
 
@@ -56,12 +57,21 @@ class VolunteerController extends Controller
     }
     public function sendApplication($id,$action='send'){
         $volunteer=Auth::user();
+        $opp=Opportunity::find($id);
+        $admin_id=$opp->coordinator_id;
+        $org_id=$opp->org_id;
         if($action==='add'){
             $app= new OpportunityApplication;
             $app->user_id=$volunteer->id;
             $app->opp_id=$id;
             $app->status='pending';
             $app->save();
+            $n=new Notification;
+            $n->user_id=$admin_id;
+            $n->org_id=$org_id;
+            $n->topic="New Application Request";
+            $n->content=$volunteer->name." wants to apply to '".$opp->topic."'.";
+            $n->save();
             return response()->json([
                 'status'=>'pending',
                 'message'=>'your application request has been sent successfully'

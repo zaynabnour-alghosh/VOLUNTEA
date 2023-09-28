@@ -241,11 +241,7 @@ class AdminController extends Controller
             ]); 
         }       
     }    
-
-
-
-
-
+    
     public function sendNotificationrToUser(Request $request)
     {
        $user = $request->to;
