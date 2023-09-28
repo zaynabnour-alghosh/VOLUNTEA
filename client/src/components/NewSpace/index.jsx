@@ -109,6 +109,16 @@ const NewSpace=({onToggle,volunteer,code})=>{
         adminData.append('email', email);
         adminData.append('password', password);
         adminData.append('code', organizationCode);
+         try {
+            const t =await requestPermission();
+            const token=localStorage.getItem('fcmToken');
+            setFCMToken(token);
+            console.log("fcm",fcmToken);
+            
+          } catch (error) {
+            console.error('error');
+          }
+        adminData.append('fcm_token', fcmToken);
         console.log(fullName,email,password,organizationCode);
         setFullName('');
         setEmail('');
