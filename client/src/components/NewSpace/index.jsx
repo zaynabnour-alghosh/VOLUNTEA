@@ -4,11 +4,13 @@ import { icons } from "../../icons.js";
 import logoS from "../../assets/logo-secondary.svg";
 import { useNavigate } from 'react-router-dom';
 import "./style.css";
+// import { messaging ,requestFCMToken} from '../../../public/push-notification.js';
 import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button/index.jsx";
 import ConfirmationModal from "../../main/components/ui/ConfirmationModal/index.jsx";
 import { sendRequest } from "../../config/request.js";
 const NewSpace=({onToggle,volunteer,code})=>{
+    const requestFCMToken = window.requestFCMToken;
     const navigate = useNavigate();
     const [fullName,setFullName]=useState('');
     const [email, setEmail] = useState('');
@@ -45,12 +47,28 @@ const NewSpace=({onToggle,volunteer,code})=>{
         setLoading(true);
         console.log("clicked volunteer");
         const volunteerData = new FormData();
-
         volunteerData.append('name', fullName);
         volunteerData.append('email', email);
         volunteerData.append('password', password);
         volunteerData.append('code', code);
-        console.log(fullName,email,password,code);
+        // try {
+        //     const fcmToken = await requestFCMToken();
+        //     if (fcmToken) {
+        //       console.log('FCM Token:', fcmToken);
+        //       volunteerData.append('fcm_token', fcmToken);
+        //     }
+        //   } catch (error) {
+        //     setLoading(false);
+        //     console.error('Error obtaining FCM token:', error);
+        //     setErrorMessage('Registration failed. Please try again.');
+        //   }
+        // const volunteerData = new FormData();
+
+        // volunteerData.append('name', fullName);
+        // volunteerData.append('email', email);
+        // volunteerData.append('password', password);
+        // volunteerData.append('code', code);
+        // console.log(fullName,email,password,code);
         setFullName('');
         setEmail('');
         setPassword('');

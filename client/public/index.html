@@ -16,5 +16,17 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script src="%PUBLIC_URL%/push-notification.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/push-notification.js`)
+          .then(registration => {
+            console.log('Firebase Messaging Service Worker registered: ', registration);
+          })
+          .catch(error => {
+            console.error('Error registering Firebase Messaging Service Worker: ', error);
+          });
+      }
+    </script>
   </body>
 </html>
