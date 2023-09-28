@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './style.css';
 import Tab from "../tab";
 import {icons} from '../../../../icons.js';
+import { sendRequest } from "../../../../config/request";
 import NotificationsModal from "../../ui/NotificationsModal";
 import secondaryLogo from '../../../../assets/secondary-white.svg';
 import ConfirmationModal from "../../ui/ConfirmationModal";
-const Sidebar=({tabs,onTabClick, toggleModal,showNotificationModal, toggleNotificationModal,showConfirmationModal,toggleConfirmationModal})=>{
-    const [selectedTab,setSelectedTab]=useState('Dashboard')
+const Sidebar=({tabs,onTabClick, toggleModal,notifications,setNotifications,showNotificationModal, toggleNotificationModal,showConfirmationModal,toggleConfirmationModal})=>{
+    const [selectedTab,setSelectedTab]=useState('Dashboard');
+
     const handleTabClick = (tabName) => {
         setSelectedTab(tabName);
         if (tabName === "Notifications") {
@@ -18,6 +20,8 @@ const Sidebar=({tabs,onTabClick, toggleModal,showNotificationModal, toggleNotifi
             onTabClick(tabName);
           }
       };
+    // const id=localStorage.getItem('organizationId');
+    
     return(
         <div className="sidebar">
             <div className="side-logo">
@@ -43,6 +47,8 @@ const Sidebar=({tabs,onTabClick, toggleModal,showNotificationModal, toggleNotifi
             </ul>
             {showNotificationModal && (
                 <NotificationsModal
+                notifications={notifications}
+                setNotifications={setNotifications}
                 showModal={showNotificationModal}
                 onRequestClose={toggleNotificationModal}
                 />

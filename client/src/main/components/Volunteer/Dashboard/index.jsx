@@ -33,6 +33,8 @@ const VolunteerDashboard=({orgId})=>{
     const [memberEmail,setMemberEmail]=useState('');
     const [selectedMember, setSelectedMember] = React.useState(null);
     const [volInfo, setVolInfo] = React.useState(null);
+    const [notifications,setNotifications]=useState([]);
+
 
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
@@ -134,6 +136,25 @@ const VolunteerDashboard=({orgId})=>{
         }
         getAuth();
     }, []);
+    useEffect(() => {
+    const getNotif=async()=>{
+    try{
+        const response=await sendRequest({
+            method:"GET",
+            route:`notifications/${id}`,
+            body:"",
+            includeHeaders:true
+        });
+        if(response){
+            console.log("notes",response);
+            setNotifications(response.data);
+        }
+        }catch(error){
+            console.log(error)
+        }
+    }
+    getNotif();
+}, []);
     return(
         <div>
             <div className="admin-dash light">
@@ -141,6 +162,8 @@ const VolunteerDashboard=({orgId})=>{
                     <Sidebar 
                         tabs={tabs} 
                         onTabClick={handleTabClick} 
+                        notifications={notifications}
+                        setNotifications={setNotifications}
                         showNotificationModal={showNotificationModal}
                         toggleNotificationModal={toggleNotificationModal}
                         showConfirmationModal={showConfirmationModal}
