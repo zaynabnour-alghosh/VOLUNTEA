@@ -138,6 +138,17 @@ class AdminController extends Controller
         $meeting->date_at=$request->date_at;
         $meeting->location=$request->location;
         $meeting->save();
+        $code=Organization::find($request->org_id)->first()->code;
+        $ids=SignupRequest::all()->where('status','accepted')->where('org_code',$code)->pluck('user_id');
+        foreach($ids as $id){
+            $n=new Notification;
+            $n->user_id=$id;
+            $n->org_id=$request->org_id;
+            $n->topic="New Meeting";
+            $n->content="Join ".$admin->name."'s meeting here ".$request->link;
+            $n->save();
+        }    
+
         $carbonDate = Carbon::parse($meeting->created_at);
         $a_date = $carbonDate->format('M d Y'); 
         $a_time = $carbonDate->format('H:i');
