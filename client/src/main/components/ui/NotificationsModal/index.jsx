@@ -1,10 +1,11 @@
 import React from "react";
 import "./style.css";
+import { sendRequest } from "../../../../config/request";
 import ModalComponent from "../../common/modal";
 import Header from "../../common/header";
 import AvatarCard from "../../common/avatar";
 import Button from "../../common/button";
-const NotificationsModal=({showModal , onRequestClose,notifications})=>{
+const NotificationsModal=({showModal , onRequestClose,setNotifications,notifications})=>{
     const customStyles = {
         content: {
             left: '60%',
@@ -40,6 +41,24 @@ const NotificationsModal=({showModal , onRequestClose,notifications})=>{
         }
     
     };
+    const id=localStorage.getItem('organizationId');
+    const handleClear=async()=>{
+        try{
+            const response=await sendRequest({
+                method:"GET",
+                route:`clear-notifications/${id}`,
+                body:'',
+                includeHeaders:true
+            });
+            if(response){
+                console.log(response);
+                setNotifications([]);
+                onRequestClose();
+            }
+        }catch(error){
+            console.log(error)
+        }
+    };
      return(
     <div className="flex notif-content">
         <ModalComponent showModal={showModal} customStyles={customStyles} onRequestClose={onRequestClose}>
@@ -48,7 +67,7 @@ const NotificationsModal=({showModal , onRequestClose,notifications})=>{
                 title={'NOTIFICATIONS'}
               />
               <div className="clear-notif">
-                <Button text={"Clear All"} inactive={true} medium={true}/>
+                <Button text={"Clear All"} inactive={true} medium={true} onClick={handleClear}/>
               </div>
             </div>
             <div className="notif-cards-container flex fullWidth column gap-10">
