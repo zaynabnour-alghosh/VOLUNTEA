@@ -68,3 +68,10 @@
 .member-search{
     width: 90%;
 }
+.box{
+    overflow-y: scroll;
+    padding-top: 90px;
+}
+.box::-webkit-scrollbar{
+    width: 0px;
+}
