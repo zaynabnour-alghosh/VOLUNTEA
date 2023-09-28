@@ -173,13 +173,19 @@ class AdminController extends Controller
         $certification->opp_id=$request->opp_id;
         $certification->content=$request->content;
         $certification->save();
+        $opportunity=Opportunity::find($request->opp_id);
+        $org_id=$opportunity->org_id;
+        $n=new Notification;
+        $n->user_id=$request->volunteer_id;
+        $n->org_id=$org_id;
+        $n->topic="New Badge! Congrats!";
+        $n->content=$admin->name." certified you on your latest activity!";
+        $n->save();
         $carbonDate = Carbon::parse($certification->created_at);
         $a_date = $carbonDate->format('M d Y'); 
         $a_time = $carbonDate->format('H:i');
-
-        $opportunity=Opportunity::find($request->opp_id);
-        $certification->topic=$opportunity->topic;
         
+        $certification->topic=$opportunity->topic;        
         $volunteer=User::find($request->volunteer_id);
         $certification->volunteer=$volunteer->name;
         $certification->admin=$admin->name;
