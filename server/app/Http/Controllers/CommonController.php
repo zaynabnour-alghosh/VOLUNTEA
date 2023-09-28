@@ -141,12 +141,6 @@ class CommonController extends Controller
         ]);
     }
 
-
-
-
-    //todo
-    //fill profile info
-    //update profile info
     public function addOrupdateProfile(Request $request,$action='update'){
         $request->validate([
             'name' => 'string|max:255',
@@ -243,28 +237,11 @@ class CommonController extends Controller
         $schedule->end_time=$request->end_time;       
         $schedule->user_id=$user->id;
         $user->save();
-        // $formatted_start_time = '';
-        // $formatted_end_time = '';
-        // $formatted_date='';
-        // if($request->start_time){
-        //     $start_time = Carbon::createFromFormat('H:i:s', $request->start_time);
-        //     $formatted_start_time = $start_time->format('h:i:s A');
-        // }
-        // if($request->end_time){
-        //     $end_time = Carbon::createFromFormat('H:i:s', $request->end_time);
-        //     $formatted_end_time = $end_time->format('h:i:s A');
-        // }
-        // if($request->event_date){
-        //     $formatted_date = Carbon::parse($request->event_date)->format('F d, Y');
-        // }      
         $schedule->save();
         return response()->json([
             'status'=>'success',
             'user'=>$user->name,
             'data'=>$schedule,
-            // 'start'=>$formatted_start_time,
-            // 'end'=>$formatted_end_time,
-            // 'date'=>$formatted_date
         ]);
     }
     public function deleteUser($id){

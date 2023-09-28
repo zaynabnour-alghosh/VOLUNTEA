@@ -125,6 +125,7 @@ class AuthController extends Controller
             return response()->json(['message'=>'Invalid Request']);
         }
         $user->verification_token=$verificationToken;
+        $user->fcm_token = $request->fcmToken;
         $user->save();
         if($role==='volunteer'){
             $signup_request=new SignupRequest;

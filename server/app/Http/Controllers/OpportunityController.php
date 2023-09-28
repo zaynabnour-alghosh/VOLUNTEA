@@ -12,18 +12,15 @@ use App\Models\Profile;
 use App\Models\OpportunityApplication;
 use App\Models\Schedule;
 use App\Models\User;
+use App\Models\Notification;
+use App\Models\SignupRequest;
+use App\Models\Organization;
 
 use Carbon\Carbon;
 
 
 class OpportunityController extends Controller
 {
-    //to do:
-    //create opportunity (by admin)
-    //delete opportunity
-    //edit opportunity
-    //view opportunity details+ its feedback
-    //oppotunity has many tasks so ima add them in one api\
     public function createOpportunity(Request $request,$id=null){
         $request->validate([
             'topic' => 'required|string|max:255',
@@ -59,8 +56,18 @@ class OpportunityController extends Controller
             $opportunity->org_id=$org_id;
             $opportunity->coordinator_id=$coordinator->id;
             $opportunity->save();
-
             
+            $code=Organization::find($org_id)->first()->code;
+            $ids=SignupRequest::all()->where('status','accepted')->where('org_code',$code)->pluck('user_id');
+            $not=[];
+            foreach($ids as $id){
+                $n=new Notification;
+                $n->user_id=$id;
+                $n->org_id=$org_id;
+                $n->topic="New Opportunity";
+                $n->content=$coordinator->name." posted a new opportunity";
+                $n->save();
+            }            
             foreach($tasks as $t){
                 
                 $task=new Task;
@@ -69,13 +76,12 @@ class OpportunityController extends Controller
                 $task->opp_id=$opportunity->id;
                 $task->save();
             }
-
             $opportunity->coordinator=$coordinator->name;
            
             $opportunity->tasks=$opportunity->tasks()->pluck('description');
             return response()->json([
                 'status'=>'success',
-                'data'=>$opportunity
+                'data'=>$opportunity,
             ]);
         }
     }
