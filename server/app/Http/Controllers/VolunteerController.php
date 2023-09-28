@@ -84,6 +84,12 @@ class VolunteerController extends Controller
                 $opp=Opportunity::find($id);
                 $opp->nb_volunteers=$opp->nb_volunteers+1;
                 $opp->save();
+                $n=new Notification;
+                $n->user_id=$admin_id;
+                $n->org_id=$org_id;
+                $n->topic="Application Cancelled";
+                $n->content=$volunteer->name." cancelled their '".$opp->topic."' application.";
+                $n->save();
                 return response()->json([
                     'status'=>'success',
                     'message'=>'your application has been cencelled successfully'
