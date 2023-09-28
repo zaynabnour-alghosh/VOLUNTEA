@@ -67,8 +67,7 @@ Route::group(["middleware" => "auth:api"], function(){
     Route::get("chatrooms/{id}",[CommonController::class,"viewChatrooms"]); 
     Route::get("all-opportunities/{id}",[CommonController::class,"getAllOpportunities"]);    
     Route::get("notifications/{id}",[CommonController::class,"getAllNotifications"]);
-    
-    
+    Route::get("clear-notifications/{id}",[CommonController::class,"deleteAllNotifications"]);
 });
 
 Route::group(["prefix" => "guest"], function(){
