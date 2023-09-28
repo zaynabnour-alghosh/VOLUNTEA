@@ -65,7 +65,8 @@ Route::group(["middleware" => "auth:api"], function(){
     Route::post("schedule/{action?}",[CommonController::class,"addOrUpdateSchedule"]);
     Route::get("delete-user/{id}",[CommonController::class,"deleteUser"]); 
     Route::get("chatrooms/{id}",[CommonController::class,"viewChatrooms"]); 
-    Route::get("all-opportunities/{id}",[CommonController::class,"getAllOpportunities"]);
+    Route::get("all-opportunities/{id}",[CommonController::class,"getAllOpportunities"]);    
+    Route::get("notifications/{id}",[CommonController::class,"getAllNotifications"]);
     
     
 });
