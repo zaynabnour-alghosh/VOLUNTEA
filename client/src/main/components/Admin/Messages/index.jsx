@@ -87,19 +87,22 @@ const Messages=()=>{
                     />
                 </div>
                 </div>
-                <div className="member-messagebox-container flex column">
-                    {filteredChats.map((chat, index) => (
-                        <div key={index} onClick={() => openSingleChat(selectedTab === "Single" ? chat.other : chat.top, `http://localhost:8000/storage/images/profiles/${chat.avatar}`)}>
-                        <AvatarCard
-                            image={`http://localhost:8000/storage/images/profiles/${chat.avatar}`}
-                            top={selectedTab === "Single" ? chat.other : chat.top}
-                            info={chat.info}
-                            isWide={true}
-                        />
-                        </div>
-                    ))}
+                <div className="box flex fullwidth">
+                    <div className="member-messagebox-container flex column">
+                        {filteredChats.map((chat, index) => (
+                            <div key={index} onClick={() => openSingleChat(selectedTab === "Single" ? chat.other : chat.top, `http://localhost:8000/storage/images/profiles/${chat.avatar}`)}>
+                            <AvatarCard
+                                image={`http://localhost:8000/storage/images/profiles/${chat.avatar}`}
+                                top={selectedTab === "Single" ? chat.other : chat.top}
+                                info={chat.info}
+                                isWide={true}
+                            />
+                            </div>
+                        ))}
 
+                    </div>
                 </div>
+                
             </div>
             {!isSingleChatboxOpen && !isGroupChatboxOpen && <EmptyChatState/>}
             {isSingleChatboxOpen && selectedVolunteer && (
