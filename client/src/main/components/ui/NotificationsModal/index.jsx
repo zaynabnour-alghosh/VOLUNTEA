@@ -4,7 +4,7 @@ import ModalComponent from "../../common/modal";
 import Header from "../../common/header";
 import AvatarCard from "../../common/avatar";
 import Button from "../../common/button";
-const NotificationsModal=({showModal , onRequestClose})=>{
+const NotificationsModal=({showModal , onRequestClose,notifications})=>{
     const customStyles = {
         content: {
             left: '60%',
@@ -17,7 +17,7 @@ const NotificationsModal=({showModal , onRequestClose})=>{
             boxShadow: '0 0 10px rgba(0,0,0,0.5)',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignItems: 'center'
         },
         overlay: {
@@ -52,7 +52,19 @@ const NotificationsModal=({showModal , onRequestClose})=>{
               </div>
             </div>
             <div className="notif-cards-container flex fullWidth column gap-10">
-                <AvatarCard
+            {notifications.map((n, index) => (
+                        <div key={index}>
+                            <AvatarCard
+                                top={n.topic}
+                                info={n.content}
+                                time={n.time}
+                                bg={true}
+                            />
+                            
+                        </div>
+                    ))}
+                
+                {/* <AvatarCard
                     top={"Reminder"}
                     info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     time={"12:45"}
@@ -75,13 +87,7 @@ const NotificationsModal=({showModal , onRequestClose})=>{
                     info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     time={"12:45"}
                     bg={true}
-                />
-                <AvatarCard
-                    top={"Reminder"}
-                    info={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                    time={"12:45"}
-                    bg={true}
-                />
+                /> */}
             </div>
 
         </ModalComponent>
