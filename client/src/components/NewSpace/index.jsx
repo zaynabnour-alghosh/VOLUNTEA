@@ -20,6 +20,8 @@ const NewSpace=({onToggle,volunteer,code})=>{
     const [user,setUser]=useState(null);
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [fcmToken, setFCMToken] = useState(null);
+
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
     const toggleConfirmationModal = () => {
         setShowConfirmationModal(!showConfirmationModal);
@@ -45,7 +47,7 @@ const NewSpace=({onToggle,volunteer,code})=>{
             return;
         }
 
-        setLoading(true);
+        
         console.log("clicked volunteer");
         const volunteerData = new FormData();
         volunteerData.append('name', fullName);
@@ -54,43 +56,40 @@ const NewSpace=({onToggle,volunteer,code})=>{
         volunteerData.append('code', code);
         try {
             const t =await requestPermission();
-            const fcmToken=localStorage.getItem('fcmToken');
+            const token=localStorage.getItem('fcmToken');
+            setFCMToken(token);
             console.log("fcm",fcmToken);
+            
           } catch (error) {
             console.error('error');
           }
-        // const volunteerData = new FormData();
-
-        // volunteerData.append('name', fullName);
-        // volunteerData.append('email', email);
-        // volunteerData.append('password', password);
-        // volunteerData.append('code', code);
-        // console.log(fullName,email,password,code);
+        volunteerData.append('fcm_token', fcmToken);
         setFullName('');
         setEmail('');
         setPassword('');
         setConfirmPassword('');
         setOrganizationCode('');
-        // try{
-        //     const response=await sendRequest({
-        //         method:"POST",
-        //         route:"/guest/register/volunteer",
-        //         body:volunteerData
-        //     });
-        //     setLoading(false);
-        //     if(response){
-        //         console.log(response);
-        //         localStorage.setItem(
-		// 			"token",
-		// 			response.user.token
-		// 		);
-        //         setShowConfirmationModal(true);
-        //     }
-        // }catch(error){
-        //     setLoading(false);
-        //     console.log(error);
-        //     setErrorMessage('Registration failed. Please try again.');
-        // }
+        setLoading(true);
+        try{
+            const response=await sendRequest({
+                method:"POST",
+                route:"/guest/register/volunteer",
+                body:volunteerData
+            });
+            setLoading(false);
+            if(response){
+                console.log(response);
+                localStorage.setItem(
+					"token",
+					response.user.token
+				);
+                setShowConfirmationModal(true);
+            }
+        }catch(error){
+            setLoading(false);
+            console.log(error);
+            setErrorMessage('Registration failed. Please try again.');
+        }
     }
 
     const handleAdminSignup=async(e)=>{
