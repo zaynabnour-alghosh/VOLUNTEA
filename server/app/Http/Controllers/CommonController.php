@@ -169,7 +169,7 @@ class CommonController extends Controller
     }
     public function deleteAllNotifications($id){
         $user=Auth::user();
-        $nots= Notifications::all()->where('org_id',$id)->where('user_id',$user->id);
+        $nots= Notification::all()->where('org_id',$id)->where('user_id',$user->id);
         foreach($nots as $not){
             $not->delete();
        }
