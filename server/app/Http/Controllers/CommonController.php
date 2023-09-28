@@ -18,6 +18,8 @@ use App\Models\Skill;
 use App\Models\VolunteerSkill;
 use App\Models\Schedule;
 use App\Models\Chatroom;
+use App\Models\Notification;
+
 use Carbon\Carbon;
 
 
@@ -134,6 +136,31 @@ class CommonController extends Controller
             $opp->coordinator=$coordinator->name; 
             $opp->date=$opp_date;          
             $all[]=$opp;
+       }
+        return response()->json([
+            'status'=>'success',
+            'data'=>$all
+        ]);
+    }
+    public function getAllNotifications($id){
+        $user=Auth::user();
+        $nots= Notifications::all()->where('org_id',$id)->where('user_id',$user->id);
+        $all=[];
+        foreach($nots as $not){
+            $carbonDate = Carbon::parse($certification->created_at);
+            $n_date = $carbonDate->format('M d Y'); 
+            $n_time = $carbonDate->format('H:i');            
+            $opp_date = Carbon::parse($opp->event_date)->format('F d, Y');                
+            $title=$not->topic;
+            $content=$not->content;
+            $time=$n_time;
+            $date=$n_date;
+            $all[]=[
+                'topic'=>$title,
+                'content'=>$content,
+                'time'=>$time,
+                'date'=>$date,
+            ];
        }
         return response()->json([
             'status'=>'success',
