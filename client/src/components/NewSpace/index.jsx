@@ -4,7 +4,7 @@ import { icons } from "../../icons.js";
 import logoS from "../../assets/logo-secondary.svg";
 import { useNavigate } from 'react-router-dom';
 import "./style.css";
-// import { messaging ,requestFCMToken} from '../../../public/push-notification.js';
+import {requestPermission} from '../../firebase.js';
 import Input from "../../main/components/common/input";
 import Button from "../../main/components/common/button/index.jsx";
 import ConfirmationModal from "../../main/components/ui/ConfirmationModal/index.jsx";
@@ -34,7 +34,8 @@ const NewSpace=({onToggle,volunteer,code})=>{
         result += alphanumericChars.charAt(randomIndex);
     }
     setOrganizationCode(result);
-    }    
+    }
+      
     const handleVolunteerSignup=async()=>{
         if (!fullName || !email || !password || !code) {
             setErrorMessage('All fields are required.');
@@ -51,17 +52,13 @@ const NewSpace=({onToggle,volunteer,code})=>{
         volunteerData.append('email', email);
         volunteerData.append('password', password);
         volunteerData.append('code', code);
-        // try {
-        //     const fcmToken = await requestFCMToken();
-        //     if (fcmToken) {
-        //       console.log('FCM Token:', fcmToken);
-        //       volunteerData.append('fcm_token', fcmToken);
-        //     }
-        //   } catch (error) {
-        //     setLoading(false);
-        //     console.error('Error obtaining FCM token:', error);
-        //     setErrorMessage('Registration failed. Please try again.');
-        //   }
+        try {
+            const t =await requestPermission();
+            const fcmToken=localStorage.getItem('fcmToken');
+            console.log("fcm",fcmToken);
+          } catch (error) {
+            console.error('error');
+          }
         // const volunteerData = new FormData();
 
         // volunteerData.append('name', fullName);
@@ -74,26 +71,26 @@ const NewSpace=({onToggle,volunteer,code})=>{
         setPassword('');
         setConfirmPassword('');
         setOrganizationCode('');
-        try{
-            const response=await sendRequest({
-                method:"POST",
-                route:"/guest/register/volunteer",
-                body:volunteerData
-            });
-            setLoading(false);
-            if(response){
-                console.log(response);
-                localStorage.setItem(
-					"token",
-					response.user.token
-				);
-                setShowConfirmationModal(true);
-            }
-        }catch(error){
-            setLoading(false);
-            console.log(error);
-            setErrorMessage('Registration failed. Please try again.');
-        }
+        // try{
+        //     const response=await sendRequest({
+        //         method:"POST",
+        //         route:"/guest/register/volunteer",
+        //         body:volunteerData
+        //     });
+        //     setLoading(false);
+        //     if(response){
+        //         console.log(response);
+        //         localStorage.setItem(
+		// 			"token",
+		// 			response.user.token
+		// 		);
+        //         setShowConfirmationModal(true);
+        //     }
+        // }catch(error){
+        //     setLoading(false);
+        //     console.log(error);
+        //     setErrorMessage('Registration failed. Please try again.');
+        // }
     }
 
     const handleAdminSignup=async(e)=>{
