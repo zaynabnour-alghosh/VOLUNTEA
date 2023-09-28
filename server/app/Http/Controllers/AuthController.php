@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\SignupRequest;
 use App\Models\OrganizationProfile;
 use App\Models\Organization;
+use App\Models\Chatroom;
+
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\EmailVerification;
 use Illuminate\Mail\Mailable;
@@ -134,7 +136,28 @@ class AuthController extends Controller
             $signup_request->status='accepted';
             $signup_request->save();
             $user->state='accepted';
-            
+            $org=Organization::where('code',$request->code);           
+            $chatroom_admin_user=new Chatroom;
+            $chatroom_admin_user->org_id=$org->id;
+            $chatroom_admin_user->conversation_id=1;
+            $chatroom_admin_user->user_id=$org->admin_id;
+            $chatroom_admin_user->other_user_id=$user->id;
+            $chatroom_admin_user->save();
+            $members_ids=SignupRequest::all()->where('org_code',$request->code)->where('status','accepted')->pluck('user_id');
+            foreach($members_ids as $mid){
+                $chatroom_user_member=new Chatroom;
+                $chatroom_user_member->org_id=$org->id;
+                $chatroom_user_member->conversation_id=1;
+                $chatroom_user_member->user_id=$user->id;
+                $chatroom_user_member->other_user_id=$mid;
+                $chatroom_user_member->save();
+            }
+            $chatroom_user_admin=new Chatroom;
+            $chatroom_user_admin->org_id=$org->id;
+            $chatroom_user_admin->conversation_id=1;
+            $chatroom_user_admin->user_id=$user->id;
+            $chatroom_user_admin->other_user_id=$org->admin_id;
+            $chatroom_user_admin->save();
         }
         if($role==='admin'){
             $org=New Organization;
