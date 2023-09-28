@@ -39,6 +39,8 @@ const AdminDashboard=({orgId})=>{
     const [memberSchedule, setMemberSchedule] = React.useState(null);
     const [memberName,setMemberName]=useState('');
     const [memberEmail,setMemberEmail]=useState('');
+    const [notifications,setNotifications]=useState([]);
+
 
     
     
@@ -143,6 +145,25 @@ const AdminDashboard=({orgId})=>{
         }
         getAuth();
     }, []);
+    useEffect(() => {
+    const getNotif=async()=>{
+    try{
+        const response=await sendRequest({
+            method:"GET",
+            route:`notifications/${id}`,
+            body:"",
+            includeHeaders:true
+        });
+        if(response){
+            console.log("notes",response);
+            setNotifications(response.data);
+        }
+        }catch(error){
+            console.log(error)
+        }
+    }
+    getNotif();
+}, []);
     return(
         <div>
             <div className="dash light">
@@ -150,6 +171,8 @@ const AdminDashboard=({orgId})=>{
                     <Sidebar 
                         tabs={tabs} 
                         onTabClick={handleTabClick} 
+                        notifications={notifications}
+                        setNotifications={setNotifications}
                         showNotificationModal={showNotificationModal}
                         toggleNotificationModal={toggleNotificationModal}
                         showConfirmationModal={showConfirmationModal}
