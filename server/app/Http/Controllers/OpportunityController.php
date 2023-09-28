@@ -59,7 +59,6 @@ class OpportunityController extends Controller
             
             $code=Organization::find($org_id)->first()->code;
             $ids=SignupRequest::all()->where('status','accepted')->where('org_code',$code)->pluck('user_id');
-            $not=[];
             foreach($ids as $id){
                 $n=new Notification;
                 $n->user_id=$id;
@@ -158,12 +157,22 @@ class OpportunityController extends Controller
         $application=OpportunityApplication::where('opp_id',$request->opp_id)
         ->where('user_id',$request->applicant_id)
         ->where('status','pending')->first();
+        $opp=Opportunity::find($request->opp_id);
+        $org_id=$opp->org_id;
+        $topic=$opp->topic; 
+         
         if($action==='accept'){
             $application->status='accepted';
             $application->save();
             $opp=Opportunity::find($request->opp_id);
-                $opp->nb_volunteers=$opp->nb_volunteers-1;
-                $opp->save();
+            $opp->nb_volunteers=$opp->nb_volunteers-1;
+            $opp->save();
+            $n=new Notification;
+            $n->user_id=$request->applicant_id;
+            $n->org_id=$org_id;
+            $n->topic="Application Accepted";
+            $n->content="Your application to ".$topic." got accepted!";
+            $n->save();
             return response()->json([
                 'data'=>$application,
                 'message'=>'application accepted'
@@ -172,6 +181,12 @@ class OpportunityController extends Controller
         elseif($action==='reject'){
             $application->status='rejected';
             $application->save();
+            $n=new Notification;
+            $n->user_id=$request->applicant_id;
+            $n->org_id=$org_id;
+            $n->topic="Application Rejected";
+            $n->content="Your application to ".$topic." got rejeceted.";
+            $n->save();
             return response()->json([
                 'data'=>$application,
                 'message'=>'application rejected'
