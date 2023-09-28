@@ -130,11 +130,19 @@ class VolunteerController extends Controller
         ]);
         $volunteer=Auth::user();
         $opp=Opportunity::find($id);
+        $admin_id=$opp->coordinator_id;
+        $org_id=$opp->org_id;
         $feedback=new Feedback;
         $feedback->volunteer_id=$volunteer->id;
         $feedback->opp_id=$id;
         $feedback->feedback=$request->feedback;
         $feedback->save();
+        $n=new Notification;
+        $n->user_id=$admin_id;
+        $n->org_id=$org_id;
+        $n->topic="New Feedback";
+        $n->content=$volunteer->name." sent their feedback on '".$opp->topic."'.";
+        $n->save();
         return response()->json([
             'status'=>'success',
             'feedback'=>$feedback
