@@ -61,6 +61,7 @@ class CommonController extends Controller
         $admin_avatar=Profile::where('user_id',$admin_org_id)->first()->avatar_url;
         if($auth_user->id!=$admin_org_id){
             $members[]=[
+                'id'=>$admin->id,
                 'name'=>$admin_name,
                 'email'=>$admin_email,
                 'avatar'=>$admin_avatar

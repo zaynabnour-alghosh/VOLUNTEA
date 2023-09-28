@@ -136,7 +136,7 @@ class AuthController extends Controller
             $signup_request->status='accepted';
             $signup_request->save();
             $user->state='accepted';
-            $org=Organization::where('code',$request->code);           
+            $org=Organization::where('code',$request->code)->first();           
             $chatroom_admin_user=new Chatroom;
             $chatroom_admin_user->org_id=$org->id;
             $chatroom_admin_user->conversation_id=1;
