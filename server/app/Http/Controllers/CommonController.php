@@ -145,7 +145,7 @@ class CommonController extends Controller
     }
     public function getAllNotifications($id){
         $user=Auth::user();
-        $nots= Notifications::all()->where('org_id',$id)->where('user_id',$user->id);
+        $nots= Notification::all()->where('org_id',$id)->where('user_id',$user->id);
         $all=[];
         foreach($nots as $not){
             $carbonDate = Carbon::parse($certification->created_at);
