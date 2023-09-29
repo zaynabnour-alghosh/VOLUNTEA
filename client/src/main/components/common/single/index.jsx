@@ -3,7 +3,7 @@ import './style.css';
 import MessageRow from "../../ui/MessageRow";
 import {icons} from '../../../../icons.js';
 import Input from "../input";
-const SingleChatBox=({ volunteerName, avatar})=>{
+const SingleChatBox=({ selectedVolunteer})=>{
     return(
         <div className="singlebox members-chatbox-container flex column fullWidth">
             <div className="chatbox-header flex row">

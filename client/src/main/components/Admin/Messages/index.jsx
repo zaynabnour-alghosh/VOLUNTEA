@@ -22,14 +22,28 @@ const Messages=()=>{
       setSelectedTab(value);
     };
 
-    const openSingleChat = (volunteerName, avatar) => {
+    const openSingleChat = (chat) => {
         setSingleChatboxOpen(true);
         setGroupChatboxOpen(false);
-        setSelectedVolunteer({ volunteerName, avatar });
+        setSelectedVolunteer({ 
+            volunteerName: chat.other,
+            avatar: `http://localhost:8000/storage/images/profiles/${chat.avatar}`,
+            sender: chat.sender,
+            receiver: chat.receiver,
+            chatroomId: chat.id,
+            org: chat.org 
+        });
     };
     const openGroupChat = () => {
         setSingleChatboxOpen(false);
-        setGroupChatboxOpen(true)
+        setGroupChatboxOpen(true);
+        setSelectedVolunteer({
+            group: chat.group,
+            member: chat.member,
+            org: chat.org,
+            id: chat.id,
+            other: chat.other
+        });
     };
     useEffect(() => {
         const id=localStorage.getItem("organizationId");
@@ -90,7 +104,12 @@ const Messages=()=>{
                 <div className="box flex fullwidth">
                     <div className="member-messagebox-container flex  fullwidth p-10 column">
                         {filteredChats.map((chat, index) => (
-                            <div key={index} onClick={() => openSingleChat(selectedTab === "Single" ? chat.other : chat.top, `http://localhost:8000/storage/images/profiles/${chat.avatar}`)}>
+                            <div key={index} onClick={() => {
+                                if (selectedTab === "Single") {
+                                openSingleChat(chat);
+                            } else if (selectedTab === "Group") {
+                                openGroupChat(chat);
+                            }}}>
                             <AvatarCard
                                 image={`http://localhost:8000/storage/images/profiles/${chat.avatar}`}
                                 top={selectedTab === "Single" ? chat.other : chat.top}
@@ -105,17 +124,11 @@ const Messages=()=>{
                 
             </div>
             {!isSingleChatboxOpen && !isGroupChatboxOpen && <EmptyChatState/>}
-            {isSingleChatboxOpen && selectedVolunteer && (
-                    <SingleChatBox
-                    volunteerName={selectedVolunteer.volunteerName}
-                    avatar={selectedVolunteer.avatar}
-                    
-                    />
+            {isSingleChatboxOpen && selectedVolunteer && selectedTab === "Single" && (
+                    <SingleChatBox {...selectedVolunteer} />
                 )}
-            {isGroupChatboxOpen && (
-                <GroupChatBox
-                
-                />
+            {isGroupChatboxOpen && selectedVolunteer && selectedTab === "Group" &&(
+                <GroupChatBox {...selectedVolunteer} />
             )}
         </div>
     );
