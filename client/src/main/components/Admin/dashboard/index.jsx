@@ -12,7 +12,8 @@ import Profile from "../../ui/Profile";
 import OpportunityDetails from "../../ui/OpportunityDetails";
 import MemberProfile from "../../ui/MemberProfile";
 import { sendRequest } from "../../../../config/request";
-
+import { onMessageListener } from "../../../../firebase";
+import Notification from "../../common/notification";
 const AdminDashboard=({orgId})=>{
     // console.log('id',orgId);
     const tabs = [
@@ -42,6 +43,9 @@ const AdminDashboard=({orgId})=>{
     const [notifications,setNotifications]=useState([]);
 
 
+    const [notificationTitle,setNotificationTitle]=useState();
+    const [notificationBody,setNotificationBody]=useState();
+    const [isNotificationOpen,setIsNotificationOpen]=useState(false);
     
     
     const [searchTerm, setSearchTerm] = useState('');
@@ -163,7 +167,22 @@ const AdminDashboard=({orgId})=>{
         }
     }
     getNotif();
-}, []);
+    }, []);
+    onMessageListener()
+    .then((payload)=>{
+    console.log("hi",payload);
+    setNotificationTitle(payload.data);
+    setNotificationBody(payload.notification.title);
+    console.log(payload.data['gcm.notification.message']);
+    console.log(payload.notification.title);
+    setNotificationTitle(payload.data['gcm.notification.message']);
+    setNotificationBody(payload.notification.title);
+    setIsNotificationOpen(true);
+
+    setTimeout(() => {
+    setIsNotificationOpen(false);
+    }, 10000);
+    })
     return(
         <div>
             <div className="dash light">
@@ -210,6 +229,9 @@ const AdminDashboard=({orgId})=>{
                             remove={true}/>}
                     </div>
                 </div>
+                {isNotificationOpen &&
+                <Notification title={notificationTitle} body={notificationBody} toggleNotificationToast={()=>setIsNotificationOpen(!isNotificationOpen)}/>
+                 }
             </div>
         </div>  
     );

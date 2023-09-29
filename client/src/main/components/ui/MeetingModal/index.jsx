@@ -5,6 +5,7 @@ import Input from "../../common/input";
 import ModalComponent from "../../common/modal";
 import { sendRequest } from "../../../../config/request";
 import { useState } from "react";
+import {onMessageListener } from '../../../../firebase.js';
 const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
     const customStyles = {
         content: {
@@ -47,7 +48,7 @@ const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
     const [date,setDate ] = useState("");
     const [location,setLocation ] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
-    
+    const[notification,setNotification]=useState('');
     const handleMeet = async() => {
         console.log("click");
         if (!link ||!description || !date) {
@@ -65,6 +66,7 @@ const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
         data.append('description',description);
         data.append('date_at',date);
         data.append('location',location);
+
         try{
             const response=await sendRequest({
                 method:"POST",
@@ -72,11 +74,14 @@ const MeetingModal=({showModal , onRequestClose,onUpdateStream})=>{
                 body:data,
                 includeHeaders:true
             });
+            
             if(response){
                 console.log(response);
                 onRequestClose();
                 onUpdateStream();
+                
             }
+            
             }catch(error){
                 console.log(error);
                 setErrorMessage('Error creating meeting.');

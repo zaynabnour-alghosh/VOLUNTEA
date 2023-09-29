@@ -1,0 +1,18 @@
+.notify{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding: 10px;
+    color:var(--text_secondary);
+    box-decoration-break: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+.not-title{
+    font-size: 24px;
+}
+.not-body{
+    font-size: 18px;
+}

@@ -82,15 +82,6 @@ const CertificationModal=({showModal , onRequestClose,members})=>{
 
     const handleCertify =async() => {
         console.log("click");
-        if (!member ||!opp || !content) {
-            setErrorMessage('Please fill in all fields.');
-            setTimeout(() => {
-                setErrorMessage('');
-              }, 5000);
-              return;
-          }
-          setErrorMessage('');
-        
         console.log("Certifying for opportunity", opp, "and member", member);
        
         const data=new FormData();

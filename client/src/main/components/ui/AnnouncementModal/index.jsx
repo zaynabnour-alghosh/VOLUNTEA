@@ -84,6 +84,7 @@ const AnnouncementModal=({showModal , onRequestClose,onUpdateStream})=>{
                 route:"/admin/new-announcement",
                 body:data,
                 includeHeaders:true
+
             });
             if(response){
                 console.log(response);

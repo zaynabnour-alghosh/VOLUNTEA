@@ -37,7 +37,7 @@ const SingleChatBox=({ volunteerName, avatar })=>{
                 <div className="send-input fullWidth">
                     <Input
                         placeholder={"Type your message here ..."}
-                        type={"textarea"}
+                        type={"text"}
                         className="fullwidth"
                         fill={true}
                         noBorder={true}
