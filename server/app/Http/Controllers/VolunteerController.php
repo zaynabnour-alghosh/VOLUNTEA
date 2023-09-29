@@ -103,6 +103,18 @@ class VolunteerController extends Controller
                 $n->topic="Application Cancelled";
                 $n->content=$volunteer->name." cancelled their '".$opp->topic."' application.";
                 $n->save();
+                $user=User::find($admin_id);
+                $token=$user->fcm_token;
+                $notificationData = json_encode([
+                    'data' => [
+                        'message' => 'Applicant Cancelled',
+                        'title' =>$volunteer->name . " cancelled their application to ".$opp->topic." .",
+                    ],
+                    'to' => $token
+                ]);
+                $this->sendNotificationrToUser($notificationData);
+
+
                 return response()->json([
                     'status'=>'success',
                     'message'=>'your application has been cencelled successfully'
