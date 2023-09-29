@@ -180,6 +180,16 @@ class OpportunityController extends Controller
             $n->topic="Application Accepted";
             $n->content="Your application to ".$topic." got accepted!";
             $n->save();
+            $user=User::find($request->applicant_id);
+            $token=$user->fcm_token;
+            $notificationData = json_encode([
+                'data' => [
+                    'message' => 'Application Accepted',
+                    'title' =>$user->name . "Your application to".$opp->topic." is accepted.",
+                ],
+                'to' => $token
+            ]);
+            $this->sendNotificationrToUser($notificationData);
             return response()->json([
                 'data'=>$application,
                 'message'=>'application accepted'
