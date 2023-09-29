@@ -111,6 +111,19 @@ class AdminController extends Controller
             $n->topic="New Announcement: ".$request->header;
             $n->content=$admin->name." posted: ".$request->topic;
             $n->save();
+
+            $user=User::find($id);
+            $token=$user->fcm_token;
+            $notificationData = json_encode([
+                'data' => [
+                    'message' => 'New Announcement',
+                    'title' =>$admin->name . "made a new announcement.",
+                ],
+             'to' => $token
+            ]);
+            $this->sendNotificationrToUser($notificationData);
+
+
         }            
         $carbonDate = Carbon::parse($announcemnt->created_at);
         $a_date = $carbonDate->format('M d Y'); 
@@ -158,12 +171,6 @@ class AdminController extends Controller
              'to' => $token
             ]);
             $this->sendNotificationrToUser($notificationData);
-            // FCMService::send(
-            //     $token,
-            //     $notificationData
-            // );
-
-
         }    
        
         
