@@ -162,6 +162,7 @@ class CommonController extends Controller
                 'date'=>$date,
             ];
        }
+       $all = array_reverse($all);
         return response()->json([
             'status'=>'success',
             'data'=>$all
