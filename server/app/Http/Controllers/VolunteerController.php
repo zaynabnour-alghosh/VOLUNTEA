@@ -168,6 +168,17 @@ class VolunteerController extends Controller
         $n->topic="New Feedback";
         $n->content=$volunteer->name." sent their feedback on '".$opp->topic."'.";
         $n->save();
+        $user=User::find($opp->coordinator_id);
+        $token=$user->fcm_token;
+        $notificationData = json_encode([
+            'data' => [
+                'message' => 'New Feedback',
+                'title' =>$volunteer->name . " shared their feedback on " . $opp->topic,
+            ],
+            'to' => $token
+        ]);
+        $this->sendNotificationrToUser($notificationData);
+
         return response()->json([
             'status'=>'success',
             'feedback'=>$feedback
