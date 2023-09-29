@@ -291,17 +291,6 @@ class AdminController extends Controller
         'data' => $notificationData,"user"=>$user
       ]);
     }
-
-
-
-
-
-
-
-
-
-
-
 }
 
-
+        

@@ -43,6 +43,8 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("new-certification",[AdminController::class,"certifyVolunteer"]);
         Route::post("request/{action?}",[AdminController::class,"acceptRequest"]);
         
+        Route::post("send-notif",[AdminController::class, "sendMeetingNotificationrToUser"]);
+
         
     });
     Route::group(["middleware" => "volunteer", "prefix" => "volunteer"],function(){
@@ -80,6 +82,5 @@ Route::group(["prefix" => "guest"], function(){
 });
     Route::get("organization-info/{id}", [OrganizationController::class, "getOrganizationInfo"]);
     Route::get("organization-landing/{code}", [OrganizationController::class, "getOrganizationLanding"]);
-    Route::post("send-notif",[AdminController::class, "sendNotificationrToUser"]);
 
 
