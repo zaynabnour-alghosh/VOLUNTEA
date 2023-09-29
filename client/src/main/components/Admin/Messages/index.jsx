@@ -34,7 +34,7 @@ const Messages=()=>{
             org: chat.org 
         });
     };
-    const openGroupChat = () => {
+    const openGroupChat = (chat) => {
         setSingleChatboxOpen(false);
         setGroupChatboxOpen(true);
         setSelectedVolunteer({
@@ -125,10 +125,19 @@ const Messages=()=>{
             </div>
             {!isSingleChatboxOpen && !isGroupChatboxOpen && <EmptyChatState/>}
             {isSingleChatboxOpen && selectedVolunteer && selectedTab === "Single" && (
-                    <SingleChatBox {...selectedVolunteer} />
+                    <SingleChatBox
+                    volunteerName={selectedVolunteer.volunteerName}
+                    avatar={selectedVolunteer.avatar}
+                    sender={selectedVolunteer.sender}
+                    receiver={selectedVolunteer.receiver}
+                    org={selectedVolunteer.org}
+                    chatroomId={selectedVolunteer.chatroomId}                    
+                    />
                 )}
             {isGroupChatboxOpen && selectedVolunteer && selectedTab === "Group" &&(
-                <GroupChatBox {...selectedVolunteer} />
+                <GroupChatBox
+                
+                />
             )}
         </div>
     );
