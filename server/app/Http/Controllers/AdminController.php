@@ -147,8 +147,26 @@ class AdminController extends Controller
             $n->topic="New Meeting";
             $n->content="Join ".$admin->name."'s meeting here ".$request->link;
             $n->save();
-        }    
 
+            $user=User::find($id);
+            $token=$user->fcm_token;
+            $notificationData = json_encode([
+                'data' => [
+                    'message' => 'New Meeting',
+                    'title' => 'Dear ' . $user->name . ', Join ' . $admin->name . "'s meeting here " . $request->link,
+                ],
+             'to' => $token
+            ]);
+            $this->sendNotificationrToUser($notificationData);
+            // FCMService::send(
+            //     $token,
+            //     $notificationData
+            // );
+
+
+        }    
+       
+        
         $carbonDate = Carbon::parse($meeting->created_at);
         $a_date = $carbonDate->format('M d Y'); 
         $a_time = $carbonDate->format('H:i');
@@ -242,10 +260,11 @@ class AdminController extends Controller
         }       
     }    
     
-    public function sendNotificationrToUser(Request $request)
+    public function sendNotificationrToUser($d)
     {
-       $user = $request->to;
-        $notificationData = $request->data;
+        $data = json_decode($d, true);
+       $user = $data['to'];
+        $notificationData = $data['data'];
        FCMService::send(
         $user,
         $notificationData
