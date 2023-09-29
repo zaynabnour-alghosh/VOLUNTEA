@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\FCMService;
 
 use App\Models\Opportunity;
 use App\Models\Task;
@@ -66,6 +67,17 @@ class OpportunityController extends Controller
                 $n->topic="New Opportunity";
                 $n->content=$coordinator->name." posted a new opportunity";
                 $n->save();
+
+                $user=User::find($id);
+                $token=$user->fcm_token;
+                $notificationData = json_encode([
+                    'data' => [
+                        'message' => 'New Opportunity',
+                        'title' => $coordinator->name . " posted a new volunteering opportunity." ,
+                    ],
+                'to' => $token
+                ]);
+                $this->sendNotificationrToUser($notificationData);
             }            
             foreach($tasks as $t){
                 
@@ -226,4 +238,19 @@ class OpportunityController extends Controller
             ]);
        }
     }
+    public function sendNotificationrToUser($d)
+    {
+        $data = json_decode($d, true);
+       $user = $data['to'];
+        $notificationData = $data['data'];
+       FCMService::send(
+        $user,
+        $notificationData
+    );
+      return response()->json([
+        'status' => 'success',
+        'data' => $notificationData,"user"=>$user
+      ]);
+    }
+
 }
