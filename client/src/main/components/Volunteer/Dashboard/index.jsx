@@ -10,7 +10,8 @@ import Messages from "../Messages";
 import Stream from "../Stream";
 import Profile from "../../ui/Profile";
 import { sendRequest } from "../../../../config/request";
-
+import { onMessageListener } from "../../../../firebase";
+import Notification from "../../common/notification";
 import MemberProfile from "../../ui/MemberProfile";
 
 const VolunteerDashboard=({orgId})=>{
@@ -35,6 +36,10 @@ const VolunteerDashboard=({orgId})=>{
     const [volInfo, setVolInfo] = React.useState(null);
     const [notifications,setNotifications]=useState([]);
 
+    const [notificationTitle,setNotificationTitle]=useState();
+    const [notificationBody,setNotificationBody]=useState();
+    const [isNotificationOpen,setIsNotificationOpen]=useState(false);
+    
 
     const [showNotificationModal, setShowNotificationModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
@@ -154,7 +159,22 @@ const VolunteerDashboard=({orgId})=>{
         }
     }
     getNotif();
-}, []);
+    }, []);
+    onMessageListener()
+    .then((payload)=>{
+    console.log("hi",payload);
+    setNotificationTitle(payload.data);
+    setNotificationBody(payload.notification.title);
+    console.log(payload.data['gcm.notification.message']);
+    console.log(payload.notification.title);
+    setNotificationTitle(payload.data['gcm.notification.message']);
+    setNotificationBody(payload.notification.title);
+    setIsNotificationOpen(true);
+
+    setTimeout(() => {
+    setIsNotificationOpen(false);
+    }, 10000);
+    })
     return(
         <div>
             <div className="admin-dash light">
@@ -203,6 +223,9 @@ const VolunteerDashboard=({orgId})=>{
                             />}
                     </div>
                 </div>
+                {isNotificationOpen &&
+                <Notification title={notificationTitle} body={notificationBody} toggleNotificationToast={()=>setIsNotificationOpen(!isNotificationOpen)}/>
+                 }
             </div>
         </div>  
     );

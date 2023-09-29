@@ -14,8 +14,8 @@ import MemberProfile from "../../ui/MemberProfile";
 import { sendRequest } from "../../../../config/request";
 import { onMessageListener } from "../../../../firebase";
 import Notification from "../../common/notification";
+
 const AdminDashboard=({orgId})=>{
-    // console.log('id',orgId);
     const tabs = [
         { icon: 'home', name: 'Content', size: 32},
         { icon: 'task', name: 'Opportunities' , size: 32},
