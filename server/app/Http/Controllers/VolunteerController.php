@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use App\Services\FCMService;
 
 use App\Models\Organization;
 use App\Models\OrganizationProfile;
@@ -11,6 +12,7 @@ use App\Models\Opportunity;
 use App\Models\Notification;
 use App\Models\Profile;
 use App\Models\Feedback;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -72,6 +74,17 @@ class VolunteerController extends Controller
             $n->topic="New Application Request";
             $n->content=$volunteer->name." wants to apply to '".$opp->topic."'.";
             $n->save();
+            $user=User::find($admin_id);
+            $token=$user->fcm_token;
+            $notificationData = json_encode([
+                'data' => [
+                    'message' => 'New Applicant',
+                    'title' =>$volunteer->name . " sent an application request to ".$opp->topic." .",
+                ],
+                'to' => $token
+            ]);
+            $this->sendNotificationrToUser($notificationData);
+
             return response()->json([
                 'status'=>'pending',
                 'message'=>'your application request has been sent successfully'
@@ -192,5 +205,19 @@ class VolunteerController extends Controller
             'status'=>'success',
             'data'=>$org_arr,
         ]);
+    }
+    public function sendNotificationrToUser($d)
+    {
+        $data = json_decode($d, true);
+       $user = $data['to'];
+        $notificationData = $data['data'];
+       FCMService::send(
+        $user,
+        $notificationData
+    );
+      return response()->json([
+        'status' => 'success',
+        'data' => $notificationData,"user"=>$user
+      ]);
     }
 }
