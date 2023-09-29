@@ -206,6 +206,16 @@ class AdminController extends Controller
         $n->topic="New Badge! Congrats!";
         $n->content=$admin->name." certified you on your latest activity!";
         $n->save();
+        $user=User::find($request->volunteer_id);
+        $token=$user->fcm_token;
+        $notificationData = json_encode([
+            'data' => [
+                'message' => 'Congrats! You received a new Badge',
+                'title' =>$user->name . "Congrats! You received a new Badge",
+            ],
+            'to' => $token
+        ]);
+        $this->sendNotificationrToUser($notificationData);
         $carbonDate = Carbon::parse($certification->created_at);
         $a_date = $carbonDate->format('M d Y'); 
         $a_time = $carbonDate->format('H:i');
