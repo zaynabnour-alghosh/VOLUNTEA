@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyD9886K8sM_YwIfeB3mwl7TtSt-IPL705Y",
     authDomain: "voluntea-53747.firebaseapp.com",
@@ -7,7 +8,9 @@ const firebaseConfig = {
     storageBucket: "voluntea-53747.appspot.com",
     messagingSenderId: "1013329626527",
     appId: "1:1013329626527:web:2fc8b16cb5affe788fa9aa",
-    measurementId: "G-QCMVBQ44E5"
+    measurementId: "G-QCMVBQ44E5",
+    databaseURL: "https://voluntea-53747-default-rtdb.firebaseio.com",
+
 };
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
@@ -51,3 +54,21 @@ export const onMessageListener = () =>
       resolve(payload);
     });
 });
+const database = getDatabase(app);
+export const sendMessage = (messageContent, chatroomId, userId) => {
+  const message = {
+      id: Math.random().toString(36).substring(2),
+      content: messageContent,
+      chatroom_id: chatroomId,
+      user_id: userId
+  };
+
+  database.ref('messages').push(message);
+};
+export const listenForMessages = (chatroomId) => {
+  database.ref('messages').orderByChild('chatroom_id').equalTo(chatroomId).on('child_added', (snapshot) => {
+      const newMessage = snapshot.val();
+      // Update your message state and UI accordingly with the new message
+      console.log('Received message:', newMessage);
+  });
+};

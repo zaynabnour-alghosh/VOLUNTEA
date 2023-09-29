@@ -109,10 +109,13 @@ const Messages=()=>{
                     <SingleChatBox
                     volunteerName={selectedVolunteer.volunteerName}
                     avatar={selectedVolunteer.avatar}
+                    
                     />
                 )}
             {isGroupChatboxOpen && (
-                <GroupChatBox/>
+                <GroupChatBox
+                
+                />
             )}
         </div>
     );
