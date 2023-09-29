@@ -185,7 +185,7 @@ class OpportunityController extends Controller
             $notificationData = json_encode([
                 'data' => [
                     'message' => 'Application Accepted',
-                    'title' =>$user->name . "Your application to".$opp->topic." is accepted.",
+                    'title' =>$user->name . " Your application to".$opp->topic." is accepted.",
                 ],
                 'to' => $token
             ]);
@@ -204,6 +204,16 @@ class OpportunityController extends Controller
             $n->topic="Application Rejected";
             $n->content="Your application to ".$topic." got rejeceted.";
             $n->save();
+            $user=User::find($request->applicant_id);
+            $token=$user->fcm_token;
+            $notificationData = json_encode([
+                'data' => [
+                    'message' => 'Application Rejected',
+                    'title' =>$user->name . " Your application to ".$opp->topic." is rejected.",
+                ],
+                'to' => $token
+            ]);
+            $this->sendNotificationrToUser($notificationData);
             return response()->json([
                 'data'=>$application,
                 'message'=>'application rejected'

@@ -211,7 +211,7 @@ class AdminController extends Controller
         $notificationData = json_encode([
             'data' => [
                 'message' => 'Congrats! You received a new Badge',
-                'title' =>$user->name . "Congrats! You received a new Badge",
+                'title' =>$user->name . " Congrats! You received a new Badge",
             ],
             'to' => $token
         ]);
