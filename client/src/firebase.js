@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import { getDatabase,ref,push} from "firebase/database";
+import { query,getDatabase,ref,push,onChildAdded,equalTo,orderByChild} from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyD9886K8sM_YwIfeB3mwl7TtSt-IPL705Y",
     authDomain: "voluntea-53747.firebaseapp.com",
@@ -68,10 +68,47 @@ export const sendMessage = (messageContent, chatroomId, userId,org) => {
   push(ref(database, `messages/${chatroomId}`), message);
   return message;
 };
-export const listenForMessages = (chatroomId) => {
-  database.ref('messages').orderByChild('chatroom_id').equalTo(chatroomId).on('child_added', (snapshot) => {
-      const newMessage = snapshot.val();
-      // Update your message state and UI accordingly with the new message
-      console.log('Received message:', newMessage);
+// export const listenForMessages = (chatroomId) => {
+//   database.ref('messages').orderByChild('chatroom_id').equalTo(chatroomId).on('child_added', (snapshot) => {
+//       const newMessage = snapshot.val();
+//       // Update your message state and UI accordingly with the new message
+//       console.log('Received message:', newMessage);
+//   });
+// };
+
+// export const listenForMessages = (chatroomId, callback) => {
+//   const dbRef = getDatabase().ref('messages');
+//   dbRef.orderByChild('chatroom_id').equalTo(chatroomId).on('child_added', (snapshot) => {
+//     const newMessage = snapshot.val();
+//     callback(newMessage);
+//   });
+// };
+
+// export const listenForMessages = (chatroomId, callback) => {
+//   const db = getDatabase();
+//   const dbRef = ref(db, 'messages');
+
+//   const query = orderByChild('chatroom_id').equalTo(chatroomId);
+
+//   onChildAdded(query, (snapshot) => {
+//     const newMessage = snapshot.val();
+//     callback(newMessage);
+//   });
+// };
+
+export const listenForMessages = (chatroomId, callback) => {
+  if (!chatroomId) {
+    console.error("Invalid chatroomId provided");
+    return;
+  }
+
+  const db = getDatabase();
+  const messagesRef = ref(db, 'messages');
+
+  const messagesQuery = query(messagesRef, orderByChild('chatroom_id'), equalTo(chatroomId));
+
+  onChildAdded(messagesQuery, (snapshot) => {
+    const newMessage = snapshot.val();
+    callback(newMessage);
   });
-};
+}
