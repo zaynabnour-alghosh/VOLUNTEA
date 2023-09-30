@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import { getDatabase } from "firebase/database";
+import { getDatabase,ref,push} from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyD9886K8sM_YwIfeB3mwl7TtSt-IPL705Y",
     authDomain: "voluntea-53747.firebaseapp.com",
@@ -55,15 +55,18 @@ export const onMessageListener = () =>
     });
 });
 const database = getDatabase(app);
-export const sendMessage = (messageContent, chatroomId, userId) => {
+export const sendMessage = (messageContent, chatroomId, userId,org) => {
   const message = {
       id: Math.random().toString(36).substring(2),
       content: messageContent,
       chatroom_id: chatroomId,
-      user_id: userId
+      user_id: userId,
+      org_id:org,
+      timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
   };
-
-  database.ref('messages').push(message);
+  console.log('Sending message:', message.content, 'at', message.timestamp);
+  push(ref(database, `messages/${chatroomId}`), message);
+  return message;
 };
 export const listenForMessages = (chatroomId) => {
   database.ref('messages').orderByChild('chatroom_id').equalTo(chatroomId).on('child_added', (snapshot) => {
