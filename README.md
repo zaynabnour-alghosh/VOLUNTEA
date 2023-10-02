@@ -9,10 +9,22 @@
 >
 > Coffee Express aims to streamline the coffee-ordering process by providing a user-friendly platform for customers to place orders and pick up their coffee at their convenience. We believe in enhancing the coffee experience by saving time and ensuring customer satisfaction.
 
-### User Stories
-- As a user, I want to browse the menu, so I can find my favorite coffee drinks.
-- As a user, I want to customize my order, so I can add or remove ingredients according to my preferences.
-- As a user, I want to pay for my order through the app, so I can avoid waiting in line at the store.
+### Admin Stories
+
+- As an administrator, I want to be able to create a profile about our organization to showcase our mission, impact, projects, and requirements.
+- As an administrator, I want to be able to create and manage volunteer opportunities, so that the number of volunteers is sufficient for each event.
+- As an administrator, I want to be able to accept or reject a volunteer’s application for a particular opportunity.
+- As an administrator, I want to be able to communicate with volunteers through messages, so I can send and receive notifications.
+- As an administrator, I want to be able to recognize our volunteers and certify them for their engagements and contributions.
+
+### Volunteer Stories
+
+- As a volunteer, I want to be able to sign up using an organization’s code, so I can be a member of its community.
+- As a volunteer, I want to be able to edit my profile, so that my information and new skills are up-to-date.
+- As a volunteer, I want to be able to browse through volunteering opportunities, so I can sign up in case I’m interested.
+- As a volunteer, I want to be able to receive notifications and reminders about upcoming shifts and events. 
+- As a volunteer, I want to be able to receive a certificate that shows my contribution as proof of my volunteer work
+
 
 <br><br>
 
