@@ -5,14 +5,14 @@
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
 
-> A mobile app for ordering coffee on-the-go, making it easier for coffee lovers to get their favorite beverages without waiting in line.
+> A web app that fosters collaboration between non-profits and volunteers, simplifying communication, scheduling, and appreciation.
 >
-> Coffee Express aims to streamline the coffee-ordering process by providing a user-friendly platform for customers to place orders and pick up their coffee at their convenience. We believe in enhancing the coffee experience by saving time and ensuring customer satisfaction.
+> VolunTea harmonizes non-profits with their volunteers, streamlining communication, scheduling and recognition. Administrators manage opportunities and nurture a community. Volunteers find purpose through this hub, where they can showcase skills, connect and create a fulfilling volunteer experience.
 
 ### Admin Stories
 
-- As an administrator, I want to be able to create a profile about our organization to showcase our mission, impact, projects, and requirements.
-- As an administrator, I want to be able to create and manage volunteer opportunities, so that the number of volunteers is sufficient for each event.
+- As an administrator, I want to be able to create a profile about our organization to showcase our mission, impact, and projects.
+- As an administrator, I want to be able to create opportunities, so that volunteers can sign up for.
 - As an administrator, I want to be able to accept or reject a volunteer’s application for a particular opportunity.
 - As an administrator, I want to be able to communicate with volunteers through messages, so I can send and receive notifications.
 - As an administrator, I want to be able to recognize our volunteers and certify them for their engagements and contributions.
@@ -31,7 +31,7 @@
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
 
-> We designed Coffee Express using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
+> VolunTea is designed using wireframes and mockups, iterating on the design until reaching the ideal layout for easy navigation and a seamless user experience.
 
 ### Wireframes
 | Login screen  | Register screen |  Landing screen |
@@ -50,12 +50,11 @@
 
 > Using the wireframes and mockups as a guide, we implemented the Coffee Express app with the following features:
 
-### User Screens (Mobile)
+### User Screens
 | Login screen  | Register screen | Landing screen | Loading screen |
 | ---| ---| ---| ---|
 | ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
 | Home screen  | Menu Screen | Order Screen | Checkout Screen |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
