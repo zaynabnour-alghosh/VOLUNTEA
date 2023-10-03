@@ -45,18 +45,22 @@
 
 > Using the mockups as a guide, VolunTea app was implemented with the following features:
 
-### User Screens
-| Login screen  | Register screen | Landing screen | Loading screen |
+### Admin Screens
+| Content Screen  | Applicants screen | Members screen | Messages screen |
 | ---| ---| ---| ---|
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| ![Landing](./readme/app/admin-content(a).jpeg) | ![fsdaf](./readme/app/applicants.jpeg) | ![fsdaf](./readme/app/members.jpeg) | ![fsdaf](./readme/app/messasges%20(1).jpeg) |
 
 
-### Admin Screens (Web)
-| Login screen  | Register screen |  Landing screen |
+
+### Volunteer Screens
+| Login screen  | Register screen |  Personal Info |
 | ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-| Login screen  | Register screen |  Landing screen |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/app/login.jpeg) | ![fsdaf](./readme/app/signup-admin.jpeg) | ![fsdaf](./readme/app/personal-info.jpeg) |
+| Content Screen  | Notifications |  Landing screen |
+| ![Landing](./readme/app/vol-notif.jpg) | ![fsdaf](./readme/app/notifications.jpeg) | ![fsdaf](./readme/app/application.jpeg) |
+| Landing Screen |
+| ![Landing](./readme/app/voluntea-organization.png) |
+
 
 <br><br>
 
@@ -65,14 +69,15 @@
 
 ###  VolunTea is built using the following technologies:
 
-- This project uses the [Laravel app development framework](https://laravel.com/)). 
-
-<br><br>
+- This project uses the [Laravel app development framework](https://laravel.com/). It is a free and open-source web framework, intended for the development of web applications following the model–view–controller architectural pattern and based on Symfony.
+- This project uses the [React JavaScript library](https://reactjs.org/). It is a free and open-source front-end JavaScript library for building user interfaces or UI components.
+- [Firebase](https://firebase.google.com/) is used for live chat and notifications. It is a platform developed by Google for creating mobile and web applications.
+- For icons, [react-icons](https://react-icons.github.io/react-icons/) is used. It is a collection of open source icons.
 
 <!-- How to run -->
 <img src="./readme/title6.svg"/>
 
-> To set up Coffee Express locally, follow these steps:
+> To set up VolunTea locally, follow these steps:
 
 ### Prerequisites
 
@@ -81,12 +86,7 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
-
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
 1. Clone the repo
    ```sh
    git clone https://github.com/zaynabnour-alghosh/VOLUNTEA.git
@@ -99,5 +99,20 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    composer install
    ```
-
+2. Create a .env file
+   ```sh
+   cp .env.example .env
+   ```
+2. Migrate tables to the database
+   ```sh
+   php artisan migrate
+   ```
+2. Start the server
+   ```sh
+   php artisan serve
+   ```
+2. Run the app
+   ```sh
+   npm start
+   ```
 Now, you should be able to run VolunTea and explore its features.
