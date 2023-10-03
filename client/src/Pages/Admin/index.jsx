@@ -1,4 +1,4 @@
-import AdminDashboard from "../../main/components/Admin/Dashboard";
+import AdminDashboard from "../../main/components/Admin/dashboard";
 const Admin=({orgId})=>{
     
     return(
