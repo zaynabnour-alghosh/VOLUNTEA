@@ -95,21 +95,3 @@ export const sendMessage = (messageContent, chatroomId, userId,org) => {
 //     callback(newMessage);
 //   });
 // };
-
-// export const listenForMessagesRealtime = (chatroomId, callback) => {
-//   const db = getDatabase();
-//   const chatroomMessagesRef = ref(db, `chatrooms/${chatroomId}/messages`);
-
-//   onValue(chatroomMessagesRef, (snapshot) => {
-//     if (snapshot.exists()) {
-//       const messages = snapshot.val();
-//       console.log('Received messages for chatroom:', messages);
-//       callback(messages);
-//     } else {
-//       console.log('No messages available for this chatroom');
-//       callback(null);
-//     }
-//   }, {
-//     onlyOnce: false // Set to true if you want to listen only once
-//   });
-// };
