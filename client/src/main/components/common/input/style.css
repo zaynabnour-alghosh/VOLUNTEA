@@ -136,17 +136,20 @@ textarea{
     max-width: 100%;
 }
 
+.base-input-row input[type="file"] {
+  position: relative;
+}
 .base-input-row input[type="file"]::-webkit-file-upload-button {
-    background-color: var(--purple);
-    border-style: none;
-    padding: 15px;
-    margin: 0px;
-    color: var(--white);
-    display: flex;
-    justify-content:flex-end;
-    position: relative;
-    left:150px;
-    
+  background-color: var(--purple);
+  border-style: none;
+  padding: 15px;
+  margin: 0px;
+  color: var(--white);
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .no-border input{
     border-style: none;
