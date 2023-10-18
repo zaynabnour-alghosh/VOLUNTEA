@@ -3,13 +3,12 @@ import StreamTab from "../../common/streamtab";
 import './style.css';
 import AvatarCard from "../../common/avatar";
 import Input from "../../common/input";
-import Header from "../../common/header";
-import MessageRow from "../../ui/MessageRow";
 import {icons} from '../../../../icons.js';
 import SingleChatBox from "../../common/single";
 import GroupChatBox from "../../common/group";
 import { sendRequest } from "../../../../config/request";
 import EmptyChatState from "../../EmptyStates/Chat";
+
 const Messages=()=>{
     const [selectedTab, setSelectedTab] = useState("Single");
     const [isSingleChatboxOpen, setSingleChatboxOpen] = useState(false);
@@ -18,6 +17,7 @@ const Messages=()=>{
     const [groupChats, setGroupChats] = useState([]);
     const [searchValue, setSearchValue] = useState("");
     const [selectedVolunteer, setSelectedVolunteer] = useState(null);
+    
     const selectHandler = (value) => {
       setSelectedTab(value);
     };

@@ -5,7 +5,7 @@ import logoS from "../../assets/logo-secondary.svg";
 import { useNavigate } from 'react-router-dom';
 import "./style.css";
 import {requestPermission} from '../../firebase.js';
-import Input from "../../main/components/common/input";
+import Input from "../../main/components/common/input/index.jsx";
 import Button from "../../main/components/common/button/index.jsx";
 import ConfirmationModal from "../../main/components/ui/ConfirmationModal/index.jsx";
 import { sendRequest } from "../../config/request.js";

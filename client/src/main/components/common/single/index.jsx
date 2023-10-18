@@ -4,23 +4,24 @@ import MessageRow from "../../ui/MessageRow";
 import {icons} from '../../../../icons.js';
 import Input from "../input";
 import { useState ,useEffect} from "react";
-import { sendMessage,listenForMessages  } from "../../../../firebase";
+import { sendMessage  } from "../../../../firebase";
 const SingleChatBox=({ volunteerName, avatar,sender,receiver,org,chatroomId})=>{
     const [messageContent, setMessageContent] = useState("");
     const [message, setMessage] = useState("");
     const [timestamp, setTimestamp] = useState("");
     const [messages, setMessages] = useState([]);
 
-    useEffect(() => {
-        const unsubscribe = listenForMessages(chatroomId, (newMessage) => {
-          setMessages(prevMessages => [...prevMessages, { sender: false, content: newMessage.content, timestamp: newMessage.timestamp }]);
-        });
+    // useEffect(() => {
+    //     const unsubscribe = listenForMessages(chatroomId, (newMessage) => {
+    //       console.log('Received message in component:', newMessage);
+    //       setMessages(prevMessages => [...prevMessages, { sender: false, content: newMessage.content, timestamp: newMessage.timestamp }]);
+    //     });
     
-        // Clean up the listener when component unmounts
-        return () => {
-          unsubscribe();
-        };
-      }, [chatroomId]);
+    //     // Clean up the listener when component unmounts
+    //     return () => {
+    //       unsubscribe();
+    //     };
+    //   }, [chatroomId]);
     const handleSendMessage = () => {
         const sentMessage = sendMessage(messageContent, chatroomId, sender,org);
         setMessages(prevMessages => [...prevMessages, { sender: true, content: messageContent, timestamp: sentMessage.timestamp }]);
@@ -59,12 +60,15 @@ const SingleChatBox=({ volunteerName, avatar,sender,receiver,org,chatroomId})=>{
                 <MessageRow text={"lorem ipsum ..."} /> */}
 
                 {messages.map((message, index) => (
+                    <div key={index}>
                         <MessageRow
                             key={index}
                             sender={message.sender}
                             text={message.content}
                             timestamp={message.timestamp}
                         />
+                    </div>
+                        
                 ))}
             </div>
             <hr />

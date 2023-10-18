@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import { query,getDatabase,ref,push,onChildAdded,equalTo,orderByChild} from "firebase/database";
+import { query,getDatabase,ref,push,onChildAdded,equalTo,orderByChild,onValue,get,child} from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyD9886K8sM_YwIfeB3mwl7TtSt-IPL705Y",
     authDomain: "voluntea-53747.firebaseapp.com",
@@ -54,7 +54,7 @@ export const onMessageListener = () =>
       resolve(payload);
     });
 });
-const database = getDatabase(app);
+export const database = getDatabase(app);
 export const sendMessage = (messageContent, chatroomId, userId,org) => {
   const message = {
       id: Math.random().toString(36).substring(2),
@@ -96,19 +96,20 @@ export const sendMessage = (messageContent, chatroomId, userId,org) => {
 //   });
 // };
 
-export const listenForMessages = (chatroomId, callback) => {
-  if (!chatroomId) {
-    console.error("Invalid chatroomId provided");
-    return;
-  }
+// export const listenForMessagesRealtime = (chatroomId, callback) => {
+//   const db = getDatabase();
+//   const chatroomMessagesRef = ref(db, `chatrooms/${chatroomId}/messages`);
 
-  const db = getDatabase();
-  const messagesRef = ref(db, 'messages');
-
-  const messagesQuery = query(messagesRef, orderByChild('chatroom_id'), equalTo(chatroomId));
-
-  onChildAdded(messagesQuery, (snapshot) => {
-    const newMessage = snapshot.val();
-    callback(newMessage);
-  });
-}
+//   onValue(chatroomMessagesRef, (snapshot) => {
+//     if (snapshot.exists()) {
+//       const messages = snapshot.val();
+//       console.log('Received messages for chatroom:', messages);
+//       callback(messages);
+//     } else {
+//       console.log('No messages available for this chatroom');
+//       callback(null);
+//     }
+//   }, {
+//     onlyOnce: false // Set to true if you want to listen only once
+//   });
+// };

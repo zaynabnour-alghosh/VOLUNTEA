@@ -25,16 +25,30 @@ const Messages=()=>{
       setSelectedTab(value);
     };
 
-    const openSingleChat = (volunteerName, avatar) => {
+    const openSingleChat = (chat) => {
         setSingleChatboxOpen(true);
         setGroupChatboxOpen(false);
-        setSelectedVolunteer({ volunteerName, avatar });
+        setSelectedVolunteer({ 
+            volunteerName: chat.other,
+            avatar: `http://localhost:8000/storage/images/profiles/${chat.avatar}`,
+            sender: chat.sender,
+            receiver: chat.receiver,
+            chatroomId: chat.id,
+            org: chat.org 
+        });
     };
-    const openGroupChat = (groupName) => {
+    const openGroupChat = (chat) => {
         setSingleChatboxOpen(false);
-        setGroupChatboxOpen(true)
-        setSelectedGroup({ groupName});
+        setGroupChatboxOpen(true);
+        setSelectedVolunteer({
+            group: chat.group,
+            member: chat.member,
+            org: chat.org,
+            id: chat.id,
+            other: chat.other
+        });
     };
+    
     useEffect(() => {
         const id=localStorage.getItem("organizationId");
         const getChatrooms = async () => {
@@ -79,53 +93,53 @@ const Messages=()=>{
                     />
                 </div>
                 <div className="member-chat-search flex">
-                <div className="member-search">
-                    <Input 
-                       value={searchValue}
-                       onChange={(e)=>setSearchValue(e.target.value)}
-                       placeholder={"Search members..."}
-                       className="search"
-                       memberSearch={true}
-                       noBorder={true}
-                       icon={icons['search']
-                    }
-                    />
-                </div>
+                    <div className="member-search">
+                        <Input 
+                        value={searchValue}
+                        onChange={(e)=>setSearchValue(e.target.value)}
+                        placeholder={"Search members..."}
+                        className="search"
+                        memberSearch={true}
+                        noBorder={true}
+                        icon={icons['search']
+                        }
+                        />
+                    </div>
                 </div>
                 <div className="box flex center fullwidth">
                     <div className="member-messagebox-container flex  fullwidth p-10 column">
-                    {filteredChats.map((chat, index) => (
-                        <div key={index} onClick={() => selectedTab === 'Single' ? openSingleChat(chat.other, `http://localhost:8000/storage/images/profiles/${chat.avatar}`) : openGroupChat(chat.other)}>
-                        {selectedTab === 'Single' ? (
+                        {filteredChats.map((chat, index) => (
+                            <div key={index} onClick={() => {
+                                if (selectedTab === "Single") {
+                                openSingleChat(chat);
+                            } else if (selectedTab === "Group") {
+                                openGroupChat(chat);
+                            }}}>
                             <AvatarCard
-                                image={`http://localhost:8000/storage/images/profiles/${chat?.avatar}`}
-                                top={chat.other}
+                                image={`http://localhost:8000/storage/images/profiles/${chat.avatar}`}
+                                top={selectedTab === "Single" ? chat.other : chat.top}
                                 info={chat.info}
                                 isWide={true}
                             />
-                            ) : (
-                            <AvatarCard
-                                top={chat.other}
-                                info={chat.info}
-                                isWide={true}
-                            />
-                            )}
+                            </div>
+                        ))}
                     </div>
-                ))}
-                </div>
 
                 </div>
                 
             </div>
             {!isSingleChatboxOpen && !isGroupChatboxOpen && <EmptyChatState/>}
-            {isSingleChatboxOpen && selectedVolunteer && (
+            {isSingleChatboxOpen && selectedVolunteer && selectedTab === "Single" && (
                     <SingleChatBox
                     volunteerName={selectedVolunteer.volunteerName}
                     avatar={selectedVolunteer.avatar}
-                    
+                    sender={selectedVolunteer.sender}
+                    receiver={selectedVolunteer.receiver}
+                    org={selectedVolunteer.org}
+                    chatroomId={selectedVolunteer.chatroomId}                    
                     />
                 )}
-            {isGroupChatboxOpen && (
+            {isGroupChatboxOpen && selectedVolunteer && selectedTab === "Group" &&(
                 <GroupChatBox
                 groupName={selectedGroup.groupName}
                 />

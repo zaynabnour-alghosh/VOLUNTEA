@@ -4,7 +4,6 @@ import { useState } from "react";
 import './style.css';
 const StartupPage=({setOrgInfo,setImpacts,setMissions,setEvents,setAll})=>{
     const[startUp,setStartUp]=useState(true);
-
     return (
         
         <div className="page startup">
